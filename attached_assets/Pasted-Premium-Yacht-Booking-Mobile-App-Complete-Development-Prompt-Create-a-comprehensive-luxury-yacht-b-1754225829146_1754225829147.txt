@@ -1,0 +1,191 @@
+Premium Yacht Booking Mobile App - Complete Development Prompt
+Create a comprehensive luxury yacht booking mobile application called Nauttec with the following complete specifications:
+
+🎨 Design System & Visual Theme
+Color Palette: Ocean blues with elegant whites (#2563eb primary, HSL-based semantic tokens)
+Typography: Modern, luxury-focused with clear hierarchy
+Theme: Nautical luxury with gradient backgrounds (bg-gradient-ios)
+Components: Based on shadcn/ui with custom luxury variants
+Icons: Lucide React icons throughout
+Mobile-First: Responsive design optimized for mobile devices
+🏗️ Core Technology Stack
+
+// Dependencies to include:
+- React 18 with TypeScript
+- React Router DOM for navigation
+- Tailwind CSS for styling
+- shadcn/ui component library
+- Lucide React for icons
+- React Hook Form for forms
+- Zod for validation
+- React Query for data fetching
+- Capacitor for mobile deployment
+📱 Complete Screen Architecture (31 Total Screens)
+🔐 Authentication Flow
+SplashScreen (/) - Nauttec logo, loading animation, auto-navigate after 3s
+PhoneLoginScreen (/login) - Country code selector, phone input, Google/Facebook options
+OTPVerificationScreen (/verify-otp) - 6-digit code input, resend functionality
+AccountSetupScreen (/account-setup) - Profile creation, role selection (renter/owner)
+🏠 Main Navigation (Bottom Tabs)
+HomeScreen (/home) - Browse yachts, search, featured carousel, all yachts grid
+OwnershipOpportunitiesScreen (/ownership-opportunities) - Fractional ownership listings
+FuelWalletScreen (/fuel-wallet) - Virtual fuel balance, transaction history
+NotificationCenterScreen (/notifications) - App notifications and alerts
+UserProfileScreen (/profile) - User profile and settings access
+⛵ Yacht Booking Flow
+YachtDetailsScreen (/yacht-details/:id) - Detailed yacht info, image gallery, amenities
+BookingCheckoutScreen (/booking/:id) - Date selection, payment, add-ons (captain, catering)
+BookingConfirmationScreen (/booking-confirmation) - Success screen with booking details
+MyBookingsScreen (/my-bookings) - List of user's bookings
+ReservationDetailScreen (/reservation-detail/:id) - Individual booking details
+🏆 Ownership & Investment
+YachtOwnershipDetailScreen (/ownership/:id) - Investment details, share information
+OwnershipInquiryScreen (/ownership-inquiry/:id) - Investment inquiry form
+ShareMarketplaceScreen (/share-marketplace) - Trade ownership shares
+ShareListingDetailScreen (/share-listing/:id) - Individual share listing
+ListShareForSaleScreen (/list-share-for-sale) - Create share listing
+SharePurchaseConfirmationScreen (/share-purchase-confirmation/:id) - Share purchase success
+👨‍💼 Owner Management
+OwnerDashboardScreen (/owner-dashboard) - Owner analytics, boat management
+BoatManagementScreen (/boat-management/:id) - Manage boat details
+AddBoatListingScreen (/add-boat-listing) - List new boat for rental
+BoatCalendarScreen (/boat-calendar/:id) - Availability calendar
+WaitlistManagementScreen (/waitlist-management) - Manage booking waitlist
+💬 Communication & Profile
+MessagingCenterScreen (/messages) - All conversations
+ChatThreadScreen (/chat/:id) - Individual conversation
+EditProfileScreen (/edit-profile) - Edit user profile
+SettingsScreen (/settings) - App settings and preferences
+TopUpScreen (/top-up) - Add funds to fuel wallet
+DashboardScreen (/dashboard) - Alternative main dashboard
+🎯 Key Features & Functionality
+Core User Actions
+Authentication: Phone/OTP login with social media alternatives
+Yacht Browsing: Search, filter, view details with image galleries
+Booking System: Date selection, guest count, add-ons (captain, catering)
+Payment Integration: Credit card processing, fuel wallet system
+Fractional Ownership: Browse investment opportunities, purchase shares
+Owner Tools: Manage boats, calendar, reservations, waitlists
+Communication: In-app messaging between renters and owners
+Profile Management: User settings, preferences, payment methods
+Essential Components
+
+// Bottom Navigation with 5 tabs:
+const tabs = [
+  { icon: Home, label: "Browse", route: "/home" },
+  { icon: Anchor, label: "Ownership", route: "/ownership-opportunities" },
+  { icon: Fuel, label: "Fuel Wallet", route: "/fuel-wallet" },
+  { icon: Bell, label: "Notifications", route: "/notifications" },
+  { icon: User, label: "Profile", route: "/profile" }
+];
+Mock Data Structure
+
+// Yacht Data Example
+interface Yacht {
+  id: number;
+  name: string;
+  location: string;
+  image: string;
+  price: number; // EUR per day
+  rating: number;
+  capacity: number;
+  isFavorite: boolean;
+  amenities: Array<{icon: LucideIcon, name: string}>;
+  owner: {
+    name: string;
+    avatar: string;
+    verified: boolean;
+    rating: number;
+  };
+}
+
+// Ownership Opportunity
+interface OwnershipOpportunity {
+  id: number;
+  name: string;
+  sharePrice: number; // EUR
+  shareFraction: string; // "1/8"
+  usageWeeks: number;
+  sharesAvailable: number;
+}
+🎨 UI/UX Specifications
+Button Variants
+
+// Custom button variants in button.tsx
+variants: {
+  luxury: "bg-primary text-primary-foreground hover:bg-primary-hover font-semibold",
+  ocean: "bg-primary text-primary-foreground hover:bg-primary-hover"
+}
+sizes: {
+  mobile: "h-14 px-8 text-base font-semibold rounded-xl"
+}
+Design Patterns
+Cards: Rounded corners, subtle shadows, hover effects
+Images: Aspect ratios for yacht photos, fallback handling
+Forms: Large touch targets, clear validation
+Navigation: Fixed bottom tabs, back button navigation
+Loading States: Spinners, skeleton screens
+Toasts: Success/error notifications using sonner
+📁 Project Structure
+src/
+├── components/
+│   ├── ui/ (shadcn components)
+│   ├── [31 screen components].tsx
+│   └── NavigationWireframes.tsx
+├── assets/ (yacht images, logos)
+├── hooks/ (custom hooks)
+├── lib/ (utilities)
+└── pages/ (routing)
+🔧 Technical Requirements
+Routing Setup
+
+// All routes configured in App.tsx
+const routes = [
+  { path: "/", element: <SplashScreen /> },
+  { path: "/login", element: <PhoneLoginScreen /> },
+  { path: "/verify-otp", element: <OTPVerificationScreen /> },
+  // ... (all 31 screens)
+  { path: "*", element: <NotFound /> }
+];
+State Management
+React Query for server state
+useState/useContext for local state
+React Router for navigation state
+Form state with React Hook Form
+Mobile Optimization
+Touch-friendly interface (minimum 44px touch targets)
+Smooth animations and transitions
+Responsive design for all screen sizes
+Capacitor integration for native features
+PWA capabilities
+🎭 Specific Visual Elements
+Images to Include
+Luxury yacht photos (multiple per yacht)
+Nauttec logo and branding
+User avatars and profile pictures
+Marina and location images
+Owner/captain photos
+Animations
+Fade-in animations for screen transitions
+Loading spinners for async operations
+Smooth carousel/gallery navigation
+Pull-to-refresh functionality
+Bottom sheet modals
+Interactive Elements
+Heart icons for favorites (fill animation)
+Star ratings (filled/empty states)
+Progress indicators for multi-step forms
+Calendar date pickers
+Image galleries with dots indicators
+🔒 Security & Validation
+Phone number validation with international formats
+OTP verification (demo: use "123456")
+Form validation with Zod schemas
+Secure payment processing simulation
+User authentication state management
+📊 Data & Analytics
+Booking tracking and history
+Fuel wallet transaction history
+Yacht ownership portfolio tracking
+User preferences and favorites
+Performance metrics and usage analytics
