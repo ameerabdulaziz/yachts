@@ -154,12 +154,12 @@ export default function YachtOwnershipDetailScreen() {
               {opportunity.financing && opportunity.financing.available && (
                 <div className="flex items-center justify-between p-3 bg-blue-50 rounded-lg border border-blue-200">
                   <div className="flex items-center space-x-2">
-                    <CreditCard className="w-5 h-5 text-blue-600" />
+                    <Calendar className="w-5 h-5 text-blue-600" />
                     <span className="font-medium text-gray-900">Financing Available</span>
                   </div>
                   <div className="text-right">
                     <span className="text-lg font-bold text-blue-600">€{opportunity.financing.monthlyPayment}/mo</span>
-                    <p className="text-xs text-gray-600">{opportunity.financing.termMonths} months • {opportunity.financing.downPaymentPercent}% down</p>
+                    <p className="text-xs text-gray-600">{opportunity.financing.downPaymentPercent}% down</p>
                   </div>
                 </div>
               )}

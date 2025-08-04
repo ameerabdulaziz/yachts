@@ -2,7 +2,7 @@ import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import BottomNavigation from "@/components/BottomNavigation";
-import { ArrowLeft, Calendar, MapPin, TrendingUp, Filter } from "lucide-react";
+import { ArrowLeft, Calendar, MapPin, TrendingUp, Filter, PieChart, Users } from "lucide-react";
 import { mockOwnershipOpportunities } from "@/lib/mockData";
 
 export default function OwnershipOpportunitiesScreen() {
@@ -65,8 +65,8 @@ export default function OwnershipOpportunitiesScreen() {
                       alt={opportunity.yacht.name}
                       className="w-full h-48 object-cover rounded-t-2xl"
                     />
-                    <div className="absolute top-3 left-3 bg-white/90 px-3 py-1 rounded-full">
-                      <span className="text-sm font-semibold text-gray-900">{opportunity.shareFraction} Share</span>
+                    <div className="absolute top-3 left-3 bg-white/90 p-2 rounded-full">
+                      <PieChart className="w-4 h-4 text-gray-900" />
                     </div>
                     <div className="absolute top-3 right-3 bg-green-500 text-white px-3 py-1 rounded-full">
                       <span className="text-sm font-semibold">{opportunity.availableShares} Available</span>
@@ -85,11 +85,16 @@ export default function OwnershipOpportunitiesScreen() {
                       </div>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-4 mb-4">
+                    <div className="grid grid-cols-3 gap-4 mb-4">
                       <div className="bg-gray-50 rounded-lg p-3 text-center">
                         <Calendar className="w-5 h-5 text-primary mx-auto mb-1" />
-                        <p className="font-semibold text-gray-900">{opportunity.usageWeeks} weeks</p>
-                        <p className="text-xs text-gray-600">Annual usage</p>
+                        <p className="font-semibold text-gray-900">{opportunity.usageDaysPerYear}</p>
+                        <p className="text-xs text-gray-600">days/year</p>
+                      </div>
+                      <div className="bg-gray-50 rounded-lg p-3 text-center">
+                        <Users className="w-5 h-5 text-blue-600 mx-auto mb-1" />
+                        <p className="font-semibold text-gray-900">{opportunity.yacht.capacity}</p>
+                        <p className="text-xs text-gray-600">guests</p>
                       </div>
                       <div className="bg-gray-50 rounded-lg p-3 text-center">
                         <TrendingUp className="w-5 h-5 text-green-600 mx-auto mb-1" />
