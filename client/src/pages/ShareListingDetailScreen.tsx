@@ -29,7 +29,7 @@ export default function ShareListingDetailScreen() {
     originalPrice: 45000,
     askingPrice: 48000,
     priceChange: 6.7,
-    usageWeeks: 6,
+    usageDaysPerYear: 40,
     seller: {
       name: "Sarah Mitchell",
       avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b0ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100",
@@ -101,7 +101,7 @@ export default function ShareListingDetailScreen() {
             <p className="text-gray-600 mb-2">{listing.yacht.location}</p>
             <div className="flex items-center space-x-2">
               <Badge variant="outline">{listing.shareFraction} share</Badge>
-              <Badge variant="outline">{listing.usageWeeks} weeks/year</Badge>
+              <Badge variant="outline">{listing.usageDaysPerYear} days/year</Badge>
             </div>
           </div>
           <div className="text-right">

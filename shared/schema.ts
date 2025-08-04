@@ -82,7 +82,7 @@ export const ownershipOpportunities = pgTable("ownership_opportunities", {
   yachtId: varchar("yacht_id").references(() => yachts.id).notNull(),
   sharePrice: decimal("share_price", { precision: 10, scale: 2 }).notNull(),
   shareFraction: varchar("share_fraction", { length: 10 }).notNull(), // "1/8", "1/6", etc.
-  usageWeeks: integer("usage_weeks").notNull(),
+  usageDaysPerYear: integer("usage_days_per_year").notNull(),
   totalShares: integer("total_shares").notNull(),
   availableShares: integer("available_shares").notNull(),
   isActive: boolean("is_active").default(true),

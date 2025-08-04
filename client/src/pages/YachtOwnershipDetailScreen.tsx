@@ -94,8 +94,8 @@ export default function YachtOwnershipDetailScreen() {
           </div>
           <div className="bg-gradient-to-r from-blue-50 to-cyan-50 rounded-xl p-4 text-center">
             <Calendar className="w-8 h-8 text-blue-600 mx-auto mb-2" />
-            <p className="text-2xl font-bold text-blue-600">{opportunity.usageWeeks}</p>
-            <p className="text-sm text-blue-700">Weeks/Year</p>
+            <p className="text-2xl font-bold text-blue-600">{opportunity.usageDaysPerYear}</p>
+            <p className="text-sm text-blue-700">Days/Year</p>
           </div>
         </div>
 

@@ -16,7 +16,7 @@ export default function SharePurchaseConfirmationScreen() {
     shareFraction: "1/8",
     sharesPurchased: 1,
     purchasePrice: 48000,
-    usageWeeks: 6,
+    usageDaysPerYear: 40,
     purchaseDate: new Date().toLocaleDateString(),
     expectedRoi: "12-15%",
     nextUsageStart: "June 2024"
@@ -60,7 +60,7 @@ export default function SharePurchaseConfirmationScreen() {
                 <Calendar className="w-6 h-6 text-primary" />
                 <div>
                   <p className="font-semibold text-gray-900">Annual Usage</p>
-                  <p className="text-gray-700">{purchase.usageWeeks} weeks per year</p>
+                  <p className="text-gray-700">{purchase.usageDaysPerYear} days per year</p>
                 </div>
               </div>
 
@@ -133,7 +133,7 @@ export default function SharePurchaseConfirmationScreen() {
                 <CheckCircle className="w-5 h-5 text-green-600 mt-0.5" />
                 <div>
                   <p className="font-medium text-gray-900">Usage Schedule</p>
-                  <p className="text-sm text-gray-600">Your {purchase.usageWeeks} weeks will be allocated for {purchase.nextUsageStart}</p>
+                  <p className="text-sm text-gray-600">Your {purchase.usageDaysPerYear} days will be allocated for {purchase.nextUsageStart}</p>
                 </div>
               </li>
               <li className="flex items-start space-x-3">

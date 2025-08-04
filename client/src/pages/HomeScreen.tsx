@@ -230,7 +230,7 @@ export default function HomeScreen() {
                     </div>
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-3 text-sm text-gray-600">
-                        <span><Calendar className="w-4 h-4 inline mr-1" />{opportunity.usageWeeks} weeks/year</span>
+                        <span><Calendar className="w-4 h-4 inline mr-1" />{opportunity.usageDaysPerYear} days/year</span>
                         <span><Users className="w-4 h-4 inline mr-1" />{opportunity.yacht.capacity} guests</span>
                       </div>
                       <div className="text-right">
