@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card, CardContent } from "@/components/ui/card";
 import BottomNavigation from "@/components/BottomNavigation";
-import { Search, Heart, Star, Users, Bed, Calendar, PieChart } from "lucide-react";
+import { Search, Heart, Star, Users, Bed, Calendar, PieChart, ChevronDown } from "lucide-react";
 import nauttecLogo from "@assets/Nauttec Logo_1754330395988.png";
 import { mockYachts, mockOwnershipOpportunities } from "@/lib/mockData";
 
@@ -74,12 +74,17 @@ export default function HomeScreen() {
           <div className="grid grid-cols-2 gap-3 mb-3">
             <div>
               <label className="text-sm font-medium text-gray-700 block mb-1">Location</label>
-              <Input 
-                placeholder="Monaco, France" 
-                value={location}
-                onChange={(e) => setLocation(e.target.value)}
-                className="text-gray-900 font-medium"
-              />
+              <Select value={location || "el-gouna"} onValueChange={setLocation}>
+                <SelectTrigger className="text-gray-900 font-medium">
+                  <SelectValue placeholder="El Gouna, Egypt" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="el-gouna">El Gouna, Egypt</SelectItem>
+                  <SelectItem value="monaco">Monaco, France</SelectItem>
+                  <SelectItem value="mallorca">Palma, Mallorca</SelectItem>
+                  <SelectItem value="saint-tropez">Saint-Tropez, France</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
             <div>
               <label className="text-sm font-medium text-gray-700 block mb-1">Guests</label>
