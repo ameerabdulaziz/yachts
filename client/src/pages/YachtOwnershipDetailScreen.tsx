@@ -3,7 +3,7 @@ import { Link, useParams } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, Share, Heart, TrendingUp, Calendar, MapPin, Users, Bed, Star, Euro, PieChart, Clock, Shield, CreditCard } from "lucide-react";
+import { ArrowLeft, Share, Heart, TrendingUp, Calendar, MapPin, Users, Bed, Star, Euro, PieChart, Clock, Shield, CreditCard, Zap } from "lucide-react";
 import { mockOwnershipOpportunities } from "@/lib/mockData";
 
 export default function YachtOwnershipDetailScreen() {
@@ -122,75 +122,6 @@ export default function YachtOwnershipDetailScreen() {
       </section>
 
       <div className="px-4 space-y-6">
-        {/* Investment Details */}
-        <Card>
-          <CardContent className="p-4">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Investment Details</h3>
-            <div className="space-y-4">
-              <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                <div className="flex items-center space-x-2">
-                  <Euro className="w-5 h-5 text-primary" />
-                  <span className="font-medium text-gray-900">Share Price</span>
-                </div>
-                <span className="text-lg font-bold text-primary">€{Number(opportunity.sharePrice).toLocaleString()}</span>
-              </div>
-              
-              <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                <div className="flex items-center space-x-2">
-                  <PieChart className="w-5 h-5 text-green-600" />
-                  <span className="font-medium text-gray-900">Ownership Fraction</span>
-                </div>
-                <span className="text-lg font-bold text-green-600">{opportunity.shareFraction}</span>
-              </div>
-              
-              <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                <div className="flex items-center space-x-2">
-                  <Clock className="w-5 h-5 text-blue-600" />
-                  <span className="font-medium text-gray-900">Annual Usage</span>
-                </div>
-                <span className="text-lg font-bold text-blue-600">{opportunity.usageDaysPerYear} days</span>
-              </div>
-
-              {opportunity.financing && opportunity.financing.available && (
-                <div className="flex items-center justify-between p-3 bg-blue-50 rounded-lg border border-blue-200">
-                  <div className="flex items-center space-x-2">
-                    <Calendar className="w-5 h-5 text-blue-600" />
-                    <span className="font-medium text-gray-900">Financing Available</span>
-                  </div>
-                  <div className="text-right">
-                    <span className="text-lg font-bold text-blue-600">€{opportunity.financing.monthlyPayment}/mo</span>
-                    <p className="text-xs text-gray-600">{opportunity.financing.downPaymentPercent}% down</p>
-                  </div>
-                </div>
-              )}
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Usage Schedule */}
-        <Card>
-          <CardContent className="p-4">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Your Usage Schedule</h3>
-            <div className="space-y-3">
-              {usageSchedule.map((schedule, index) => (
-                <div key={index} className="flex items-center justify-between p-3 border border-gray-200 rounded-lg">
-                  <span className="font-medium text-gray-900">{schedule.month} 2024</span>
-                  <div className="flex space-x-2">
-                    {schedule.weeks.map((week, i) => (
-                      <Badge key={i} variant="outline" className="text-xs">
-                        {week}
-                      </Badge>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-            <p className="text-sm text-gray-600 mt-3">
-              * Additional weeks may be available through share exchange with other owners
-            </p>
-          </CardContent>
-        </Card>
-
         {/* Yacht Specifications */}
         <Card>
           <CardContent className="p-4">
@@ -220,33 +151,7 @@ export default function YachtOwnershipDetailScreen() {
           </CardContent>
         </Card>
 
-        {/* ROI Projection */}
-        <Card>
-          <CardContent className="p-4">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">ROI Projection</h3>
-            <div className="space-y-3">
-              {roiData.map((data, index) => (
-                <div key={index} className="flex items-center justify-between">
-                  <span className="text-gray-700">{data.year}</span>
-                  <div className="flex items-center space-x-3">
-                    <div className="w-24 bg-gray-200 rounded-full h-2">
-                      <div 
-                        className="bg-green-500 h-2 rounded-full" 
-                        style={{ width: `${(data.value / 20) * 100}%` }}
-                      ></div>
-                    </div>
-                    <span className="font-semibold text-green-600 w-10 text-right">{data.value}%</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-            <p className="text-xs text-gray-600 mt-3">
-              * Projections based on historical performance and market analysis
-            </p>
-          </CardContent>
-        </Card>
-
-        {/* Benefits */}
+        {/* Ownership Benefits */}
         <Card>
           <CardContent className="p-4">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">Ownership Benefits</h3>
@@ -273,6 +178,85 @@ export default function YachtOwnershipDetailScreen() {
                 </div>
               </div>
             </div>
+          </CardContent>
+        </Card>
+
+        {/* Investment Details */}
+        <Card>
+          <CardContent className="p-4">
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">Investment Details</h3>
+            <div className="space-y-4">
+              <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                <div className="flex items-center space-x-2">
+                  <Euro className="w-5 h-5 text-primary" />
+                  <span className="font-medium text-gray-900">Share Price</span>
+                </div>
+                <span className="text-lg font-bold text-primary">€{Number(opportunity.sharePrice).toLocaleString()}</span>
+              </div>
+              
+              <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                <div className="flex items-center space-x-2">
+                  <PieChart className="w-5 h-5 text-green-600" />
+                  <span className="font-medium text-gray-900">Ownership Fraction</span>
+                </div>
+                <span className="text-lg font-bold text-green-600">{opportunity.shareFraction}</span>
+              </div>
+              
+              <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                <div className="flex items-center space-x-2">
+                  <Clock className="w-5 h-5 text-blue-600" />
+                  <span className="font-medium text-gray-900">Annual Usage</span>
+                </div>
+                <span className="text-lg font-bold text-blue-600">{opportunity.usageDaysPerYear} days</span>
+              </div>
+              
+              <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                <div className="flex items-center space-x-2">
+                  <Zap className="w-5 h-5 text-orange-600" />
+                  <span className="font-medium text-gray-900">Annual Engine Hours</span>
+                </div>
+                <span className="text-lg font-bold text-orange-600">50 hours</span>
+              </div>
+
+              {opportunity.financing && opportunity.financing.available && (
+                <div className="flex items-center justify-between p-3 bg-blue-50 rounded-lg border border-blue-200">
+                  <div className="flex items-center space-x-2">
+                    <Calendar className="w-5 h-5 text-blue-600" />
+                    <span className="font-medium text-gray-900">Financing Available</span>
+                  </div>
+                  <div className="text-right">
+                    <span className="text-lg font-bold text-blue-600">€{opportunity.financing.monthlyPayment}/mo</span>
+                    <p className="text-xs text-gray-600">{opportunity.financing.downPaymentPercent}% down</p>
+                  </div>
+                </div>
+              )}
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* ROI Projection */}
+        <Card>
+          <CardContent className="p-4">
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">ROI Projection</h3>
+            <div className="space-y-3">
+              {roiData.map((data, index) => (
+                <div key={index} className="flex items-center justify-between">
+                  <span className="text-gray-700">{data.year}</span>
+                  <div className="flex items-center space-x-3">
+                    <div className="w-24 bg-gray-200 rounded-full h-2">
+                      <div 
+                        className="bg-green-500 h-2 rounded-full" 
+                        style={{ width: `${(data.value / 20) * 100}%` }}
+                      ></div>
+                    </div>
+                    <span className="font-semibold text-green-600 w-10 text-right">{data.value}%</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <p className="text-xs text-gray-600 mt-3">
+              * Projections based on historical performance and market analysis
+            </p>
           </CardContent>
         </Card>
 
