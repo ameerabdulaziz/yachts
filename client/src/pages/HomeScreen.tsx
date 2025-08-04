@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card, CardContent } from "@/components/ui/card";
 import BottomNavigation from "@/components/BottomNavigation";
-import { Search, Bell, Heart, Star, Users, Bed, Calendar, MapPin, Ship, TrendingUp, Plus, History } from "lucide-react";
+import { Search, Heart, Star, Users, Bed, Calendar } from "lucide-react";
 import nauttecLogo from "@assets/Nauttec Logo_1754330395988.png";
 import { mockYachts, mockOwnershipOpportunities } from "@/lib/mockData";
 
@@ -243,79 +243,6 @@ export default function HomeScreen() {
               </Link>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Fuel Wallet Preview */}
-      <section className="px-4 py-6 bg-gradient-to-r from-green-50 to-blue-50">
-        <Card className="shadow-lg">
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center space-x-3">
-                <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
-                  <i className="fas fa-gas-pump text-green-600 text-xl"></i>
-                </div>
-                <div>
-                  <h3 className="text-lg font-bold text-gray-900">Fuel Wallet</h3>
-                  <p className="text-sm text-gray-600">Current Balance</p>
-                </div>
-              </div>
-              <div className="text-right">
-                <p className="text-2xl font-bold text-gray-900">€1,250</p>
-                <p className="text-sm text-green-600">+€200 this month</p>
-              </div>
-            </div>
-            <div className="flex space-x-3">
-              <Link href="/top-up" className="flex-1">
-                <Button className="w-full bg-primary text-white py-3 rounded-xl font-semibold hover:bg-primary-hover transition-colors">
-                  <Plus className="w-4 h-4 mr-2" />
-                  Top Up
-                </Button>
-              </Link>
-              <Link href="/fuel-wallet" className="flex-1">
-                <Button variant="outline" className="w-full py-3 rounded-xl font-semibold hover:bg-gray-50 transition-colors">
-                  <History className="w-4 h-4 mr-2" />
-                  History
-                </Button>
-              </Link>
-            </div>
-          </CardContent>
-        </Card>
-      </section>
-
-      {/* Recent Activity */}
-      <section className="px-4 py-6">
-        <h3 className="text-xl font-bold text-gray-900 mb-4">Recent Activity</h3>
-        <div className="space-y-3">
-          <Card>
-            <CardContent className="p-4">
-              <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
-                  <Ship className="w-5 h-5 text-blue-600" />
-                </div>
-                <div className="flex-1">
-                  <p className="font-medium text-gray-900">Booking confirmed for Serenity Princess</p>
-                  <p className="text-sm text-gray-600">June 15-18, 2024 • Monaco</p>
-                </div>
-                <span className="text-xs text-gray-500">2h ago</span>
-              </div>
-            </CardContent>
-          </Card>
-          
-          <Card>
-            <CardContent className="p-4">
-              <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
-                  <TrendingUp className="w-5 h-5 text-green-600" />
-                </div>
-                <div className="flex-1">
-                  <p className="font-medium text-gray-900">Share purchase completed</p>
-                  <p className="text-sm text-gray-600">Azure Legend 1/8 share • €45,000</p>
-                </div>
-                <span className="text-xs text-gray-500">1d ago</span>
-              </div>
-            </CardContent>
-          </Card>
         </div>
       </section>
 
