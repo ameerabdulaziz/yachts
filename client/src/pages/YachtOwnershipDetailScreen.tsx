@@ -14,11 +14,11 @@ export default function YachtOwnershipDetailScreen() {
   const opportunity = mockOwnershipOpportunities.find(o => o.id === id) || mockOwnershipOpportunities[0];
   
   const roiData = [
-    { year: 2024, value: 12 },
-    { year: 2025, value: 15 },
     { year: 2026, value: 18 },
     { year: 2027, value: 14 },
-    { year: 2028, value: 16 }
+    { year: 2028, value: 16 },
+    { year: 2029, value: 19 },
+    { year: 2030, value: 21 }
   ];
 
   const usageSchedule = [
@@ -188,44 +188,44 @@ export default function YachtOwnershipDetailScreen() {
             <div className="space-y-4">
               <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                 <div className="flex items-center space-x-2">
-                  <Euro className="w-5 h-5 text-primary" />
+                  <Euro className="w-5 h-5 text-blue-500" />
                   <span className="font-medium text-gray-900">Share Price</span>
                 </div>
-                <span className="text-lg font-bold text-primary">€{Number(opportunity.sharePrice).toLocaleString()}</span>
+                <span className="text-lg font-bold text-blue-500">€{Number(opportunity.sharePrice).toLocaleString()}</span>
               </div>
               
               <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                 <div className="flex items-center space-x-2">
-                  <PieChart className="w-5 h-5 text-green-600" />
+                  <PieChart className="w-5 h-5 text-blue-500" />
                   <span className="font-medium text-gray-900">Ownership Fraction</span>
                 </div>
-                <span className="text-lg font-bold text-green-600">{opportunity.shareFraction}</span>
+                <span className="text-lg font-bold text-blue-500">{opportunity.shareFraction}</span>
               </div>
               
               <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                 <div className="flex items-center space-x-2">
-                  <Clock className="w-5 h-5 text-blue-600" />
+                  <Clock className="w-5 h-5 text-blue-500" />
                   <span className="font-medium text-gray-900">Annual Usage</span>
                 </div>
-                <span className="text-lg font-bold text-blue-600">{opportunity.usageDaysPerYear} days</span>
+                <span className="text-lg font-bold text-blue-500">{opportunity.usageDaysPerYear} days</span>
               </div>
               
               <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                 <div className="flex items-center space-x-2">
-                  <Zap className="w-5 h-5 text-orange-600" />
+                  <Zap className="w-5 h-5 text-blue-500" />
                   <span className="font-medium text-gray-900">Annual Engine Hours</span>
                 </div>
-                <span className="text-lg font-bold text-orange-600">50 hours</span>
+                <span className="text-lg font-bold text-blue-500">50 hours</span>
               </div>
 
               {opportunity.financing && opportunity.financing.available && (
                 <div className="flex items-center justify-between p-3 bg-blue-50 rounded-lg border border-blue-200">
                   <div className="flex items-center space-x-2">
-                    <Calendar className="w-5 h-5 text-blue-600" />
+                    <Calendar className="w-5 h-5 text-blue-500" />
                     <span className="font-medium text-gray-900">Financing Available</span>
                   </div>
                   <div className="text-right">
-                    <span className="text-lg font-bold text-blue-600">€{opportunity.financing.monthlyPayment}/mo</span>
+                    <span className="text-lg font-bold text-blue-500">€{opportunity.financing.monthlyPayment}/mo</span>
                     <p className="text-xs text-gray-600">{opportunity.financing.downPaymentPercent}% down</p>
                   </div>
                 </div>
@@ -264,7 +264,7 @@ export default function YachtOwnershipDetailScreen() {
         <div className="space-y-3 pb-6">
           <Link href={`/ownership-inquiry/${opportunity.id}`}>
             <Button className="w-full bg-gradient-ocean text-white py-4 rounded-xl font-semibold text-lg hover:shadow-lg transition-all duration-300">
-              Invest Now - €{Number(opportunity.sharePrice).toLocaleString()}
+              Call Nauttec Team - €{Number(opportunity.sharePrice).toLocaleString()}
             </Button>
           </Link>
           
