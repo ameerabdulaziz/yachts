@@ -262,7 +262,7 @@ export default function YachtOwnershipDetailScreen() {
         <div className="space-y-3 pb-6">
           <Link href={`/ownership-inquiry/${opportunity.id}`}>
             <Button className="w-full bg-gradient-ocean text-white py-4 rounded-xl font-semibold text-lg hover:shadow-lg transition-all duration-300">
-              Call Nauttec Team - €{Number(opportunity.sharePrice).toLocaleString()}
+              Call Nauttec Team
             </Button>
           </Link>
           
