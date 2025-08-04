@@ -92,3 +92,12 @@ The system implements a phone-based authentication flow:
 - **PostgreSQL Database**: Hosted database service with connection pooling
 - **Session Storage**: PostgreSQL-backed session management with connect-pg-simple
 - **Environment Configuration**: Environment variables for database connections and API keys
+
+# Recent Changes
+
+## January 2025
+- **January 19, 2025**: Updated all yacht and boat listings to feature authentic De Antonio Yachts models including D50 Open, D42 Open, D36 Open, D32 Open, D29 Open, D60 Open, D50 Coupe, and E23 electric model with real specifications, authentic pricing, and official images from Barcelona-based manufacturer
+- Initial comprehensive yacht booking platform implementation with 31 screens
+- Integrated PostgreSQL database with Drizzle ORM
+- Implemented authentication flow and fractional ownership system
+- Mobile-first responsive design with ocean blue theme
