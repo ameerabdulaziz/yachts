@@ -3,7 +3,7 @@ import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
-import { Anchor } from "lucide-react";
+import nauttecLogo from "@assets/Nauttec Logo_1754330395988.png";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
@@ -56,8 +56,8 @@ export default function OTPVerificationScreen() {
     <div className="min-h-screen bg-gradient-ocean flex items-center justify-center p-4">
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
-          <div className="w-16 h-16 mx-auto mb-4 bg-primary rounded-2xl flex items-center justify-center">
-            <Anchor className="w-8 h-8 text-white" />
+          <div className="w-20 h-16 mx-auto mb-4 bg-white rounded-2xl flex items-center justify-center p-2">
+            <img src={nauttecLogo} alt="Nauttec Logo" className="w-full h-full object-contain" />
           </div>
           <CardTitle className="text-2xl font-bold">Verify Your Phone</CardTitle>
           <p className="text-gray-600">

@@ -5,7 +5,8 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
-import { Anchor, User, Ship } from "lucide-react";
+import { User, Ship } from "lucide-react";
+import nauttecLogo from "@assets/Nauttec Logo_1754330395988.png";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
@@ -49,8 +50,8 @@ export default function AccountSetupScreen() {
     <div className="min-h-screen bg-gradient-ocean flex items-center justify-center p-4">
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
-          <div className="w-16 h-16 mx-auto mb-4 bg-primary rounded-2xl flex items-center justify-center">
-            <Anchor className="w-8 h-8 text-white" />
+          <div className="w-20 h-16 mx-auto mb-4 bg-white rounded-2xl flex items-center justify-center p-2">
+            <img src={nauttecLogo} alt="Nauttec Logo" className="w-full h-full object-contain" />
           </div>
           <CardTitle className="text-2xl font-bold">Complete Your Profile</CardTitle>
           <p className="text-gray-600">Tell us a bit about yourself</p>

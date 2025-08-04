@@ -5,7 +5,8 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card, CardContent } from "@/components/ui/card";
 import BottomNavigation from "@/components/BottomNavigation";
-import { Search, Bell, Heart, Star, Users, Bed, Calendar, MapPin, Ship, TrendingUp, Plus, History, Anchor } from "lucide-react";
+import { Search, Bell, Heart, Star, Users, Bed, Calendar, MapPin, Ship, TrendingUp, Plus, History } from "lucide-react";
+import nauttecLogo from "@assets/Nauttec Logo_1754330395988.png";
 import { mockYachts, mockOwnershipOpportunities } from "@/lib/mockData";
 
 export default function HomeScreen() {
@@ -20,8 +21,8 @@ export default function HomeScreen() {
       <header className="bg-white border-b border-gray-200 px-4 py-3 sticky top-0 z-40">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3">
-            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-              <Anchor className="w-5 h-5 text-white" />
+            <div className="w-16 h-8 bg-white rounded-lg flex items-center justify-center p-1">
+              <img src={nauttecLogo} alt="Nauttec Logo" className="w-full h-full object-contain" />
             </div>
             <h1 className="text-xl font-bold text-gray-900">Nauttec</h1>
           </div>
