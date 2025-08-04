@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card, CardContent } from "@/components/ui/card";
 import BottomNavigation from "@/components/BottomNavigation";
-import { Search, Heart, Star, Users, Bed, Calendar } from "lucide-react";
+import { Search, Heart, Star, Users, Bed, Calendar, CreditCard } from "lucide-react";
 import nauttecLogo from "@assets/Nauttec Logo_1754330395988.png";
 import { mockYachts, mockOwnershipOpportunities } from "@/lib/mockData";
 
@@ -228,7 +228,7 @@ export default function HomeScreen() {
                         </span>
                       </div>
                     </div>
-                    <div className="flex items-center justify-between">
+                    <div className="flex items-center justify-between mb-3">
                       <div className="flex items-center space-x-3 text-sm text-gray-600">
                         <span><Calendar className="w-4 h-4 inline mr-1" />{opportunity.usageDaysPerYear} days/year</span>
                         <span><Users className="w-4 h-4 inline mr-1" />{opportunity.yacht.capacity} guests</span>
@@ -238,6 +238,18 @@ export default function HomeScreen() {
                         <p className="text-sm text-gray-600">per share</p>
                       </div>
                     </div>
+                    {opportunity.financing && opportunity.financing.available && (
+                      <div className="flex items-center justify-between pt-3 border-t border-gray-100">
+                        <div className="flex items-center space-x-2">
+                          <CreditCard className="w-4 h-4 text-blue-600" />
+                          <span className="text-sm text-gray-700">Financing Available</span>
+                        </div>
+                        <div className="text-right">
+                          <p className="text-sm font-semibold text-gray-900">€{opportunity.financing.monthlyPayment}/mo</p>
+                          <p className="text-xs text-gray-500">60 months • 25% down</p>
+                        </div>
+                      </div>
+                    )}
                   </CardContent>
                 </Card>
               </Link>

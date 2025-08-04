@@ -147,12 +147,18 @@ export const mockOwnershipOpportunities: (OwnershipOpportunity & { yacht: Yacht 
   {
     id: "opportunity-1",
     yachtId: "yacht-4",
-    sharePrice: "45000",
+    sharePrice: "57143",
     shareFraction: "1/7",
     usageDaysPerYear: 46,
     totalShares: 7,
     availableShares: 2,
     isActive: true,
+    financing: {
+      available: true,
+      downPaymentPercent: 25,
+      termMonths: 60,
+      monthlyPayment: "715"
+    },
     createdAt: new Date(),
     updatedAt: new Date(),
     yacht: {
@@ -178,12 +184,18 @@ export const mockOwnershipOpportunities: (OwnershipOpportunity & { yacht: Yacht 
   {
     id: "opportunity-2",
     yachtId: "yacht-3",
-    sharePrice: "68000",
+    sharePrice: "71429",
     shareFraction: "1/7",
     usageDaysPerYear: 46,
     totalShares: 7,
     availableShares: 3,
     isActive: true,
+    financing: {
+      available: true,
+      downPaymentPercent: 25,
+      termMonths: 60,
+      monthlyPayment: "893"
+    },
     createdAt: new Date(),
     updatedAt: new Date(),
     yacht: {
@@ -209,12 +221,18 @@ export const mockOwnershipOpportunities: (OwnershipOpportunity & { yacht: Yacht 
   {
     id: "opportunity-3",
     yachtId: "yacht-2",
-    sharePrice: "85000",
+    sharePrice: "81250",
     shareFraction: "1/8",
     usageDaysPerYear: 40,
     totalShares: 8,
     availableShares: 1,
     isActive: true,
+    financing: {
+      available: true,
+      downPaymentPercent: 25,
+      termMonths: 60,
+      monthlyPayment: "1016"
+    },
     createdAt: new Date(),
     updatedAt: new Date(),
     yacht: {
@@ -240,12 +258,18 @@ export const mockOwnershipOpportunities: (OwnershipOpportunity & { yacht: Yacht 
   {
     id: "opportunity-4",
     yachtId: "yacht-6",
-    sharePrice: "180000",
+    sharePrice: "166667",
     shareFraction: "1/12",
     usageDaysPerYear: 27,
     totalShares: 12,
     availableShares: 3,
     isActive: true,
+    financing: {
+      available: true,
+      downPaymentPercent: 25,
+      termMonths: 60,
+      monthlyPayment: "2083"
+    },
     createdAt: new Date(),
     updatedAt: new Date(),
     yacht: {
@@ -271,12 +295,18 @@ export const mockOwnershipOpportunities: (OwnershipOpportunity & { yacht: Yacht 
   {
     id: "opportunity-2",
     yachtId: "yacht-7",
-    sharePrice: "95000",
+    sharePrice: "100000",
     shareFraction: "1/10",
     usageDaysPerYear: 32,
     totalShares: 10,
     availableShares: 2,
     isActive: true,
+    financing: {
+      available: true,
+      downPaymentPercent: 25,
+      termMonths: 60,
+      monthlyPayment: "1250"
+    },
     createdAt: new Date(),
     updatedAt: new Date(),
     yacht: {

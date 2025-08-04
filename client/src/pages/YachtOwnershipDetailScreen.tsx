@@ -3,7 +3,7 @@ import { Link, useParams } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, Share, Heart, TrendingUp, Calendar, MapPin, Users, Bed, Star, Euro, PieChart, Clock, Shield } from "lucide-react";
+import { ArrowLeft, Share, Heart, TrendingUp, Calendar, MapPin, Users, Bed, Star, Euro, PieChart, Clock, Shield, CreditCard } from "lucide-react";
 import { mockOwnershipOpportunities } from "@/lib/mockData";
 
 export default function YachtOwnershipDetailScreen() {
@@ -148,8 +148,21 @@ export default function YachtOwnershipDetailScreen() {
                   <Clock className="w-5 h-5 text-blue-600" />
                   <span className="font-medium text-gray-900">Annual Usage</span>
                 </div>
-                <span className="text-lg font-bold text-blue-600">{opportunity.usageWeeks} weeks</span>
+                <span className="text-lg font-bold text-blue-600">{opportunity.usageDaysPerYear} days</span>
               </div>
+
+              {opportunity.financing && opportunity.financing.available && (
+                <div className="flex items-center justify-between p-3 bg-blue-50 rounded-lg border border-blue-200">
+                  <div className="flex items-center space-x-2">
+                    <CreditCard className="w-5 h-5 text-blue-600" />
+                    <span className="font-medium text-gray-900">Financing Available</span>
+                  </div>
+                  <div className="text-right">
+                    <span className="text-lg font-bold text-blue-600">€{opportunity.financing.monthlyPayment}/mo</span>
+                    <p className="text-xs text-gray-600">{opportunity.financing.termMonths} months • {opportunity.financing.downPaymentPercent}% down</p>
+                  </div>
+                </div>
+              )}
             </div>
           </CardContent>
         </Card>

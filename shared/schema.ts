@@ -85,6 +85,7 @@ export const ownershipOpportunities = pgTable("ownership_opportunities", {
   usageDaysPerYear: integer("usage_days_per_year").notNull(),
   totalShares: integer("total_shares").notNull(),
   availableShares: integer("available_shares").notNull(),
+  financing: jsonb("financing"), // { available: boolean, downPaymentPercent: number, termMonths: number, monthlyPayment: string }
   isActive: boolean("is_active").default(true),
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
@@ -208,3 +209,11 @@ export type Message = typeof messages.$inferSelect;
 export type InsertMessage = z.infer<typeof insertMessageSchema>;
 export type FuelTransaction = typeof fuelTransactions.$inferSelect;
 export type InsertFuelTransaction = z.infer<typeof insertFuelTransactionSchema>;
+
+// Financing type for ownership opportunities
+export type FinancingInfo = {
+  available: boolean;
+  downPaymentPercent: number;
+  termMonths: number;
+  monthlyPayment: string;
+};
