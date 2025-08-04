@@ -1,12 +1,11 @@
 import { Link, useLocation } from "wouter";
-import { Home, Anchor, Fuel, Bell, User } from "lucide-react";
+import { Home, Ship, TrendingUp, User } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const tabs = [
-  { icon: Home, label: "Browse", route: "/home" },
-  { icon: Anchor, label: "Ownership", route: "/ownership-opportunities" },
-  { icon: Fuel, label: "Fuel Wallet", route: "/fuel-wallet" },
-  { icon: Bell, label: "Notifications", route: "/notifications" },
+  { icon: Home, label: "Home", route: "/home" },
+  { icon: Ship, label: "My Boats", route: "/my-bookings" },
+  { icon: TrendingUp, label: "Own a Yacht", route: "/ownership-opportunities" },
   { icon: User, label: "Profile", route: "/profile" }
 ];
 
@@ -28,14 +27,7 @@ export default function BottomNavigation() {
                     : "text-gray-600 hover:bg-gray-50"
                 )}
               >
-                <div className="relative">
-                  <Icon className="w-6 h-6 mb-1" />
-                  {label === "Notifications" && (
-                    <span className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">
-                      3
-                    </span>
-                  )}
-                </div>
+                <Icon className="w-6 h-6 mb-1" />
                 <span className="text-xs font-medium">{label}</span>
               </button>
             </Link>

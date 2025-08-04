@@ -24,7 +24,6 @@ export default function HomeScreen() {
             <div className="w-16 h-8 bg-white rounded-lg flex items-center justify-center p-1">
               <img src={nauttecLogo} alt="Nauttec Logo" className="w-full h-full object-contain" />
             </div>
-            <h1 className="text-xl font-bold text-gray-900">Nauttec</h1>
           </div>
           <div className="flex items-center space-x-3">
             <Link href="/dev-navigation">
@@ -32,24 +31,46 @@ export default function HomeScreen() {
                 All Screens
               </Button>
             </Link>
-            <Button variant="ghost" size="sm" className="p-2">
-              <Search className="w-5 h-5 text-gray-600" />
-            </Button>
-            <Button variant="ghost" size="sm" className="p-2 relative">
-              <Bell className="w-5 h-5 text-gray-600" />
-              <span className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">3</span>
-            </Button>
+            <Link href="/profile">
+              <Button variant="ghost" size="sm" className="p-2">
+                <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
+                  <span className="text-white text-sm font-bold">JD</span>
+                </div>
+              </Button>
+            </Link>
           </div>
         </div>
       </header>
 
       {/* Hero Section with Search */}
-      <section className="bg-blue-500 px-4 py-8 text-white">
-        <div className="text-center mb-6">
-          <h2 className="text-2xl font-bold mb-2">Book Your Yacht</h2>
+      <section className="relative px-4 py-8 text-white overflow-hidden">
+        {/* Shallow Water Background */}
+        <div className="absolute inset-0">
+          <svg className="w-full h-full" viewBox="0 0 400 200" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="waterGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stopColor="#87CEEB" />
+                <stop offset="50%" stopColor="#4FC3F7" />
+                <stop offset="100%" stopColor="#29B6F6" />
+              </linearGradient>
+              <filter id="wave">
+                <feTurbulence baseFrequency="0.02" numOctaves="3" result="noise" seed="2" />
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="8" />
+              </filter>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#waterGradient)" />
+            <ellipse cx="200" cy="180" rx="300" ry="40" fill="rgba(255,255,255,0.2)" filter="url(#wave)" />
+            <ellipse cx="150" cy="170" rx="200" ry="25" fill="rgba(255,255,255,0.1)" />
+            <ellipse cx="250" cy="175" rx="150" ry="20" fill="rgba(255,255,255,0.15)" />
+          </svg>
         </div>
         
-        <div className="bg-white rounded-2xl p-4 shadow-xl">
+        <div className="relative z-10">
+          <div className="text-center mb-6">
+            <h2 className="text-2xl font-bold mb-2">Book Your Yacht</h2>
+          </div>
+          
+          <div className="bg-white rounded-2xl p-4 shadow-xl">
           <div className="grid grid-cols-2 gap-3 mb-3">
             <div>
               <label className="text-sm font-medium text-gray-700 block mb-1">Location</label>
@@ -98,6 +119,7 @@ export default function HomeScreen() {
             <Search className="w-5 h-5 mr-2" />
             Search Yachts
           </Button>
+          </div>
         </div>
       </section>
 
