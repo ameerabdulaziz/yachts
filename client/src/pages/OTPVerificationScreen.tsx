@@ -102,7 +102,7 @@ export default function OTPVerificationScreen() {
         <div className="space-y-8">
           {/* Nauttec Logo */}
           <div className="flex justify-center">
-            <div className="w-24 h-24 bg-white rounded-3xl flex items-center justify-center shadow-lg p-4">
+            <div className="w-24 h-16">
               <img src={nauttecLogo} alt="Nauttec Logo" className="w-full h-full object-contain" />
             </div>
           </div>
