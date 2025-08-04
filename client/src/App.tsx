@@ -37,6 +37,7 @@ import EditProfileScreen from "@/pages/EditProfileScreen";
 import SettingsScreen from "@/pages/SettingsScreen";
 import TopUpScreen from "@/pages/TopUpScreen";
 import DashboardScreen from "@/pages/DashboardScreen";
+import DevNavigationScreen from "@/pages/DevNavigationScreen";
 
 function Router() {
   return (
@@ -72,6 +73,7 @@ function Router() {
       <Route path="/settings" component={SettingsScreen} />
       <Route path="/top-up" component={TopUpScreen} />
       <Route path="/dashboard" component={DashboardScreen} />
+      <Route path="/dev-navigation" component={DevNavigationScreen} />
       <Route component={NotFound} />
     </Switch>
   );

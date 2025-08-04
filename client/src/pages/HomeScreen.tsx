@@ -27,6 +27,11 @@ export default function HomeScreen() {
             <h1 className="text-xl font-bold text-gray-900">Nauttec</h1>
           </div>
           <div className="flex items-center space-x-3">
+            <Link href="/dev-navigation">
+              <Button variant="ghost" size="sm" className="p-2 text-xs">
+                All Screens
+              </Button>
+            </Link>
             <Button variant="ghost" size="sm" className="p-2">
               <Search className="w-5 h-5 text-gray-600" />
             </Button>
