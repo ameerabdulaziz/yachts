@@ -80,20 +80,20 @@ export default function YachtOwnershipDetailScreen() {
 
         {/* Key Metrics */}
         <div className="grid grid-cols-3 gap-3 mb-6">
-          <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl p-3 text-center">
-            <TrendingUp className="w-6 h-6 text-green-600 mx-auto mb-1" />
-            <p className="text-xl font-bold text-green-600">15%</p>
-            <p className="text-xs text-green-700">Expected ROI</p>
+          <div className="bg-gray-50 rounded-xl p-3 text-center">
+            <TrendingUp className="w-6 h-6 text-gray-600 mx-auto mb-1" />
+            <p className="text-xl font-bold text-gray-600">15%</p>
+            <p className="text-xs text-gray-500">Expected ROI</p>
           </div>
-          <div className="bg-gradient-to-r from-blue-50 to-cyan-50 rounded-xl p-3 text-center">
-            <Calendar className="w-6 h-6 text-blue-600 mx-auto mb-1" />
-            <p className="text-xl font-bold text-blue-600">{opportunity.usageDaysPerYear}</p>
-            <p className="text-xs text-blue-700">Days/Year</p>
+          <div className="bg-gray-50 rounded-xl p-3 text-center">
+            <Calendar className="w-6 h-6 text-gray-600 mx-auto mb-1" />
+            <p className="text-xl font-bold text-gray-600">{opportunity.usageDaysPerYear}</p>
+            <p className="text-xs text-gray-500">Days/Year</p>
           </div>
-          <div className="bg-gradient-to-r from-orange-50 to-amber-50 rounded-xl p-3 text-center">
-            <Zap className="w-6 h-6 text-orange-600 mx-auto mb-1" />
-            <p className="text-xl font-bold text-orange-600">50</p>
-            <p className="text-xs text-orange-700">Engine Hours</p>
+          <div className="bg-gray-50 rounded-xl p-3 text-center">
+            <Zap className="w-6 h-6 text-gray-600 mx-auto mb-1" />
+            <p className="text-xl font-bold text-gray-600">50</p>
+            <p className="text-xs text-gray-500">Engine Hours</p>
           </div>
         </div>
 
@@ -124,26 +124,26 @@ export default function YachtOwnershipDetailScreen() {
         <Card>
           <CardContent className="p-3">
             <h3 className="text-base font-semibold text-gray-900 mb-3">Yacht Specifications</h3>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-4 gap-2">
               <div className="bg-gray-50 rounded-lg p-2 text-center">
-                <Users className="w-5 h-5 text-primary mx-auto mb-1" />
+                <Users className="w-4 h-4 text-primary mx-auto mb-1" />
                 <p className="font-semibold text-gray-900 text-xs">{opportunity.yacht.capacity}</p>
-                <p className="text-xs text-gray-600">Max Guests</p>
+                <p className="text-xs text-gray-600">Guests</p>
               </div>
               <div className="bg-gray-50 rounded-lg p-2 text-center">
-                <Bed className="w-5 h-5 text-primary mx-auto mb-1" />
+                <Bed className="w-4 h-4 text-primary mx-auto mb-1" />
                 <p className="font-semibold text-gray-900 text-xs">{opportunity.yacht.cabins}</p>
                 <p className="text-xs text-gray-600">Cabins</p>
               </div>
               <div className="bg-gray-50 rounded-lg p-2 text-center">
-                <MapPin className="w-5 h-5 text-primary mx-auto mb-1" />
+                <MapPin className="w-4 h-4 text-primary mx-auto mb-1" />
                 <p className="font-semibold text-gray-900 text-xs">{opportunity.yacht.length} ft</p>
                 <p className="text-xs text-gray-600">Length</p>
               </div>
               <div className="bg-gray-50 rounded-lg p-2 text-center">
-                <Calendar className="w-5 h-5 text-primary mx-auto mb-1" />
+                <Calendar className="w-4 h-4 text-primary mx-auto mb-1" />
                 <p className="font-semibold text-gray-900 text-xs">{opportunity.yacht.yearBuilt}</p>
-                <p className="text-xs text-gray-600">Year Built</p>
+                <p className="text-xs text-gray-600">Year</p>
               </div>
             </div>
           </CardContent>
