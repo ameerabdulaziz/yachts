@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import { useLocation, Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ArrowLeft, Shield, RotateCcw } from "lucide-react";
+import { ArrowLeft, RotateCcw } from "lucide-react";
+import nauttecLogo from "@assets/Nauttec Logo_1754330395988.png";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
@@ -99,10 +100,10 @@ export default function OTPVerificationScreen() {
 
         {/* Content */}
         <div className="space-y-8">
-          {/* Shield Icon */}
+          {/* Nauttec Logo */}
           <div className="flex justify-center">
-            <div className="w-24 h-24 bg-blue-400 rounded-3xl flex items-center justify-center">
-              <Shield className="w-10 h-10 text-white" />
+            <div className="w-24 h-24 bg-white rounded-3xl flex items-center justify-center shadow-lg p-4">
+              <img src={nauttecLogo} alt="Nauttec Logo" className="w-full h-full object-contain" />
             </div>
           </div>
 
