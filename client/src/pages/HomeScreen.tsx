@@ -44,10 +44,9 @@ export default function HomeScreen() {
       </header>
 
       {/* Hero Section with Search */}
-      <section className="bg-gradient-ocean px-4 py-8 text-white">
+      <section className="bg-blue-500 px-4 py-8 text-white">
         <div className="text-center mb-6">
-          <h2 className="text-2xl font-bold mb-2">Find Your Perfect Yacht</h2>
-          <p className="text-blue-100">Luxury experiences on the water</p>
+          <h2 className="text-2xl font-bold mb-2">Book Your Yacht</h2>
         </div>
         
         <div className="bg-white rounded-2xl p-4 shadow-xl">
@@ -95,7 +94,7 @@ export default function HomeScreen() {
               />
             </div>
           </div>
-          <Button className="w-full bg-gradient-ocean text-white p-4 rounded-xl font-semibold hover:shadow-lg transition-all duration-300">
+          <Button className="w-full bg-blue-600 text-white p-4 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 hover:bg-blue-700">
             <Search className="w-5 h-5 mr-2" />
             Search Yachts
           </Button>
@@ -157,23 +156,6 @@ export default function HomeScreen() {
                 </Card>
               </Link>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Quick Categories */}
-      <section className="px-4 py-6 bg-white">
-        <h3 className="text-xl font-bold text-gray-900 mb-4">Browse by Category</h3>
-        <div className="grid grid-cols-2 gap-4">
-          <div className="bg-gradient-ocean rounded-2xl p-6 text-white text-center">
-            <Ship className="w-8 h-8 mx-auto mb-3" />
-            <h4 className="font-bold mb-1">Luxury Yachts</h4>
-            <p className="text-sm text-blue-100">Premium vessels</p>
-          </div>
-          <div className="bg-gradient-to-br from-amber-500 to-orange-600 rounded-2xl p-6 text-white text-center">
-            <TrendingUp className="w-8 h-8 mx-auto mb-3" />
-            <h4 className="font-bold mb-1">Investments</h4>
-            <p className="text-sm text-orange-100">Fractional ownership</p>
           </div>
         </div>
       </section>
