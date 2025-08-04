@@ -191,49 +191,58 @@ export default function HomeScreen() {
           </Link>
         </div>
         
-        <div className="space-y-4">
-          {mockOwnershipOpportunities.map((opportunity) => (
-            <Link key={opportunity.id} href={`/ownership/${opportunity.id}`}>
-              <Card className="card-hover cursor-pointer">
-                <CardContent className="p-4">
-                  <div className="flex space-x-4">
+        <div className="overflow-x-auto">
+          <div className="flex space-x-4" style={{ width: "max-content" }}>
+            {mockOwnershipOpportunities.map((opportunity) => (
+              <Link key={opportunity.id} href={`/ownership/${opportunity.id}`}>
+                <Card className="w-80 card-hover cursor-pointer">
+                  <div className="relative">
                     <img 
                       src={opportunity.yacht.images[0]} 
                       alt={opportunity.yacht.name}
-                      className="w-20 h-20 object-cover rounded-xl"
+                      className="w-full h-48 object-cover rounded-t-2xl"
                     />
-                    <div className="flex-1">
-                      <div className="flex items-start justify-between mb-2">
-                        <div>
-                          <h4 className="font-bold text-gray-900">{opportunity.yacht.name}</h4>
-                          <p className="text-sm text-gray-600">{opportunity.shareFraction} Share Available</p>
-                        </div>
-                        <div className="text-right">
-                          <p className="text-lg font-bold text-primary">€{opportunity.sharePrice}</p>
-                          <p className="text-xs text-gray-500">per share</p>
-                        </div>
-                      </div>
-                      <div className="flex items-center space-x-4 text-sm text-gray-600 mb-2">
-                        <span><Calendar className="w-4 h-4 inline mr-1" />{opportunity.usageWeeks} weeks/year</span>
-                        <span><MapPin className="w-4 h-4 inline mr-1" />{opportunity.yacht.location}</span>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-1">
-                          <div className={`w-2 h-2 rounded-full ${opportunity.availableShares > 2 ? 'bg-green-500' : 'bg-orange-500'}`}></div>
-                          <span className={`text-xs font-medium ${opportunity.availableShares > 2 ? 'text-green-600' : 'text-orange-600'}`}>
-                            {opportunity.availableShares} shares left
-                          </span>
-                        </div>
-                        <Button className="bg-primary text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-primary-hover transition-colors">
-                          Learn More
-                        </Button>
+                    <div className="absolute top-3 right-3 bg-amber-500 text-white px-2 py-1 rounded-full text-xs font-bold">
+                      {opportunity.shareFraction}
+                    </div>
+                    <Button 
+                      variant="ghost" 
+                      size="sm" 
+                      className="absolute top-3 left-3 p-2 bg-white/80 rounded-full hover:bg-white"
+                    >
+                      <Heart className="w-4 h-4 text-gray-600" />
+                    </Button>
+                  </div>
+                  <CardContent className="p-4">
+                    <div className="flex items-start justify-between mb-2">
+                      <div>
+                        <h4 className="font-bold text-gray-900">{opportunity.yacht.name}</h4>
+                        <p className="text-gray-600 text-sm">{opportunity.yacht.location}</p>
                       </div>
                     </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </Link>
-          ))}
+                    <div className="flex items-center space-x-2 mb-2">
+                      <div className="flex items-center space-x-1">
+                        <div className={`w-2 h-2 rounded-full ${opportunity.availableShares > 2 ? 'bg-green-500' : 'bg-orange-500'}`}></div>
+                        <span className={`text-xs font-medium ${opportunity.availableShares > 2 ? 'text-green-600' : 'text-orange-600'}`}>
+                          {opportunity.availableShares} shares available
+                        </span>
+                      </div>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-3 text-sm text-gray-600">
+                        <span><Calendar className="w-4 h-4 inline mr-1" />{opportunity.usageWeeks} weeks/year</span>
+                        <span><Users className="w-4 h-4 inline mr-1" />{opportunity.yacht.capacity} guests</span>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-2xl font-bold text-primary">€{opportunity.sharePrice}</p>
+                        <p className="text-sm text-gray-600">per share</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 
