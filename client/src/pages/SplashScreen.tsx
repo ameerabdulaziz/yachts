@@ -18,12 +18,13 @@ export default function SplashScreen() {
   return (
     <div className="fixed inset-0 z-50 animate-fade-in">
       {/* Background Image */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage: `url(${yachtBackground})`
-        }}
-      />
+      <div className="absolute inset-0">
+        <img 
+          src={yachtBackground} 
+          alt="De Antonio Yacht" 
+          className="w-full h-full object-cover"
+        />
+      </div>
       
       {/* Light Overlay for better contrast */}
       <div className="absolute inset-0 bg-black bg-opacity-20" />
