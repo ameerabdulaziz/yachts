@@ -1,4 +1,4 @@
-import { ArrowLeft, Calendar, Clock, Users, Fuel, AlertCircle, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowLeft, Calendar, Clock, Users, Fuel, AlertCircle, ChevronLeft, ChevronRight, DollarSign, Gauge } from "lucide-react";
 import { Link, useRoute } from "wouter";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -14,7 +14,7 @@ const mockBookingCalendar = {
     totalShares: 7,
     remainingDays: 34,
     remainingEngineHours: 38,
-    fuelBalance: 45, // liters
+    fuelBalance: 120, // euros
     fuelThreshold: 20,
     // Generate calendar data for March 2025
     getDateStatus: (date: string) => {
@@ -23,6 +23,7 @@ const mockBookingCalendar = {
       if ([3, 10, 17, 24, 31].includes(dayOfMonth)) return { status: "maintenance" };
       if ([5, 12, 16, 19, 26].includes(dayOfMonth)) return { status: "booked", bookedBy: dayOfMonth === 19 ? "You" : "Owner #3" };
       if ([21, 22].includes(dayOfMonth)) return { status: "waitlist", waitlistCount: 2 };
+      if ([7, 14].includes(dayOfMonth)) return { status: "waitlist", waitlistCount: 1 };
       return { status: "available" };
     }
   }
@@ -33,7 +34,7 @@ export default function BookingCalendarScreen() {
   const boatId = params?.id;
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [selectedSlot, setSelectedSlot] = useState<"morning" | "afternoon" | "full">("full");
-  const [currentDate, setCurrentDate] = useState(new Date(2025, 2, 1)); // March 2025
+  const [currentDate, setCurrentDate] = useState(new Date(2025, 9, 1)); // October 2025
 
   const bookingData = boatId ? mockBookingCalendar[boatId as keyof typeof mockBookingCalendar] : null;
 
@@ -93,7 +94,7 @@ export default function BookingCalendarScreen() {
       case "available": return "bg-green-500 text-white hover:bg-green-600 cursor-pointer";
       case "booked": return "bg-orange-500 text-white hover:bg-orange-600 cursor-pointer";
       case "maintenance": return "bg-gray-400 text-white";
-      case "waitlist": return "bg-yellow-500 text-white";
+      case "waitlist": return "bg-yellow-500 text-white hover:bg-yellow-600 cursor-pointer";
       default: return "bg-gray-200 text-gray-600";
     }
   };
@@ -102,16 +103,26 @@ export default function BookingCalendarScreen() {
     if (day.isCurrentMonth && day.status === "available" && canBook) {
       setSelectedDate(day.dateStr);
     } else if (day.isCurrentMonth && day.status === "booked") {
-      // Prompt user to join waitlist
-      const confirmed = window.confirm(`This date is already booked. Would you like to join the waitlist for ${new Date(day.dateStr).toLocaleDateString("en-US", { 
+      // Show popup to join waitlist
+      const confirmed = window.confirm(`This date is already booked by ${day.bookedBy || 'another owner'}. Would you like to join the waitlist for ${new Date(day.dateStr).toLocaleDateString("en-US", { 
         weekday: "long", 
         month: "long", 
         day: "numeric" 
       })}?`);
       
       if (confirmed) {
-        // Here you would typically make an API call to join the waitlist
         alert("You've been added to the waitlist! We'll notify you if this date becomes available.");
+      }
+    } else if (day.isCurrentMonth && day.status === "waitlist") {
+      // Show popup to cancel waitlist
+      const confirmed = window.confirm(`You are currently on the waitlist for ${new Date(day.dateStr).toLocaleDateString("en-US", { 
+        weekday: "long", 
+        month: "long", 
+        day: "numeric" 
+      })}. Would you like to cancel your waitlist position?`);
+      
+      if (confirmed) {
+        alert("You've been removed from the waitlist for this date.");
       }
     }
   };
@@ -140,20 +151,29 @@ export default function BookingCalendarScreen() {
         {/* Usage Summary */}
         <Card className="border border-gray-100">
           <CardHeader className="pb-3">
-            <CardTitle className="text-lg">Your Usage Balance</CardTitle>
+            <CardTitle className="text-lg">My Usage Balance</CardTitle>
           </CardHeader>
           <CardContent className="space-y-3">
             <div className="grid grid-cols-3 gap-3">
-              <div className="text-center p-2 bg-blue-50 rounded-lg">
-                <div className="text-lg font-bold text-blue-600">{bookingData.remainingDays}</div>
+              <div className="text-center p-3 bg-gray-50 rounded-lg">
+                <div className="mb-2">
+                  <Calendar className="h-6 w-6 text-blue-600 mx-auto" />
+                </div>
+                <div className="text-lg font-bold text-gray-900">{bookingData.remainingDays}</div>
                 <div className="text-xs text-gray-600">Days Left</div>
               </div>
-              <div className="text-center p-2 bg-green-50 rounded-lg">
-                <div className="text-lg font-bold text-green-600">{bookingData.remainingEngineHours}</div>
+              <div className="text-center p-3 bg-gray-50 rounded-lg">
+                <div className="mb-2">
+                  <Gauge className="h-6 w-6 text-blue-600 mx-auto" />
+                </div>
+                <div className="text-lg font-bold text-gray-900">{bookingData.remainingEngineHours}</div>
                 <div className="text-xs text-gray-600">Engine Hours</div>
               </div>
-              <div className="text-center p-2 bg-orange-50 rounded-lg">
-                <div className="text-lg font-bold text-orange-600">{bookingData.fuelBalance}L</div>
+              <div className="text-center p-3 bg-gray-50 rounded-lg">
+                <div className="mb-2">
+                  <DollarSign className="h-6 w-6 text-blue-600 mx-auto" />
+                </div>
+                <div className="text-lg font-bold text-gray-900">€{bookingData.fuelBalance}</div>
                 <div className="text-xs text-gray-600">Fuel Balance</div>
               </div>
             </div>
