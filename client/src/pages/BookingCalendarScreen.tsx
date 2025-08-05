@@ -1,5 +1,5 @@
 import { ArrowLeft, Calendar, Clock, Users, Fuel, AlertCircle, ChevronLeft, ChevronRight, DollarSign, Gauge } from "lucide-react";
-import { Link, useRoute } from "wouter";
+import { Link, useRoute, useLocation } from "wouter";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -61,6 +61,7 @@ const mockBookingCalendar = {
 
 export default function BookingCalendarScreen() {
   const [match, params] = useRoute("/booking-calendar/:id");
+  const [location, setLocation] = useLocation();
   const boatId = params?.id;
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [selectedSlot, setSelectedSlot] = useState<"morning" | "afternoon" | "full">("full");
@@ -369,11 +370,30 @@ export default function BookingCalendarScreen() {
               </div>
 
               <div className="flex gap-2">
-                <Button className="flex-1 bg-blue-600 hover:bg-blue-700">
+                <Button 
+                  className="flex-1 bg-blue-600 hover:bg-blue-700"
+                  onClick={() => {
+                    // Finalize booking and redirect to confirmation
+                    setLocation("/booking-confirmation");
+                  }}
+                >
                   <Clock className="h-4 w-4 mr-2" />
                   Book {selectedSlot === "full" ? "Full Day" : selectedSlot}
                 </Button>
-                <Button variant="outline" className="flex-1">
+                <Button 
+                  variant="outline" 
+                  className="flex-1"
+                  onClick={() => {
+                    const bookingText = `I'd like to book a yacht for ${new Date(selectedDate).toLocaleDateString("en-US", { 
+                      weekday: "long", 
+                      month: "long", 
+                      day: "numeric",
+                      year: "numeric"
+                    })} - ${selectedSlot === "full" ? "Full Day" : selectedSlot} slot. Yacht ID: ${boatId}`;
+                    const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(bookingText)}`;
+                    window.open(whatsappUrl, '_blank');
+                  }}
+                >
                   <Users className="h-4 w-4 mr-2" />
                   Share Booking
                 </Button>
