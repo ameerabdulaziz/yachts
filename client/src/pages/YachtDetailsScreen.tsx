@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { ArrowLeft, Heart, Share, Star, Users, Bed, Ruler, Calendar, Wifi, Utensils, Volume2, Snowflake, MessageCircle, CheckCircle, ChevronLeft, ChevronRight } from "lucide-react";
+import { Checkbox } from "@/components/ui/checkbox";
 import { mockYachts } from "@/lib/mockData";
 import BottomNavigation from "@/components/BottomNavigation";
 
@@ -17,6 +18,7 @@ export default function YachtDetailsScreen() {
   const [selectedEndDate, setSelectedEndDate] = useState<Date | null>(null);
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [showCalendar, setShowCalendar] = useState(false);
+  const [includeCatering, setIncludeCatering] = useState(false);
 
   // Find yacht by ID (in real app, this would be an API call)
   const yacht = mockYachts.find(y => y.id === id) || mockYachts[0];
@@ -204,31 +206,6 @@ export default function YachtDetailsScreen() {
           </div>
         </div>
 
-        {/* Owner Info */}
-        <div className="bg-blue-50 rounded-xl p-4 mb-6">
-          <div className="flex items-center space-x-3">
-            <Avatar className="w-12 h-12">
-              <AvatarImage src={yacht.owner.avatar} alt={yacht.owner.name} />
-              <AvatarFallback>{yacht.owner.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
-            </Avatar>
-            <div className="flex-1">
-              <div className="flex items-center space-x-2 mb-1">
-                <h4 className="font-semibold text-gray-900">{yacht.owner.name}</h4>
-              </div>
-              <p className="text-sm text-gray-600">Boat owner</p>
-              <div className="flex items-center space-x-1 mt-1">
-                <div className="flex text-yellow-400">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-3 h-3 fill-current" />
-                  ))}
-                </div>
-                <span className="text-xs text-gray-600">{yacht.owner.rating} (89 reviews)</span>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
         {/* Calendar Section */}
         <div className="mb-6">
           <div className="flex items-center justify-between mb-3">
@@ -324,15 +301,8 @@ export default function YachtDetailsScreen() {
             </Dialog>
           </div>
           
-          {/* Quick Date Selection */}
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-            <div className="flex items-center space-x-2 mb-2">
-              <Calendar className="w-5 h-5 text-blue-600" />
-              <span className="font-semibold text-blue-900">Available Dates</span>
-            </div>
-            <p className="text-sm text-blue-700 mb-3">October 15-30, 2025 • November 1-15, 2025</p>
-            
-            {selectedStartDate && selectedEndDate && (
+          {selectedStartDate && selectedEndDate && (
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
               <div className="bg-white rounded-lg p-3 border border-blue-200">
                 <div className="text-sm font-medium text-gray-900 mb-1">Your Selection:</div>
                 <div className="text-sm text-gray-700">
@@ -342,7 +312,55 @@ export default function YachtDetailsScreen() {
                   {Math.ceil((selectedEndDate.getTime() - selectedStartDate.getTime()) / (1000 * 60 * 60 * 24))} nights
                 </div>
               </div>
-            )}
+            </div>
+          )}
+        </div>
+
+        {/* Catering Option */}
+        <div className="mb-6">
+          <div className="bg-gray-50 rounded-xl p-4 border border-gray-200">
+            <div className="flex items-center space-x-3">
+              <Checkbox 
+                id="catering"
+                checked={includeCatering}
+                onCheckedChange={setIncludeCatering}
+              />
+              <div className="flex-1">
+                <label htmlFor="catering" className="text-sm font-medium text-gray-900 cursor-pointer">
+                  Add Catering Service
+                </label>
+                <p className="text-xs text-gray-600">Professional catering with local specialties</p>
+              </div>
+              <div className="text-right">
+                <p className="text-sm font-semibold text-gray-900">€200</p>
+                <p className="text-xs text-gray-600">per day</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Owner Info */}
+        <div className="bg-blue-50 rounded-xl p-4 mb-6">
+          <div className="flex items-center space-x-3">
+            <Avatar className="w-12 h-12">
+              <AvatarImage src={yacht.owner.avatar} alt={yacht.owner.name} />
+              <AvatarFallback>{yacht.owner.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
+            </Avatar>
+            <div className="flex-1">
+              <div className="flex items-center space-x-2 mb-1">
+                <h4 className="font-semibold text-gray-900">{yacht.owner.name}</h4>
+              </div>
+              <p className="text-sm text-gray-600">Boat owner</p>
+              <div className="flex items-center space-x-1 mt-1">
+                <div className="flex text-yellow-400">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-3 h-3 fill-current" />
+                  ))}
+                </div>
+                <span className="text-xs text-gray-600">{yacht.owner.rating} (89 reviews)</span>
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
@@ -360,7 +378,7 @@ export default function YachtDetailsScreen() {
           </div>
         </div>
         
-        <Link href={`/booking/${yacht.id}${selectedStartDate && selectedEndDate ? `?start=${selectedStartDate.toISOString().split('T')[0]}&end=${selectedEndDate.toISOString().split('T')[0]}` : ''}`}>
+        <Link href={`/booking-checkout${selectedStartDate && selectedEndDate ? `?yacht=${yacht.id}&start=${selectedStartDate.toISOString().split('T')[0]}&end=${selectedEndDate.toISOString().split('T')[0]}&catering=${includeCatering}` : ''}`}>
           <Button 
             className="w-full bg-gradient-ocean text-white py-4 rounded-xl font-semibold text-lg hover:shadow-lg transition-all duration-300"
             disabled={!selectedStartDate || !selectedEndDate}
@@ -371,7 +389,19 @@ export default function YachtDetailsScreen() {
         
         {selectedStartDate && selectedEndDate && (
           <div className="mt-2 text-center text-sm text-gray-600">
-            Total: €{(parseInt(yacht.pricePerDay) * Math.ceil((selectedEndDate.getTime() - selectedStartDate.getTime()) / (1000 * 60 * 60 * 24))).toLocaleString()}
+            {(() => {
+              const nights = Math.ceil((selectedEndDate.getTime() - selectedStartDate.getTime()) / (1000 * 60 * 60 * 24));
+              const yachtCost = parseInt(yacht.pricePerDay) * nights;
+              const cateringCost = includeCatering ? 200 * nights : 0;
+              const total = yachtCost + cateringCost;
+              return (
+                <div>
+                  <div>Yacht: €{yachtCost.toLocaleString()}</div>
+                  {includeCatering && <div>Catering: €{cateringCost.toLocaleString()}</div>}
+                  <div className="font-semibold">Total: €{total.toLocaleString()}</div>
+                </div>
+              );
+            })()}
           </div>
         )}
       </section>
