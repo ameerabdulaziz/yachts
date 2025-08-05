@@ -32,12 +32,12 @@ export default function SplashScreen() {
       {/* Content */}
       <div className="relative h-full flex flex-col p-8">
         {/* Top Section - Nauttec Logo positioned after boat tip */}
-        <div className="pt-16 pb-8">
+        <div className="pt-8 pb-4">
           <div className="text-center">
-            <div className="w-40 h-32 mx-auto mb-8">
+            <div className="w-40 h-32 mx-auto mb-6">
               <img src={nauttecLogo} alt="Nauttec Logo" className="w-full h-full object-contain drop-shadow-2xl" />
             </div>
-            <div className="mt-8">
+            <div className="mt-6">
               <div className="w-8 h-8 border-4 border-white border-t-transparent rounded-full animate-spin mx-auto"></div>
             </div>
           </div>
