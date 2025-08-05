@@ -30,11 +30,11 @@ export default function SplashScreen() {
       <div className="absolute inset-0 bg-black bg-opacity-20" />
       
       {/* Content */}
-      <div className="relative h-full flex flex-col p-8">
-        {/* Top Section - Nauttec Logo positioned after boat tip */}
-        <div className="pt-8 pb-4">
+      <div className="relative h-full flex flex-col">
+        {/* Top Section - Nauttec Logo positioned high up */}
+        <div className="pt-16 px-8">
           <div className="text-center">
-            <div className="w-40 h-32 mx-auto mb-6">
+            <div className="w-48 h-20 mx-auto mb-8">
               <img src={nauttecLogo} alt="Nauttec Logo" className="w-full h-full object-contain drop-shadow-2xl" />
             </div>
             <div className="mt-6">
@@ -43,20 +43,17 @@ export default function SplashScreen() {
           </div>
         </div>
         
-        {/* Spacer to push De Antonio logo towards boat tail */}
+        {/* Spacer to push De Antonio logo to bottom */}
         <div className="flex-1"></div>
         
-        {/* Bottom Section - De Antonio Yachts Logo positioned towards boat tail */}
-        <div className="text-center pb-16">
-          <div className="mb-4">
-            <p className="text-white text-sm mb-3 drop-shadow-lg">Powered by</p>
-            <div className="w-56 h-16 mx-auto flex items-center justify-center">
-              <img 
-                src={deAntonioLogo} 
-                alt="De Antonio Yachts" 
-                className="h-full object-contain drop-shadow-xl"
-              />
-            </div>
+        {/* Bottom Section - De Antonio Yachts Logo positioned at very bottom */}
+        <div className="text-center pb-8 px-8">
+          <div className="w-64 h-14 mx-auto flex items-center justify-center">
+            <img 
+              src={deAntonioLogo} 
+              alt="De Antonio Yachts" 
+              className="h-full object-contain drop-shadow-xl"
+            />
           </div>
         </div>
       </div>
