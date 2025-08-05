@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ArrowLeft, Heart, Share, Star, Users, Bed, Ruler, Calendar, Wifi, Utensils, Volume2, Snowflake, MessageCircle, CheckCircle } from "lucide-react";
 import { mockYachts } from "@/lib/mockData";
+import BottomNavigation from "@/components/BottomNavigation";
 
 export default function YachtDetailsScreen() {
   const { id } = useParams<{ id: string }>();
@@ -205,6 +206,8 @@ export default function YachtDetailsScreen() {
           </Button>
         </Link>
       </section>
+      
+      <BottomNavigation />
     </div>
   );
 }

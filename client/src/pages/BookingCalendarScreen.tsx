@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import BottomNavigation from "@/components/BottomNavigation";
 
 // Mock booking calendar data based on Yachtak specification
 const mockBookingCalendar = {
@@ -245,6 +246,8 @@ export default function BookingCalendarScreen() {
           </Alert>
         )}
       </div>
+      
+      <BottomNavigation />
     </div>
   );
 }

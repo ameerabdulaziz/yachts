@@ -3,6 +3,7 @@ import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import BottomNavigation from "@/components/BottomNavigation";
 
 // Mock data for owned boats - limiting to 2 boats as requested
 const mockOwnedBoats = [
@@ -173,6 +174,8 @@ export default function MyBoatsScreen() {
           </div>
         )}
       </div>
+      
+      <BottomNavigation />
     </div>
   );
 }
