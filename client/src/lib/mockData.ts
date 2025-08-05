@@ -10,7 +10,7 @@ export const mockYachts: (Yacht & { owner: { name: string; avatar: string; verif
     capacity: 12,
     cabins: 2,
     length: "50",
-    yearBuilt: 2024,
+    yearBuilt: 2026,
     images: [
       "https://static.wixstatic.com/media/0fb4c8_60988eb5cf834fcb876c1d06bd8af594~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D50.jpg",
       "https://static.wixstatic.com/media/0fb4c8_6858e9c5176b4ce29966b597a896ba3df000.jpg/v1/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0fb4c8_6858e9c5176b4ce29966b597a896ba3df000.jpg"
@@ -38,7 +38,7 @@ export const mockYachts: (Yacht & { owner: { name: string; avatar: string; verif
     capacity: 12,
     cabins: 2,
     length: "42",
-    yearBuilt: 2024,
+    yearBuilt: 2026,
     images: [
       "https://static.wixstatic.com/media/0fb4c8_008f1545c8764f8789a2b7415ca9dde7~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D42.jpg",
       "https://static.wixstatic.com/media/0fb4c8_7c755f09d13f412dbc05e7e373459d1ff000.jpg/v1/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0fb4c8_7c755f09d13f412dbc05e7e373459d1ff000.jpg"
@@ -66,7 +66,7 @@ export const mockYachts: (Yacht & { owner: { name: string; avatar: string; verif
     capacity: 12,
     cabins: 1,
     length: "36",
-    yearBuilt: 2024,
+    yearBuilt: 2026,
     images: [
       "https://static.wixstatic.com/media/0fb4c8_fbbb6a2569c747d48881f7ac065b947a~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D36.jpg",
       "https://static.wixstatic.com/media/0fb4c8_8b966046562f427b8b62d4479b53d852f000.jpg/v1/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0fb4c8_8b966046562f427b8b62d4479b53d852f000.jpg"
@@ -94,7 +94,7 @@ export const mockYachts: (Yacht & { owner: { name: string; avatar: string; verif
     capacity: 10,
     cabins: 2,
     length: "32",
-    yearBuilt: 2025,
+    yearBuilt: 2026,
     images: [
       "https://static.wixstatic.com/media/0fb4c8_6cbbd012fc0645009bc4a91a412b293a~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D32.jpg",
       "https://static.wixstatic.com/media/0fb4c8_b477bd8bfe504485855871529fcb3f53f000.jpg/v1/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0fb4c8_b477bd8bfe504485855871529fcb3f53f000.jpg"
@@ -122,7 +122,7 @@ export const mockYachts: (Yacht & { owner: { name: string; avatar: string; verif
     capacity: 8,
     cabins: 1,
     length: "29",
-    yearBuilt: 2024,
+    yearBuilt: 2026,
     images: [
       "https://static.wixstatic.com/media/0fb4c8_b9744cfa841b4c4388ad78ac9b49bbe7~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D29.jpg",
       "https://static.wixstatic.com/media/0fb4c8_37f396843d334191b8a1d91b9c519f33f000.jpg/v1/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0fb4c8_37f396843d334191b8a1d91b9c519f33f000.jpg"
@@ -144,13 +144,13 @@ export const mockYachts: (Yacht & { owner: { name: string; avatar: string; verif
   {
     id: "yacht-6",
     name: "De Antonio D60 Open",
-    description: "The new flagship model with four hidden outboard engines and unmatched luxury. Available for 2025 delivery with customizable layout options and premium Barcelona craftsmanship.",
+    description: "The new flagship model with four hidden outboard engines and unmatched luxury. Available for 2026 delivery with customizable layout options and premium Barcelona craftsmanship.",
     location: "El Gouna, Egypt",
     pricePerDay: "4200",
     capacity: 12,
     cabins: 3,
     length: "60",
-    yearBuilt: 2025,
+    yearBuilt: 2026,
     images: [
       "https://static.wixstatic.com/media/5c3629_a8b1aa6ff9244bddaf7383aa45b4afc1~mv2.jpg/v1/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/5c3629_a8b1aa6ff9244bddaf7383aa45b4afc1~mv2.jpg",
       "https://static.wixstatic.com/media/0fb4c8_038f4da53a4848a784b7c1d1bac8dfdb~mv2.jpg/v1/fill/w_800,h_400,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/D60%20PLANTA%20EXTERIOR%20HARD%20TOP.jpg"
@@ -178,7 +178,7 @@ export const mockYachts: (Yacht & { owner: { name: string; avatar: string; verif
     capacity: 12,
     cabins: 2,
     length: "50",
-    yearBuilt: 2024,
+    yearBuilt: 2026,
     images: [
       "https://static.wixstatic.com/media/0fb4c8_60988eb5cf834fcb876c1d06bd8af594~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D50.jpg",
       "https://static.wixstatic.com/media/0fb4c8_6858e9c5176b4ce29966b597a896ba3df000.jpg/v1/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0fb4c8_6858e9c5176b4ce29966b597a896ba3df000.jpg"
@@ -206,7 +206,7 @@ export const mockYachts: (Yacht & { owner: { name: string; avatar: string; verif
     capacity: 8,
     cabins: 1,
     length: "23",
-    yearBuilt: 2024,
+    yearBuilt: 2026,
     images: [
       "https://static.wixstatic.com/media/0fb4c8_5c8b9b7d8c4a4a8fa8c2a5f5e8c6b2a3~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_E23.jpg",
       "https://static.wixstatic.com/media/0fb4c8_e23_interior_luxury_sustainable~mv2.jpg/v1/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/E23_interior.jpg"
@@ -253,8 +253,8 @@ export const mockOwnershipOpportunities: (OwnershipOpportunity & { yacht: Yacht 
       pricePerDay: "1800",
       capacity: 10,
       cabins: 2,
-      length: "9.90",
-      yearBuilt: 2025,
+      length: "32",
+      yearBuilt: 2026,
       images: ["https://static.wixstatic.com/media/0fb4c8_6cbbd012fc0645009bc4a91a412b293a~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D32.jpg"],
       amenities: ["Dual 300HP V-8 Fourstroke", "Central Outdoor Galley", "Three Pilot Seats", "Generous Bench Seating", "650L Fuel Tank", "100L Freshwater", "80L Blackwater Tank", "CE Certification"],
       ownerId: "owner-4",
@@ -290,8 +290,8 @@ export const mockOwnershipOpportunities: (OwnershipOpportunity & { yacht: Yacht 
       pricePerDay: "2200",
       capacity: 12,
       cabins: 1,
-      length: "11.50",
-      yearBuilt: 2024,
+      length: "36",
+      yearBuilt: 2026,
       images: ["https://static.wixstatic.com/media/0fb4c8_fbbb6a2569c747d48881f7ac065b947a~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D36.jpg"],
       amenities: ["350HP V10 VERADO Engine", "Hydraulic Steering", "Outdoor Galley", "Walkaround Deck", "Large Central Table", "Pilot Area Seating", "VHF Radio", "Bilge Pumps"],
       ownerId: "owner-3",
@@ -327,8 +327,8 @@ export const mockOwnershipOpportunities: (OwnershipOpportunity & { yacht: Yacht 
       pricePerDay: "2800",
       capacity: 12,
       cabins: 2,
-      length: "12.64",
-      yearBuilt: 2024,
+      length: "42",
+      yearBuilt: 2026,
       images: ["https://static.wixstatic.com/media/0fb4c8_008f1545c8764f8789a2b7415ca9dde7~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D42.jpg"],
       amenities: ["Triple Mercury 400HP Outboards", "Walk-around Design", "Bow Lounge Area", "Convertible Center Seats", "Exterior Kitchen", "Large Sundecks", "Premium Sound System", "Navigation Package"],
       ownerId: "owner-2",
@@ -364,8 +364,8 @@ export const mockOwnershipOpportunities: (OwnershipOpportunity & { yacht: Yacht 
       pricePerDay: "4200",
       capacity: 12,
       cabins: 3,
-      length: "18.50",
-      yearBuilt: 2024,
+      length: "60",
+      yearBuilt: 2026,
       images: ["https://static.wixstatic.com/media/0fb4c8_1105b00d73ee4ddc9f1ad1d4b74d9ece~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D60.jpg"],
       amenities: ["Premium Hidden Outboards", "Master Suite", "VIP Cabin", "Outdoor Kitchen", "Premium Audio", "Advanced Navigation", "Flexiteek Decking", "Luxury Finishes"],
       ownerId: "owner-6",
@@ -401,8 +401,8 @@ export const mockOwnershipOpportunities: (OwnershipOpportunity & { yacht: Yacht 
       pricePerDay: "3600",
       capacity: 12,
       cabins: 2,
-      length: "14.90",
-      yearBuilt: 2024,
+      length: "50",
+      yearBuilt: 2026,
       images: ["https://static.wixstatic.com/media/0fb4c8_60988eb5cf834fcb876c1d06bd8af594~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D50.jpg"],
       amenities: ["Climate Control", "Enclosed Cabin", "Hidden Outboards", "Premium Seating", "Navigation Package", "Entertainment System", "Galley Kitchen", "Head Compartment"],
       ownerId: "owner-7",
@@ -422,6 +422,12 @@ export const mockOwnershipOpportunities: (OwnershipOpportunity & { yacht: Yacht 
     totalShares: 4,
     availableShares: 1,
     isActive: true,
+    financing: {
+      available: true,
+      downPaymentPercent: 25,
+      termMonths: 60,
+      monthlyPayment: "725"
+    },
     createdAt: new Date(),
     updatedAt: new Date(),
     yacht: {
@@ -432,8 +438,8 @@ export const mockOwnershipOpportunities: (OwnershipOpportunity & { yacht: Yacht 
       pricePerDay: "2400",
       capacity: 8,
       cabins: 1,
-      length: "7.20",
-      yearBuilt: 2024,
+      length: "23",
+      yearBuilt: 2026,
       images: ["https://static.wixstatic.com/media/0fb4c8_44dd9413f85a474e8822360eec904262~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_E23.jpg"],
       amenities: ["Electric Propulsion", "Zero Emissions", "Silent Operation", "Solar Panels", "Premium Interior", "Touch Screen Controls", "LED Lighting", "Sustainable Materials"],
       ownerId: "owner-8",
