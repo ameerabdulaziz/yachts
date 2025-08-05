@@ -62,45 +62,32 @@ export default function MyBoatsScreen() {
       {/* Content */}
       <div className="p-4 space-y-4">
         {/* Fuel Wallet */}
-        <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-xl p-4 shadow-sm text-white">
+        <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <div className="bg-white/20 rounded-full p-2">
-                <Fuel className="h-5 w-5" />
+              <div className="bg-blue-100 rounded-full p-2">
+                <Fuel className="h-5 w-5 text-blue-600" />
               </div>
               <div>
-                <h2 className="text-lg font-semibold">Fuel Wallet</h2>
-                <p className="text-blue-100 text-sm">Available balance</p>
+                <h2 className="text-lg font-semibold text-gray-900">Fuel Wallet</h2>
+                <p className="text-gray-600 text-sm">Available balance</p>
               </div>
             </div>
             <div className="text-right">
-              <div className="text-2xl font-bold">€2,450</div>
-              <p className="text-blue-100 text-xs">≈ 980L fuel</p>
+              <div className="text-2xl font-bold text-gray-900">€2,450</div>
             </div>
           </div>
           <div className="mt-3 flex space-x-2">
-            <Button size="sm" className="bg-white/20 hover:bg-white/30 text-white border-white/30">
+            <Button size="sm" className="bg-blue-600 hover:bg-blue-700 text-white">
               Top Up
             </Button>
-            <Button size="sm" variant="outline" className="bg-transparent border-white/30 text-white hover:bg-white/10">
+            <Button size="sm" variant="outline" className="border-blue-600 text-blue-600 hover:bg-blue-50">
               History
             </Button>
           </div>
         </div>
 
-        {/* Quick Actions */}
-        <div className="grid grid-cols-2 gap-3">
-          <Link href="/share-marketplace">
-            <Button variant="outline" className="w-full">
-              <TrendingUp className="h-4 w-4 mr-2" />
-              Trade Shares
-            </Button>
-          </Link>
-          <Button variant="outline" className="w-full">
-            <Users className="h-4 w-4 mr-2" />
-            Swap Days
-          </Button>
-        </div>
+
 
         {/* Owned Boats List */}
         <div className="space-y-4">
@@ -142,6 +129,9 @@ export default function MyBoatsScreen() {
                     </div>
                     <div className="flex items-center gap-1">
                       <span>Built {boat.yearBuilt}</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <span>{boat.sharesFractionOwned} owned</span>
                     </div>
                   </div>
 
