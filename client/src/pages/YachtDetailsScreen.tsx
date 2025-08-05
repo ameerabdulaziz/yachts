@@ -153,11 +153,8 @@ export default function YachtDetailsScreen() {
             <div className="flex-1">
               <div className="flex items-center space-x-2 mb-1">
                 <h4 className="font-semibold text-gray-900">{yacht.owner.name}</h4>
-                {yacht.owner.verified && (
-                  <CheckCircle className="w-4 h-4 text-blue-500" />
-                )}
               </div>
-              <p className="text-sm text-gray-600">Verified owner • 15 years experience</p>
+              <p className="text-sm text-gray-600">Boat owner</p>
               <div className="flex items-center space-x-1 mt-1">
                 <div className="flex text-yellow-400">
                   {[...Array(5)].map((_, i) => (
@@ -167,10 +164,7 @@ export default function YachtDetailsScreen() {
                 <span className="text-xs text-gray-600">{yacht.owner.rating} (89 reviews)</span>
               </div>
             </div>
-            <Button variant="outline" size="sm">
-              <MessageCircle className="w-4 h-4 mr-1" />
-              Contact
-            </Button>
+
           </div>
         </div>
 
@@ -182,7 +176,7 @@ export default function YachtDetailsScreen() {
               <CheckCircle className="w-5 h-5 text-green-600" />
               <span className="font-semibold text-green-900">Available</span>
             </div>
-            <p className="text-sm text-green-700">June 15-30, 2024 • July 1-15, 2024</p>
+            <p className="text-sm text-green-700">October 15-30, 2025 • November 1-15, 2025</p>
           </div>
         </div>
       </section>
@@ -196,7 +190,7 @@ export default function YachtDetailsScreen() {
           </div>
           <div className="text-right">
             <p className="text-sm text-gray-600">Next available</p>
-            <p className="font-semibold text-gray-900">June 15, 2024</p>
+            <p className="font-semibold text-gray-900">October 15, 2025</p>
           </div>
         </div>
         

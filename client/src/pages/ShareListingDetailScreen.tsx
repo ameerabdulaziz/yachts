@@ -38,7 +38,7 @@ export default function ShareListingDetailScreen() {
       memberSince: "2022",
       totalSales: 3
     },
-    listedDate: new Date("2024-05-15"),
+    listedDate: new Date("2025-09-15"),
     reason: "Upgrading to larger share",
     description: "This 1/8 share in Azure Legend has been an amazing investment. The yacht is impeccably maintained and managed by a professional crew. Perfect for family vacations in the Mediterranean. Selling only because I'm upgrading to a 1/4 share.",
     usageSchedule: [

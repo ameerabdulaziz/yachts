@@ -17,8 +17,8 @@ export default function BookingCheckoutScreen() {
   const [, setLocation] = useLocation();
   const { toast } = useToast();
   
-  const [startDate, setStartDate] = useState("2024-06-15");
-  const [endDate, setEndDate] = useState("2024-06-18");
+  const [startDate, setStartDate] = useState("2025-10-15");
+  const [endDate, setEndDate] = useState("2025-10-18");
   const [guestCount, setGuestCount] = useState(6);
   const [addCaptain, setAddCaptain] = useState(false);
   const [addCatering, setAddCatering] = useState(false);

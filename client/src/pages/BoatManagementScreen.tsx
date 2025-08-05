@@ -26,7 +26,7 @@ export default function BoatManagementScreen() {
     totalBookings: 18,
     monthlyRevenue: 7200,
     occupancyRate: 78,
-    nextMaintenance: "July 15, 2024"
+    nextMaintenance: "November 15, 2025"
   };
 
   const bookings = [

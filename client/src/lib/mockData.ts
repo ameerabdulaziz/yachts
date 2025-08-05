@@ -23,9 +23,9 @@ export const mockYachts: (Yacht & { owner: { name: string; avatar: string; verif
     createdAt: new Date(),
     updatedAt: new Date(),
     owner: {
-      name: "Captain Marc Fernandez",
+      name: "Marc Fernandez",
       avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100",
-      verified: true,
+      verified: false,
       rating: 5.0
     }
   },
@@ -457,8 +457,8 @@ export const mockBookings: (Booking & { yacht: Yacht })[] = [
     id: "booking-1",
     yachtId: "yacht-1",
     userId: "user-1",
-    startDate: new Date("2024-09-16"),
-    endDate: new Date("2024-09-19"),
+    startDate: new Date("2025-10-16"),
+    endDate: new Date("2025-10-19"),
     guestCount: 6,
     totalPrice: "8190",
     status: "confirmed",
@@ -500,7 +500,7 @@ export const mockMessages: (Message & { sender: { name: string; avatar: string }
     isRead: false,
     createdAt: new Date(),
     sender: {
-      name: "Captain Marc Fernandez",
+      name: "Marc Fernandez",
       avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100"
     }
   },
@@ -510,7 +510,7 @@ export const mockMessages: (Message & { sender: { name: string; avatar: string }
     recipientId: "user-1",
     content: "Welcome to the De Antonio D42 Open experience! This award-winning yacht features triple Mercury 400HP concealed outboards for the ultimate performance. Can't wait to show you the innovative design!",
     isRead: false,
-    createdAt: new Date("2024-09-20"),
+    createdAt: new Date("2025-10-20"),
     sender: {
       name: "Sofia Martinez",
       avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b0ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100"

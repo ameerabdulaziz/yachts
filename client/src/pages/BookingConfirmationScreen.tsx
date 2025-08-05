@@ -8,8 +8,8 @@ export default function BookingConfirmationScreen() {
     id: "booking-12345",
     yachtName: "Serenity Princess",
     location: "Monaco, France",
-    startDate: "June 15, 2024",
-    endDate: "June 18, 2024",
+    startDate: "October 15, 2025",
+    endDate: "October 18, 2025",
     guests: 6,
     totalPrice: 8190,
     captain: "Captain Laurent",
@@ -104,7 +104,7 @@ export default function BookingConfirmationScreen() {
               />
               <div>
                 <h4 className="font-semibold text-gray-900">{booking.captain}</h4>
-                <p className="text-sm text-gray-600">15 years experience</p>
+
                 <div className="flex text-yellow-400 mt-1">
                   {[...Array(5)].map((_, i) => (
                     <CheckCircle key={i} className="w-3 h-3" />

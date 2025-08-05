@@ -20,7 +20,7 @@ export default function ChatThreadScreen() {
     },
     yacht: {
       name: "Serenity Princess",
-      booking: "June 15-18, 2024"
+      booking: "October 15-18, 2025"
     }
   };
 

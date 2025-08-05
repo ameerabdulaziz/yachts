@@ -26,7 +26,7 @@ const mockBoatOwnership = {
     availableShares: 2,
     sharePrice: "57,143",
     usageDaysPerYear: 96,
-    nextAvailableDate: "March 15, 2025",
+    nextAvailableDate: "October 15, 2025",
     monthlyMaintenance: "180",
     annualAppreciation: "+8.2%"
   },

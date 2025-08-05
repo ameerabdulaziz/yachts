@@ -19,14 +19,14 @@ export default function DashboardScreen() {
       id: "booking-1",
       yacht: "Serenity Princess",
       location: "Monaco, France",
-      dates: "June 15-18, 2024",
+      dates: "October 15-18, 2025",
       image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400"
     },
     {
       id: "booking-2",
       yacht: "Ocean's Dream",
       location: "Ibiza, Spain",
-      dates: "July 20-22, 2024",
+      dates: "November 20-22, 2025",
       image: "https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400"
     }
   ];

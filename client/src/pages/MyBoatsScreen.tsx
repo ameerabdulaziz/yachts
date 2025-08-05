@@ -19,7 +19,7 @@ const mockOwnedBoats = [
     sharesPercentage: 28.6,
     shareValue: "114,286",
     usageDaysPerYear: 96,
-    nextAvailableDate: "March 15, 2025"
+    nextAvailableDate: "October 15, 2025"
   },
   {
     id: "yacht-6",
@@ -33,7 +33,7 @@ const mockOwnedBoats = [
     sharesPercentage: 8.3,
     shareValue: "166,667",
     usageDaysPerYear: 27,
-    nextAvailableDate: "April 8, 2025"
+    nextAvailableDate: "November 8, 2025"
   }
 ];
 

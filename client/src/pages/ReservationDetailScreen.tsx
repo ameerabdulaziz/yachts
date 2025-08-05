@@ -15,8 +15,8 @@ export default function ReservationDetailScreen() {
       location: "Monaco, France",
       image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400"
     },
-    startDate: new Date("2024-06-15"),
-    endDate: new Date("2024-06-18"),
+    startDate: new Date("2025-10-15"),
+    endDate: new Date("2025-10-18"),
     guestCount: 6,
     totalPrice: 8190,
     paymentMethod: "Credit Card",
@@ -161,20 +161,11 @@ export default function ReservationDetailScreen() {
                 />
                 <div>
                   <h4 className="font-semibold text-gray-900">{booking.captain.name}</h4>
-                  <p className="text-sm text-gray-600">15 years experience</p>
+
                 </div>
               </div>
               
-              <div className="grid grid-cols-2 gap-3">
-                <Button variant="outline" className="flex items-center space-x-2">
-                  <Phone className="w-4 h-4" />
-                  <span>Call</span>
-                </Button>
-                <Button variant="outline" className="flex items-center space-x-2">
-                  <MessageCircle className="w-4 h-4" />
-                  <span>Message</span>
-                </Button>
-              </div>
+
             </CardContent>
           </Card>
         )}

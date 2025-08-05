@@ -27,7 +27,7 @@ const mockShareListings = [
       rating: 4.9,
       verified: true
     },
-    listedDate: new Date("2024-05-15"),
+    listedDate: new Date("2025-09-15"),
     reason: "Upgrading to larger share"
   },
   {
@@ -48,7 +48,7 @@ const mockShareListings = [
       rating: 4.7,
       verified: true
     },
-    listedDate: new Date("2024-05-20"),
+    listedDate: new Date("2025-09-20"),
     reason: "Relocating abroad"
   }
 ];

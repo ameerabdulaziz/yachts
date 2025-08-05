@@ -20,7 +20,7 @@ export default function OwnerDashboardScreen() {
       location: "Monaco, France",
       image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400",
       status: "available",
-      nextBooking: "June 15, 2024",
+      nextBooking: "October 15, 2025",
       monthlyRevenue: 7200,
       rating: 4.9,
       bookings: 18
@@ -31,7 +31,7 @@ export default function OwnerDashboardScreen() {
       location: "Ibiza, Spain",
       image: "https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400",
       status: "booked",
-      nextBooking: "June 20, 2024",
+      nextBooking: "October 20, 2025",
       monthlyRevenue: 5300,
       rating: 4.7,
       bookings: 10
@@ -43,7 +43,7 @@ export default function OwnerDashboardScreen() {
       id: "booking-1",
       guestName: "John D.",
       yacht: "Serenity Princess",
-      dates: "June 15-18, 2024",
+      dates: "October 15-18, 2025",
       revenue: 8190,
       status: "confirmed"
     },
@@ -51,7 +51,7 @@ export default function OwnerDashboardScreen() {
       id: "booking-2",
       guestName: "Sarah M.",
       yacht: "Ocean's Dream",
-      dates: "June 22-24, 2024",
+      dates: "October 22-24, 2025",
       revenue: 3600,
       status: "pending"
     }

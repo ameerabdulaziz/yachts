@@ -17,18 +17,18 @@ export default function BoatCalendarScreen() {
 
   // Mock calendar data
   const bookings = [
-    { date: "2024-06-15", guest: "John D.", status: "confirmed", revenue: 2400 },
-    { date: "2024-06-16", guest: "John D.", status: "confirmed", revenue: 2400 },
-    { date: "2024-06-17", guest: "John D.", status: "confirmed", revenue: 2400 },
-    { date: "2024-06-20", guest: "Sarah M.", status: "pending", revenue: 2400 },
-    { date: "2024-06-21", guest: "Sarah M.", status: "pending", revenue: 2400 },
-    { date: "2024-07-05", guest: "Available", status: "blocked", revenue: 0 },
-    { date: "2024-07-06", guest: "Available", status: "blocked", revenue: 0 },
+    { date: "2025-10-15", guest: "John D.", status: "confirmed", revenue: 2400 },
+    { date: "2025-10-16", guest: "John D.", status: "confirmed", revenue: 2400 },
+    { date: "2025-10-17", guest: "John D.", status: "confirmed", revenue: 2400 },
+    { date: "2025-10-20", guest: "Sarah M.", status: "pending", revenue: 2400 },
+    { date: "2025-10-21", guest: "Sarah M.", status: "pending", revenue: 2400 },
+    { date: "2025-11-05", guest: "Available", status: "blocked", revenue: 0 },
+    { date: "2025-11-06", guest: "Available", status: "blocked", revenue: 0 },
   ];
 
   const blockedDates = [
-    { date: "2024-07-15", reason: "Maintenance" },
-    { date: "2024-07-16", reason: "Maintenance" },
+    { date: "2025-11-15", reason: "Maintenance" },
+    { date: "2025-11-16", reason: "Maintenance" },
   ];
 
   const getDaysInMonth = (date: Date) => {

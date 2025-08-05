@@ -9,7 +9,7 @@ const mockNotifications = [
     id: "1",
     type: "booking",
     title: "Booking Confirmed",
-    message: "Your booking for Serenity Princess has been confirmed for June 15-18, 2024",
+    message: "Your booking for Serenity Princess has been confirmed for October 15-18, 2025",
     time: "2 hours ago",
     read: false,
     icon: Ship
