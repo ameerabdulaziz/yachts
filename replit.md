@@ -96,7 +96,18 @@ The system implements a phone-based authentication flow:
 # Recent Changes
 
 ## January 2025
-- **January 19, 2025**: Updated all yacht and boat listings to feature authentic De Antonio Yachts models including D50 Open, D42 Open, D36 Open, D32 Open, D29 Open, D60 Open, D50 Coupe, and E23 electric model with real specifications, authentic pricing, and official images from Barcelona-based manufacturer
+- **January 19, 2025**: Comprehensive De Antonio Yachts data update with authentic specifications:
+  - Updated all yacht specifications with official dimensions from De Antonio Yachts website
+  - D60: 18.50m length, 12 passengers, 3 cabins (flagship model for 2025)
+  - D42: 12.64m length, 12 passengers, 2 cabins with 1200HP max power
+  - D36: 11.50m length, 12 passengers, 1 cabin (corrected from 10.30m)
+  - D32: 9.90m length, 10 passengers, 2 cabins with 600HP max power
+  - D29: 8.50m length, 8 passengers, 1 cabin (corrected dimensions)
+  - E23: 7.20m length, 8 passengers, electric catamaran with zero emissions
+  - All locations standardized to "El Gouna, Egypt" for consistency
+  - All dates updated to be after September 15th, 2024
+- Updated yacht ownership detail page with iOS 18 styling and compact layouts
+- Splash screen logo repositioning with Nauttec logo after boat tip
 - Initial comprehensive yacht booking platform implementation with 31 screens
 - Integrated PostgreSQL database with Drizzle ORM
 - Implemented authentication flow and fractional ownership system
