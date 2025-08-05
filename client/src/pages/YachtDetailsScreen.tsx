@@ -270,7 +270,7 @@ export default function YachtDetailsScreen() {
                   {selectedStartDate.toLocaleDateString()} - {selectedEndDate.toLocaleDateString()}
                 </div>
                 <div className="text-sm text-gray-600 mt-1">
-                  {Math.ceil((selectedEndDate.getTime() - selectedStartDate.getTime()) / (1000 * 60 * 60 * 24))} days
+                  {Math.ceil((selectedEndDate.getTime() - selectedStartDate.getTime()) / (1000 * 60 * 60 * 24)) + 1} days
                 </div>
               </div>
             )}
@@ -335,9 +335,9 @@ export default function YachtDetailsScreen() {
               <div>
                 <p className="text-2xl font-bold text-gray-900">
                   €{(() => {
-                    const nights = Math.ceil((selectedEndDate.getTime() - selectedStartDate.getTime()) / (1000 * 60 * 60 * 24));
-                    const yachtCost = parseInt(yacht.pricePerDay) * nights;
-                    const cateringCost = includeCatering ? 200 * nights : 0;
+                    const days = Math.ceil((selectedEndDate.getTime() - selectedStartDate.getTime()) / (1000 * 60 * 60 * 24)) + 1;
+                    const yachtCost = parseInt(yacht.pricePerDay) * days;
+                    const cateringCost = includeCatering ? 200 * days : 0;
                     return (yachtCost + cateringCost).toLocaleString();
                   })()}
                 </p>

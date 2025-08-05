@@ -32,7 +32,7 @@ export default function BookingCheckoutScreen() {
   // Find yacht by ID
   const yacht = mockYachts.find(y => y.id === yachtId) || mockYachts[0];
 
-  const days = Math.ceil((new Date(endDate).getTime() - new Date(startDate).getTime()) / (1000 * 60 * 60 * 24));
+  const days = Math.ceil((new Date(endDate).getTime() - new Date(startDate).getTime()) / (1000 * 60 * 60 * 24)) + 1;
   const basePrice = Number(yacht.pricePerDay) * days;
   const cateringPrice = addCatering ? 200 * days : 0;
   const serviceFee = Math.round((basePrice + cateringPrice) * 0.05);
