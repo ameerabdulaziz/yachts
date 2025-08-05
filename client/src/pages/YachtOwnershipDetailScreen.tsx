@@ -3,7 +3,7 @@ import { Link, useParams } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, Share, Heart, TrendingUp, Calendar, MapPin, Users, Bed, Star, Euro, PieChart, Clock, Shield, CreditCard, Truck } from "lucide-react";
+import { ArrowLeft, Share, Heart, TrendingUp, Calendar, MapPin, Users, Bed, Star, Euro, PieChart, Clock, Shield, CreditCard, Cog } from "lucide-react";
 import { mockOwnershipOpportunities } from "@/lib/mockData";
 
 export default function YachtOwnershipDetailScreen() {
@@ -91,7 +91,7 @@ export default function YachtOwnershipDetailScreen() {
             <p className="text-xs text-gray-500">Days/Year</p>
           </div>
           <div className="bg-gray-50 rounded-xl p-3 text-center">
-            <Truck className="w-6 h-6 text-blue-600 mx-auto mb-1" />
+            <Cog className="w-6 h-6 text-blue-600 mx-auto mb-1" />
             <p className="text-xl font-bold text-gray-600">50</p>
             <p className="text-xs text-gray-500">Engine Hours</p>
           </div>
@@ -191,7 +191,7 @@ export default function YachtOwnershipDetailScreen() {
               
               <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                 <div className="flex items-center space-x-2">
-                  <Truck className="w-5 h-5 text-blue-500" />
+                  <Cog className="w-5 h-5 text-blue-500" />
                   <span className="font-medium text-gray-900">Annual Engine Hours</span>
                 </div>
                 <span className="text-lg font-bold text-blue-500">50 hours</span>
