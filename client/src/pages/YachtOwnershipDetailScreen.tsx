@@ -191,7 +191,7 @@ export default function YachtOwnershipDetailScreen() {
               
               <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                 <div className="flex items-center space-x-2">
-                  <Zap className="w-5 h-5 text-blue-500" />
+                  <Truck className="w-5 h-5 text-blue-500" />
                   <span className="font-medium text-gray-900">Annual Engine Hours</span>
                 </div>
                 <span className="text-lg font-bold text-blue-500">50 hours</span>
