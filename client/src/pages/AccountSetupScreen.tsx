@@ -16,11 +16,13 @@ export default function AccountSetupScreen() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [role, setRole] = useState("renter");
   const { toast } = useToast();
 
   const setupMutation = useMutation({
-    mutationFn: async (data: { firstName: string; lastName: string; email: string; role: string }) => {
+    mutationFn: async (data: { firstName: string; lastName: string; email: string; password: string; role: string }) => {
       const response = await apiRequest("POST", "/api/auth/setup-account", data);
       return response.json();
     },
@@ -29,7 +31,12 @@ export default function AccountSetupScreen() {
         title: "Account Setup Complete",
         description: "Welcome to Nauttec!",
       });
-      setLocation("/home");
+      // Redirect based on user role
+      if (role === "owner") {
+        setLocation("/my-boats");
+      } else {
+        setLocation("/home");
+      }
     },
     onError: () => {
       toast({
@@ -41,8 +48,17 @@ export default function AccountSetupScreen() {
   });
 
   const handleSetup = () => {
-    if (firstName && lastName && email) {
-      setupMutation.mutate({ firstName, lastName, email, role });
+    if (password !== confirmPassword) {
+      toast({
+        title: "Password Mismatch",
+        description: "Passwords do not match",
+        variant: "destructive",
+      });
+      return;
+    }
+    
+    if (firstName && lastName && email && password) {
+      setupMutation.mutate({ firstName, lastName, email, password, role });
     }
   };
 
@@ -100,6 +116,28 @@ export default function AccountSetupScreen() {
             />
           </div>
 
+          <div className="space-y-2">
+            <Label htmlFor="password">Create Password</Label>
+            <Input
+              id="password"
+              type="password"
+              placeholder="Choose a secure password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="confirmPassword">Confirm Password</Label>
+            <Input
+              id="confirmPassword"
+              type="password"
+              placeholder="Confirm your password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
+          </div>
+
           <div className="space-y-3">
             <Label>I'm interested in</Label>
             <RadioGroup value={role} onValueChange={setRole}>
@@ -132,7 +170,7 @@ export default function AccountSetupScreen() {
 
           <Button 
             onClick={handleSetup}
-            disabled={!firstName || !lastName || !email || setupMutation.isPending}
+            disabled={!firstName || !lastName || !email || !password || !confirmPassword || setupMutation.isPending}
             className="w-full h-12 bg-primary hover:bg-primary-hover font-semibold"
           >
             {setupMutation.isPending ? "Setting up..." : "Complete Setup"}

@@ -3,6 +3,9 @@ import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Label } from "@/components/ui/label";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import nauttecLogo from "@assets/Nauttec Logo_1754330395988.png";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
@@ -12,9 +15,37 @@ export default function PhoneLoginScreen() {
   const [, setLocation] = useLocation();
   const [countryCode, setCountryCode] = useState("+34");
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [password, setPassword] = useState("");
+  const [loginMode, setLoginMode] = useState("password"); // "password" or "otp"
   const { toast } = useToast();
 
-  const loginMutation = useMutation({
+  const passwordLoginMutation = useMutation({
+    mutationFn: async (data: { phone: string; password: string }) => {
+      const response = await apiRequest("POST", "/api/auth/login", data);
+      return response.json();
+    },
+    onSuccess: (data) => {
+      toast({
+        title: "Login Successful",
+        description: "Welcome back!",
+      });
+      // Redirect based on user role
+      if (data.user?.role === "owner") {
+        setLocation("/my-boats");
+      } else {
+        setLocation("/home");
+      }
+    },
+    onError: () => {
+      toast({
+        title: "Login Failed",
+        description: "Invalid phone number or password",
+        variant: "destructive",
+      });
+    }
+  });
+
+  const otpLoginMutation = useMutation({
     mutationFn: async (data: { phone: string }) => {
       const response = await apiRequest("POST", "/api/auth/phone-login", data);
       return response.json();
@@ -35,9 +66,14 @@ export default function PhoneLoginScreen() {
     }
   });
 
-  const handleLogin = () => {
+  const handlePasswordLogin = () => {
     const fullPhone = `${countryCode}${phoneNumber}`;
-    loginMutation.mutate({ phone: fullPhone });
+    passwordLoginMutation.mutate({ phone: fullPhone, password });
+  };
+
+  const handleOtpLogin = () => {
+    const fullPhone = `${countryCode}${phoneNumber}`;
+    otpLoginMutation.mutate({ phone: fullPhone });
   };
 
   return (
@@ -59,39 +95,103 @@ export default function PhoneLoginScreen() {
           </p>
         </div>
 
-        {/* Phone Input Section */}
-        <div className="space-y-4">
-          <div className="flex space-x-0 border border-gray-300 rounded-lg overflow-hidden bg-white">
-            <Select value={countryCode} onValueChange={setCountryCode}>
-              <SelectTrigger className="w-28 border-0 bg-gray-50 rounded-none">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="+1">🇺🇸 +1</SelectItem>
-                <SelectItem value="+44">🇬🇧 +44</SelectItem>
-                <SelectItem value="+33">🇫🇷 +33</SelectItem>
-                <SelectItem value="+49">🇩🇪 +49</SelectItem>
-                <SelectItem value="+39">🇮🇹 +39</SelectItem>
-                <SelectItem value="+34">🇪🇸 +34</SelectItem>
-              </SelectContent>
-            </Select>
-            <Input
-              type="tel"
-              placeholder="Phone number"
-              value={phoneNumber}
-              onChange={(e) => setPhoneNumber(e.target.value)}
-              className="flex-1 border-0 rounded-none focus-visible:ring-0 text-base"
-            />
-          </div>
+        {/* Login Section */}
+        <Card className="w-full">
+          <CardContent className="p-6">
+            <Tabs value={loginMode} onValueChange={setLoginMode}>
+              <TabsList className="grid w-full grid-cols-2">
+                <TabsTrigger value="password">Password</TabsTrigger>
+                <TabsTrigger value="otp">OTP Login</TabsTrigger>
+              </TabsList>
+              
+              <TabsContent value="password" className="space-y-4 mt-4">
+                <div className="space-y-2">
+                  <Label htmlFor="phone">Phone Number</Label>
+                  <div className="flex space-x-0 border border-gray-300 rounded-lg overflow-hidden bg-white">
+                    <Select value={countryCode} onValueChange={setCountryCode}>
+                      <SelectTrigger className="w-28 border-0 bg-gray-50 rounded-none">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="+1">🇺🇸 +1</SelectItem>
+                        <SelectItem value="+44">🇬🇧 +44</SelectItem>
+                        <SelectItem value="+33">🇫🇷 +33</SelectItem>
+                        <SelectItem value="+49">🇩🇪 +49</SelectItem>
+                        <SelectItem value="+39">🇮🇹 +39</SelectItem>
+                        <SelectItem value="+34">🇪🇸 +34</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <Input
+                      id="phone"
+                      type="tel"
+                      placeholder="Phone number"
+                      value={phoneNumber}
+                      onChange={(e) => setPhoneNumber(e.target.value)}
+                      className="flex-1 border-0 rounded-none focus-visible:ring-0 text-base"
+                    />
+                  </div>
+                </div>
+                
+                <div className="space-y-2">
+                  <Label htmlFor="password">Password</Label>
+                  <Input
+                    id="password"
+                    type="password"
+                    placeholder="Enter your password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="text-base"
+                  />
+                </div>
 
-          <Button 
-            onClick={handleLogin} 
-            className="w-full bg-blue-400 hover:bg-blue-500 text-white py-4 text-base font-medium rounded-lg"
-            disabled={loginMutation.isPending}
-          >
-            {loginMutation.isPending ? "Sending..." : "Send Verification Code"}
-          </Button>
-        </div>
+                <Button 
+                  onClick={handlePasswordLogin} 
+                  className="w-full bg-blue-400 hover:bg-blue-500 text-white py-4 text-base font-medium rounded-lg"
+                  disabled={passwordLoginMutation.isPending || !phoneNumber || !password}
+                >
+                  {passwordLoginMutation.isPending ? "Signing in..." : "Sign In"}
+                </Button>
+              </TabsContent>
+              
+              <TabsContent value="otp" className="space-y-4 mt-4">
+                <div className="space-y-2">
+                  <Label htmlFor="phone-otp">Phone Number</Label>
+                  <div className="flex space-x-0 border border-gray-300 rounded-lg overflow-hidden bg-white">
+                    <Select value={countryCode} onValueChange={setCountryCode}>
+                      <SelectTrigger className="w-28 border-0 bg-gray-50 rounded-none">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="+1">🇺🇸 +1</SelectItem>
+                        <SelectItem value="+44">🇬🇧 +44</SelectItem>
+                        <SelectItem value="+33">🇫🇷 +33</SelectItem>
+                        <SelectItem value="+49">🇩🇪 +49</SelectItem>
+                        <SelectItem value="+39">🇮🇹 +39</SelectItem>
+                        <SelectItem value="+34">🇪🇸 +34</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <Input
+                      id="phone-otp"
+                      type="tel"
+                      placeholder="Phone number"
+                      value={phoneNumber}
+                      onChange={(e) => setPhoneNumber(e.target.value)}
+                      className="flex-1 border-0 rounded-none focus-visible:ring-0 text-base"
+                    />
+                  </div>
+                </div>
+
+                <Button 
+                  onClick={handleOtpLogin} 
+                  className="w-full bg-blue-400 hover:bg-blue-500 text-white py-4 text-base font-medium rounded-lg"
+                  disabled={otpLoginMutation.isPending || !phoneNumber}
+                >
+                  {otpLoginMutation.isPending ? "Sending..." : "Send Verification Code"}
+                </Button>
+              </TabsContent>
+            </Tabs>
+          </CardContent>
+        </Card>
 
         {/* Social Login Section */}
         <div className="space-y-4">

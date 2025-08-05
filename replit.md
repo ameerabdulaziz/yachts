@@ -42,12 +42,14 @@ The application uses a PostgreSQL database with the following core entities base
 
 ## Authentication & Authorization
 
-The system implements a phone-based authentication flow:
+The system implements a dual authentication flow:
 
-- **Phone Login**: Country code selector with SMS OTP verification
-- **Account Setup**: Role selection (renter, owner, or both) during onboarding
+- **Password Login**: Primary method with phone number and password
+- **OTP Fallback**: SMS verification code as alternative login method
+- **Account Setup**: Role selection (renter, owner, or both) with password creation during onboarding
 - **Session Management**: Uses PostgreSQL-backed session storage with express-session
 - **Role-Based Access**: Different UI and functionality based on user roles
+- **Smart Routing**: Owners redirect to /my-boats, renters to /home after login
 
 ## Data Management Strategy
 
@@ -96,6 +98,12 @@ The system implements a phone-based authentication flow:
 # Recent Changes
 
 ## August 2025
+- **August 5, 2025**: Authentication system enhancement:
+  - Added password-based login as primary authentication method
+  - Maintained OTP verification as fallback option using tabs interface
+  - Updated account setup to include password creation with confirmation
+  - Implemented role-based routing: owners go to /my-boats, renters to /home
+  - Enhanced login screen with tabbed interface for password vs OTP login
 - **August 5, 2025**: Major Yachtak specification implementation:
   - Updated platform overview to reflect three-tier user system (Visitors, Owners, Administrators)
   - Implemented sophisticated booking rules engine with 48-day/50-engine-hour limits per share
