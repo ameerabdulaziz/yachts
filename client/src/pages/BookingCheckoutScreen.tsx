@@ -17,20 +17,27 @@ export default function BookingCheckoutScreen() {
   const [, setLocation] = useLocation();
   const { toast } = useToast();
   
-  const [startDate, setStartDate] = useState("2025-10-15");
-  const [endDate, setEndDate] = useState("2025-10-18");
+  // Parse URL parameters
+  const urlParams = new URLSearchParams(window.location.search);
+  const yachtId = urlParams.get('yacht') || id;
+  const urlStartDate = urlParams.get('start');
+  const urlEndDate = urlParams.get('end');
+  const urlCatering = urlParams.get('catering') === 'true';
+  
+  const [startDate, setStartDate] = useState(urlStartDate || "2025-10-15");
+  const [endDate, setEndDate] = useState(urlEndDate || "2025-10-18");
   const [guestCount, setGuestCount] = useState(6);
   const [addCaptain, setAddCaptain] = useState(false);
-  const [addCatering, setAddCatering] = useState(false);
+  const [addCatering, setAddCatering] = useState(urlCatering);
   const [paymentMethod, setPaymentMethod] = useState("credit-card");
 
   // Find yacht by ID
-  const yacht = mockYachts.find(y => y.id === id) || mockYachts[0];
+  const yacht = mockYachts.find(y => y.id === yachtId) || mockYachts[0];
 
   const days = Math.ceil((new Date(endDate).getTime() - new Date(startDate).getTime()) / (1000 * 60 * 60 * 24));
   const basePrice = Number(yacht.pricePerDay) * days;
   const captainPrice = addCaptain ? 200 * days : 0;
-  const cateringPrice = addCatering ? 150 * days : 0;
+  const cateringPrice = addCatering ? 200 * days : 0; // Updated to match yacht details pricing
   const serviceFee = Math.round((basePrice + captainPrice + cateringPrice) * 0.05);
   const totalPrice = basePrice + captainPrice + cateringPrice + serviceFee;
 
@@ -72,7 +79,7 @@ export default function BookingCheckoutScreen() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 pb-24">
       {/* Header */}
       <header className="bg-white border-b border-gray-200 px-4 py-3 sticky top-0 z-40">
         <div className="flex items-center space-x-3">
@@ -188,7 +195,7 @@ export default function BookingCheckoutScreen() {
                   <span className="font-semibold text-gray-900">€200/day</span>
                   <Checkbox
                     checked={addCaptain}
-                    onCheckedChange={setAddCaptain}
+                    onCheckedChange={(checked) => setAddCaptain(!!checked)}
                   />
                 </div>
               </div>
@@ -202,10 +209,10 @@ export default function BookingCheckoutScreen() {
                   </div>
                 </div>
                 <div className="flex items-center space-x-3">
-                  <span className="font-semibold text-gray-900">€150/day</span>
+                  <span className="font-semibold text-gray-900">€200/day</span>
                   <Checkbox
                     checked={addCatering}
-                    onCheckedChange={setAddCatering}
+                    onCheckedChange={(checked) => setAddCatering(!!checked)}
                   />
                 </div>
               </div>

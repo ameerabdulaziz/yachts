@@ -58,6 +58,7 @@ function Router() {
       <Route path="/profile" component={UserProfileScreen} />
       <Route path="/yacht-details/:id" component={YachtDetailsScreen} />
       <Route path="/booking/:id" component={BookingCheckoutScreen} />
+      <Route path="/booking-checkout" component={BookingCheckoutScreen} />
       <Route path="/booking-confirmation" component={BookingConfirmationScreen} />
       <Route path="/my-bookings" component={MyBookingsScreen} />
       <Route path="/reservation-detail/:id" component={ReservationDetailScreen} />
