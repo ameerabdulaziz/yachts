@@ -45,7 +45,7 @@ export default function MyBoatsScreen() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white pb-24">
       {/* Header */}
       <div className="bg-white border-b border-gray-100">
         <div className="flex items-center justify-between p-4">

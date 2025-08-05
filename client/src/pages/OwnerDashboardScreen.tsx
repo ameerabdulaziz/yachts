@@ -58,7 +58,7 @@ export default function OwnerDashboardScreen() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 pb-20">
+    <div className="min-h-screen bg-gray-50 pb-24">
       {/* Header */}
       <header className="relative px-4 py-6 text-white overflow-hidden">
         {/* Turquoise Sea Background */}

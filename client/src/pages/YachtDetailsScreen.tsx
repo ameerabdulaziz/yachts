@@ -87,7 +87,7 @@ export default function YachtDetailsScreen() {
   const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 pb-24">
       {/* Header */}
       <header className="absolute top-0 left-0 right-0 z-50 bg-transparent">
         <div className="flex items-center justify-between p-4">
@@ -240,10 +240,13 @@ export default function YachtDetailsScreen() {
                   <span>View Calendar</span>
                 </Button>
               </DialogTrigger>
-              <DialogContent className="max-w-md">
+              <DialogContent className="max-w-md" aria-describedby="calendar-description">
                 <DialogHeader>
                   <DialogTitle>Select Your Dates</DialogTitle>
                 </DialogHeader>
+                <div id="calendar-description" className="sr-only">
+                  Select your check-in and check-out dates for yacht booking
+                </div>
                 <div className="p-4">
                   {/* Calendar Header */}
                   <div className="flex items-center justify-between mb-4">
