@@ -16,7 +16,6 @@ const mockBookingCalendar = {
     remainingEngineHours: 38,
     fuelBalance: 120, // euros
     fuelThreshold: 20,
-    // Generate calendar data for March 2025
     getDateStatus: (date: string) => {
       const dayOfMonth = new Date(date).getDate();
       // Mock different statuses for different days
@@ -24,6 +23,37 @@ const mockBookingCalendar = {
       if ([5, 12, 16, 19, 26].includes(dayOfMonth)) return { status: "booked", bookedBy: dayOfMonth === 19 ? "You" : "Owner #3" };
       if ([21, 22].includes(dayOfMonth)) return { status: "waitlist", waitlistCount: 2 };
       if ([7, 14].includes(dayOfMonth)) return { status: "waitlist", waitlistCount: 1 };
+      return { status: "available" };
+    }
+  },
+  "yacht-6": {
+    ownerShares: 1,
+    totalShares: 12,
+    remainingDays: 18,
+    remainingEngineHours: 32,
+    fuelBalance: 85, // euros
+    fuelThreshold: 20,
+    getDateStatus: (date: string) => {
+      const dayOfMonth = new Date(date).getDate();
+      // Different pattern for yacht-6
+      if ([2, 9, 16, 23, 30].includes(dayOfMonth)) return { status: "maintenance" };
+      if ([4, 11, 18, 25].includes(dayOfMonth)) return { status: "booked", bookedBy: dayOfMonth === 18 ? "You" : "Owner #7" };
+      if ([6, 13, 20, 27].includes(dayOfMonth)) return { status: "waitlist", waitlistCount: 3 };
+      return { status: "available" };
+    }
+  },
+  "yacht-1": {
+    ownerShares: 3,
+    totalShares: 8,
+    remainingDays: 42,
+    remainingEngineHours: 55,
+    fuelBalance: 95, // euros
+    fuelThreshold: 20,
+    getDateStatus: (date: string) => {
+      const dayOfMonth = new Date(date).getDate();
+      if ([1, 8, 15, 22, 29].includes(dayOfMonth)) return { status: "maintenance" };
+      if ([3, 10, 17, 24, 31].includes(dayOfMonth)) return { status: "booked", bookedBy: dayOfMonth === 17 ? "You" : "Owner #2" };
+      if ([5, 12, 19, 26].includes(dayOfMonth)) return { status: "waitlist", waitlistCount: 1 };
       return { status: "available" };
     }
   }
@@ -100,29 +130,36 @@ export default function BookingCalendarScreen() {
   };
 
   const handleDateClick = (day: any) => {
-    if (day.isCurrentMonth && day.status === "available" && canBook) {
+    console.log("Date clicked:", day); // Debug log
+    
+    if (!day.isCurrentMonth) {
+      return; // Don't handle clicks on other month's dates
+    }
+    
+    if (day.status === "available" && canBook) {
       setSelectedDate(day.dateStr);
-    } else if (day.isCurrentMonth && day.status === "booked") {
+      console.log("Selected available date:", day.dateStr);
+    } else if (day.status === "booked") {
       // Show popup to join waitlist
-      const confirmed = window.confirm(`This date is already booked by ${day.bookedBy || 'another owner'}. Would you like to join the waitlist for ${new Date(day.dateStr).toLocaleDateString("en-US", { 
+      const confirmed = confirm(`This date is already booked by ${day.bookedBy || 'another owner'}.\n\nWould you like to join the waitlist for ${new Date(day.dateStr).toLocaleDateString("en-US", { 
         weekday: "long", 
         month: "long", 
         day: "numeric" 
       })}?`);
       
       if (confirmed) {
-        alert("You've been added to the waitlist! We'll notify you if this date becomes available.");
+        alert("✅ You've been added to the waitlist!\nWe'll notify you if this date becomes available.");
       }
-    } else if (day.isCurrentMonth && day.status === "waitlist") {
+    } else if (day.status === "waitlist") {
       // Show popup to cancel waitlist
-      const confirmed = window.confirm(`You are currently on the waitlist for ${new Date(day.dateStr).toLocaleDateString("en-US", { 
+      const confirmed = confirm(`You are currently on the waitlist for ${new Date(day.dateStr).toLocaleDateString("en-US", { 
         weekday: "long", 
         month: "long", 
         day: "numeric" 
-      })}. Would you like to cancel your waitlist position?`);
+      })}.\n\nWould you like to cancel your waitlist position?`);
       
       if (confirmed) {
-        alert("You've been removed from the waitlist for this date.");
+        alert("❌ You've been removed from the waitlist for this date.");
       }
     }
   };
@@ -171,7 +208,7 @@ export default function BookingCalendarScreen() {
               </div>
               <div className="text-center p-3 bg-gray-50 rounded-lg">
                 <div className="mb-2">
-                  <DollarSign className="h-6 w-6 text-blue-600 mx-auto" />
+                  <Fuel className="h-6 w-6 text-blue-600 mx-auto" />
                 </div>
                 <div className="text-lg font-bold text-gray-900">€{bookingData.fuelBalance}</div>
                 <div className="text-xs text-gray-600">Fuel Balance</div>
@@ -254,17 +291,24 @@ export default function BookingCalendarScreen() {
             
             <div className="grid grid-cols-7 gap-1">
               {calendarDays.map((day, index) => (
-                <div
+                <button
                   key={index}
+                  type="button"
                   className={`
                     aspect-square flex items-center justify-center text-sm font-medium rounded-lg transition-colors
                     ${getStatusColor(day.status, day.isCurrentMonth)}
                     ${selectedDate === day.dateStr ? "ring-2 ring-blue-500" : ""}
+                    focus:outline-none focus:ring-2 focus:ring-blue-300
                   `}
-                  onClick={() => handleDateClick(day)}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    handleDateClick(day);
+                  }}
+                  disabled={!day.isCurrentMonth}
                 >
                   {day.day}
-                </div>
+                </button>
               ))}
             </div>
             
