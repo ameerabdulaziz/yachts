@@ -270,7 +270,7 @@ export default function YachtDetailsScreen() {
                   {selectedStartDate.toLocaleDateString()} - {selectedEndDate.toLocaleDateString()}
                 </div>
                 <div className="text-sm text-gray-600 mt-1">
-                  {Math.ceil((selectedEndDate.getTime() - selectedStartDate.getTime()) / (1000 * 60 * 60 * 24))} nights
+                  {Math.ceil((selectedEndDate.getTime() - selectedStartDate.getTime()) / (1000 * 60 * 60 * 24))} days
                 </div>
               </div>
             )}

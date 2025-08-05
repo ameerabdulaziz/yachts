@@ -92,7 +92,7 @@ export default function BookingCheckoutScreen() {
       <section className="bg-white px-4 py-4 border-b border-gray-200">
         <div className="flex space-x-4">
           <img 
-            src={yacht.images[0]} 
+            src={yacht.images?.[0]} 
             alt={yacht.name}
             className="w-20 h-20 object-cover rounded-xl"
           />
@@ -239,7 +239,7 @@ export default function BookingCheckoutScreen() {
           disabled={bookingMutation.isPending}
           className="w-full bg-gradient-ocean text-white py-4 rounded-xl font-semibold text-lg hover:shadow-lg transition-all duration-300"
         >
-          {bookingMutation.isPending ? "Processing..." : `Confirm Booking - €${totalPrice.toLocaleString()}`}
+          {bookingMutation.isPending ? "Processing..." : "Confirm Booking"}
         </Button>
       </div>
     </div>
