@@ -38,6 +38,8 @@ import SettingsScreen from "@/pages/SettingsScreen";
 import TopUpScreen from "@/pages/TopUpScreen";
 import DashboardScreen from "@/pages/DashboardScreen";
 import DevNavigationScreen from "@/pages/DevNavigationScreen";
+import MyBoatsScreen from "@/pages/MyBoatsScreen";
+import BoatOwnershipManagementScreen from "@/pages/BoatOwnershipManagementScreen";
 
 function Router() {
   return (
@@ -75,6 +77,8 @@ function Router() {
       <Route path="/top-up" component={TopUpScreen} />
       <Route path="/dashboard" component={DashboardScreen} />
       <Route path="/dev-navigation" component={DevNavigationScreen} />
+      <Route path="/my-boats" component={MyBoatsScreen} />
+      <Route path="/boat-ownership/:id" component={BoatOwnershipManagementScreen} />
       <Route component={NotFound} />
     </Switch>
   );
