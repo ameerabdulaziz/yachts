@@ -103,11 +103,7 @@ export default function MyBoatsScreen() {
                   alt={boat.name}
                   className="w-full h-48 object-cover"
                 />
-                <div className="absolute top-3 right-3">
-                  <Badge variant="secondary" className="bg-white/90 text-gray-900">
-                    {boat.sharesFractionOwned} Owned
-                  </Badge>
-                </div>
+
               </div>
               
               <CardContent className="p-4">
@@ -131,7 +127,7 @@ export default function MyBoatsScreen() {
                       <span>Built {boat.yearBuilt}</span>
                     </div>
                     <div className="flex items-center gap-1">
-                      <span>{boat.sharesFractionOwned} owned</span>
+                      <span>2/7 shares owned</span>
                     </div>
                   </div>
 
