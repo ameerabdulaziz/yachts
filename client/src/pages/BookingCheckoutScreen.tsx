@@ -6,7 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Checkbox } from "@/components/ui/checkbox";
-import { ArrowLeft, Users, Calendar, UserCheck, Utensils, CreditCard, Fuel, Minus, Plus } from "lucide-react";
+import { ArrowLeft, Calendar, Utensils, CreditCard, Building, MapPin } from "lucide-react";
 import { mockYachts } from "@/lib/mockData";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
@@ -26,8 +26,6 @@ export default function BookingCheckoutScreen() {
   
   const [startDate, setStartDate] = useState(urlStartDate || "2025-10-15");
   const [endDate, setEndDate] = useState(urlEndDate || "2025-10-18");
-  const [guestCount, setGuestCount] = useState(6);
-  const [addCaptain, setAddCaptain] = useState(false);
   const [addCatering, setAddCatering] = useState(urlCatering);
   const [paymentMethod, setPaymentMethod] = useState("credit-card");
 
@@ -36,10 +34,9 @@ export default function BookingCheckoutScreen() {
 
   const days = Math.ceil((new Date(endDate).getTime() - new Date(startDate).getTime()) / (1000 * 60 * 60 * 24));
   const basePrice = Number(yacht.pricePerDay) * days;
-  const captainPrice = addCaptain ? 200 * days : 0;
-  const cateringPrice = addCatering ? 200 * days : 0; // Updated to match yacht details pricing
-  const serviceFee = Math.round((basePrice + captainPrice + cateringPrice) * 0.05);
-  const totalPrice = basePrice + captainPrice + cateringPrice + serviceFee;
+  const cateringPrice = addCatering ? 200 * days : 0;
+  const serviceFee = Math.round((basePrice + cateringPrice) * 0.05);
+  const totalPrice = basePrice + cateringPrice + serviceFee;
 
   const bookingMutation = useMutation({
     mutationFn: async (bookingData: any) => {
@@ -68,10 +65,9 @@ export default function BookingCheckoutScreen() {
       userId: "user-1", // In real app, get from auth context
       startDate: new Date(startDate),
       endDate: new Date(endDate),
-      guestCount,
       totalPrice: totalPrice.toString(),
       status: "confirmed",
-      addOns: { captain: addCaptain, catering: addCatering },
+      addOns: { catering: addCatering },
       paymentMethod
     };
     
@@ -104,7 +100,6 @@ export default function BookingCheckoutScreen() {
             <h2 className="font-bold text-gray-900">{yacht.name}</h2>
             <p className="text-gray-600 text-sm">{yacht.location}</p>
             <div className="flex items-center space-x-3 text-sm text-gray-600 mt-1">
-              <span><Users className="w-4 h-4 inline mr-1" />{yacht.capacity} guests</span>
               <span>€{yacht.pricePerDay}/day</span>
             </div>
           </div>
@@ -145,76 +140,24 @@ export default function BookingCheckoutScreen() {
           </CardContent>
         </Card>
 
-        {/* Guest Count */}
-        <Card>
-          <CardContent className="p-4">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">
-              <Users className="w-5 h-5 inline mr-2" />
-              Guests
-            </h3>
-            <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
-              <span className="font-medium text-gray-900">Number of guests</span>
-              <div className="flex items-center space-x-3">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="w-8 h-8 p-0"
-                  onClick={() => setGuestCount(Math.max(1, guestCount - 1))}
-                >
-                  <Minus className="w-4 h-4" />
-                </Button>
-                <span className="font-semibold text-lg w-8 text-center">{guestCount}</span>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="w-8 h-8 p-0"
-                  onClick={() => setGuestCount(Math.min(yacht.capacity, guestCount + 1))}
-                >
-                  <Plus className="w-4 h-4" />
-                </Button>
-              </div>
-            </div>
-            <p className="text-sm text-gray-600 mt-2">Maximum {yacht.capacity} guests</p>
-          </CardContent>
-        </Card>
-
         {/* Add-ons */}
         <Card>
           <CardContent className="p-4">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Add-ons</h3>
-            <div className="space-y-4">
-              <div className="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
-                <div className="flex items-center space-x-3">
-                  <UserCheck className="w-6 h-6 text-primary" />
-                  <div>
-                    <p className="font-medium text-gray-900">Professional Captain</p>
-                    <p className="text-sm text-gray-600">Licensed and experienced</p>
-                  </div>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <span className="font-semibold text-gray-900">€200/day</span>
-                  <Checkbox
-                    checked={addCaptain}
-                    onCheckedChange={(checked) => setAddCaptain(!!checked)}
-                  />
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">Additional Services</h3>
+            <div className="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+              <div className="flex items-center space-x-3">
+                <Utensils className="w-6 h-6 text-primary" />
+                <div>
+                  <p className="font-medium text-gray-900">Catering Service</p>
+                  <p className="text-sm text-gray-600">Professional catering with local specialties</p>
                 </div>
               </div>
-              
-              <div className="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
-                <div className="flex items-center space-x-3">
-                  <Utensils className="w-6 h-6 text-primary" />
-                  <div>
-                    <p className="font-medium text-gray-900">Catering Service</p>
-                    <p className="text-sm text-gray-600">Gourmet meals and drinks</p>
-                  </div>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <span className="font-semibold text-gray-900">€200/day</span>
-                  <Checkbox
-                    checked={addCatering}
-                    onCheckedChange={(checked) => setAddCatering(!!checked)}
-                  />
-                </div>
+              <div className="flex items-center space-x-3">
+                <span className="font-semibold text-gray-900">€200/day</span>
+                <Checkbox
+                  checked={addCatering}
+                  onCheckedChange={(checked) => setAddCatering(!!checked)}
+                />
               </div>
             </div>
           </CardContent>
@@ -229,12 +172,6 @@ export default function BookingCheckoutScreen() {
                 <span className="text-gray-700">€{yacht.pricePerDay} × {days} days</span>
                 <span className="font-medium">€{basePrice.toLocaleString()}</span>
               </div>
-              {addCaptain && (
-                <div className="flex items-center justify-between">
-                  <span className="text-gray-700">Captain ({days} days)</span>
-                  <span className="font-medium">€{captainPrice.toLocaleString()}</span>
-                </div>
-              )}
               {addCatering && (
                 <div className="flex items-center justify-between">
                   <span className="text-gray-700">Catering ({days} days)</span>
@@ -261,19 +198,35 @@ export default function BookingCheckoutScreen() {
             <h3 className="text-lg font-semibold text-gray-900 mb-4">Payment Method</h3>
             <RadioGroup value={paymentMethod} onValueChange={setPaymentMethod}>
               <div className="flex items-center space-x-3 p-4 border border-gray-200 rounded-lg">
-                <RadioGroupItem value="fuel-wallet" id="fuel-wallet" />
-                <Fuel className="w-5 h-5 text-green-600" />
-                <div className="flex-1">
-                  <Label htmlFor="fuel-wallet" className="font-medium text-gray-900">Fuel Wallet</Label>
-                  <p className="text-sm text-gray-600">Balance: €1,250</p>
-                </div>
-              </div>
-              <div className="flex items-center space-x-3 p-4 border border-gray-200 rounded-lg">
                 <RadioGroupItem value="credit-card" id="credit-card" />
                 <CreditCard className="w-5 h-5 text-blue-600" />
                 <div className="flex-1">
-                  <Label htmlFor="credit-card" className="font-medium text-gray-900">Credit Card</Label>
-                  <p className="text-sm text-gray-600">•••• •••• •••• 4532</p>
+                  <Label htmlFor="credit-card" className="font-medium text-gray-900">Credit/Debit Card</Label>
+                  <p className="text-sm text-gray-600">Visa, Mastercard, American Express</p>
+                </div>
+              </div>
+              <div className="flex items-center space-x-3 p-4 border border-gray-200 rounded-lg">
+                <RadioGroupItem value="sepa" id="sepa" />
+                <Building className="w-5 h-5 text-green-600" />
+                <div className="flex-1">
+                  <Label htmlFor="sepa" className="font-medium text-gray-900">SEPA Direct Debit</Label>
+                  <p className="text-sm text-gray-600">European bank account transfer</p>
+                </div>
+              </div>
+              <div className="flex items-center space-x-3 p-4 border border-gray-200 rounded-lg">
+                <RadioGroupItem value="bank-transfer" id="bank-transfer" />
+                <MapPin className="w-5 h-5 text-purple-600" />
+                <div className="flex-1">
+                  <Label htmlFor="bank-transfer" className="font-medium text-gray-900">Bank Transfer</Label>
+                  <p className="text-sm text-gray-600">Direct wire transfer to our account</p>
+                </div>
+              </div>
+              <div className="flex items-center space-x-3 p-4 border border-gray-200 rounded-lg">
+                <RadioGroupItem value="sofort" id="sofort" />
+                <Building className="w-5 h-5 text-orange-600" />
+                <div className="flex-1">
+                  <Label htmlFor="sofort" className="font-medium text-gray-900">Sofort Banking</Label>
+                  <p className="text-sm text-gray-600">Instant online bank transfer</p>
                 </div>
               </div>
             </RadioGroup>
