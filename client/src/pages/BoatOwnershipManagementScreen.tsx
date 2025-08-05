@@ -25,7 +25,9 @@ const mockBoatOwnership = {
     sharesOwned: 2,
     availableShares: 2,
     sharePrice: "57,143",
-    usageDaysPerYear: 96,
+    usageDaysPerYear: 42,
+    remainingDays: 38,
+    remainingEngineHours: 45,
     nextAvailableDate: "October 15, 2025",
     monthlyMaintenance: "180",
     annualAppreciation: "+8.2%"
@@ -47,7 +49,9 @@ const mockBoatOwnership = {
     sharesOwned: 1,
     availableShares: 3,
     sharePrice: "166,667",
-    usageDaysPerYear: 27,
+    usageDaysPerYear: 23,
+    remainingDays: 18,
+    remainingEngineHours: 32,
     nextAvailableDate: "April 8, 2025",
     monthlyMaintenance: "350",
     annualAppreciation: "+12.1%"
@@ -73,7 +77,7 @@ export default function BoatOwnershipManagementScreen() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white pb-24">
       {/* Header */}
       <div className="bg-white border-b border-gray-100">
         <div className="flex items-center justify-between p-4">
@@ -82,7 +86,6 @@ export default function BoatOwnershipManagementScreen() {
               <ArrowLeft className="h-5 w-5" />
             </Button>
           </Link>
-          <h1 className="text-lg font-semibold text-gray-900">Ownership Details</h1>
           <div className="w-9" /> {/* Spacer */}
         </div>
       </div>
@@ -131,14 +134,18 @@ export default function BoatOwnershipManagementScreen() {
             <CardTitle className="text-lg">Your Ownership</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-3 gap-3">
               <div className="text-center p-3 bg-blue-50 rounded-lg">
-                <div className="text-2xl font-bold text-blue-600">{boat.sharesOwned}</div>
-                <div className="text-sm text-gray-600">Shares Owned</div>
+                <div className="text-xl font-bold text-blue-600">{boat.sharesOwned}/{boat.totalShares}</div>
+                <div className="text-xs text-gray-600">Shares Owned</div>
+              </div>
+              <div className="text-center p-3 bg-orange-50 rounded-lg">
+                <div className="text-xl font-bold text-orange-600">{boat.remainingDays}</div>
+                <div className="text-xs text-gray-600">Remaining Days</div>
               </div>
               <div className="text-center p-3 bg-green-50 rounded-lg">
-                <div className="text-2xl font-bold text-green-600">{boat.usageDaysPerYear}</div>
-                <div className="text-sm text-gray-600">Days/Year</div>
+                <div className="text-xl font-bold text-green-600">{boat.remainingEngineHours}</div>
+                <div className="text-xs text-gray-600">Engine Hours</div>
               </div>
             </div>
 
