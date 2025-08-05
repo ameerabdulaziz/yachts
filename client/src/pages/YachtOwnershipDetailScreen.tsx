@@ -3,7 +3,7 @@ import { Link, useParams } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, Share, Heart, TrendingUp, Calendar, MapPin, Users, Bed, Star, Euro, PieChart, Clock, Shield, CreditCard, Zap } from "lucide-react";
+import { ArrowLeft, Share, Heart, TrendingUp, Calendar, MapPin, Users, Bed, Star, Euro, PieChart, Clock, Shield, CreditCard, Truck } from "lucide-react";
 import { mockOwnershipOpportunities } from "@/lib/mockData";
 
 export default function YachtOwnershipDetailScreen() {
@@ -81,42 +81,23 @@ export default function YachtOwnershipDetailScreen() {
         {/* Key Metrics */}
         <div className="grid grid-cols-3 gap-3 mb-6">
           <div className="bg-gray-50 rounded-xl p-3 text-center">
-            <TrendingUp className="w-6 h-6 text-gray-600 mx-auto mb-1" />
+            <TrendingUp className="w-6 h-6 text-blue-600 mx-auto mb-1" />
             <p className="text-xl font-bold text-gray-600">15%</p>
             <p className="text-xs text-gray-500">Expected ROI</p>
           </div>
           <div className="bg-gray-50 rounded-xl p-3 text-center">
-            <Calendar className="w-6 h-6 text-gray-600 mx-auto mb-1" />
+            <Calendar className="w-6 h-6 text-blue-600 mx-auto mb-1" />
             <p className="text-xl font-bold text-gray-600">{opportunity.usageDaysPerYear}</p>
             <p className="text-xs text-gray-500">Days/Year</p>
           </div>
           <div className="bg-gray-50 rounded-xl p-3 text-center">
-            <Zap className="w-6 h-6 text-gray-600 mx-auto mb-1" />
+            <Truck className="w-6 h-6 text-blue-600 mx-auto mb-1" />
             <p className="text-xl font-bold text-gray-600">50</p>
             <p className="text-xs text-gray-500">Engine Hours</p>
           </div>
         </div>
 
-        {/* Availability */}
-        <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-              <span className="font-semibold text-green-900">Available Shares</span>
-            </div>
-            <Badge className="bg-green-500 text-white">
-              {opportunity.availableShares} of {opportunity.totalShares} remaining
-            </Badge>
-          </div>
-          <div className="mt-3">
-            <div className="w-full bg-green-200 rounded-full h-2">
-              <div 
-                className="bg-green-500 h-2 rounded-full" 
-                style={{ width: `${(opportunity.availableShares / opportunity.totalShares) * 100}%` }}
-              ></div>
-            </div>
-          </div>
-        </div>
+
       </section>
 
       <div className="px-4 space-y-6">
