@@ -91,9 +91,9 @@ export default function BookingCalendarScreen() {
     
     switch (status) {
       case "available": return "bg-green-500 text-white hover:bg-green-600 cursor-pointer";
-      case "booked": return "bg-yellow-500 text-white";
+      case "booked": return "bg-orange-500 text-white hover:bg-orange-600 cursor-pointer";
       case "maintenance": return "bg-gray-400 text-white";
-      case "waitlist": return "bg-orange-500 text-white";
+      case "waitlist": return "bg-yellow-500 text-white";
       default: return "bg-gray-200 text-gray-600";
     }
   };
@@ -101,6 +101,18 @@ export default function BookingCalendarScreen() {
   const handleDateClick = (day: any) => {
     if (day.isCurrentMonth && day.status === "available" && canBook) {
       setSelectedDate(day.dateStr);
+    } else if (day.isCurrentMonth && day.status === "booked") {
+      // Prompt user to join waitlist
+      const confirmed = window.confirm(`This date is already booked. Would you like to join the waitlist for ${new Date(day.dateStr).toLocaleDateString("en-US", { 
+        weekday: "long", 
+        month: "long", 
+        day: "numeric" 
+      })}?`);
+      
+      if (confirmed) {
+        // Here you would typically make an API call to join the waitlist
+        alert("You've been added to the waitlist! We'll notify you if this date becomes available.");
+      }
     }
   };
 
@@ -169,7 +181,7 @@ export default function BookingCalendarScreen() {
                 <span>Available</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-4 h-4 bg-yellow-500 rounded"></div>
+                <div className="w-4 h-4 bg-orange-500 rounded"></div>
                 <span>Booked</span>
               </div>
               <div className="flex items-center gap-2">
@@ -177,7 +189,7 @@ export default function BookingCalendarScreen() {
                 <span>Maintenance</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-4 h-4 bg-orange-500 rounded"></div>
+                <div className="w-4 h-4 bg-yellow-500 rounded"></div>
                 <span>Waitlist</span>
               </div>
             </div>
