@@ -42,7 +42,7 @@ export default function UserProfileScreen() {
       </header>
 
       {/* Profile Header */}
-      <section className="bg-gradient-ocean px-4 py-8 text-white">
+      <section className="bg-gradient-to-b from-blue-50 to-white px-4 py-8 text-gray-900">
         <div className="text-center">
           <div className="relative inline-block mb-4">
             <Avatar className="w-24 h-24 border-4 border-white">
@@ -58,9 +58,9 @@ export default function UserProfileScreen() {
               <Camera className="w-4 h-4" />
             </Button>
           </div>
-          <h2 className="text-2xl font-bold mb-1">{user.name}</h2>
-          <p className="text-blue-100 mb-1">{user.email}</p>
-          <p className="text-blue-200 text-sm">{user.joinDate}</p>
+          <h2 className="text-2xl font-bold mb-1 text-gray-900">{user.name}</h2>
+          <p className="text-gray-600 mb-1">{user.email}</p>
+          <p className="text-gray-500 text-sm">{user.joinDate}</p>
           
           <div className="flex items-center justify-center space-x-1 mt-3">
             <div className="flex text-yellow-400">
@@ -68,7 +68,7 @@ export default function UserProfileScreen() {
                 <Star key={i} className="w-4 h-4 fill-current" />
               ))}
             </div>
-            <span className="text-white ml-2">{user.rating} rating</span>
+            <span className="text-gray-700 ml-2">{user.rating} rating</span>
           </div>
         </div>
       </section>
