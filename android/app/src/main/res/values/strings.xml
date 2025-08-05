@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Nauttec</string>
+    <string name="title_activity_main">Nauttec</string>
+    <string name="package_name">com.nauttec.app</string>
+    <string name="custom_url_scheme">com.nauttec.app</string>
+</resources>

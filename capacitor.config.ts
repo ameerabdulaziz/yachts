@@ -1,9 +1,9 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.nauttec.app',
-  appName: 'Nauttec',
-  webDir: 'dist',
+  appId: 'com.nauttec.yachtak',
+  appName: 'Yachtak',
+  webDir: 'dist/public',
   server: {
     androidScheme: 'https'
   },
