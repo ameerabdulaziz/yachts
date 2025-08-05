@@ -95,6 +95,62 @@ The system implements a dual authentication flow:
 - **Session Storage**: PostgreSQL-backed session management with connect-pg-simple
 - **Environment Configuration**: Environment variables for database connections and API keys
 
+# Navigation Structure
+
+The application includes 31+ screens with comprehensive routing:
+
+## Authentication Flow
+- `/` - SplashScreen (entry point)
+- `/login` - PhoneLoginScreen (password + OTP tabs)
+- `/verify-otp` - OTPVerificationScreen
+- `/account-setup` - AccountSetupScreen (role selection)
+
+## Main Navigation
+- `/home` - HomeScreen (renter dashboard)
+- `/my-boats` - MyBoatsScreen (owner dashboard)
+- `/profile` - UserProfileScreen
+- `/settings` - SettingsScreen
+- `/notifications` - NotificationCenterScreen
+
+## Yacht Discovery & Booking
+- `/yacht-details/:id` - YachtDetailsScreen
+- `/booking/:id` - BookingCheckoutScreen
+- `/booking-confirmation` - BookingConfirmationScreen
+- `/my-bookings` - MyBookingsScreen
+- `/reservation-detail/:id` - ReservationDetailScreen
+
+## Fractional Ownership
+- `/ownership-opportunities` - OwnershipOpportunitiesScreen
+- `/ownership/:id` - YachtOwnershipDetailScreen
+- `/ownership-inquiry/:id` - OwnershipInquiryScreen
+
+## Share Trading Marketplace
+- `/share-marketplace` - ShareMarketplaceScreen
+- `/share-listing/:id` - ShareListingDetailScreen
+- `/list-share-for-sale` - ListShareForSaleScreen
+- `/share-purchase-confirmation/:id` - SharePurchaseConfirmationScreen
+- `/share-trading` - ShareTradingScreen
+
+## Owner Management
+- `/owner-dashboard` - OwnerDashboardScreen
+- `/boat-management/:id` - BoatManagementScreen
+- `/add-boat-listing` - AddBoatListingScreen
+- `/boat-calendar/:id` - BoatCalendarScreen
+- `/boat-ownership/:id` - BoatOwnershipManagementScreen
+- `/booking-calendar/:id` - BookingCalendarScreen
+- `/waitlist-management` - WaitlistManagementScreen
+
+## Communication & Financial
+- `/messages` - MessagingCenterScreen
+- `/chat/:id` - ChatThreadScreen
+- `/fuel-wallet` - FuelWalletScreen
+- `/top-up` - TopUpScreen
+
+## Utility
+- `/dashboard` - DashboardScreen
+- `/edit-profile` - EditProfileScreen
+- `/dev-navigation` - DevNavigationScreen (development helper)
+
 # Recent Changes
 
 ## August 2025
