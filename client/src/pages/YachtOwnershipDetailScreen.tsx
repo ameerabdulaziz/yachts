@@ -42,7 +42,16 @@ export default function YachtOwnershipDetailScreen() {
             <Button variant="ghost" size="sm" className="w-10 h-10 rounded-full bg-white/80 backdrop-blur-sm">
               <Heart className="w-5 h-5 text-gray-900" />
             </Button>
-            <Button variant="ghost" size="sm" className="w-10 h-10 rounded-full bg-white/80 backdrop-blur-sm">
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              className="w-10 h-10 rounded-full bg-white/80 backdrop-blur-sm"
+              onClick={() => {
+                const shareText = `Check out this amazing yacht ownership opportunity: ${opportunity.yacht.name} - €${Number(opportunity.sharePrice).toLocaleString()} per share!`;
+                const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(shareText)}`;
+                window.open(whatsappUrl, '_blank');
+              }}
+            >
               <Share className="w-5 h-5 text-gray-900" />
             </Button>
           </div>
@@ -100,7 +109,7 @@ export default function YachtOwnershipDetailScreen() {
 
       </section>
 
-      <div className="px-4 space-y-6">
+      <div className="px-4 space-y-6 -mt-2">
         {/* Yacht Specifications */}
         <Card>
           <CardContent className="p-3">
@@ -242,7 +251,7 @@ export default function YachtOwnershipDetailScreen() {
         {/* Action Buttons */}
         <div className="space-y-3 pb-6">
           <Link href={`/ownership-inquiry/${opportunity.id}`}>
-            <Button className="w-full bg-gradient-ocean text-white py-4 rounded-xl font-semibold text-lg hover:shadow-lg transition-all duration-300">
+            <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-xl font-semibold text-lg hover:shadow-lg transition-all duration-300">
               Call Nauttec Team
             </Button>
           </Link>
