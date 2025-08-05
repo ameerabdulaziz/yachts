@@ -9,7 +9,7 @@ export const mockYachts: (Yacht & { owner: { name: string; avatar: string; verif
     pricePerDay: "3200",
     capacity: 12,
     cabins: 2,
-    length: "14.90",
+    length: "15.24",
     yearBuilt: 2024,
     images: [
       "https://static.wixstatic.com/media/0fb4c8_60988eb5cf834fcb876c1d06bd8af594~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D50.jpg",
@@ -37,7 +37,7 @@ export const mockYachts: (Yacht & { owner: { name: string; avatar: string; verif
     pricePerDay: "2800",
     capacity: 12,
     cabins: 2,
-    length: "12.64",
+    length: "12.80",
     yearBuilt: 2024,
     images: [
       "https://static.wixstatic.com/media/0fb4c8_008f1545c8764f8789a2b7415ca9dde7~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D42.jpg",
