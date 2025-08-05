@@ -3,27 +3,38 @@
 @tailwind utilities;
 
 :root {
-  --background: hsl(0, 0%, 100%);
-  --foreground: hsl(20, 14.3%, 4.1%);
-  --muted: hsl(60, 4.8%, 95.9%);
-  --muted-foreground: hsl(25, 5.3%, 44.7%);
+  /* iOS Light Mode Colors */
+  --background: hsl(0, 0%, 100%); /* iOS systemBackground */
+  --foreground: hsl(0, 0%, 0%); /* iOS label */
+  --muted: hsl(210, 17%, 95%); /* iOS systemGray6 */
+  --muted-foreground: hsl(240, 1%, 55%); /* iOS secondaryLabel */
   --popover: hsl(0, 0%, 100%);
-  --popover-foreground: hsl(20, 14.3%, 4.1%);
+  --popover-foreground: hsl(0, 0%, 0%);
   --card: hsl(0, 0%, 100%);
-  --card-foreground: hsl(20, 14.3%, 4.1%);
-  --border: hsl(20, 5.9%, 90%);
-  --input: hsl(20, 5.9%, 90%);
-  --primary: hsl(207, 90%, 54%);
-  --primary-foreground: hsl(211, 100%, 99%);
-  --primary-hover: hsl(207, 90%, 46%);
-  --secondary: hsl(60, 4.8%, 95.9%);
-  --secondary-foreground: hsl(24, 9.8%, 10%);
-  --accent: hsl(60, 4.8%, 95.9%);
-  --accent-foreground: hsl(24, 9.8%, 10%);
-  --destructive: hsl(0, 84.2%, 60.2%);
-  --destructive-foreground: hsl(60, 9.1%, 97.8%);
-  --ring: hsl(20, 14.3%, 4.1%);
-  --radius: 0.5rem;
+  --card-foreground: hsl(0, 0%, 0%);
+  --border: hsl(240, 6%, 90%); /* iOS separator */
+  --input: hsl(210, 17%, 95%); /* iOS systemGray6 */
+  --primary: hsl(211, 100%, 50%); /* iOS systemBlue */
+  --primary-foreground: hsl(0, 0%, 100%);
+  --primary-hover: hsl(211, 100%, 45%);
+  --secondary: hsl(210, 17%, 95%); /* iOS systemGray6 */
+  --secondary-foreground: hsl(0, 0%, 0%);
+  --accent: hsl(211, 100%, 50%); /* iOS systemBlue */
+  --accent-foreground: hsl(0, 0%, 100%);
+  --destructive: hsl(4, 90%, 58%); /* iOS systemRed */
+  --destructive-foreground: hsl(0, 0%, 100%);
+  --ring: hsl(211, 100%, 50%);
+  --radius: 0.75rem; /* iOS corner radius */
+  
+  /* iOS System Colors */
+  --ios-gray: hsl(240, 6%, 93%); /* systemGray5 */
+  --ios-gray2: hsl(240, 5%, 84%); /* systemGray4 */
+  --ios-gray3: hsl(240, 3%, 70%); /* systemGray3 */
+  --ios-gray4: hsl(240, 1%, 55%); /* systemGray2 */
+  --ios-gray5: hsl(240, 1%, 44%); /* systemGray */
+  --ios-green: hsl(142, 76%, 36%); /* systemGreen */
+  --ios-orange: hsl(28, 100%, 52%); /* systemOrange */
+  --ios-yellow: hsl(48, 100%, 51%); /* systemYellow */
   
   /* Ocean gradient colors */
   --ocean-start: hsl(180, 100%, 75%);
@@ -31,27 +42,38 @@
 }
 
 .dark {
-  --background: hsl(240, 10%, 3.9%);
-  --foreground: hsl(0, 0%, 98%);
-  --muted: hsl(240, 3.7%, 15.9%);
-  --muted-foreground: hsl(240, 5%, 64.9%);
-  --popover: hsl(240, 10%, 3.9%);
-  --popover-foreground: hsl(0, 0%, 98%);
-  --card: hsl(240, 10%, 3.9%);
-  --card-foreground: hsl(0, 0%, 98%);
-  --border: hsl(240, 3.7%, 15.9%);
-  --input: hsl(240, 3.7%, 15.9%);
-  --primary: hsl(207, 90%, 54%);
-  --primary-foreground: hsl(211, 100%, 99%);
-  --primary-hover: hsl(207, 90%, 46%);
-  --secondary: hsl(240, 3.7%, 15.9%);
-  --secondary-foreground: hsl(0, 0%, 98%);
-  --accent: hsl(240, 3.7%, 15.9%);
-  --accent-foreground: hsl(0, 0%, 98%);
-  --destructive: hsl(0, 62.8%, 30.6%);
-  --destructive-foreground: hsl(0, 0%, 98%);
-  --ring: hsl(240, 4.9%, 83.9%);
-  --radius: 0.5rem;
+  /* iOS Dark Mode Colors */
+  --background: hsl(0, 0%, 0%); /* iOS systemBackground dark */
+  --foreground: hsl(0, 0%, 100%); /* iOS label dark */
+  --muted: hsl(240, 5%, 11%); /* iOS systemGray6 dark */
+  --muted-foreground: hsl(240, 4%, 65%); /* iOS secondaryLabel dark */
+  --popover: hsl(0, 0%, 7%);
+  --popover-foreground: hsl(0, 0%, 100%);
+  --card: hsl(0, 0%, 7%);
+  --card-foreground: hsl(0, 0%, 100%);
+  --border: hsl(240, 3%, 25%); /* iOS separator dark */
+  --input: hsl(240, 5%, 11%);
+  --primary: hsl(212, 100%, 60%); /* iOS systemBlue dark */
+  --primary-foreground: hsl(0, 0%, 0%);
+  --primary-hover: hsl(212, 100%, 55%);
+  --secondary: hsl(240, 5%, 11%);
+  --secondary-foreground: hsl(0, 0%, 100%);
+  --accent: hsl(212, 100%, 60%);
+  --accent-foreground: hsl(0, 0%, 0%);
+  --destructive: hsl(14, 83%, 61%); /* iOS systemRed dark */
+  --destructive-foreground: hsl(0, 0%, 0%);
+  --ring: hsl(212, 100%, 60%);
+  --radius: 0.75rem;
+  
+  /* iOS Dark System Colors */
+  --ios-gray: hsl(240, 5%, 15%);
+  --ios-gray2: hsl(240, 4%, 21%);
+  --ios-gray3: hsl(240, 3%, 32%);
+  --ios-gray4: hsl(240, 2%, 54%);
+  --ios-gray5: hsl(240, 1%, 68%);
+  --ios-green: hsl(142, 70%, 45%);
+  --ios-orange: hsl(28, 87%, 67%);
+  --ios-yellow: hsl(48, 100%, 67%);
 }
 
 @layer base {
@@ -60,11 +82,14 @@
   }
 
   body {
-    @apply font-sans antialiased bg-background text-foreground;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', system-ui, sans-serif;
+    @apply antialiased bg-background text-foreground;
     margin: 0;
     padding: 0;
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
   
   html {
@@ -90,12 +115,23 @@
   }
   
   .card-hover {
-    transition: all 0.3s ease;
+    transition: all 0.2s cubic-bezier(0.4, 0.0, 0.2, 1); /* iOS easing */
   }
   
   .card-hover:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  }
+  
+  .ios-button {
+    border-radius: 0.75rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    transition: all 0.2s cubic-bezier(0.4, 0.0, 0.2, 1);
+  }
+  
+  .ios-shadow {
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
   }
   
   .animate-fade-in {

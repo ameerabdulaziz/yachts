@@ -5,10 +5,17 @@ export default {
   content: ["./client/index.html", "./client/src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['-apple-system', 'BlinkMacSystemFont', 'SF Pro Display', 'SF Pro Text', 'system-ui', 'sans-serif'],
+        display: ['-apple-system', 'BlinkMacSystemFont', 'SF Pro Display', 'system-ui', 'sans-serif'],
+        text: ['-apple-system', 'BlinkMacSystemFont', 'SF Pro Text', 'system-ui', 'sans-serif'],
+      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+        xl: "1rem", // iOS large corner radius
+        '2xl': "1.25rem", // iOS extra large corner radius
       },
       colors: {
         background: "var(--background)",
@@ -60,6 +67,17 @@ export default {
           "accent-foreground": "var(--sidebar-accent-foreground)",
           border: "var(--sidebar-border)",
           ring: "var(--sidebar-ring)",
+        },
+        ios: {
+          blue: "hsl(211, 100%, 50%)",
+          gray: "var(--ios-gray)",
+          gray2: "var(--ios-gray2)",
+          gray3: "var(--ios-gray3)",
+          gray4: "var(--ios-gray4)",
+          gray5: "var(--ios-gray5)",
+          green: "var(--ios-green)",
+          orange: "var(--ios-orange)",
+          yellow: "var(--ios-yellow)",
         },
       },
       keyframes: {
