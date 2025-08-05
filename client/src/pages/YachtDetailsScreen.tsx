@@ -124,7 +124,7 @@ export default function YachtDetailsScreen() {
         <div className="absolute bottom-4 right-4 bg-black/50 text-white px-3 py-1 rounded-full text-sm">
           {currentImageIndex + 1} / {yacht.images.length}
         </div>
-        {yacht.images && yacht.images.length > 1 && (
+        {yacht.images && yacht.images?.length > 1 && (
           <div className="absolute bottom-4 left-4 flex space-x-2">
             {yacht.images?.map((_, index) => (
               <button
@@ -208,103 +208,64 @@ export default function YachtDetailsScreen() {
 
         {/* Calendar Section */}
         <div className="mb-6">
-          <div className="flex items-center justify-between mb-3">
-            <h3 className="text-lg font-bold text-gray-900">Select Dates</h3>
-            <Dialog open={showCalendar} onOpenChange={setShowCalendar}>
-              <DialogTrigger asChild>
-                <Button variant="outline" size="sm" className="flex items-center space-x-2">
-                  <Calendar className="w-4 h-4" />
-                  <span>View Calendar</span>
-                </Button>
-              </DialogTrigger>
-              <DialogContent className="max-w-md" aria-describedby="calendar-description">
-                <DialogHeader>
-                  <DialogTitle>Select Your Dates</DialogTitle>
-                </DialogHeader>
-                <div id="calendar-description" className="sr-only">
-                  Select your check-in and check-out dates for yacht booking
+          <h3 className="text-lg font-bold text-gray-900 mb-4">Select Your Dates</h3>
+          <div className="bg-white rounded-xl border border-gray-200 p-4">
+            {/* Calendar Header */}
+            <div className="flex items-center justify-between mb-4">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1))}
+              >
+                <ChevronLeft className="w-4 h-4" />
+              </Button>
+              <h3 className="font-semibold">
+                {monthNames[currentMonth.getMonth()]} {currentMonth.getFullYear()}
+              </h3>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1))}
+              >
+                <ChevronRight className="w-4 h-4" />
+              </Button>
+            </div>
+
+            {/* Calendar Grid */}
+            <div className="grid grid-cols-7 gap-1 mb-2">
+              {dayNames.map(day => (
+                <div key={day} className="text-center text-xs font-medium text-gray-500 py-2">
+                  {day}
                 </div>
-                <div className="p-4">
-                  {/* Calendar Header */}
-                  <div className="flex items-center justify-between mb-4">
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1))}
+              ))}
+            </div>
+
+            <div className="grid grid-cols-7 gap-1 mb-4">
+              {getDaysInMonth(currentMonth).map((date, index) => (
+                <div key={index} className="aspect-square">
+                  {date && (
+                    <button
+                      onClick={() => handleDateClick(date)}
+                      disabled={!isDateAvailable(date)}
+                      className={`w-full h-full text-sm rounded-md flex items-center justify-center transition-colors ${
+                        isDateSelected(date)
+                          ? 'bg-primary text-white'
+                          : isDateAvailable(date)
+                          ? 'hover:bg-blue-50 text-gray-900'
+                          : 'text-gray-300 cursor-not-allowed'
+                      }`}
                     >
-                      <ChevronLeft className="w-4 h-4" />
-                    </Button>
-                    <h3 className="font-semibold">
-                      {monthNames[currentMonth.getMonth()]} {currentMonth.getFullYear()}
-                    </h3>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1))}
-                    >
-                      <ChevronRight className="w-4 h-4" />
-                    </Button>
-                  </div>
-
-                  {/* Calendar Grid */}
-                  <div className="grid grid-cols-7 gap-1 mb-2">
-                    {dayNames.map(day => (
-                      <div key={day} className="text-center text-xs font-medium text-gray-500 py-2">
-                        {day}
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="grid grid-cols-7 gap-1">
-                    {getDaysInMonth(currentMonth).map((date, index) => (
-                      <div key={index} className="aspect-square">
-                        {date && (
-                          <button
-                            onClick={() => handleDateClick(date)}
-                            disabled={!isDateAvailable(date)}
-                            className={`w-full h-full text-sm rounded-md flex items-center justify-center transition-colors ${
-                              isDateSelected(date)
-                                ? 'bg-primary text-white'
-                                : isDateAvailable(date)
-                                ? 'hover:bg-blue-50 text-gray-900'
-                                : 'text-gray-300 cursor-not-allowed'
-                            }`}
-                          >
-                            {date.getDate()}
-                          </button>
-                        )}
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Selected Dates Display */}
-                  <div className="mt-4 p-3 bg-blue-50 rounded-lg">
-                    <div className="text-sm">
-                      <div className="font-medium text-gray-900">Selected Dates:</div>
-                      {selectedStartDate && (
-                        <div className="text-gray-700">
-                          Check-in: {selectedStartDate.toLocaleDateString()}
-                        </div>
-                      )}
-                      {selectedEndDate && (
-                        <div className="text-gray-700">
-                          Check-out: {selectedEndDate.toLocaleDateString()}
-                        </div>
-                      )}
-                      {!selectedStartDate && (
-                        <div className="text-gray-500">Select your check-in date</div>
-                      )}
-                    </div>
-                  </div>
+                      {date.getDate()}
+                    </button>
+                  )}
                 </div>
-              </DialogContent>
-            </Dialog>
-          </div>
-          
-          {selectedStartDate && selectedEndDate && (
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-              <div className="bg-white rounded-lg p-3 border border-blue-200">
-                <div className="text-sm font-medium text-gray-900 mb-1">Your Selection:</div>
+              ))}
+            </div>
+
+            {/* Selected Dates Display */}
+            {selectedStartDate && selectedEndDate && (
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
+                <div className="text-sm font-medium text-gray-900 mb-1">Selected Dates:</div>
                 <div className="text-sm text-gray-700">
                   {selectedStartDate.toLocaleDateString()} - {selectedEndDate.toLocaleDateString()}
                 </div>
@@ -312,18 +273,19 @@ export default function YachtDetailsScreen() {
                   {Math.ceil((selectedEndDate.getTime() - selectedStartDate.getTime()) / (1000 * 60 * 60 * 24))} nights
                 </div>
               </div>
-            </div>
-          )}
+            )}
+          </div>
         </div>
 
         {/* Catering Option */}
         <div className="mb-6">
+          <h3 className="text-lg font-bold text-gray-900 mb-3">Additional Services</h3>
           <div className="bg-gray-50 rounded-xl p-4 border border-gray-200">
             <div className="flex items-center space-x-3">
               <Checkbox 
                 id="catering"
                 checked={includeCatering}
-                onCheckedChange={setIncludeCatering}
+                onCheckedChange={(checked) => setIncludeCatering(!!checked)}
               />
               <div className="flex-1">
                 <label htmlFor="catering" className="text-sm font-medium text-gray-900 cursor-pointer">
@@ -369,8 +331,24 @@ export default function YachtDetailsScreen() {
       <section className="sticky bottom-0 bg-white border-t border-gray-200 px-4 py-4">
         <div className="flex items-center justify-between mb-4">
           <div>
-            <p className="text-2xl font-bold text-gray-900">€{yacht.pricePerDay}</p>
-            <p className="text-gray-600">per day</p>
+            {selectedStartDate && selectedEndDate ? (
+              <div>
+                <p className="text-2xl font-bold text-gray-900">
+                  €{(() => {
+                    const nights = Math.ceil((selectedEndDate.getTime() - selectedStartDate.getTime()) / (1000 * 60 * 60 * 24));
+                    const yachtCost = parseInt(yacht.pricePerDay) * nights;
+                    const cateringCost = includeCatering ? 200 * nights : 0;
+                    return (yachtCost + cateringCost).toLocaleString();
+                  })()}
+                </p>
+                <p className="text-gray-600">total for your stay</p>
+              </div>
+            ) : (
+              <div>
+                <p className="text-2xl font-bold text-gray-900">€{yacht.pricePerDay}</p>
+                <p className="text-gray-600">per day</p>
+              </div>
+            )}
           </div>
           <div className="text-right">
             <p className="text-sm text-gray-600">Next available</p>
@@ -386,24 +364,7 @@ export default function YachtDetailsScreen() {
             {selectedStartDate && selectedEndDate ? 'Book Selected Dates' : 'Select Dates to Book'}
           </Button>
         </Link>
-        
-        {selectedStartDate && selectedEndDate && (
-          <div className="mt-2 text-center text-sm text-gray-600">
-            {(() => {
-              const nights = Math.ceil((selectedEndDate.getTime() - selectedStartDate.getTime()) / (1000 * 60 * 60 * 24));
-              const yachtCost = parseInt(yacht.pricePerDay) * nights;
-              const cateringCost = includeCatering ? 200 * nights : 0;
-              const total = yachtCost + cateringCost;
-              return (
-                <div>
-                  <div>Yacht: €{yachtCost.toLocaleString()}</div>
-                  {includeCatering && <div>Catering: €{cateringCost.toLocaleString()}</div>}
-                  <div className="font-semibold">Total: €{total.toLocaleString()}</div>
-                </div>
-              );
-            })()}
-          </div>
-        )}
+
       </section>
       
       <BottomNavigation />
