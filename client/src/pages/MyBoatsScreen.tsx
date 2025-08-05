@@ -1,4 +1,4 @@
-import { ArrowLeft, Users, DollarSign, TrendingUp, TrendingDown } from "lucide-react";
+import { ArrowLeft, Users, DollarSign, TrendingUp, TrendingDown, Fuel, Calendar, Clock } from "lucide-react";
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -18,8 +18,8 @@ const mockOwnedBoats = [
     sharesFractionOwned: "2/7",
     sharesPercentage: 28.6,
     shareValue: "114,286",
-    usageDaysPerYear: 96,
-    nextAvailableDate: "October 15, 2025"
+    remainingDays: 42,
+    remainingEngineHours: 38
   },
   {
     id: "yacht-6",
@@ -32,8 +32,8 @@ const mockOwnedBoats = [
     sharesFractionOwned: "1/12",
     sharesPercentage: 8.3,
     shareValue: "166,667",
-    usageDaysPerYear: 27,
-    nextAvailableDate: "November 8, 2025"
+    remainingDays: 23,
+    remainingEngineHours: 47
   }
 ];
 
@@ -61,18 +61,30 @@ export default function MyBoatsScreen() {
 
       {/* Content */}
       <div className="p-4 space-y-4">
-        {/* Summary Stats */}
-        <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
-          <h2 className="text-lg font-semibold text-gray-900 mb-3">Portfolio Overview</h2>
-          <div className="grid grid-cols-2 gap-4">
-            <div className="text-center">
-              <div className="text-2xl font-bold text-blue-600">2</div>
-              <div className="text-sm text-gray-600">Boats Owned</div>
+        {/* Fuel Wallet */}
+        <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-xl p-4 shadow-sm text-white">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-3">
+              <div className="bg-white/20 rounded-full p-2">
+                <Fuel className="h-5 w-5" />
+              </div>
+              <div>
+                <h2 className="text-lg font-semibold">Fuel Wallet</h2>
+                <p className="text-blue-100 text-sm">Available balance</p>
+              </div>
             </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-green-600">119</div>
-              <div className="text-sm text-gray-600">Days/Year</div>
+            <div className="text-right">
+              <div className="text-2xl font-bold">€2,450</div>
+              <p className="text-blue-100 text-xs">≈ 980L fuel</p>
             </div>
+          </div>
+          <div className="mt-3 flex space-x-2">
+            <Button size="sm" className="bg-white/20 hover:bg-white/30 text-white border-white/30">
+              Top Up
+            </Button>
+            <Button size="sm" variant="outline" className="bg-transparent border-white/30 text-white hover:bg-white/10">
+              History
+            </Button>
           </div>
         </div>
 
@@ -140,12 +152,18 @@ export default function MyBoatsScreen() {
                       <span className="text-sm font-semibold text-blue-600">${boat.shareValue}</span>
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="text-sm font-medium text-gray-700">Usage Days</span>
-                      <span className="text-sm font-semibold text-gray-900">{boat.usageDaysPerYear}/year</span>
+                      <div className="flex items-center space-x-1">
+                        <Calendar className="h-3 w-3 text-gray-500" />
+                        <span className="text-sm font-medium text-gray-700">Remaining Days</span>
+                      </div>
+                      <span className="text-sm font-semibold text-gray-900">{boat.remainingDays} days</span>
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="text-sm font-medium text-gray-700">Next Available</span>
-                      <span className="text-sm font-semibold text-gray-900">{boat.nextAvailableDate}</span>
+                      <div className="flex items-center space-x-1">
+                        <Clock className="h-3 w-3 text-gray-500" />
+                        <span className="text-sm font-medium text-gray-700">Engine Hours</span>
+                      </div>
+                      <span className="text-sm font-semibold text-gray-900">{boat.remainingEngineHours}h left</span>
                     </div>
                   </div>
 
