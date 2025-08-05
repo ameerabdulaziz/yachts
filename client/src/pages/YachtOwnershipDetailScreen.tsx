@@ -52,12 +52,12 @@ export default function YachtOwnershipDetailScreen() {
       {/* Image Gallery */}
       <section className="relative">
         <img 
-          src={opportunity.yacht.images[currentImageIndex]} 
+          src={opportunity.yacht.images?.[currentImageIndex] || opportunity.yacht.images?.[0]} 
           alt={opportunity.yacht.name}
           className="w-full h-80 object-cover"
         />
         <div className="absolute bottom-4 right-4 bg-black/50 text-white px-3 py-1 rounded-full text-sm">
-          {currentImageIndex + 1} / {opportunity.yacht.images.length}
+          {currentImageIndex + 1} / {opportunity.yacht.images?.length || 1}
         </div>
         <div className="absolute bottom-4 left-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
           {opportunity.shareFraction} Share Available
@@ -216,15 +216,15 @@ export default function YachtOwnershipDetailScreen() {
                 <span className="text-lg font-bold text-blue-500">50 hours</span>
               </div>
 
-              {opportunity.financing && opportunity.financing.available && (
+              {opportunity.financing && (opportunity.financing as any).available && (
                 <div className="flex items-center justify-between p-3 bg-blue-50 rounded-lg border border-blue-200">
                   <div className="flex items-center space-x-2">
                     <Calendar className="w-5 h-5 text-blue-500" />
                     <span className="font-medium text-gray-900">Financing Available</span>
                   </div>
                   <div className="text-right">
-                    <span className="text-lg font-bold text-blue-500">€{opportunity.financing.monthlyPayment}/mo</span>
-                    <p className="text-xs text-gray-600">{opportunity.financing.downPaymentPercent}% down</p>
+                    <span className="text-lg font-bold text-blue-500">€{(opportunity.financing as any).monthlyPayment}/mo</span>
+                    <p className="text-xs text-gray-600">{(opportunity.financing as any).downPaymentPercent}% down</p>
                   </div>
                 </div>
               )}

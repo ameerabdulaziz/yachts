@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
-import { User, Ship } from "lucide-react";
+import { User, Ship, Anchor } from "lucide-react";
 import nauttecLogo from "@assets/Nauttec Logo_1754330395988.png";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
@@ -47,7 +47,18 @@ export default function AccountSetupScreen() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-ocean flex items-center justify-center p-4">
+    <div className="min-h-screen relative flex items-center justify-center p-4 overflow-hidden">
+      {/* Turquoise Sea Background */}
+      <div className="absolute inset-0 bg-gradient-ocean">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `url('https://images.pexels.com/photos/1001682/pexels-photo-1001682.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&fit=crop')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          opacity: 0.8
+        }} />
+        <div className="absolute inset-0 bg-gradient-to-br from-cyan-300/30 to-blue-500/40" />
+      </div>
+      <div className="relative z-10 w-full max-w-md">
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
           <div className="w-20 h-16 mx-auto mb-4 bg-white rounded-2xl flex items-center justify-center p-2">
@@ -128,6 +139,7 @@ export default function AccountSetupScreen() {
           </Button>
         </CardContent>
       </Card>
+      </div>
     </div>
   );
 }

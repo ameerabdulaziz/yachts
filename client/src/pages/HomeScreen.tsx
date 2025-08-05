@@ -44,25 +44,15 @@ export default function HomeScreen() {
 
       {/* Hero Section with Search */}
       <section className="relative px-4 py-8 text-white overflow-hidden">
-        {/* Shallow Water Background */}
-        <div className="absolute inset-0">
-          <svg className="w-full h-full" viewBox="0 0 400 200" preserveAspectRatio="xMidYMid slice">
-            <defs>
-              <linearGradient id="waterGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stopColor="#87CEEB" />
-                <stop offset="50%" stopColor="#4FC3F7" />
-                <stop offset="100%" stopColor="#29B6F6" />
-              </linearGradient>
-              <filter id="wave">
-                <feTurbulence baseFrequency="0.02" numOctaves="3" result="noise" seed="2" />
-                <feDisplacementMap in="SourceGraphic" in2="noise" scale="8" />
-              </filter>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#waterGradient)" />
-            <ellipse cx="200" cy="180" rx="300" ry="40" fill="rgba(255,255,255,0.2)" filter="url(#wave)" />
-            <ellipse cx="150" cy="170" rx="200" ry="25" fill="rgba(255,255,255,0.1)" />
-            <ellipse cx="250" cy="175" rx="150" ry="20" fill="rgba(255,255,255,0.15)" />
-          </svg>
+        {/* Turquoise Sea Background */}
+        <div className="absolute inset-0 bg-gradient-ocean">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `url('https://images.pexels.com/photos/1001682/pexels-photo-1001682.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&fit=crop')`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            opacity: 0.8
+          }} />
+          <div className="absolute inset-0 bg-gradient-to-br from-cyan-300/30 to-blue-500/40" />
         </div>
         
         <div className="relative z-10">
@@ -142,7 +132,7 @@ export default function HomeScreen() {
                 <Card className="w-80 card-hover cursor-pointer">
                   <div className="relative">
                     <img 
-                      src={yacht.images[0]} 
+                      src={yacht.images?.[0] || yacht.images?.[0]} 
                       alt={yacht.name}
                       className="w-full h-48 object-cover rounded-t-2xl"
                     />
@@ -203,7 +193,7 @@ export default function HomeScreen() {
                 <Card className="w-80 card-hover cursor-pointer">
                   <div className="relative">
                     <img 
-                      src={opportunity.yacht.images[0]} 
+                      src={opportunity.yacht.images?.[0] || opportunity.yacht.images?.[0]} 
                       alt={opportunity.yacht.name}
                       className="w-full h-48 object-cover rounded-t-2xl"
                     />
@@ -249,14 +239,14 @@ export default function HomeScreen() {
                         <p className="text-sm text-gray-600">per share</p>
                       </div>
                     </div>
-                    {opportunity.financing && opportunity.financing.available && (
+                    {opportunity.financing && (opportunity.financing as any).available && (
                       <div className="flex items-center justify-between pt-3 border-t border-gray-100">
                         <div className="flex items-center space-x-2">
                           <Calendar className="w-4 h-4 text-blue-600" />
                           <span className="text-sm text-gray-700">Financing Available</span>
                         </div>
                         <div className="text-right">
-                          <p className="text-sm font-semibold text-gray-900">€{opportunity.financing.monthlyPayment}/mo</p>
+                          <p className="text-sm font-semibold text-gray-900">€{(opportunity.financing as any).monthlyPayment}/mo</p>
                           <p className="text-xs text-gray-500">25% down</p>
                         </div>
                       </div>

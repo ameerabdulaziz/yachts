@@ -26,11 +26,23 @@ export default function OwnershipOpportunitiesScreen() {
       </header>
 
       {/* Hero Section */}
-      <section className="bg-gradient-ocean px-4 py-8 text-white">
+      <section className="relative px-4 py-8 text-white overflow-hidden">
+        {/* Turquoise Sea Background */}
+        <div className="absolute inset-0 bg-gradient-ocean">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `url('https://images.pexels.com/photos/1001682/pexels-photo-1001682.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&fit=crop')`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            opacity: 0.8
+          }} />
+          <div className="absolute inset-0 bg-gradient-to-br from-cyan-300/30 to-blue-500/40" />
+        </div>
+        <div className="relative z-10">
         <div className="text-center">
           <TrendingUp className="w-16 h-16 mx-auto mb-4 text-white" />
           <h2 className="text-2xl font-bold mb-2">Fractional Yacht Ownership</h2>
           <p className="text-blue-100">Own a share of luxury yachts and enjoy exclusive access</p>
+        </div>
         </div>
       </section>
 
@@ -61,7 +73,7 @@ export default function OwnershipOpportunitiesScreen() {
                 <CardContent className="p-0">
                   <div className="relative">
                     <img 
-                      src={opportunity.yacht.images[0]} 
+                      src={opportunity.yacht.images?.[0] || opportunity.yacht.images?.[0]} 
                       alt={opportunity.yacht.name}
                       className="w-full h-48 object-cover rounded-t-2xl"
                     />

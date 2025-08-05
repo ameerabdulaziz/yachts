@@ -22,12 +22,24 @@ export default function BookingConfirmationScreen() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Success Header */}
-      <section className="bg-gradient-ocean px-4 py-12 text-white text-center">
+      <section className="relative px-4 py-12 text-white text-center overflow-hidden">
+        {/* Turquoise Sea Background */}
+        <div className="absolute inset-0 bg-gradient-ocean">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `url('https://images.pexels.com/photos/1001682/pexels-photo-1001682.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&fit=crop')`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            opacity: 0.8
+          }} />
+          <div className="absolute inset-0 bg-gradient-to-br from-cyan-300/30 to-blue-500/40" />
+        </div>
+        <div className="relative z-10">
         <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-4">
           <CheckCircle className="w-12 h-12 text-green-600" />
         </div>
         <h1 className="text-2xl font-bold mb-2">Booking Confirmed!</h1>
         <p className="text-blue-100">Your luxury yacht experience awaits</p>
+        </div>
       </section>
 
       <div className="p-4 space-y-6">

@@ -26,8 +26,8 @@
   --radius: 0.5rem;
   
   /* Ocean gradient colors */
-  --ocean-start: hsl(207, 90%, 54%);
-  --ocean-end: hsl(199, 89%, 48%);
+  --ocean-start: hsl(180, 100%, 75%);
+  --ocean-end: hsl(195, 85%, 55%);
 }
 
 .dark {

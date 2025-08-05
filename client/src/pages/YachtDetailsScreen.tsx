@@ -53,16 +53,16 @@ export default function YachtDetailsScreen() {
       {/* Image Gallery */}
       <section className="relative">
         <img 
-          src={yacht.images[currentImageIndex]} 
+          src={yacht.images?.[currentImageIndex] || yacht.images?.[0]} 
           alt={yacht.name}
           className="w-full h-80 object-cover"
         />
         <div className="absolute bottom-4 right-4 bg-black/50 text-white px-3 py-1 rounded-full text-sm">
           {currentImageIndex + 1} / {yacht.images.length}
         </div>
-        {yacht.images.length > 1 && (
+        {yacht.images && yacht.images.length > 1 && (
           <div className="absolute bottom-4 left-4 flex space-x-2">
-            {yacht.images.map((_, index) => (
+            {yacht.images?.map((_, index) => (
               <button
                 key={index}
                 onClick={() => setCurrentImageIndex(index)}
