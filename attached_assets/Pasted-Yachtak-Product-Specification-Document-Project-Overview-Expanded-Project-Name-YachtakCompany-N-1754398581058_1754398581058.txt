@@ -1,0 +1,196 @@
+Yachtak Product Specification Document
+
+Project Overview (Expanded)
+
+Project Name: YachtakCompany: Nauttec
+
+In the world of luxury boating, full yacht ownership is often financially out of reach and comes with significant operational burdens. Simultaneously, most privately owned yachts remain underutilized, costing owners more than they return in lifestyle value.
+
+Yachtak introduces a smarter, more sustainable alternative: fractional yacht ownership and managed rental operations of De Antonio Yachts. By blending technology, hospitality, and co-ownership principles, Yachtak enables multiple individuals to co-own premium yachts and experience carefree boating, without the complexity of managing it themselves.
+
+Yachtak is both the digital platform (mobile and web) and the operational engine behind this model. The service is run and governed by Nauttec, the company responsible for selling the fractional shares, maintaining the yachts, managing crew and marina logistics, and building the underlying technology.
+
+Supported Models: Yachtak will offer the full De Antonio Yachts range — D23, D29, D32, D36, D42, D50, and D60 — under various fractional ownership structures. Larger yachts may be divided into fewer shares, while smaller ones may be split among more co-owners.
+
+Yachtak allows users to:
+
+Rent a boat for short-term leisure use
+
+Co-own a boat with a group (public or private)
+
+Buy or sell yacht shares through a digital marketplace
+
+Seamlessly manage usage, fuel, and maintenance
+
+Platform Architecture (Explained)
+
+Yachtak is designed around three distinct user types, each with their own role, journey, and permissions within the platform.
+
+1. Visitors
+
+Visitors are prospective customers exploring boating experiences. They don’t need to log in to use the app but must register with a mobile number or email to initiate a booking or ownership request.
+
+Visitors can choose from two primary paths:
+
+Rent a Boat:
+
+Users browse a catalog of available boats.
+
+Each listing includes specs (boat name, length, engine power, passenger capacity), calendar availability, and rental rates.
+
+Visitors can add food & beverage packages to their booking (e.g., seafood trays, drinks).
+
+Once selections are made, the visitor proceeds to enter contact details and completes the booking via secure online payment.
+
+Own a Boat:
+
+Visitors can explore ownership opportunities in three formats:
+
+Buying a whole boat
+
+Starting a closed ownership group with friends
+
+Purchasing available shares from the public co-ownership marketplace
+
+Visitors can select the number of shares to buy and whether they wish to finance the purchase via a bank loan. Upon submission, the user is contacted by a financing partner or Nauttec representative.
+
+This two-pronged journey is designed to convert high-intent users into paying clients — either as renters or long-term co-owners.
+
+2. Owners
+
+Once a visitor becomes a co-owner, they are upgraded to an "Owner" status in the platform. Their account is linked to the specific boat(s) they own and the number of shares held.
+
+Owners gain access to a full-featured dashboard, enabling them to:
+
+View Owned Boats:
+
+Owners can view the name, model, and specs of each boat they co-own.
+
+Information such as boat location, status (available, sailing, in maintenance), and engine hours is shown in real time.
+
+A list of co-owners and the number of shares each holds is also visible.
+
+Manage Bookings:
+
+Owners access a color-coded booking calendar (green = available, blue = booked, grey = in maintenance).
+
+Booking requests are validated based on remaining day/engine hour balance and fuel credits.
+
+Owners can book half-day or full-day slots, with the option to mark bookings as private or open to sharing.
+
+If the requested slot is unavailable, owners can join a waiting list. The current booker is notified and asked to confirm their intent; if released, the slot passes to the next person on the list.
+
+Buy More Shares:
+
+Owners can request to purchase additional shares in their current boat or explore ownership opportunities in new boats via a marketplace.
+
+If buying from an existing co-owner, a notification is sent to all other owners. The first to accept initiates the transaction.
+
+Sell Shares:
+
+Owners can offer their shares for sale.
+
+Co-owners are notified and given 30 days to exercise a right of first refusal. If declined, the share is listed publicly.
+
+Interested buyers may join a waitlist and be notified once the share becomes available.
+
+Fuel Wallet & Top-Up:
+
+Each owner has a prepaid virtual fuel wallet (e.g., 100L).
+
+After each outing, the skipper logs fuel usage and deducts it from the wallet.
+
+Owners are notified when their balance falls below a threshold and prompted to top up.
+
+Bookings are blocked if the balance is too low.
+
+Other Functionalities:
+
+Owners may lend, swap, or sell unused boat days with others.
+
+With mutual agreement from all owners, they can allow Nauttec to rent out unused days.
+
+Owners can rate crew and skippers post-trip.
+
+Owners are rated internally based on reliability (no-shows, late cancellations, responsiveness).
+
+3. Administrators (Nauttec Team)
+
+Administrators are the operational core of the platform, responsible for upholding fairness, reliability, and transparency.
+
+Their key functions include:
+
+Onboarding new boats with specifications, photos, and pricing
+
+Creating and managing availability calendars
+
+Uploading maintenance logs, receipts, and engine data
+
+Configuring seasonal rules (e.g., increased engine hour deductions on holidays)
+
+Setting fuel wallet thresholds, booking rules, and cancellation penalties
+
+Reviewing and approving share sales, purchases, and ownership transfers
+
+Generating usage and financial reports for each boat
+
+Monitoring owner behavior and enforcing platform policies
+
+The administrator role is critical to the trust-based relationship between co-owners. By acting as a neutral third party, Nauttec ensures the platform stays balanced, data-driven, and fair to all participants.
+
+Booking Rules Engine (Detailed Explanation)
+
+The booking system is one of the most important modules within Yachtak. To ensure fairness across all co-owners, Nauttec enforces a detailed booking policy based on fractional share ownership.
+
+Usage Limits per Share:
+Each fractional share entitles the owner to a defined annual usage — specifically, up to 48 calendar days or 50 engine hours, whichever comes first. This rule ensures high-value usage is fairly distributed, particularly across peak seasons where demand is high.
+
+Weighted Days and Seasonal Multipliers:
+Not all days are equal in terms of demand. To account for seasonality and holidays, Nauttec assigns a weight multiplier to certain high-demand dates. For example, a booking on a national holiday may deduct 2 engine hours instead of 1, based on the seasonal multiplier configured by the admin. This system prevents owners from front-loading their usage with only high-demand days.
+
+Booking Conditions:
+
+Bookings are only accepted if the owner has sufficient engine hour or day balance.
+
+Owners cannot book two consecutive days unless they own multiple shares.
+
+Owners may select between morning and afternoon slots or full-day bookings.
+
+If an owner's fuel wallet falls below the minimum threshold, they will be prompted to top up before confirming a booking.
+
+Booking Flexibility:
+
+Owners can offer to share their booking with other owners. If accepted, usage costs and credits (engine hours and days) are split equally.
+
+If an owner cancels within two days of the booking date, it is considered late cancellation, and the allotted day is deducted.
+
+A no-show results in a penalty of multiple deducted days, depending on the rules defined by Nauttec.
+
+Peer Interactions:
+
+Owners can swap or lend days to one another via the app.
+
+Unused days can be sold within the platform’s marketplace.
+
+If a booking slot is full, owners may join a waitlist. The first confirmed owner is given a grace period to reaffirm; otherwise, the slot passes to the next on the list.
+
+Owner Ratings:
+
+Owners are rated for their reliability and adherence to booking rules.
+
+Persistent no-shows or repeated last-minute cancellations negatively impact the owner's rating and may affect their booking priority in future cycles.
+
+Optional Rentals & Revenue Model
+
+Unused boat days may be monetized by allowing Nauttec to offer them as rentals to third parties. This feature requires full consent from all co-owners of the boat in question.
+
+Once approved:
+
+Nauttec lists the boat on its rental marketplace.
+
+Interested visitors can book available dates, subject to pricing and package rules.
+
+After deducting a service commission, revenue from the booking is deposited into the boat’s shared account.
+
+Funds in the shared account can be used for future maintenance, upgrades, or split among owners.
+
