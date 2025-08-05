@@ -104,19 +104,19 @@ export default function AccountSetupScreen() {
             <Label>I'm interested in</Label>
             <RadioGroup value={role} onValueChange={setRole}>
               <div className="flex items-center space-x-2 p-3 border rounded-lg">
-                <RadioGroupItem value="renter" id="renter" />
-                <User className="w-5 h-5 text-primary" />
-                <div className="flex-1">
-                  <Label htmlFor="renter" className="font-medium">Renting Yachts</Label>
-                  <p className="text-sm text-gray-600">Book luxury yacht experiences</p>
-                </div>
-              </div>
-              <div className="flex items-center space-x-2 p-3 border rounded-lg">
                 <RadioGroupItem value="owner" id="owner" />
                 <Ship className="w-5 h-5 text-primary" />
                 <div className="flex-1">
-                  <Label htmlFor="owner" className="font-medium">Yacht Ownership</Label>
-                  <p className="text-sm text-gray-600">List your yacht or invest in shares</p>
+                  <Label htmlFor="owner" className="font-medium">Own a yacht</Label>
+                  <p className="text-sm text-gray-600">Buy with friends or with others</p>
+                </div>
+              </div>
+              <div className="flex items-center space-x-2 p-3 border rounded-lg">
+                <RadioGroupItem value="renter" id="renter" />
+                <User className="w-5 h-5 text-primary" />
+                <div className="flex-1">
+                  <Label htmlFor="renter" className="font-medium">Rent a yacht</Label>
+                  <p className="text-sm text-gray-600">Book luxury yacht experiences</p>
                 </div>
               </div>
               <div className="flex items-center space-x-2 p-3 border rounded-lg">
