@@ -1,4 +1,4 @@
-import { ArrowLeft, Users, DollarSign, TrendingUp, TrendingDown, Calendar, MapPin, Ruler } from "lucide-react";
+import { ArrowLeft, Users, DollarSign, TrendingUp, TrendingDown, Calendar, MapPin, Ruler, Clock, Gauge } from "lucide-react";
 import { Link, useRoute } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -123,23 +123,37 @@ export default function BoatOwnershipManagementScreen() {
           </div>
         </div>
 
+        {/* Book My Next Trip Button */}
+        <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white mb-4">
+          Book My Next Trip
+        </Button>
+
         {/* Ownership Summary */}
         <Card className="border border-gray-100">
           <CardHeader className="pb-3">
-            <CardTitle className="text-lg">Your Ownership</CardTitle>
+            <CardTitle className="text-lg">My Ownership</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="grid grid-cols-3 gap-3">
-              <div className="text-center p-3 bg-blue-50 rounded-lg">
-                <div className="text-xl font-bold text-blue-600">{boat.sharesOwned}/{boat.totalShares}</div>
-                <div className="text-xs text-gray-600">Shares Owned</div>
+              <div className="text-center p-3 bg-gray-50 rounded-lg">
+                <div className="mb-2">
+                  <DollarSign className="h-6 w-6 text-blue-600 mx-auto" />
+                </div>
+                <div className="text-xl font-bold text-gray-900">{boat.sharesOwned}/{boat.totalShares}</div>
+                <div className="text-xs text-gray-600">My Shares</div>
               </div>
-              <div className="text-center p-3 bg-orange-50 rounded-lg">
-                <div className="text-xl font-bold text-orange-600">{boat.remainingDays}</div>
+              <div className="text-center p-3 bg-gray-50 rounded-lg">
+                <div className="mb-2">
+                  <Calendar className="h-6 w-6 text-blue-600 mx-auto" />
+                </div>
+                <div className="text-xl font-bold text-gray-900">{boat.remainingDays}</div>
                 <div className="text-xs text-gray-600">Remaining Days</div>
               </div>
-              <div className="text-center p-3 bg-green-50 rounded-lg">
-                <div className="text-xl font-bold text-green-600">{boat.remainingEngineHours}</div>
+              <div className="text-center p-3 bg-gray-50 rounded-lg">
+                <div className="mb-2">
+                  <Gauge className="h-6 w-6 text-blue-600 mx-auto" />
+                </div>
+                <div className="text-xl font-bold text-gray-900">{boat.remainingEngineHours}</div>
                 <div className="text-xs text-gray-600">Engine Hours</div>
               </div>
             </div>
@@ -167,7 +181,7 @@ export default function BoatOwnershipManagementScreen() {
         {/* Share Management Actions */}
         <Card className="border border-gray-100">
           <CardHeader className="pb-3">
-            <CardTitle className="text-lg">Manage Your Shares</CardTitle>
+            <CardTitle className="text-lg">Manage My Shares</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="p-3 bg-gray-50 rounded-lg">
@@ -175,14 +189,11 @@ export default function BoatOwnershipManagementScreen() {
                 <span className="text-sm text-gray-600">Available Shares</span>
                 <span className="font-semibold">{boat.availableShares} of {boat.totalShares}</span>
               </div>
-              <div className="text-sm text-gray-600">
-                Price per share: <span className="font-semibold text-gray-900">${boat.sharePrice}</span>
+              <div className="text-sm text-gray-600 flex justify-between">
+                <span>Price per share:</span>
+                <span className="font-semibold text-gray-900">${boat.sharePrice}</span>
               </div>
             </div>
-
-            <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white mb-3">
-              Book My Next Trip
-            </Button>
 
             <div className="grid grid-cols-2 gap-3">
               <Button 
@@ -206,22 +217,6 @@ export default function BoatOwnershipManagementScreen() {
                 No shares currently available for purchase
               </p>
             )}
-          </CardContent>
-        </Card>
-
-        {/* Amenities */}
-        <Card className="border border-gray-100">
-          <CardHeader className="pb-3">
-            <CardTitle className="text-lg">Boat Features</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-2 gap-2">
-              {boat.amenities.map((amenity, index) => (
-                <div key={index} className="text-sm text-gray-600 bg-gray-50 px-2 py-1 rounded">
-                  {amenity}
-                </div>
-              ))}
-            </div>
           </CardContent>
         </Card>
 
