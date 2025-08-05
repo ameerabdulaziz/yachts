@@ -83,6 +83,7 @@ function Router() {
       <Route path="/boat-ownership/:id" component={BoatOwnershipManagementScreen} />
       <Route path="/booking-calendar/:id" component={BookingCalendarScreen} />
       <Route path="/share-trading" component={ShareTradingScreen} />
+      <Route path="/share-marketplace" component={ShareTradingScreen} />
       <Route component={NotFound} />
     </Switch>
   );

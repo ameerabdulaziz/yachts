@@ -77,7 +77,7 @@ export default function MyBoatsScreen() {
 
         {/* Quick Actions */}
         <div className="grid grid-cols-2 gap-3">
-          <Link href="/share-trading">
+          <Link href="/share-marketplace">
             <Button variant="outline" className="w-full">
               <TrendingUp className="h-4 w-4 mr-2" />
               Trade Shares

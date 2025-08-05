@@ -1,20 +1,26 @@
-import { ArrowLeft, TrendingUp, TrendingDown, Users, Clock, AlertCircle } from "lucide-react";
+import { ArrowLeft, TrendingUp, TrendingDown, Users, Clock, AlertCircle, UserCheck, Calendar, Zap } from "lucide-react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 
-// Mock share trading data based on Yachtak specification
+// Authentic De Antonio Yachts share listings
 const mockShareListings = [
   {
     id: "listing-1",
     boatName: "De Antonio D42 Open",
     boatImage: "https://static.wixstatic.com/media/0fb4c8_008f1545c8764f8789a2b7415ca9dde7~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D42.jpg",
-    shareFraction: "1/7",
-    sharePrice: "71,429",
+    length: "12.64m",
+    passengers: 12,
+    cabins: 2,
+    power: "1200HP",
+    shareFraction: "1/8",
+    sharePrice: "62,500",
     location: "El Gouna, Egypt",
-    usageDaysPerYear: 48,
+    availableShares: 2,
+    usageDaysPerYear: 45,
+    engineHoursPerYear: 50,
     rightOfFirstRefusal: true,
     daysRemaining: 23,
     sellerName: "Owner #4",
@@ -25,15 +31,62 @@ const mockShareListings = [
     id: "listing-2",
     boatName: "De Antonio D32 Open",
     boatImage: "https://static.wixstatic.com/media/0fb4c8_6cbbd012fc0645009bc4a91a412b293a~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D32.jpg",
-    shareFraction: "2/7",
-    sharePrice: "114,286",
+    length: "9.90m",
+    passengers: 10,
+    cabins: 2,
+    power: "600HP",
+    shareFraction: "1/8",
+    sharePrice: "50,000",
     location: "El Gouna, Egypt",
-    usageDaysPerYear: 96,
+    availableShares: 1,
+    usageDaysPerYear: 45,
+    engineHoursPerYear: 50,
     rightOfFirstRefusal: false,
     daysRemaining: 0,
     sellerName: "Co-Owner",
     postedDate: "2025-01-20",
     waitlistCount: 1,
+    publicListing: true
+  },
+  {
+    id: "listing-3",
+    boatName: "De Antonio D60",
+    boatImage: "https://static.wixstatic.com/media/0fb4c8_b8a4fd5d6b40452fa36a2c12fe1c5b7b~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D60.jpg",
+    length: "18.50m",
+    passengers: 12,
+    cabins: 3,
+    power: "2000HP",
+    shareFraction: "1/8",
+    sharePrice: "125,000",
+    location: "El Gouna, Egypt",
+    availableShares: 1,
+    usageDaysPerYear: 45,
+    engineHoursPerYear: 50,
+    rightOfFirstRefusal: true,
+    daysRemaining: 15,
+    sellerName: "Owner #2",
+    postedDate: "2025-01-25",
+    waitlistCount: 5
+  },
+  {
+    id: "listing-4",
+    boatName: "De Antonio D29",
+    boatImage: "https://static.wixstatic.com/media/0fb4c8_2c6d2e89776645a6b4a6b38e8f5b5e5e~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D29.jpg",
+    length: "8.50m",
+    passengers: 8,
+    cabins: 1,
+    power: "400HP",
+    shareFraction: "1/8",
+    sharePrice: "37,500",
+    location: "El Gouna, Egypt",
+    availableShares: 3,
+    usageDaysPerYear: 45,
+    engineHoursPerYear: 50,
+    rightOfFirstRefusal: false,
+    daysRemaining: 0,
+    sellerName: "Multiple Owners",
+    postedDate: "2025-01-10",
+    waitlistCount: 2,
     publicListing: true
   }
 ];
@@ -55,25 +108,6 @@ export default function ShareTradingScreen() {
       </div>
 
       <div className="p-4 space-y-4">
-        {/* Trading Overview */}
-        <Card className="border border-gray-100">
-          <CardHeader className="pb-3">
-            <CardTitle className="text-lg">Share Marketplace</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="text-center p-3 bg-green-50 rounded-lg">
-                <div className="text-xl font-bold text-green-600">2</div>
-                <div className="text-sm text-gray-600">Available Shares</div>
-              </div>
-              <div className="text-center p-3 bg-blue-50 rounded-lg">
-                <div className="text-xl font-bold text-blue-600">4</div>
-                <div className="text-sm text-gray-600">People Waiting</div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
         {/* Right of First Refusal Notice */}
         <Alert className="border-blue-200 bg-blue-50">
           <AlertCircle className="h-4 w-4" />
@@ -93,9 +127,6 @@ export default function ShareTradingScreen() {
                   className="w-full h-32 object-cover"
                 />
                 <div className="absolute top-2 right-2 space-y-1">
-                  <Badge variant="secondary" className="bg-white/90 text-gray-900">
-                    {listing.shareFraction}
-                  </Badge>
                   {listing.rightOfFirstRefusal && (
                     <Badge className="bg-blue-600 text-white block">
                       Co-Owners Only
@@ -113,23 +144,40 @@ export default function ShareTradingScreen() {
                 <div>
                   <h3 className="font-semibold text-gray-900">{listing.boatName}</h3>
                   <p className="text-sm text-gray-600">{listing.location}</p>
+                  <div className="flex items-center gap-4 text-xs text-gray-500 mt-1">
+                    <span>{listing.length}</span>
+                    <span>{listing.passengers} guests</span>
+                    <span>{listing.cabins} cabins</span>
+                    <span>{listing.power}</span>
+                  </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4 text-sm">
-                  <div>
-                    <span className="text-gray-600">Share Price</span>
-                    <div className="font-semibold text-lg">${listing.sharePrice}</div>
+                <div className="grid grid-cols-4 gap-2 text-sm">
+                  <div className="flex flex-col items-center p-2 bg-blue-50 rounded-lg">
+                    <UserCheck className="h-4 w-4 text-blue-600 mb-1" />
+                    <span className="text-xs font-semibold">{listing.shareFraction}</span>
+                    <span className="text-xs text-gray-600">Share</span>
                   </div>
-                  <div>
-                    <span className="text-gray-600">Usage Days</span>
-                    <div className="font-semibold">{listing.usageDaysPerYear}/year</div>
+                  <div className="flex flex-col items-center p-2 bg-green-50 rounded-lg">
+                    <Calendar className="h-4 w-4 text-green-600 mb-1" />
+                    <span className="text-xs font-semibold">{listing.usageDaysPerYear}</span>
+                    <span className="text-xs text-gray-600">Days/Year</span>
+                  </div>
+                  <div className="flex flex-col items-center p-2 bg-orange-50 rounded-lg">
+                    <Zap className="h-4 w-4 text-orange-600 mb-1" />
+                    <span className="text-xs font-semibold">{listing.engineHoursPerYear}</span>
+                    <span className="text-xs text-gray-600">Hours/Year</span>
+                  </div>
+                  <div className="flex flex-col items-center p-2 bg-purple-50 rounded-lg">
+                    <span className="text-xs font-semibold text-purple-600">${listing.sharePrice}</span>
+                    <span className="text-xs text-gray-600">Price</span>
                   </div>
                 </div>
 
                 <div className="bg-gray-50 rounded-lg p-3 space-y-2">
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Seller</span>
-                    <span className="font-medium">{listing.sellerName}</span>
+                    <span className="text-gray-600">Available Shares</span>
+                    <span className="font-medium">{listing.availableShares}</span>
                   </div>
                   <div className="flex justify-between text-sm">
                     <span className="text-gray-600">Posted</span>
