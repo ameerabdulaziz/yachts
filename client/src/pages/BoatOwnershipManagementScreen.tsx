@@ -124,9 +124,11 @@ export default function BoatOwnershipManagementScreen() {
         </div>
 
         {/* Book My Next Trip Button */}
-        <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white mb-4">
-          Book My Next Trip
-        </Button>
+        <Link href={`/booking-calendar/${boat.id}`}>
+          <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white mb-4">
+            View Yacht Calendar
+          </Button>
+        </Link>
 
         {/* Ownership Summary */}
         <Card className="border border-gray-100">

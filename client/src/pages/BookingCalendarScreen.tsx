@@ -55,11 +55,11 @@ export default function BookingCalendarScreen() {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case "available": return "bg-green-100 text-green-800 border-green-200";
-      case "booked": return "bg-blue-100 text-blue-800 border-blue-200";
-      case "maintenance": return "bg-gray-100 text-gray-800 border-gray-200";
-      case "waitlist": return "bg-yellow-100 text-yellow-800 border-yellow-200";
-      default: return "bg-gray-100 text-gray-800 border-gray-200";
+      case "available": return "bg-green-500 text-white border-green-600";
+      case "booked": return "bg-yellow-500 text-white border-yellow-600";
+      case "maintenance": return "bg-gray-400 text-white border-gray-500";
+      case "waitlist": return "bg-orange-500 text-white border-orange-600";
+      default: return "bg-gray-400 text-white border-gray-500";
     }
   };
 
@@ -108,6 +108,33 @@ export default function BookingCalendarScreen() {
                 </AlertDescription>
               </Alert>
             )}
+          </CardContent>
+        </Card>
+
+        {/* Legend */}
+        <Card className="border border-gray-100">
+          <CardHeader className="pb-3">
+            <CardTitle className="text-lg">Calendar Legend</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="flex flex-wrap gap-3 text-sm">
+              <div className="flex items-center gap-2">
+                <div className="w-4 h-4 bg-green-500 rounded"></div>
+                <span>Available</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-4 h-4 bg-yellow-500 rounded"></div>
+                <span>Booked</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-4 h-4 bg-gray-400 rounded"></div>
+                <span>Maintenance</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-4 h-4 bg-orange-500 rounded"></div>
+                <span>Waitlist</span>
+              </div>
+            </div>
           </CardContent>
         </Card>
 
