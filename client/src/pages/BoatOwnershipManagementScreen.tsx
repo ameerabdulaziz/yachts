@@ -99,16 +99,11 @@ export default function BoatOwnershipManagementScreen() {
               alt={boat.name}
               className="w-full h-56 object-cover"
             />
-            <div className="absolute top-3 right-3">
-              <Badge variant="secondary" className="bg-white/90 text-gray-900">
-                {boat.sharesFractionOwned} Owned
-              </Badge>
-            </div>
+
           </div>
           
           <div className="p-4">
             <h2 className="text-xl font-bold text-gray-900 mb-2">{boat.name}</h2>
-            <p className="text-gray-600 text-sm mb-4">{boat.description}</p>
             
             {/* Specs */}
             <div className="flex items-center gap-4 text-sm text-gray-600 mb-4">
@@ -164,10 +159,7 @@ export default function BoatOwnershipManagementScreen() {
                 <span className="text-gray-600">Annual Appreciation</span>
                 <span className="font-semibold text-green-600">{boat.annualAppreciation}</span>
               </div>
-              <div className="flex justify-between">
-                <span className="text-gray-600">Next Available</span>
-                <span className="font-semibold">{boat.nextAvailableDate}</span>
-              </div>
+
             </div>
           </CardContent>
         </Card>
@@ -188,20 +180,23 @@ export default function BoatOwnershipManagementScreen() {
               </div>
             </div>
 
+            <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white mb-3">
+              Book My Next Trip
+            </Button>
+
             <div className="grid grid-cols-2 gap-3">
               <Button 
-                className="bg-green-600 hover:bg-green-700"
+                variant="outline"
+                className="w-full"
                 disabled={boat.availableShares === 0}
               >
-                <TrendingUp className="h-4 w-4 mr-2" />
                 Buy More Shares
               </Button>
               <Button 
                 variant="outline" 
-                className="border-red-200 text-red-600 hover:bg-red-50"
+                className="w-full"
                 disabled={boat.sharesOwned === 0}
               >
-                <TrendingDown className="h-4 w-4 mr-2" />
                 Sell Shares
               </Button>
             </div>
@@ -230,20 +225,7 @@ export default function BoatOwnershipManagementScreen() {
           </CardContent>
         </Card>
 
-        {/* Quick Actions */}
-        <div className="grid grid-cols-2 gap-3 pt-2">
-          <Link href={`/yacht/${boat.id}`}>
-            <Button variant="outline" className="w-full">
-              View Full Details
-            </Button>
-          </Link>
-          <Link href={`/booking-calendar/${boat.id}`}>
-            <Button variant="outline" className="w-full">
-              <Calendar className="h-4 w-4 mr-2" />
-              Book Usage
-            </Button>
-          </Link>
-        </div>
+
       </div>
       
       <BottomNavigation />
