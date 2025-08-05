@@ -30,9 +30,9 @@ export default function SplashScreen() {
       <div className="absolute inset-0 bg-black bg-opacity-20" />
       
       {/* Content */}
-      <div className="relative h-full flex flex-col justify-between p-8">
-        {/* Top Section - Nauttec Logo Only */}
-        <div className="flex-1 flex items-center justify-center">
+      <div className="relative h-full flex flex-col p-8">
+        {/* Top Section - Nauttec Logo positioned after boat tip */}
+        <div className="pt-16 pb-8">
           <div className="text-center">
             <div className="w-40 h-32 mx-auto mb-8">
               <img src={nauttecLogo} alt="Nauttec Logo" className="w-full h-full object-contain drop-shadow-2xl" />
@@ -43,8 +43,11 @@ export default function SplashScreen() {
           </div>
         </div>
         
-        {/* Bottom Section - De Antonio Yachts Logo */}
-        <div className="text-center">
+        {/* Spacer to push De Antonio logo towards boat tail */}
+        <div className="flex-1"></div>
+        
+        {/* Bottom Section - De Antonio Yachts Logo positioned towards boat tail */}
+        <div className="text-center pb-16">
           <div className="mb-4">
             <p className="text-white text-sm mb-3 drop-shadow-lg">Powered by</p>
             <div className="w-56 h-16 mx-auto flex items-center justify-center">
