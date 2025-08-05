@@ -43,6 +43,7 @@ function Router() {
   return (
     <Switch>
       <Route path="/" component={SplashScreen} />
+      <Route path="/splash" component={SplashScreen} />
       <Route path="/login" component={PhoneLoginScreen} />
       <Route path="/verify-otp" component={OTPVerificationScreen} />
       <Route path="/account-setup" component={AccountSetupScreen} />
