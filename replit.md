@@ -1,6 +1,6 @@
 # Overview
 
-Nauttec is a comprehensive luxury yacht booking mobile application that provides users with the ability to browse, book, and own yacht shares. The application features a modern React-based frontend with a Node.js/Express backend, designed with a mobile-first approach and nautical luxury theming. It supports both yacht renters and owners, offering features like yacht booking, fractional ownership opportunities, fuel wallet management, and comprehensive user management.
+Yachtak (operated by Nauttec) is a comprehensive fractional yacht ownership and rental platform that revolutionizes luxury boating access. The platform enables three user types: Visitors (prospective customers), Owners (fractional yacht co-owners), and Administrators (Nauttec team). It offers the complete De Antonio Yachts range (D23-D60) under various fractional ownership structures, with sophisticated booking rules, fuel wallet management, and peer-to-peer share trading capabilities.
 
 # User Preferences
 
@@ -31,14 +31,14 @@ The backend follows a RESTful API design pattern:
 
 ## Database Schema Design
 
-The application uses a PostgreSQL database with the following core entities:
+The application uses a PostgreSQL database with the following core entities based on Yachtak's three-tier user system:
 
-- **Users**: Handles authentication, profile data, roles (renter/owner/both), and fuel wallet balances
-- **Yachts**: Yacht listings with detailed specifications, amenities, pricing, and location data
-- **Bookings**: Reservation management with guest details, pricing, add-ons, and payment methods
-- **Ownership System**: Fractional ownership opportunities, share purchases, and secondary market listings
-- **Communication**: Messages system for guest-owner communication
-- **Financial**: Fuel wallet transactions for virtual currency management
+- **Users**: Three types - Visitors (prospective customers), Owners (fractional co-owners), Administrators (Nauttec team)
+- **Yachts**: Complete De Antonio range (D23-D60) with specifications, availability calendars, and maintenance logs
+- **Fractional Ownership**: Share structures, usage limits (48 days/50 engine hours per share), and co-owner relationships
+- **Booking Rules Engine**: Seasonal multipliers, weighted days, peer interactions, and owner ratings
+- **Share Trading**: Right of first refusal system, waitlists, and peer-to-peer marketplace
+- **Fuel Wallet System**: Prepaid virtual fuel management with usage tracking and top-up notifications
 
 ## Authentication & Authorization
 
@@ -94,6 +94,16 @@ The system implements a phone-based authentication flow:
 - **Environment Configuration**: Environment variables for database connections and API keys
 
 # Recent Changes
+
+## August 2025
+- **August 5, 2025**: Major Yachtak specification implementation:
+  - Updated platform overview to reflect three-tier user system (Visitors, Owners, Administrators)
+  - Implemented sophisticated booking rules engine with 48-day/50-engine-hour limits per share
+  - Added booking calendar with seasonal multipliers and weighted days for high-demand periods
+  - Created share trading marketplace with 30-day right of first refusal system
+  - Enhanced My Boats functionality with fractional ownership management
+  - Added peer-to-peer share trading and day swapping capabilities
+  - Integrated fuel wallet system with usage tracking and low-balance notifications
 
 ## January 2025
 - **January 19, 2025**: Comprehensive De Antonio Yachts data update with authentic specifications:

@@ -40,6 +40,8 @@ import DashboardScreen from "@/pages/DashboardScreen";
 import DevNavigationScreen from "@/pages/DevNavigationScreen";
 import MyBoatsScreen from "@/pages/MyBoatsScreen";
 import BoatOwnershipManagementScreen from "@/pages/BoatOwnershipManagementScreen";
+import BookingCalendarScreen from "@/pages/BookingCalendarScreen";
+import ShareTradingScreen from "@/pages/ShareTradingScreen";
 
 function Router() {
   return (
@@ -79,6 +81,8 @@ function Router() {
       <Route path="/dev-navigation" component={DevNavigationScreen} />
       <Route path="/my-boats" component={MyBoatsScreen} />
       <Route path="/boat-ownership/:id" component={BoatOwnershipManagementScreen} />
+      <Route path="/booking-calendar/:id" component={BookingCalendarScreen} />
+      <Route path="/share-trading" component={ShareTradingScreen} />
       <Route component={NotFound} />
     </Switch>
   );

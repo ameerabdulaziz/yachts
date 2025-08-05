@@ -17,7 +17,7 @@ const mockOwnedBoats = [
     sharesFractionOwned: "2/7",
     sharesPercentage: 28.6,
     shareValue: "114,286",
-    usageDaysPerYear: 92,
+    usageDaysPerYear: 96,
     nextAvailableDate: "March 15, 2025"
   },
   {
@@ -73,6 +73,20 @@ export default function MyBoatsScreen() {
               <div className="text-sm text-gray-600">Days/Year</div>
             </div>
           </div>
+        </div>
+
+        {/* Quick Actions */}
+        <div className="grid grid-cols-2 gap-3">
+          <Link href="/share-trading">
+            <Button variant="outline" className="w-full">
+              <TrendingUp className="h-4 w-4 mr-2" />
+              Trade Shares
+            </Button>
+          </Link>
+          <Button variant="outline" className="w-full">
+            <Users className="h-4 w-4 mr-2" />
+            Swap Days
+          </Button>
         </div>
 
         {/* Owned Boats List */}

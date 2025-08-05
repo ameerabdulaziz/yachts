@@ -24,7 +24,7 @@ const mockBoatOwnership = {
     sharesOwned: 2,
     availableShares: 2,
     sharePrice: "57,143",
-    usageDaysPerYear: 92,
+    usageDaysPerYear: 96,
     nextAvailableDate: "March 15, 2025",
     monthlyMaintenance: "180",
     annualAppreciation: "+8.2%"
@@ -229,10 +229,12 @@ export default function BoatOwnershipManagementScreen() {
               View Full Details
             </Button>
           </Link>
-          <Button variant="outline" className="w-full">
-            <Calendar className="h-4 w-4 mr-2" />
-            Book Usage
-          </Button>
+          <Link href={`/booking-calendar/${boat.id}`}>
+            <Button variant="outline" className="w-full">
+              <Calendar className="h-4 w-4 mr-2" />
+              Book Usage
+            </Button>
+          </Link>
         </div>
       </div>
     </div>
