@@ -420,6 +420,15 @@ export default function BookingCalendarScreen() {
             </AlertDescription>
           </Alert>
         )}
+
+        {!selectedDate && canBook && (
+          <Alert className="border-blue-200 bg-blue-50">
+            <Calendar className="h-4 w-4" />
+            <AlertDescription>
+              Select an available date (green) to book your yacht session.
+            </AlertDescription>
+          </Alert>
+        )}
       </div>
       
       <BottomNavigation />
