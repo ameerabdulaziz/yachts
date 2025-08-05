@@ -1,4 +1,4 @@
-import { ArrowLeft, Calendar, Clock, Users, Fuel, AlertCircle } from "lucide-react";
+import { ArrowLeft, Calendar, Clock, Users, Fuel, AlertCircle, ChevronLeft, ChevronRight } from "lucide-react";
 import { Link, useRoute } from "wouter";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -16,17 +16,15 @@ const mockBookingCalendar = {
     remainingEngineHours: 38,
     fuelBalance: 45, // liters
     fuelThreshold: 20,
-    calendar: [
-      { date: "2025-03-15", status: "available", multiplier: 1 },
-      { date: "2025-03-16", status: "booked", bookedBy: "Owner #3", multiplier: 1 },
-      { date: "2025-03-17", status: "available", multiplier: 1 },
-      { date: "2025-03-18", status: "maintenance", multiplier: 0 },
-      { date: "2025-03-19", status: "available", multiplier: 1 },
-      { date: "2025-03-20", status: "available", multiplier: 2, holiday: "Spring Holiday" },
-      { date: "2025-03-21", status: "waitlist", waitlistCount: 2, multiplier: 2 },
-      { date: "2025-03-22", status: "available", multiplier: 1 },
-      { date: "2025-03-23", status: "booked", bookedBy: "You", multiplier: 1 },
-    ]
+    // Generate calendar data for March 2025
+    getDateStatus: (date: string) => {
+      const dayOfMonth = new Date(date).getDate();
+      // Mock different statuses for different days
+      if ([3, 10, 17, 24, 31].includes(dayOfMonth)) return { status: "maintenance" };
+      if ([5, 12, 16, 19, 26].includes(dayOfMonth)) return { status: "booked", bookedBy: dayOfMonth === 19 ? "You" : "Owner #3" };
+      if ([21, 22].includes(dayOfMonth)) return { status: "waitlist", waitlistCount: 2 };
+      return { status: "available" };
+    }
   }
 };
 
@@ -35,8 +33,41 @@ export default function BookingCalendarScreen() {
   const boatId = params?.id;
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [selectedSlot, setSelectedSlot] = useState<"morning" | "afternoon" | "full">("full");
+  const [currentDate, setCurrentDate] = useState(new Date(2025, 2, 1)); // March 2025
 
   const bookingData = boatId ? mockBookingCalendar[boatId as keyof typeof mockBookingCalendar] : null;
+
+  // Generate calendar days for the current month
+  const generateCalendarDays = () => {
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth();
+    const firstDay = new Date(year, month, 1);
+    const lastDay = new Date(year, month + 1, 0);
+    const startDate = new Date(firstDay);
+    startDate.setDate(startDate.getDate() - firstDay.getDay()); // Start from Sunday
+    
+    const days = [];
+    const current = new Date(startDate);
+    
+    // Generate 42 days (6 weeks x 7 days) to fill the calendar grid
+    for (let i = 0; i < 42; i++) {
+      const dateStr = current.toISOString().split('T')[0];
+      const isCurrentMonth = current.getMonth() === month;
+      const dayInfo = isCurrentMonth && bookingData ? bookingData.getDateStatus(dateStr) : { status: "unavailable" };
+      
+      days.push({
+        date: new Date(current),
+        dateStr,
+        isCurrentMonth,
+        day: current.getDate(),
+        ...dayInfo
+      });
+      
+      current.setDate(current.getDate() + 1);
+    }
+    
+    return days;
+  };
 
   if (!bookingData) {
     return (
@@ -51,17 +82,32 @@ export default function BookingCalendarScreen() {
     );
   }
 
+  const calendarDays = generateCalendarDays();
+
   const canBook = bookingData.remainingDays > 0 && bookingData.remainingEngineHours > 0 && bookingData.fuelBalance > bookingData.fuelThreshold;
 
-  const getStatusColor = (status: string) => {
+  const getStatusColor = (status: string, isCurrentMonth: boolean) => {
+    if (!isCurrentMonth) return "bg-gray-100 text-gray-400";
+    
     switch (status) {
-      case "available": return "bg-green-500 text-white border-green-600";
-      case "booked": return "bg-yellow-500 text-white border-yellow-600";
-      case "maintenance": return "bg-gray-400 text-white border-gray-500";
-      case "waitlist": return "bg-orange-500 text-white border-orange-600";
-      default: return "bg-gray-400 text-white border-gray-500";
+      case "available": return "bg-green-500 text-white hover:bg-green-600 cursor-pointer";
+      case "booked": return "bg-yellow-500 text-white";
+      case "maintenance": return "bg-gray-400 text-white";
+      case "waitlist": return "bg-orange-500 text-white";
+      default: return "bg-gray-200 text-gray-600";
     }
   };
+
+  const handleDateClick = (day: any) => {
+    if (day.isCurrentMonth && day.status === "available" && canBook) {
+      setSelectedDate(day.dateStr);
+    }
+  };
+
+  const monthNames = ["January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"];
+  
+  const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
@@ -141,62 +187,68 @@ export default function BookingCalendarScreen() {
         {/* Calendar */}
         <Card className="border border-gray-100">
           <CardHeader className="pb-3">
-            <CardTitle className="text-lg flex items-center gap-2">
-              <Calendar className="h-5 w-5" />
-              March 2025
-            </CardTitle>
+            <div className="flex items-center justify-between">
+              <CardTitle className="text-lg flex items-center gap-2">
+                <Calendar className="h-5 w-5" />
+                {monthNames[currentDate.getMonth()]} {currentDate.getFullYear()}
+              </CardTitle>
+              <div className="flex gap-1">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1))}
+                >
+                  <ChevronLeft className="h-4 w-4" />
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1))}
+                >
+                  <ChevronRight className="h-4 w-4" />
+                </Button>
+              </div>
+            </div>
           </CardHeader>
-          <CardContent className="space-y-3">
-            {bookingData.calendar.map((day) => (
-              <div
-                key={day.date}
-                className={`p-3 rounded-lg border transition-colors ${
-                  selectedDate === day.date ? "ring-2 ring-blue-500" : ""
-                } ${getStatusColor(day.status)} ${
-                  day.status === "available" && canBook ? "cursor-pointer hover:opacity-80" : ""
-                }`}
-                onClick={() => {
-                  if (day.status === "available" && canBook) {
-                    setSelectedDate(day.date);
-                  }
-                }}
-              >
-                <div className="flex justify-between items-center">
-                  <div>
-                    <div className="font-medium">
-                      {new Date(day.date).toLocaleDateString("en-US", { 
-                        weekday: "short", 
-                        month: "short", 
-                        day: "numeric" 
-                      })}
-                    </div>
-                    {day.holiday && (
-                      <div className="text-xs text-red-600 font-medium">{day.holiday}</div>
-                    )}
-                    {day.bookedBy && (
-                      <div className="text-xs opacity-70">Booked by {day.bookedBy}</div>
-                    )}
-                    {day.waitlistCount && (
-                      <div className="text-xs opacity-70">Waitlist: {day.waitlistCount} people</div>
-                    )}
-                  </div>
-                  
-                  <div className="text-right">
-                    <Badge variant="secondary" className="text-xs">
-                      {day.status === "maintenance" ? "Maintenance" : 
-                       day.status === "booked" ? "Booked" :
-                       day.status === "waitlist" ? "Join Waitlist" : 
-                       "Available"}
-                    </Badge>
-                    {day.multiplier > 1 && (
-                      <div className="text-xs text-red-600 font-medium mt-1">
-                        {day.multiplier}x Engine Hours
-                      </div>
-                    )}
-                  </div>
+          <CardContent>
+            {/* Calendar Grid */}
+            <div className="grid grid-cols-7 gap-1 mb-2">
+              {dayNames.map((dayName) => (
+                <div key={dayName} className="text-center text-xs font-medium text-gray-500 p-2">
+                  {dayName}
+                </div>
+              ))}
+            </div>
+            
+            <div className="grid grid-cols-7 gap-1">
+              {calendarDays.map((day, index) => (
+                <div
+                  key={index}
+                  className={`
+                    aspect-square flex items-center justify-center text-sm font-medium rounded-lg transition-colors
+                    ${getStatusColor(day.status, day.isCurrentMonth)}
+                    ${selectedDate === day.dateStr ? "ring-2 ring-blue-500" : ""}
+                  `}
+                  onClick={() => handleDateClick(day)}
+                >
+                  {day.day}
+                </div>
+              ))}
+            </div>
+            
+            {/* Status info for selected date */}
+            {selectedDate && (
+              <div className="mt-4 p-3 bg-blue-50 rounded-lg border border-blue-200">
+                <div className="text-sm">
+                  <strong>Selected:</strong> {new Date(selectedDate).toLocaleDateString("en-US", { 
+                    weekday: "long", 
+                    month: "long", 
+                    day: "numeric",
+                    year: "numeric"
+                  })}
                 </div>
               </div>
-            ))}
+            )}
           </CardContent>
         </Card>
 
