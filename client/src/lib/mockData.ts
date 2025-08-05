@@ -9,7 +9,7 @@ export const mockYachts: (Yacht & { owner: { name: string; avatar: string; verif
     pricePerDay: "3200",
     capacity: 12,
     cabins: 2,
-    length: "15.24",
+    length: "50",
     yearBuilt: 2024,
     images: [
       "https://static.wixstatic.com/media/0fb4c8_60988eb5cf834fcb876c1d06bd8af594~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D50.jpg",
@@ -37,7 +37,7 @@ export const mockYachts: (Yacht & { owner: { name: string; avatar: string; verif
     pricePerDay: "2800",
     capacity: 12,
     cabins: 2,
-    length: "12.80",
+    length: "42",
     yearBuilt: 2024,
     images: [
       "https://static.wixstatic.com/media/0fb4c8_008f1545c8764f8789a2b7415ca9dde7~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D42.jpg",
@@ -65,7 +65,7 @@ export const mockYachts: (Yacht & { owner: { name: string; avatar: string; verif
     pricePerDay: "2200",
     capacity: 12,
     cabins: 1,
-    length: "11.50",
+    length: "36",
     yearBuilt: 2024,
     images: [
       "https://static.wixstatic.com/media/0fb4c8_fbbb6a2569c747d48881f7ac065b947a~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D36.jpg",
@@ -93,7 +93,7 @@ export const mockYachts: (Yacht & { owner: { name: string; avatar: string; verif
     pricePerDay: "1800",
     capacity: 10,
     cabins: 2,
-    length: "9.90",
+    length: "32",
     yearBuilt: 2025,
     images: [
       "https://static.wixstatic.com/media/0fb4c8_6cbbd012fc0645009bc4a91a412b293a~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D32.jpg",
@@ -121,7 +121,7 @@ export const mockYachts: (Yacht & { owner: { name: string; avatar: string; verif
     pricePerDay: "1600",
     capacity: 8,
     cabins: 1,
-    length: "8.50",
+    length: "29",
     yearBuilt: 2024,
     images: [
       "https://static.wixstatic.com/media/0fb4c8_b9744cfa841b4c4388ad78ac9b49bbe7~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D29.jpg",
@@ -149,7 +149,7 @@ export const mockYachts: (Yacht & { owner: { name: string; avatar: string; verif
     pricePerDay: "4200",
     capacity: 12,
     cabins: 3,
-    length: "18.50",
+    length: "60",
     yearBuilt: 2025,
     images: [
       "https://static.wixstatic.com/media/5c3629_a8b1aa6ff9244bddaf7383aa45b4afc1~mv2.jpg/v1/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/5c3629_a8b1aa6ff9244bddaf7383aa45b4afc1~mv2.jpg",
@@ -177,7 +177,7 @@ export const mockYachts: (Yacht & { owner: { name: string; avatar: string; verif
     pricePerDay: "3600",
     capacity: 12,
     cabins: 2,
-    length: "14.90",
+    length: "50",
     yearBuilt: 2024,
     images: [
       "https://static.wixstatic.com/media/0fb4c8_60988eb5cf834fcb876c1d06bd8af594~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D50.jpg",
@@ -205,7 +205,7 @@ export const mockYachts: (Yacht & { owner: { name: string; avatar: string; verif
     pricePerDay: "2400",
     capacity: 8,
     cabins: 1,
-    length: "7.20",
+    length: "23",
     yearBuilt: 2024,
     images: [
       "https://static.wixstatic.com/media/0fb4c8_5c8b9b7d8c4a4a8fa8c2a5f5e8c6b2a3~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_E23.jpg",
