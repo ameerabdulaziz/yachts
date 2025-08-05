@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import BottomNavigation from "@/components/BottomNavigation";
-import { ArrowLeft, Edit3, Star, Ship, TrendingUp, MessageCircle, Settings, LogOut, Camera } from "lucide-react";
+import { ArrowLeft, Edit3, Star, Ship, PieChart, MessageCircle, Settings, LogOut, Camera, Crown } from "lucide-react";
 
 export default function UserProfileScreen() {
   const user = {
@@ -20,13 +20,13 @@ export default function UserProfileScreen() {
   const menuItems = [
     { icon: Edit3, label: "Edit Profile", href: "/edit-profile" },
     { icon: Ship, label: "My Bookings", href: "/my-bookings" },
-    { icon: TrendingUp, label: "My Investments", href: "/my-investments" },
+    { icon: PieChart, label: "My Investments", href: "/my-investments" },
     { icon: MessageCircle, label: "Messages", href: "/messages" },
     { icon: Settings, label: "Settings", href: "/settings" },
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 pb-24">
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white pb-24">
       {/* Header */}
       <header className="bg-white border-b border-gray-200 px-4 py-3 sticky top-0 z-40">
         <div className="flex items-center justify-between">
@@ -75,19 +75,26 @@ export default function UserProfileScreen() {
 
       {/* Stats Cards */}
       <section className="px-4 py-6">
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-3 gap-3">
           <Card>
-            <CardContent className="p-4 text-center">
-              <Ship className="w-8 h-8 text-primary mx-auto mb-2" />
-              <p className="text-2xl font-bold text-gray-900">{user.totalBookings}</p>
-              <p className="text-sm text-gray-600">Yacht Trips</p>
+            <CardContent className="p-3 text-center">
+              <Ship className="w-6 h-6 text-blue-600 mx-auto mb-2" />
+              <p className="text-xl font-bold text-gray-900">{user.totalBookings}</p>
+              <p className="text-xs text-gray-600">Yacht Trips</p>
             </CardContent>
           </Card>
           <Card>
-            <CardContent className="p-4 text-center">
-              <TrendingUp className="w-8 h-8 text-green-600 mx-auto mb-2" />
-              <p className="text-2xl font-bold text-gray-900">{user.totalShares}</p>
-              <p className="text-sm text-gray-600">Yacht Shares</p>
+            <CardContent className="p-3 text-center">
+              <PieChart className="w-6 h-6 text-blue-600 mx-auto mb-2" />
+              <p className="text-xl font-bold text-gray-900">{user.totalShares}</p>
+              <p className="text-xs text-gray-600">Yacht Shares</p>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardContent className="p-3 text-center">
+              <Crown className="w-6 h-6 text-blue-600 mx-auto mb-2" />
+              <p className="text-xl font-bold text-gray-900">Owner</p>
+              <p className="text-xs text-gray-600">Yacht Owner</p>
             </CardContent>
           </Card>
         </div>
