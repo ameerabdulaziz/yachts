@@ -22,15 +22,15 @@ export default function OwnershipHomeScreen() {
   const [selectedModel, setSelectedModel] = useState("D42");
 
   const yachtModels = [
-    { id: "D60", name: "D60", length: "18.50m", passengers: 12, price: "€2.1M", sharesFrom: "€175K" },
-    { id: "D42", name: "D42", length: "12.64m", passengers: 12, price: "€890K", sharesFrom: "€89K" },
-    { id: "D36", name: "D36", length: "11.50m", passengers: 12, price: "€650K", sharesFrom: "€65K" },
-    { id: "D32", name: "D32", length: "9.90m", passengers: 10, price: "€480K", sharesFrom: "€48K" },
-    { id: "D29", name: "D29", length: "8.50m", passengers: 8, price: "€350K", sharesFrom: "€35K" },
-    { id: "E23", name: "E23", length: "7.20m", passengers: 8, price: "€280K", sharesFrom: "€28K" }
+    { id: "E23", name: "E23", length: "7.20m", passengers: 8, price: "€280K", sharesFrom: "€28K", image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80" },
+    { id: "D29", name: "D29", length: "8.50m", passengers: 8, price: "€350K", sharesFrom: "€35K", image: "https://images.unsplash.com/photo-1566024287286-457247b70310?auto=format&fit=crop&w=800&q=80" },
+    { id: "D32", name: "D32", length: "9.90m", passengers: 10, price: "€480K", sharesFrom: "€48K", image: "https://images.unsplash.com/photo-1570479398395-87749b0aeca2?auto=format&fit=crop&w=800&q=80" },
+    { id: "D36", name: "D36", length: "11.50m", passengers: 12, price: "€650K", sharesFrom: "€65K", image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&q=80" },
+    { id: "D42", name: "D42", length: "12.64m", passengers: 12, price: "€890K", sharesFrom: "€89K", image: "https://images.unsplash.com/photo-1593351415075-3bac8c2b7e3b?auto=format&fit=crop&w=800&q=80" },
+    { id: "D60", name: "D60", length: "18.50m", passengers: 12, price: "€2.1M", sharesFrom: "€175K", image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?auto=format&fit=crop&w=800&q=80" }
   ];
 
-  const selectedYacht = yachtModels.find(y => y.id === selectedModel) || yachtModels[1];
+  const selectedYacht = yachtModels.find(y => y.id === selectedModel) || yachtModels[4];
 
   const ownershipBenefits = [
     { icon: Crown, title: "Premium Ownership", desc: "Fractional ownership with full yacht privileges" },
@@ -81,14 +81,22 @@ export default function OwnershipHomeScreen() {
         
         <div className="relative z-10">
           <div className="text-center mb-6">
-            <div className="flex items-center justify-center space-x-2 mb-3">
-              <Crown className="w-8 h-8 text-yellow-300" />
+            <div className="text-center mb-3">
               <h1 className="text-3xl font-bold">Own Your Dream Yacht</h1>
             </div>
             <p className="text-blue-100 text-lg">Fractional ownership starting from €28K</p>
           </div>
           
           <div className="bg-white rounded-2xl p-6 shadow-xl">
+            {/* Yacht Image */}
+            <div className="mb-4">
+              <img 
+                src={selectedYacht.image} 
+                alt={`De Antonio ${selectedYacht.name}`}
+                className="w-full h-48 object-cover rounded-xl"
+              />
+            </div>
+            
             <div className="text-center mb-4">
               <h3 className="text-xl font-bold text-gray-900 mb-2">De Antonio {selectedYacht.name}</h3>
               <div className="flex items-center justify-center space-x-4 text-sm text-gray-600 mb-4">
@@ -132,7 +140,7 @@ export default function OwnershipHomeScreen() {
             <div className="grid grid-cols-2 gap-3">
               <Link href={`/ownership/${selectedYacht.id}`}>
                 <Button className="w-full bg-blue-600 text-white p-4 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 hover:bg-blue-700">
-                  <Crown className="w-4 h-4 mr-2" />
+                  <Anchor className="w-4 h-4 mr-2" />
                   Own This Yacht
                 </Button>
               </Link>
