@@ -6,6 +6,7 @@ import BottomNavigation from "@/components/BottomNavigation";
 import { ArrowLeft, Calendar, Users, MapPin, Clock, Filter, Search } from "lucide-react";
 import { mockBookings } from "@/lib/mockData";
 import seaBackground from "@assets/image_1754575606863.png";
+import deAntonioD50 from "@assets/de antonio D50 (1)_1754331061302.jpg";
 
 const statusColors = {
   confirmed: "bg-green-100 text-green-800",
@@ -35,7 +36,7 @@ export default function MyBookingsScreen() {
         name: "De Antonio D42",
         location: "El Gouna, Egypt",
         pricePerDay: "2100.00",
-        images: ["https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"]
+        images: [deAntonioD50]
       }
     },
     {
@@ -56,7 +57,7 @@ export default function MyBookingsScreen() {
         name: "De Antonio D36",
         location: "El Gouna, Egypt", 
         pricePerDay: "1400.00",
-        images: ["https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"]
+        images: [deAntonioD50]
       }
     },
     {
@@ -77,7 +78,7 @@ export default function MyBookingsScreen() {
         name: "De Antonio D60",
         location: "El Gouna, Egypt",
         pricePerDay: "2800.00",
-        images: ["https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"]
+        images: [deAntonioD50]
       }
     }
   ];
@@ -157,7 +158,7 @@ export default function MyBookingsScreen() {
                   <Card className="overflow-hidden cursor-pointer hover:shadow-lg transition-shadow border border-gray-100">
                     <div className="relative">
                       <img
-                        src={booking.yacht.images?.[0] || "https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"}
+                        src={booking.yacht.images?.[0] || deAntonioD50}
                         alt={booking.yacht.name}
                         className="w-full h-48 object-cover"
                       />
@@ -204,13 +205,13 @@ export default function MyBookingsScreen() {
                               {Math.ceil((booking.endDate.getTime() - booking.startDate.getTime()) / (1000 * 60 * 60 * 24))} days
                             </span>
                           </div>
-                          {(booking.addOns.captain || booking.addOns.catering) && (
+                          {(booking.addOns?.captain || booking.addOns?.catering) && (
                             <div className="flex justify-between items-center">
                               <span className="text-sm font-medium text-gray-700">Add-ons</span>
                               <span className="text-sm font-semibold text-gray-900">
                                 {[
-                                  booking.addOns.captain && "Captain",
-                                  booking.addOns.catering && "Catering"
+                                  booking.addOns?.captain && "Captain",
+                                  booking.addOns?.catering && "Catering"
                                 ].filter(Boolean).join(", ")}
                               </span>
                             </div>
@@ -243,7 +244,7 @@ export default function MyBookingsScreen() {
                     <CardContent className="p-0">
                       <div className="flex">
                         <img 
-                          src={booking.yacht.images?.[0] || "https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"} 
+                          src={booking.yacht.images?.[0] || deAntonioD50} 
                           alt={booking.yacht.name}
                           className="w-24 h-24 object-cover rounded-l-2xl"
                         />
