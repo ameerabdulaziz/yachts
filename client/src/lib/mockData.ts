@@ -1,6 +1,7 @@
 import { Yacht, OwnershipOpportunity, Booking, FuelTransaction, Message } from "@shared/schema";
 import deAntonioD50 from "@assets/image_1754579474724.png";
 import deAntonioD50Aerial from "@assets/de antonio D50 (1)_1754331061302.jpg";
+import deAntonioD36 from "@assets/image_1754582579453.png";
 
 export const mockYachts: (Yacht & { owner: { name: string; avatar: string; verified: boolean; rating: number } })[] = [
   {
@@ -70,7 +71,7 @@ export const mockYachts: (Yacht & { owner: { name: string; avatar: string; verif
     length: "36",
     yearBuilt: 2026,
     images: [
-      "https://static.wixstatic.com/media/0fb4c8_fbbb6a2569c747d48881f7ac065b947a~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D36.jpg",
+      deAntonioD36,
       "https://static.wixstatic.com/media/0fb4c8_8b966046562f427b8b62d4479b53d852f000.jpg/v1/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0fb4c8_8b966046562f427b8b62d4479b53d852f000.jpg"
     ],
     amenities: ["350HP V10 VERADO Engine", "Hydraulic Steering", "Outdoor Galley", "Walkaround Deck", "Large Central Table", "Pilot Area Seating", "VHF Radio", "Bilge Pumps"],
@@ -267,7 +268,7 @@ export const mockOwnershipOpportunities: (OwnershipOpportunity & { yacht: Yacht 
       cabins: 1,
       length: "36",
       yearBuilt: 2026,
-      images: ["https://static.wixstatic.com/media/0fb4c8_fbbb6a2569c747d48881f7ac065b947a~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D36.jpg"],
+      images: [deAntonioD36],
       amenities: ["350HP V10 VERADO Engine", "Hydraulic Steering", "Outdoor Galley", "Walkaround Deck", "Large Central Table", "Pilot Area Seating", "VHF Radio", "Bilge Pumps"],
       ownerId: "owner-3",
       isActive: true,
