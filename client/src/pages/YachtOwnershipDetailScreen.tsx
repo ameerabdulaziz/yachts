@@ -3,7 +3,7 @@ import { Link, useParams } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, Share, Heart, TrendingUp, Calendar, MapPin, Users, Bed, Star, Euro, PieChart, Clock, Shield, CreditCard, Cog } from "lucide-react";
+import { ArrowLeft, Share, Heart, TrendingUp, Calendar, MapPin, Users, Bed, Star, Euro, PieChart, Clock, Shield, CreditCard, Cog, Fuel } from "lucide-react";
 import { mockOwnershipOpportunities } from "@/lib/mockData";
 
 export default function YachtOwnershipDetailScreen() {
@@ -224,6 +224,53 @@ export default function YachtOwnershipDetailScreen() {
                   </div>
                 </div>
               )}
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Recent Transactions */}
+        <Card>
+          <CardContent className="p-4">
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">Recent Transactions</h3>
+            <div className="space-y-3">
+              <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                <div className="flex items-center space-x-3">
+                  <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                    <Fuel className="w-5 h-5 text-blue-600" />
+                  </div>
+                  <div>
+                    <p className="font-medium text-gray-900">22/07/2024</p>
+                    <p className="text-sm text-gray-600">Trip to Ibiza</p>
+                  </div>
+                </div>
+                <span className="text-lg font-bold text-gray-900">€128</span>
+              </div>
+              
+              <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                <div className="flex items-center space-x-3">
+                  <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                    <Fuel className="w-5 h-5 text-blue-600" />
+                  </div>
+                  <div>
+                    <p className="font-medium text-gray-900">10/06/2024</p>
+                    <p className="text-sm text-gray-600">Trip to Saint-Tropez</p>
+                  </div>
+                </div>
+                <span className="text-lg font-bold text-gray-900">€285</span>
+              </div>
+              
+              <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                <div className="flex items-center space-x-3">
+                  <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                    <Fuel className="w-5 h-5 text-blue-600" />
+                  </div>
+                  <div>
+                    <p className="font-medium text-gray-900">10/06/2024</p>
+                    <p className="text-sm text-gray-600">Trip to Mallorca</p>
+                  </div>
+                </div>
+                <span className="text-lg font-bold text-gray-900">€644</span>
+              </div>
             </div>
           </CardContent>
         </Card>
