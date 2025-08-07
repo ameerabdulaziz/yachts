@@ -53,6 +53,7 @@ export default function OwnershipHomeScreen() {
             <div className="w-16 h-8 bg-white rounded-lg flex items-center justify-center p-1">
               <img src={nauttecLogo} alt="Nauttec Logo" className="w-full h-full object-contain" />
             </div>
+            <span className="text-xs text-gray-500 hidden">Ownership Home</span>
           </div>
           <div className="flex items-center space-x-3">
             <Link href="/dev-navigation">
