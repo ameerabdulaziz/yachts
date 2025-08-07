@@ -110,19 +110,15 @@ export default function TopUpScreen() {
           <div className="absolute inset-0 bg-gradient-to-br from-cyan-300/30 to-blue-500/40" />
         </div>
         <div className="relative z-10">
-        <div className="text-center">
-          <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
-            <Fuel className="w-8 h-8 text-white" />
-          </div>
-          <h2 className="text-lg font-medium text-blue-100 mb-2">Current Balance</h2>
-          <p className="text-3xl font-bold text-white">€{currentBalance.toLocaleString()}</p>
-          {amount && (
-            <div className="mt-4 pt-4 border-t border-white/20">
-              <p className="text-blue-100 text-sm">New balance after top-up</p>
-              <p className="text-2xl font-bold text-white">€{newBalance.toLocaleString()}</p>
+          <div className="bg-white rounded-2xl p-4 shadow-xl">
+            <div className="text-center">
+              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Fuel className="w-8 h-8 text-blue-600" />
+              </div>
+              <h2 className="text-lg font-medium text-gray-600 mb-2">Current Balance</h2>
+              <p className="text-3xl font-bold text-gray-900">€{currentBalance.toLocaleString()}</p>
             </div>
-          )}
-        </div>
+          </div>
         </div>
       </section>
 
@@ -240,57 +236,15 @@ export default function TopUpScreen() {
           </Card>
         )}
 
-        {/* Benefits */}
-        <Card>
-          <CardContent className="p-4 bg-green-50">
-            <h3 className="text-lg font-semibold text-green-900 mb-3">
-              <CheckCircle className="w-5 h-5 inline mr-2" />
-              Fuel Wallet Benefits
-            </h3>
-            <ul className="space-y-2 text-sm text-green-800">
-              <li className="flex items-center space-x-2">
-                <CheckCircle className="w-4 h-4 text-green-600" />
-                <span>Instant booking confirmations</span>
-              </li>
-              <li className="flex items-center space-x-2">
-                <CheckCircle className="w-4 h-4 text-green-600" />
-                <span>No transaction fees on bookings</span>
-              </li>
-              <li className="flex items-center space-x-2">
-                <CheckCircle className="w-4 h-4 text-green-600" />
-                <span>Priority customer support</span>
-              </li>
-              <li className="flex items-center space-x-2">
-                <CheckCircle className="w-4 h-4 text-green-600" />
-                <span>Automatic refunds for cancellations</span>
-              </li>
-            </ul>
-          </CardContent>
-        </Card>
 
-        {/* Important Notes */}
-        <Card>
-          <CardContent className="p-4 bg-amber-50">
-            <div className="flex items-start space-x-2">
-              <AlertCircle className="w-5 h-5 text-amber-600 mt-0.5" />
-              <div>
-                <h4 className="font-semibold text-amber-900 mb-2">Important Information</h4>
-                <ul className="text-sm text-amber-800 space-y-1">
-                  <li>• Funds are processed instantly with credit card</li>
-                  <li>• Fuel wallet balance never expires</li>
-                  <li>• Unused funds can be withdrawn anytime</li>
-                  <li>• All transactions are secured and encrypted</li>
-                </ul>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+
+
 
         {/* Top Up Button */}
         <Button 
           onClick={handleTopUp}
           disabled={!amount || topUpMutation.isPending}
-          className="w-full bg-gradient-ocean text-white py-4 rounded-xl font-semibold text-lg hover:shadow-lg transition-all duration-300"
+          className="w-full bg-blue-600 text-white p-4 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 hover:bg-blue-700"
         >
           {topUpMutation.isPending ? (
             "Processing..."
