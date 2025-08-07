@@ -21,7 +21,7 @@ export default function BottomNavigation() {
     <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-2 z-40">
       <div className="flex items-center justify-between px-2">
         {tabs.map(({ icon: Icon, label, route }) => {
-          const isActive = location === route || (route === "/" && location === "");
+          const isActive = location === route || (route === "/" && (location === "" || location === "/hone"));
           return (
             <Link key={route} href={route}>
               <button

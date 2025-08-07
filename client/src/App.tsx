@@ -46,6 +46,7 @@ import MyBoatsScreen from "@/pages/MyBoatsScreen";
 import BoatOwnershipManagementScreen from "@/pages/BoatOwnershipManagementScreen";
 import BookingCalendarScreen from "@/pages/BookingCalendarScreen";
 import ShareTradingScreen from "@/pages/ShareTradingScreen";
+import RedirectToOwnership from "@/components/RedirectToOwnership";
 
 function Router() {
   // Force scroll to top on any route change
@@ -77,6 +78,7 @@ function Router() {
       <ScrollHandler />
       <Switch>
         <Route path="/" component={OwnershipHomeScreen} />
+        <Route path="/hone" component={RedirectToOwnership} />
         <Route path="/splash" component={SplashScreen} />
         <Route path="/login" component={PhoneLoginScreen} />
         <Route path="/verify-otp" component={OTPVerificationScreen} />
