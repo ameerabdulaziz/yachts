@@ -23,19 +23,61 @@ export default function MyBookingsScreen() {
       userId: "user-1",
       startDate: new Date("2025-11-20"),
       endDate: new Date("2025-11-22"),
-      guestCount: 4,
-      totalPrice: "3600.00",
-      status: "pending" as const,
-      addOns: { captain: false, catering: true },
+      guestCount: 8,
+      totalPrice: "4200.00",
+      status: "confirmed" as const,
+      addOns: { captain: true, catering: true },
       paymentMethod: "fuel-wallet",
       createdAt: new Date(),
       updatedAt: new Date(),
       yacht: {
         id: "yacht-2",
-        name: "Ocean's Dream",
-        location: "Ibiza, Spain",
-        pricePerDay: "1800.00",
-        images: ["https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400"]
+        name: "De Antonio D42",
+        location: "El Gouna, Egypt",
+        pricePerDay: "2100.00",
+        images: ["https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"]
+      }
+    },
+    {
+      id: "booking-3",
+      yachtId: "yacht-3", 
+      userId: "user-1",
+      startDate: new Date("2025-12-15"),
+      endDate: new Date("2025-12-17"),
+      guestCount: 6,
+      totalPrice: "2800.00",
+      status: "confirmed" as const,
+      addOns: { captain: false, catering: false },
+      paymentMethod: "credit-card",
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      yacht: {
+        id: "yacht-3",
+        name: "De Antonio D36",
+        location: "El Gouna, Egypt", 
+        pricePerDay: "1400.00",
+        images: ["https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"]
+      }
+    },
+    {
+      id: "booking-4",
+      yachtId: "yacht-4",
+      userId: "user-1", 
+      startDate: new Date("2026-01-10"),
+      endDate: new Date("2026-01-12"),
+      guestCount: 10,
+      totalPrice: "5600.00",
+      status: "pending" as const,
+      addOns: { captain: true, catering: true },
+      paymentMethod: "fuel-wallet",
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      yacht: {
+        id: "yacht-4",
+        name: "De Antonio D60",
+        location: "El Gouna, Egypt",
+        pricePerDay: "2800.00",
+        images: ["https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"]
       }
     }
   ];
@@ -112,42 +154,73 @@ export default function MyBookingsScreen() {
             <div className="space-y-4">
               {upcomingBookings.map((booking) => (
                 <Link key={booking.id} href={`/reservation-detail/${booking.id}`}>
-                  <Card className="card-hover cursor-pointer">
-                    <CardContent className="p-0">
-                      <div className="flex">
-                        <img 
-                          src={booking.yacht.images[0]} 
-                          alt={booking.yacht.name}
-                          className="w-24 h-24 object-cover rounded-l-2xl"
-                        />
-                        <div className="flex-1 p-4">
-                          <div className="flex items-start justify-between mb-2">
-                            <div>
-                              <h3 className="font-bold text-gray-900">{booking.yacht.name}</h3>
-                              <p className="text-sm text-gray-600">{booking.yacht.location}</p>
-                            </div>
-                            <Badge className={statusColors[booking.status]}>
-                              {booking.status}
-                            </Badge>
+                  <Card className="overflow-hidden cursor-pointer hover:shadow-lg transition-shadow border border-gray-100">
+                    <div className="relative">
+                      <img
+                        src={booking.yacht.images?.[0] || "https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"}
+                        alt={booking.yacht.name}
+                        className="w-full h-48 object-cover"
+                      />
+                      <div className="absolute top-3 right-3">
+                        <Badge className={statusColors[booking.status]}>
+                          {booking.status}
+                        </Badge>
+                      </div>
+                    </div>
+                    
+                    <CardContent className="p-4">
+                      <div className="space-y-3">
+                        {/* Yacht Info */}
+                        <div>
+                          <h3 className="text-lg font-semibold text-gray-900">{booking.yacht.name}</h3>
+                          <p className="text-sm text-gray-600">{booking.yacht.location}</p>
+                        </div>
+
+                        {/* Booking Details */}
+                        <div className="flex items-center gap-4 text-sm text-gray-600">
+                          <div className="flex items-center gap-1">
+                            <Calendar className="h-4 w-4" />
+                            <span>{booking.startDate.toLocaleDateString()}</span>
                           </div>
-                          
-                          <div className="space-y-1 text-sm text-gray-600 mb-3">
-                            <div className="flex items-center space-x-2">
-                              <Calendar className="w-4 h-4" />
-                              <span>{booking.startDate.toLocaleDateString()} - {booking.endDate.toLocaleDateString()}</span>
-                            </div>
-                            <div className="flex items-center space-x-2">
-                              <Users className="w-4 h-4" />
-                              <span>{booking.guestCount} guests</span>
-                            </div>
+                          <div className="flex items-center gap-1">
+                            <Users className="h-4 w-4" />
+                            <span>{booking.guestCount} guests</span>
                           </div>
-                          
-                          <div className="flex items-center justify-between">
-                            <span className="text-lg font-bold text-primary">€{Number(booking.totalPrice).toLocaleString()}</span>
-                            <div className="flex items-center space-x-1 text-xs text-gray-500">
-                              <Clock className="w-3 h-3" />
-                              <span>{Math.ceil((booking.startDate.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24))} days left</span>
+                          <div className="flex items-center gap-1">
+                            <Clock className="h-4 w-4" />
+                            <span>{Math.ceil((booking.startDate.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24))} days</span>
+                          </div>
+                        </div>
+
+                        {/* Booking Summary */}
+                        <div className="bg-blue-50 rounded-lg p-3 space-y-2">
+                          <div className="flex justify-between items-center">
+                            <span className="text-sm font-medium text-gray-700">Total Cost</span>
+                            <span className="text-sm font-semibold text-blue-600">€{Number(booking.totalPrice).toLocaleString()}</span>
+                          </div>
+                          <div className="flex justify-between items-center">
+                            <span className="text-sm font-medium text-gray-700">Duration</span>
+                            <span className="text-sm font-semibold text-gray-900">
+                              {Math.ceil((booking.endDate.getTime() - booking.startDate.getTime()) / (1000 * 60 * 60 * 24))} days
+                            </span>
+                          </div>
+                          {(booking.addOns.captain || booking.addOns.catering) && (
+                            <div className="flex justify-between items-center">
+                              <span className="text-sm font-medium text-gray-700">Add-ons</span>
+                              <span className="text-sm font-semibold text-gray-900">
+                                {[
+                                  booking.addOns.captain && "Captain",
+                                  booking.addOns.catering && "Catering"
+                                ].filter(Boolean).join(", ")}
+                              </span>
                             </div>
+                          )}
+                        </div>
+
+                        {/* Action Preview */}
+                        <div className="flex gap-2 pt-2">
+                          <div className="flex-1 text-center">
+                            <div className="text-xs text-gray-500">Tap to view details</div>
                           </div>
                         </div>
                       </div>
@@ -170,7 +243,7 @@ export default function MyBookingsScreen() {
                     <CardContent className="p-0">
                       <div className="flex">
                         <img 
-                          src={booking.yacht.images[0]} 
+                          src={booking.yacht.images?.[0] || "https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"} 
                           alt={booking.yacht.name}
                           className="w-24 h-24 object-cover rounded-l-2xl"
                         />
