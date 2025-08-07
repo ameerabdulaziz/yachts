@@ -61,7 +61,7 @@ export default function OwnerDashboardScreen() {
   return (
     <div className="min-h-screen bg-gray-50 pb-24">
       {/* Header */}
-      <header className="relative px-4 py-6 text-white overflow-hidden">
+      <header className="relative px-4 py-6 overflow-hidden">
         {/* Turquoise Sea Background */}
         <div className="absolute inset-0 bg-gradient-ocean">
           <div className="absolute inset-0" style={{
@@ -75,8 +75,8 @@ export default function OwnerDashboardScreen() {
         <div className="relative z-10">
         <div className="flex items-center justify-between mb-6">
           <div>
-            <h1 className="text-2xl font-bold">Owner Dashboard</h1>
-            <p className="text-blue-100">Manage your yacht portfolio</p>
+            <h1 className="text-2xl font-bold text-gray-800">Owner Dashboard</h1>
+            <p className="text-gray-700">Manage your yacht portfolio</p>
           </div>
           <div className="flex space-x-2">
             <Link href="/add-boat-listing">
@@ -86,7 +86,7 @@ export default function OwnerDashboardScreen() {
               </Button>
             </Link>
             <Link href="/settings">
-              <Button variant="ghost" size="sm" className="text-white hover:bg-white/10">
+              <Button variant="ghost" size="sm" className="text-gray-700 hover:bg-white/10">
                 <Settings className="w-5 h-5" />
               </Button>
             </Link>
@@ -96,12 +96,12 @@ export default function OwnerDashboardScreen() {
         {/* Key Metrics */}
         <div className="grid grid-cols-2 gap-4">
           <div className="bg-white/20 rounded-xl p-4 text-center">
-            <p className="text-2xl font-bold">{ownerStats.totalYachts}</p>
-            <p className="text-blue-100 text-sm">Yachts</p>
+            <p className="text-2xl font-bold text-gray-800">{ownerStats.totalYachts}</p>
+            <p className="text-gray-700 text-sm">Yachts</p>
           </div>
           <div className="bg-white/20 rounded-xl p-4 text-center">
-            <p className="text-2xl font-bold">€{ownerStats.monthlyRevenue.toLocaleString()}</p>
-            <p className="text-blue-100 text-sm">Monthly Revenue</p>
+            <p className="text-2xl font-bold text-gray-800">€{ownerStats.monthlyRevenue.toLocaleString()}</p>
+            <p className="text-gray-700 text-sm">Monthly Revenue</p>
           </div>
         </div>
         </div>

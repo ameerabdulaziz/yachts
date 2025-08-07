@@ -44,7 +44,7 @@ export default function HomeScreen() {
       </header>
 
       {/* Hero Section with Search */}
-      <section className="relative px-4 py-8 text-white overflow-hidden">
+      <section className="relative px-4 py-8 overflow-hidden">
         {/* Turquoise Sea Background */}
         <div className="absolute inset-0 bg-gradient-ocean">
           <div className="absolute inset-0" style={{
@@ -58,7 +58,7 @@ export default function HomeScreen() {
         
         <div className="relative z-10">
           <div className="text-center mb-6">
-            <h2 className="text-2xl font-bold mb-2">Book Your Yacht</h2>
+            <h2 className="text-2xl font-bold mb-2 text-gray-800">Book Your Yacht</h2>
           </div>
           
           <div className="bg-white rounded-2xl p-4 shadow-xl">

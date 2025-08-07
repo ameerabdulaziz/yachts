@@ -23,7 +23,7 @@ export default function BookingConfirmationScreen() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Success Header */}
-      <section className="relative px-4 py-12 text-white text-center overflow-hidden">
+      <section className="relative px-4 py-12 text-center overflow-hidden">
         {/* Turquoise Sea Background */}
         <div className="absolute inset-0 bg-gradient-ocean">
           <div className="absolute inset-0" style={{

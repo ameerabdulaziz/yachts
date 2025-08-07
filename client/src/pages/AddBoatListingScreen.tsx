@@ -11,6 +11,7 @@ import { ArrowLeft, Ship, MapPin, Euro, Users, Upload, Plus, X } from "lucide-re
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
+import seaBackground from "@assets/image_1754575606863.png";
 
 export default function AddBoatListingScreen() {
   const [, setLocation] = useLocation();
@@ -103,23 +104,24 @@ export default function AddBoatListingScreen() {
       </header>
 
       {/* Hero Section */}
-      <section className="relative px-4 py-8 text-white overflow-hidden">
+      <section className="relative px-4 py-8 overflow-hidden">
         {/* Turquoise Sea Background */}
         <div className="absolute inset-0 bg-gradient-ocean">
           <div className="absolute inset-0" style={{
-            backgroundImage: `url('https://images.pexels.com/photos/1001682/pexels-photo-1001682.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&fit=crop')`,
+            backgroundImage: `url(${seaBackground})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            opacity: 0.8
+            opacity: 0.9
           }} />
-          <div className="absolute inset-0 bg-gradient-to-br from-cyan-300/30 to-blue-500/40" />
+          <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-blue-200/20 to-blue-500/30" />
         </div>
+        
         <div className="relative z-10">
-        <div className="text-center">
-          <Ship className="w-16 h-16 mx-auto mb-4 text-white" />
-          <h2 className="text-2xl font-bold mb-2">List Your Yacht</h2>
-          <p className="text-blue-100">Start earning from your yacht today</p>
-        </div>
+          <div className="bg-white rounded-2xl p-6 mx-4 shadow-xl text-center">
+            <Ship className="w-16 h-16 mx-auto mb-4 text-blue-600" />
+            <h2 className="text-2xl font-bold mb-2 text-gray-900">List Your Yacht</h2>
+            <p className="text-gray-600">Start earning from your yacht today</p>
+          </div>
         </div>
       </section>
 

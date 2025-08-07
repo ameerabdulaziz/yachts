@@ -80,7 +80,7 @@ export default function OwnershipHomeScreen() {
       </header>
 
       {/* Hero Section - Ownership Focus */}
-      <section className="relative px-4 py-8 text-white overflow-hidden">
+      <section className="relative px-4 py-8 overflow-hidden">
         {/* Turquoise Sea Background */}
         <div className="absolute inset-0 bg-gradient-ocean">
           <div className="absolute inset-0" style={{

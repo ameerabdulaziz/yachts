@@ -62,7 +62,7 @@ export default function DashboardScreen() {
   return (
     <div className="min-h-screen bg-gray-50 pb-24">
       {/* Header */}
-      <header className="relative px-4 py-6 text-white overflow-hidden">
+      <header className="relative px-4 py-6 overflow-hidden">
         {/* Turquoise Sea Background */}
         <div className="absolute inset-0 bg-gradient-ocean">
           <div className="absolute inset-0" style={{
@@ -76,14 +76,14 @@ export default function DashboardScreen() {
         <div className="relative z-10">
         <div className="flex items-center justify-between mb-6">
           <div>
-            <h1 className="text-2xl font-bold">Dashboard</h1>
-            <p className="text-blue-100">Welcome back, John!</p>
+            <h1 className="text-2xl font-bold text-gray-800">Dashboard</h1>
+            <p className="text-gray-700">Welcome back, John!</p>
           </div>
           <div className="flex space-x-2">
-            <Button variant="ghost" size="sm" className="text-white hover:bg-white/10 p-2">
+            <Button variant="ghost" size="sm" className="text-gray-700 hover:bg-white/10 p-2">
               <Search className="w-5 h-5" />
             </Button>
-            <Button variant="ghost" size="sm" className="text-white hover:bg-white/10 p-2 relative">
+            <Button variant="ghost" size="sm" className="text-gray-700 hover:bg-white/10 p-2 relative">
               <Bell className="w-5 h-5" />
               <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">3</span>
             </Button>
@@ -93,12 +93,12 @@ export default function DashboardScreen() {
         {/* Quick Stats */}
         <div className="grid grid-cols-2 gap-4">
           <div className="bg-white/20 rounded-xl p-4 text-center">
-            <p className="text-2xl font-bold">{userStats.upcomingTrips}</p>
-            <p className="text-blue-100 text-sm">Upcoming Trips</p>
+            <p className="text-2xl font-bold text-gray-800">{userStats.upcomingTrips}</p>
+            <p className="text-gray-700 text-sm">Upcoming Trips</p>
           </div>
           <div className="bg-white/20 rounded-xl p-4 text-center">
-            <p className="text-2xl font-bold">€{userStats.fuelWalletBalance.toLocaleString()}</p>
-            <p className="text-blue-100 text-sm">Fuel Wallet</p>
+            <p className="text-2xl font-bold text-gray-800">€{userStats.fuelWalletBalance.toLocaleString()}</p>
+            <p className="text-gray-700 text-sm">Fuel Wallet</p>
           </div>
         </div>
         </div>
