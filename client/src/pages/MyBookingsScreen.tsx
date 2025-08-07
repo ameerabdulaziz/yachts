@@ -6,7 +6,7 @@ import BottomNavigation from "@/components/BottomNavigation";
 import { ArrowLeft, Calendar, Users, MapPin, Clock, Filter, Search } from "lucide-react";
 import { mockBookings } from "@/lib/mockData";
 import seaBackground from "@assets/image_1754575606863.png";
-import deAntonioD50 from "@assets/de antonio D50 (1)_1754331061302.jpg";
+import deAntonioD50 from "@assets/image_1754579474724.png";
 
 const statusColors = {
   confirmed: "bg-green-100 text-green-800",

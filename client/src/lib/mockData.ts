@@ -1,5 +1,5 @@
 import { Yacht, OwnershipOpportunity, Booking, FuelTransaction, Message } from "@shared/schema";
-import deAntonioD50 from "@assets/de antonio D50 (1)_1754331061302.jpg";
+import deAntonioD50 from "@assets/image_1754579474724.png";
 
 export const mockYachts: (Yacht & { owner: { name: string; avatar: string; verified: boolean; rating: number } })[] = [
   {
