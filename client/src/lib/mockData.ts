@@ -203,7 +203,7 @@ export const mockYachts: (Yacht & { owner: { name: string; avatar: string; verif
 
 export const mockOwnershipOpportunities: (OwnershipOpportunity & { yacht: Yacht })[] = [
   {
-    id: "opportunity-1",
+    id: "share-d32",
     yachtId: "yacht-4",
     sharePrice: "57143",
     shareFraction: "1/7",
@@ -240,7 +240,7 @@ export const mockOwnershipOpportunities: (OwnershipOpportunity & { yacht: Yacht 
     }
   },
   {
-    id: "opportunity-2",
+    id: "share-d36",
     yachtId: "yacht-3",
     sharePrice: "71429",
     shareFraction: "1/7",
@@ -277,7 +277,7 @@ export const mockOwnershipOpportunities: (OwnershipOpportunity & { yacht: Yacht 
     }
   },
   {
-    id: "opportunity-3",
+    id: "share-d42",
     yachtId: "yacht-2",
     sharePrice: "81250",
     shareFraction: "1/8",
@@ -314,7 +314,7 @@ export const mockOwnershipOpportunities: (OwnershipOpportunity & { yacht: Yacht 
     }
   },
   {
-    id: "opportunity-4",
+    id: "share-d60",
     yachtId: "yacht-6",
     sharePrice: "166667",
     shareFraction: "1/12",
@@ -351,8 +351,8 @@ export const mockOwnershipOpportunities: (OwnershipOpportunity & { yacht: Yacht 
     }
   },
   {
-    id: "opportunity-5",
-    yachtId: "yacht-7",
+    id: "share-d50",
+    yachtId: "yacht-1",
     sharePrice: "100000",
     shareFraction: "1/10",
     usageDaysPerYear: 32,
@@ -369,17 +369,17 @@ export const mockOwnershipOpportunities: (OwnershipOpportunity & { yacht: Yacht 
     updatedAt: new Date(),
     yacht: {
       id: "yacht-7",
-      name: "De Antonio D50 Coupe",
-      description: "Enclosed version of the flagship D50 with climate-controlled cabin. Features the award-winning hidden outboard design with additional weather protection and luxury accommodations.",
+      name: "De Antonio D50 Open",
+      description: "The flagship model with hidden outboard engines, featuring a continuous wide stern platform and optimized hydrodynamics. Perfect for luxury day cruising with exceptional space optimization.",
       location: "El Gouna, Egypt",
-      pricePerDay: "3600",
+      pricePerDay: "3200",
       capacity: 12,
       cabins: 2,
       length: "50",
       yearBuilt: 2026,
-      images: ["https://static.wixstatic.com/media/0fb4c8_60988eb5cf834fcb876c1d06bd8af594~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D50.jpg"],
-      amenities: ["Climate Control", "Enclosed Cabin", "Hidden Outboards", "Premium Seating", "Navigation Package", "Entertainment System", "Galley Kitchen", "Head Compartment"],
-      ownerId: "owner-7",
+      images: ["https://static.wixstatic.com/media/0fb4c8_1105b00d73ee4ddc9f1ad1d4b74d9ece~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D50.jpg"],
+      amenities: ["Hidden Outboard Engines", "Flexiteek Synthetic Teak Deck", "Outdoor Kitchen", "Fusion Audio System", "Simrad Navigation", "Electric Windlass", "LED Lighting", "Freshwater Shower"],
+      ownerId: "owner-1",
       isActive: true,
       rating: "4.8",
       reviewCount: 34,
@@ -388,7 +388,7 @@ export const mockOwnershipOpportunities: (OwnershipOpportunity & { yacht: Yacht 
     }
   },
   {
-    id: "opportunity-6",
+    id: "share-e23",
     yachtId: "yacht-8",
     sharePrice: "58000",
     shareFraction: "1/4",
