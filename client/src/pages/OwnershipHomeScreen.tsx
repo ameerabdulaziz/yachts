@@ -16,6 +16,7 @@ import {
   Clock
 } from "lucide-react";
 import nauttecLogo from "@assets/Nauttec Logo_1754330395988.png";
+import seaBackground from "@assets/image_1754575606863.png";
 import BottomNavigation from "@/components/BottomNavigation";
 
 export default function OwnershipHomeScreen() {
@@ -71,12 +72,12 @@ export default function OwnershipHomeScreen() {
         {/* Turquoise Sea Background */}
         <div className="absolute inset-0 bg-gradient-ocean">
           <div className="absolute inset-0" style={{
-            backgroundImage: `url('https://images.pexels.com/photos/3408744/pexels-photo-3408744.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&fit=crop')`,
+            backgroundImage: `url(${seaBackground})`,
             backgroundSize: 'cover',
-            backgroundPosition: 'top center',
-            opacity: 0.6
+            backgroundPosition: 'center',
+            opacity: 0.9
           }} />
-          <div className="absolute inset-0 bg-gradient-to-b from-blue-300/20 via-cyan-400/30 to-blue-600/50" />
+          <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-blue-200/20 to-blue-500/30" />
         </div>
         
         <div className="relative z-10">
