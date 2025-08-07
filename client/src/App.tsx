@@ -47,46 +47,46 @@ import BoatOwnershipManagementScreen from "@/pages/BoatOwnershipManagementScreen
 import BookingCalendarScreen from "@/pages/BookingCalendarScreen";
 import ShareTradingScreen from "@/pages/ShareTradingScreen";
 import RedirectToOwnership from "@/components/RedirectToOwnership";
-import RouteDebugger from "@/components/RouteDebugger";
+import ScrollToTopOnRoute from "@/components/ScrollToTopOnRoute";
 
 function Router() {
   // Force scroll to top on any route change
   const [location] = useLocation();
   
-  // Immediate redirect if landing on /hone
+  // Handle redirects and scroll to top
   useEffect(() => {
+    // Immediate redirect if landing on /hone
     if (location === '/hone') {
       console.log('Detected /hone route, redirecting to /');
       window.history.replaceState({}, '', '/');
-      window.location.reload();
+      window.location.href = '/';
+      return;
     }
-  }, [location]);
-  
-  useEffect(() => {
-    // Immediate scroll to top
-    window.scrollTo(0, 0);
-    document.documentElement.scrollTop = 0;
-    document.body.scrollTop = 0;
     
-    // Additional attempts to ensure scroll works
-    setTimeout(() => {
-      window.scrollTo(0, 0);
+    // Force scroll to top for all route changes
+    const scrollToTop = () => {
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
       document.documentElement.scrollTop = 0;
       document.body.scrollTop = 0;
-    }, 0);
+      // Also try the root element
+      const root = document.getElementById('root');
+      if (root) root.scrollTop = 0;
+    };
     
-    setTimeout(() => {
-      window.scrollTo(0, 0);
-      document.documentElement.scrollTop = 0;
-      document.body.scrollTop = 0;
-    }, 100);
+    // Immediate scroll
+    scrollToTop();
+    
+    // Multiple attempts to ensure it works across all browsers/devices
+    requestAnimationFrame(scrollToTop);
+    setTimeout(scrollToTop, 10);
+    setTimeout(scrollToTop, 50);
+    setTimeout(scrollToTop, 100);
+    setTimeout(scrollToTop, 200);
   }, [location]);
 
   return (
     <>
-
-      <ScrollToTop />
-      <ScrollHandler />
+      <ScrollToTopOnRoute />
       <Switch>
         <Route path="/" component={OwnershipHomeScreen} />
         <Route path="/hone" component={OwnershipHomeScreen} />

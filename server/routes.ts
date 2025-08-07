@@ -188,12 +188,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Handle mobile PWA redirects
+  // Handle mobile PWA redirects - Must be before other routes
   app.get("/hone", (req, res) => {
+    console.log("Server: Redirecting /hone to /");
     res.redirect(301, "/");
   });
   
   app.get("/home", (req, res) => {
+    console.log("Server: Redirecting /home to /charter");
     res.redirect(301, "/charter");
   });
 
