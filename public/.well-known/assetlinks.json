@@ -1,0 +1,7 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "web",
+    "site": "https://aa24c7c5-180b-4821-9a07-52ba6a1ab532-00-1ahrnvdt44yoh.picard.replit.dev"
+  }
+}]
