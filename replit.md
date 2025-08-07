@@ -49,7 +49,8 @@ The system implements a dual authentication flow:
 - **Account Setup**: Role selection (renter, owner, or both) with password creation during onboarding
 - **Session Management**: Uses PostgreSQL-backed session storage with express-session
 - **Role-Based Access**: Different UI and functionality based on user roles
-- **Smart Routing**: Owners redirect to /my-boats, renters to /home after login
+- **Smart Routing**: Owners redirect to /my-boats, renters to /charter after login
+- **Mobile PWA Routing**: Comprehensive redirect system handles iPhone app icon navigation
 
 ## Data Management Strategy
 
@@ -106,7 +107,7 @@ The application includes 31+ screens with comprehensive routing:
 - `/account-setup` - AccountSetupScreen (role selection)
 
 ## Main Navigation
-- `/home` - HomeScreen (renter dashboard)
+- `/charter` - CharterScreen (yacht charter/rental dashboard)
 - `/my-boats` - MyBoatsScreen (owner dashboard)
 - `/profile` - UserProfileScreen
 - `/settings` - SettingsScreen
@@ -154,6 +155,14 @@ The application includes 31+ screens with comprehensive routing:
 # Recent Changes
 
 ## August 2025
+- **August 7, 2025**: iPhone PWA routing issue completely resolved:
+  - Fixed critical mobile PWA routing where iPhone app was opening on `/hone` instead of ownership home
+  - Implemented comprehensive redirect system: /hone → /, /home → /charter  
+  - Added server-side and client-side redirect handling at multiple layers
+  - Renamed HomeScreen to CharterScreen and moved charter functionality to /charter route
+  - Updated PWA manifest with unique app ID to force cache refresh
+  - Enhanced mobile navigation to properly detect root routes and highlight correct tabs
+  - Confirmed via debug logging: iPhone app now correctly opens to OwnershipHomeScreen
 - **August 7, 2025**: Major UX and branding updates:
   - Updated ownership home screen with iOS-native styling and SF Pro fonts
   - Replaced all "Yachtak" references with "Nauttec" for consistent branding
