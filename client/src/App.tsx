@@ -12,6 +12,7 @@ import PhoneLoginScreen from "@/pages/PhoneLoginScreen";
 import OTPVerificationScreen from "@/pages/OTPVerificationScreen";
 import AccountSetupScreen from "@/pages/AccountSetupScreen";
 import HomeScreen from "@/pages/HomeScreen";
+import OwnershipHomeScreen from "@/pages/OwnershipHomeScreen";
 import OwnershipOpportunitiesScreen from "@/pages/OwnershipOpportunitiesScreen";
 import FuelWalletScreen from "@/pages/FuelWalletScreen";
 import NotificationCenterScreen from "@/pages/NotificationCenterScreen";
@@ -55,6 +56,7 @@ function Router() {
         <Route path="/verify-otp" component={OTPVerificationScreen} />
         <Route path="/account-setup" component={AccountSetupScreen} />
         <Route path="/home" component={HomeScreen} />
+        <Route path="/ownership-home" component={OwnershipHomeScreen} />
         <Route path="/ownership-opportunities" component={OwnershipOpportunitiesScreen} />
         <Route path="/fuel-wallet" component={FuelWalletScreen} />
         <Route path="/notifications" component={NotificationCenterScreen} />
