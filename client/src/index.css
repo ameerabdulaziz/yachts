@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Force scroll to top on page navigation */
+html {
+  scroll-behavior: auto !important;
+}
+
+body {
+  scroll-behavior: auto !important;
+}
+
 :root {
   /* iOS Light Mode Colors */
   --background: hsl(0, 0%, 100%); /* iOS systemBackground */

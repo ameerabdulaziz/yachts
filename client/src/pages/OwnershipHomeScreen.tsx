@@ -19,6 +19,7 @@ import {
 import nauttecLogo from "@assets/Nauttec Logo_1754330395988.png";
 import seaBackground from "@assets/image_1754575606863.png";
 import BottomNavigation from "@/components/BottomNavigation";
+import { enhancedScrollToTop } from "@/utils/scrollToTop";
 
 export default function OwnershipHomeScreen() {
   const [selectedModel, setSelectedModel] = useState("D42");
@@ -53,12 +54,22 @@ export default function OwnershipHomeScreen() {
           </div>
           <div className="flex items-center space-x-3">
             <Link href="/dev-navigation">
-              <Button variant="ghost" size="sm" className="p-2 text-xs">
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                className="p-2 text-xs"
+                onClick={enhancedScrollToTop}
+              >
                 All Screens
               </Button>
             </Link>
             <Link href="/profile">
-              <Button variant="ghost" size="sm" className="p-2">
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                className="p-2"
+                onClick={enhancedScrollToTop}
+              >
                 <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
                   <span className="text-white text-sm font-bold">JD</span>
                 </div>
@@ -145,6 +156,7 @@ export default function OwnershipHomeScreen() {
                 <Button 
                   className="w-full bg-blue-600 text-white p-4 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 hover:bg-blue-700 border-0"
                   style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}
+                  onClick={enhancedScrollToTop}
                 >
                   <Anchor className="w-4 h-4 mr-2" />
                   Own This Yacht
@@ -155,6 +167,7 @@ export default function OwnershipHomeScreen() {
                   variant="outline" 
                   className="w-full p-4 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 border-blue-600 text-blue-600 hover:bg-blue-50"
                   style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}
+                  onClick={enhancedScrollToTop}
                 >
                   <ArrowRight className="w-4 h-4 mr-2" />
                   View All
@@ -196,6 +209,7 @@ export default function OwnershipHomeScreen() {
               size="sm" 
               className="border-blue-500 text-blue-500 hover:bg-blue-50 font-medium px-4 py-2 rounded-lg"
               style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}
+              onClick={enhancedScrollToTop}
             >
               View All <ArrowRight className="w-4 h-4 ml-1" />
             </Button>
@@ -242,7 +256,10 @@ export default function OwnershipHomeScreen() {
             }
           ].map((opportunity) => (
             <Link key={opportunity.id} href={`/ownership/${opportunity.id}`}>
-              <Card className="hover:shadow-lg transition-all duration-300 cursor-pointer border-0 shadow-md bg-white rounded-xl overflow-hidden">
+              <Card 
+                className="hover:shadow-lg transition-all duration-300 cursor-pointer border-0 shadow-md bg-white rounded-xl overflow-hidden"
+                onClick={enhancedScrollToTop}
+              >
                 <CardContent className="p-0">
                   <div className="relative">
                     <img 
@@ -323,7 +340,14 @@ export default function OwnershipHomeScreen() {
                       </div>
                     </div>
 
-                    <Button className="w-full bg-blue-600 text-white py-3 rounded-xl font-semibold hover:bg-blue-700 transition-colors" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>
+                    <Button 
+                      className="w-full bg-blue-600 text-white py-3 rounded-xl font-semibold hover:bg-blue-700 transition-colors" 
+                      style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        enhancedScrollToTop();
+                      }}
+                    >
                       View Details
                     </Button>
                   </div>
@@ -356,7 +380,10 @@ export default function OwnershipHomeScreen() {
               </div>
             </div>
             <Link href="/ownership-opportunities">
-              <Button className="w-full mt-4 bg-white text-blue-600 hover:bg-gray-100 font-semibold">
+              <Button 
+                className="w-full mt-4 bg-white text-blue-600 hover:bg-gray-100 font-semibold"
+                onClick={enhancedScrollToTop}
+              >
                 Start Your Ownership Journey
               </Button>
             </Link>
@@ -372,7 +399,11 @@ export default function OwnershipHomeScreen() {
             <h3 className="text-lg font-semibold text-gray-900 mb-2">Not Ready to Own?</h3>
             <p className="text-gray-600 mb-4">Experience luxury yachting with our rental options first</p>
             <Link href="/home">
-              <Button variant="outline" className="font-semibold">
+              <Button 
+                variant="outline" 
+                className="font-semibold"
+                onClick={enhancedScrollToTop}
+              >
                 Explore Rentals
               </Button>
             </Link>

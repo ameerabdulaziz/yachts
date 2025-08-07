@@ -1,6 +1,7 @@
 import { Link, useLocation } from "wouter";
 import { Home, Ship, TrendingUp, User } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { enhancedScrollToTop } from "@/utils/scrollToTop";
 
 const tabs = [
   { icon: Home, label: "Home", route: "/home" },
@@ -20,6 +21,7 @@ export default function BottomNavigation() {
           return (
             <Link key={route} href={route}>
               <button
+                onClick={enhancedScrollToTop}
                 className={cn(
                   "flex flex-col items-center py-2 px-3 rounded-xl transition-colors",
                   isActive
