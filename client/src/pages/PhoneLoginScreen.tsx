@@ -10,6 +10,7 @@ import nauttecLogo from "@assets/Nauttec Logo_1754330395988.png";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
+import SocialLoginButtons from "@/components/SocialLoginButtons";
 
 export default function PhoneLoginScreen() {
   const [, setLocation] = useLocation();

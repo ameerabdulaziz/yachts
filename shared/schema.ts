@@ -35,6 +35,9 @@ export const users = pgTable("users", {
   role: varchar("role", { length: 20 }).default("renter"), // renter, owner, both
   isVerified: boolean("is_verified").default(false),
   fuelWalletBalance: decimal("fuel_wallet_balance", { precision: 10, scale: 2 }).default("0.00"),
+  googleId: varchar("google_id").unique(),
+  facebookId: varchar("facebook_id").unique(),
+  password: varchar("password"), // For email/password login
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
 });
