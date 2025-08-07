@@ -78,7 +78,7 @@ function Router() {
       <ScrollHandler />
       <Switch>
         <Route path="/" component={OwnershipHomeScreen} />
-        <Route path="/hone" component={RedirectToOwnership} />
+        <Route path="/hone" component={OwnershipHomeScreen} />
         <Route path="/splash" component={SplashScreen} />
         <Route path="/login" component={PhoneLoginScreen} />
         <Route path="/verify-otp" component={OTPVerificationScreen} />
