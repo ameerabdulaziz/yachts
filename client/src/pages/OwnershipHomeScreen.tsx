@@ -13,7 +13,8 @@ import {
   Anchor,
   Euro,
   Star,
-  Clock
+  Clock,
+  MapPin
 } from "lucide-react";
 import nauttecLogo from "@assets/Nauttec Logo_1754330395988.png";
 import seaBackground from "@assets/image_1754575606863.png";
@@ -35,9 +36,9 @@ export default function OwnershipHomeScreen() {
 
   const ownershipBenefits = [
     { icon: Crown, title: "Premium Ownership", desc: "Fractional ownership with full yacht privileges" },
-    { icon: TrendingUp, title: "Asset Appreciation", desc: "Potential value growth in luxury yacht market" },
-    { icon: Shield, title: "Hassle-Free", desc: "Complete management and maintenance included" },
-    { icon: Users, title: "Co-Owner Network", desc: "Connect with fellow yacht enthusiasts" }
+    { icon: Star, title: "Hassle Free", desc: "Complete management and maintenance included" },
+    { icon: Euro, title: "Revenue from Renting", desc: "Earn income when not using your yacht" },
+    { icon: Users, title: "Co-Owner Network", desc: "Connect with like-minded yacht enthusiasts" }
   ];
 
   return (
@@ -141,13 +142,13 @@ export default function OwnershipHomeScreen() {
 
             <div className="grid grid-cols-2 gap-3">
               <Link href={`/ownership/${selectedYacht.id}`}>
-                <Button className="w-full bg-blue-600 text-white p-4 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 hover:bg-blue-700">
+                <Button className="w-full bg-blue-600 text-white p-4 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 hover:bg-blue-700 border-0">
                   <Anchor className="w-4 h-4 mr-2" />
                   Own This Yacht
                 </Button>
               </Link>
               <Link href="/ownership-opportunities">
-                <Button variant="outline" className="w-full p-4 rounded-xl font-semibold hover:shadow-lg transition-all duration-300">
+                <Button variant="outline" className="w-full p-4 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 border-blue-600 text-blue-600 hover:bg-blue-50">
                   <ArrowRight className="w-4 h-4 mr-2" />
                   View All
                 </Button>
@@ -194,50 +195,134 @@ export default function OwnershipHomeScreen() {
           </Link>
         </div>
         
-        <div className="grid gap-4">
+        <div className="space-y-4">
           {[
-            { model: "D60", location: "El Gouna", shares: "2/10", price: "€175K", status: "Available", priority: true, image: "https://static.wixstatic.com/media/5c3629_a8b1aa6ff9244bddaf7383aa45b4afc1~mv2.jpg/v1/fill/w_400,h_200,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/5c3629_a8b1aa6ff9244bddaf7383aa45b4afc1~mv2.jpg" },
-            { model: "D42", location: "El Gouna", shares: "1/10", price: "€89K", status: "Last Share", priority: true, image: "https://static.wixstatic.com/media/0fb4c8_008f1545c8764f8789a2b7415ca9dde7~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_400,h_200,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D42.jpg" },
-            { model: "D36", location: "El Gouna", shares: "3/10", price: "€65K", status: "Available", priority: false, image: "https://static.wixstatic.com/media/0fb4c8_fbbb6a2569c747d48881f7ac065b947a~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_400,h_200,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D36.jpg" }
-          ].map((share, index) => (
-            <Card key={index} className="overflow-hidden hover:shadow-lg transition-all duration-300 border-0 shadow-md bg-white rounded-xl">
-              <CardContent className="p-0">
-                <div className="flex">
-                  <div className="w-32 h-24 flex-shrink-0">
+            { 
+              id: "share-d60", 
+              model: "D60", 
+              location: "El Gouna", 
+              availableShares: 2, 
+              totalShares: 10, 
+              sharePrice: "175000", 
+              usageDaysPerYear: 48, 
+              capacity: 12, 
+              priority: true, 
+              image: "https://static.wixstatic.com/media/5c3629_a8b1aa6ff9244bddaf7383aa45b4afc1~mv2.jpg/v1/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/5c3629_a8b1aa6ff9244bddaf7383aa45b4afc1~mv2.jpg" 
+            },
+            { 
+              id: "share-d42", 
+              model: "D42", 
+              location: "El Gouna", 
+              availableShares: 1, 
+              totalShares: 10, 
+              sharePrice: "89000", 
+              usageDaysPerYear: 48, 
+              capacity: 12, 
+              priority: true, 
+              image: "https://static.wixstatic.com/media/0fb4c8_008f1545c8764f8789a2b7415ca9dde7~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D42.jpg" 
+            },
+            { 
+              id: "share-d36", 
+              model: "D36", 
+              location: "El Gouna", 
+              availableShares: 3, 
+              totalShares: 10, 
+              sharePrice: "65000", 
+              usageDaysPerYear: 48, 
+              capacity: 12, 
+              priority: false, 
+              image: "https://static.wixstatic.com/media/0fb4c8_fbbb6a2569c747d48881f7ac065b947a~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D36.jpg" 
+            }
+          ].map((opportunity) => (
+            <Link key={opportunity.id} href={`/ownership/${opportunity.id}`}>
+              <Card className="hover:shadow-lg transition-all duration-300 cursor-pointer border-0 shadow-md bg-white rounded-xl overflow-hidden">
+                <CardContent className="p-0">
+                  <div className="relative">
                     <img 
-                      src={share.image} 
-                      alt={`De Antonio ${share.model}`}
-                      className="w-full h-full object-cover"
+                      src={opportunity.image} 
+                      alt={`De Antonio ${opportunity.model}`}
+                      className="w-full h-48 object-cover"
                     />
+                    <div className="absolute top-3 left-3 bg-white/90 p-2 rounded-full">
+                      <Anchor className="w-4 h-4 text-gray-900" />
+                    </div>
+                    <div className="absolute top-3 right-3 bg-green-500 text-white px-3 py-1 rounded-full">
+                      <span className="text-sm font-semibold">{opportunity.availableShares} Available</span>
+                    </div>
                   </div>
-                  <div className="flex-1 p-4 flex justify-between items-center">
-                    <div>
-                      <div className="flex items-center space-x-2 mb-1">
-                        <h3 className="font-semibold text-gray-900" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>
-                          De Antonio {share.model}
+                  
+                  <div className="p-4">
+                    <div className="flex items-start justify-between mb-3">
+                      <div>
+                        <h3 className="text-xl font-bold text-gray-900" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif' }}>
+                          De Antonio {opportunity.model}
                         </h3>
-                        {share.priority && (
-                          <Badge className="bg-orange-100 text-orange-700 text-xs px-2 py-1 rounded-full font-medium">
-                            Priority
-                          </Badge>
-                        )}
+                        <p className="text-gray-600" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>
+                          {opportunity.location}
+                        </p>
                       </div>
-                      <p className="text-sm text-gray-500" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>
-                        {share.location} • {share.shares} shares
-                      </p>
+                      <div className="text-right">
+                        <p className="text-2xl font-bold text-blue-600" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif' }}>
+                          €{Number(opportunity.sharePrice).toLocaleString()}
+                        </p>
+                        <p className="text-sm text-gray-500" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>
+                          per share
+                        </p>
+                      </div>
                     </div>
-                    <div className="text-right">
-                      <p className="font-bold text-gray-900 text-lg" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif' }}>
-                        {share.price}
-                      </p>
-                      <p className="text-sm text-green-600 font-medium" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>
-                        {share.status}
-                      </p>
+
+                    <div className="grid grid-cols-3 gap-4 mb-4">
+                      <div className="bg-gray-50 rounded-lg p-3 text-center">
+                        <Calendar className="w-5 h-5 text-blue-600 mx-auto mb-1" />
+                        <p className="font-semibold text-gray-900" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>
+                          {opportunity.usageDaysPerYear}
+                        </p>
+                        <p className="text-xs text-gray-600" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>
+                          days/year
+                        </p>
+                      </div>
+                      <div className="bg-gray-50 rounded-lg p-3 text-center">
+                        <Users className="w-5 h-5 text-blue-600 mx-auto mb-1" />
+                        <p className="font-semibold text-gray-900" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>
+                          {opportunity.capacity}
+                        </p>
+                        <p className="text-xs text-gray-600" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>
+                          guests
+                        </p>
+                      </div>
+                      <div className="bg-gray-50 rounded-lg p-3 text-center">
+                        <TrendingUp className="w-5 h-5 text-green-600 mx-auto mb-1" />
+                        <p className="font-semibold text-gray-900" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>
+                          12-15%
+                        </p>
+                        <p className="text-xs text-gray-600" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>
+                          Expected ROI
+                        </p>
+                      </div>
                     </div>
+
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center space-x-2">
+                        <MapPin className="w-4 h-4 text-gray-400" />
+                        <span className="text-sm text-gray-600" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>
+                          {opportunity.location}
+                        </span>
+                      </div>
+                      <div className="flex items-center space-x-1">
+                        <div className={`w-2 h-2 rounded-full ${opportunity.availableShares > 2 ? 'bg-green-500' : 'bg-orange-500'}`}></div>
+                        <span className={`text-xs font-medium ${opportunity.availableShares > 2 ? 'text-green-600' : 'text-orange-600'}`} style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>
+                          {opportunity.availableShares} shares left
+                        </span>
+                      </div>
+                    </div>
+
+                    <Button className="w-full bg-blue-600 text-white py-3 rounded-xl font-semibold hover:bg-blue-700 transition-colors" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>
+                      View Details
+                    </Button>
                   </div>
-                </div>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
+            </Link>
           ))}
         </div>
       </section>
