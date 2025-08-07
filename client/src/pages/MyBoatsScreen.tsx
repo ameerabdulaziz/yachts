@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import BottomNavigation from "@/components/BottomNavigation";
+import deAntonioD50 from "@assets/image_1754579474724.png";
 
 // Mock data for owned boats - limiting to 2 boats as requested
 const mockOwnedBoats = [
@@ -22,18 +23,18 @@ const mockOwnedBoats = [
     remainingEngineHours: 38
   },
   {
-    id: "yacht-6",
-    name: "De Antonio D60 Open",
-    image: "https://static.wixstatic.com/media/0fb4c8_1105b00d73ee4ddc9f1ad1d4b74d9ece~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D60.jpg",
+    id: "yacht-1",
+    name: "De Antonio D50 Open",
+    image: deAntonioD50,
     location: "El Gouna, Egypt",
-    length: "60",
+    length: "50",
     capacity: 12,
     yearBuilt: 2026,
-    sharesFractionOwned: "1/12",
-    sharesPercentage: 8.3,
-    shareValue: "166,667",
-    remainingDays: 23,
-    remainingEngineHours: 47
+    sharesFractionOwned: "2/7",
+    sharesPercentage: 28.6,
+    shareValue: "128,571",
+    remainingDays: 35,
+    remainingEngineHours: 42
   }
 ];
 
