@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import nauttecLogo from "@assets/Nauttec Logo_1754330395988.png";
 import seaBackground from "@assets/image_1754575606863.png";
+import deAntonioD50 from "@assets/image_1754579474724.png";
 import BottomNavigation from "@/components/BottomNavigation";
 import { enhancedScrollToTop } from "@/utils/scrollToTop";
 
@@ -219,40 +220,60 @@ export default function OwnershipHomeScreen() {
         <div className="space-y-4">
           {[
             { 
+              id: "share-d32", 
+              model: "D32", 
+              location: "El Gouna", 
+              availableShares: 3, 
+              totalShares: 10, 
+              sharePrice: "48000", 
+              monthlyPayment: "715",
+              usageDaysPerYear: 48, 
+              capacity: 10, 
+              expectedROI: "6-8%",
+              priority: false, 
+              image: "https://static.wixstatic.com/media/0fb4c8_6cbbd012fc0645009bc4a91a412b293a~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D32.jpg" 
+            },
+            { 
+              id: "share-d36", 
+              model: "D36", 
+              location: "El Gouna", 
+              availableShares: 2, 
+              totalShares: 10, 
+              sharePrice: "65000", 
+              monthlyPayment: "920",
+              usageDaysPerYear: 48, 
+              capacity: 12, 
+              expectedROI: "5-7%",
+              priority: false, 
+              image: "https://static.wixstatic.com/media/0fb4c8_fbbb6a2569c747d48881f7ac065b947a~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D36.jpg" 
+            },
+            { 
+              id: "share-d50", 
+              model: "D50", 
+              location: "El Gouna", 
+              availableShares: 1, 
+              totalShares: 10, 
+              sharePrice: "128000", 
+              monthlyPayment: "1,650",
+              usageDaysPerYear: 48, 
+              capacity: 12, 
+              expectedROI: "4-6%",
+              priority: true, 
+              image: "https://static.wixstatic.com/media/0fb4c8_60988eb5cf834fcb876c1d06bd8af594~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D50.jpg"
+            },
+            { 
               id: "share-d60", 
               model: "D60", 
               location: "El Gouna", 
               availableShares: 2, 
               totalShares: 10, 
               sharePrice: "175000", 
+              monthlyPayment: "2,280",
               usageDaysPerYear: 48, 
               capacity: 12, 
+              expectedROI: "3-5%",
               priority: true, 
               image: "https://static.wixstatic.com/media/5c3629_a8b1aa6ff9244bddaf7383aa45b4afc1~mv2.jpg/v1/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/5c3629_a8b1aa6ff9244bddaf7383aa45b4afc1~mv2.jpg" 
-            },
-            { 
-              id: "share-d42", 
-              model: "D42", 
-              location: "El Gouna", 
-              availableShares: 1, 
-              totalShares: 10, 
-              sharePrice: "89000", 
-              usageDaysPerYear: 48, 
-              capacity: 12, 
-              priority: true, 
-              image: "https://static.wixstatic.com/media/0fb4c8_008f1545c8764f8789a2b7415ca9dde7~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D42.jpg" 
-            },
-            { 
-              id: "share-d36", 
-              model: "D36", 
-              location: "El Gouna", 
-              availableShares: 3, 
-              totalShares: 10, 
-              sharePrice: "65000", 
-              usageDaysPerYear: 48, 
-              capacity: 12, 
-              priority: false, 
-              image: "https://static.wixstatic.com/media/0fb4c8_fbbb6a2569c747d48881f7ac065b947a~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D36.jpg" 
             }
           ].map((opportunity) => (
             <Link key={opportunity.id} href={`/ownership/${opportunity.id}`}>
@@ -292,6 +313,9 @@ export default function OwnershipHomeScreen() {
                         <p className="text-sm text-gray-500" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>
                           per share
                         </p>
+                        <p className="text-xs text-blue-600 font-medium" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>
+                          or €{opportunity.monthlyPayment}/month
+                        </p>
                       </div>
                     </div>
 
@@ -317,7 +341,7 @@ export default function OwnershipHomeScreen() {
                       <div className="bg-gray-50 rounded-lg p-3 text-center">
                         <TrendingUp className="w-5 h-5 text-green-600 mx-auto mb-1" />
                         <p className="font-semibold text-gray-900" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>
-                          12-15%
+                          {opportunity.expectedROI}
                         </p>
                         <p className="text-xs text-gray-600" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>
                           Expected ROI
@@ -358,30 +382,22 @@ export default function OwnershipHomeScreen() {
         </div>
       </section>
 
-      {/* Quick Stats */}
+      {/* Dealer Partner Program */}
       <section className="px-4 py-6">
         <Card className="bg-gradient-to-r from-blue-600 to-cyan-600 text-white">
           <CardContent className="p-6">
-            <h2 className="text-xl font-bold mb-4">Your Investment Summary</h2>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="text-center">
-                <div className="flex items-center justify-center space-x-1 mb-1">
-                  <Euro className="w-5 h-5" />
-                  <span className="text-2xl font-bold">€0</span>
-                </div>
-                <p className="text-blue-100 text-sm">Portfolio Value</p>
-              </div>
-              <div className="text-center">
-                <div className="flex items-center justify-center space-x-1 mb-1">
-                  <Clock className="w-5 h-5" />
-                  <span className="text-2xl font-bold">0</span>
-                </div>
-                <p className="text-blue-100 text-sm">Days Available</p>
+            <h2 className="text-xl font-bold mb-4" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif' }}>Exclusive Owner Benefits</h2>
+            <div className="flex items-center mb-4">
+              <MapPin className="w-6 h-6 mr-3" />
+              <div>
+                <h3 className="font-semibold" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>Free Days Abroad</h3>
+                <p className="text-blue-100 text-sm" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>Access boats worldwide through our dealer partner program</p>
               </div>
             </div>
             <Link href="/ownership-opportunities">
               <Button 
-                className="w-full mt-4 bg-white text-blue-600 hover:bg-gray-100 font-semibold"
+                className="w-full bg-white text-blue-600 hover:bg-gray-100 font-semibold"
+                style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}
                 onClick={enhancedScrollToTop}
               >
                 Start Your Ownership Journey
