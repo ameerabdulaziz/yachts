@@ -22,15 +22,15 @@ export default function OwnershipHomeScreen() {
   const [selectedModel, setSelectedModel] = useState("D42");
 
   const yachtModels = [
-    { id: "E23", name: "E23", length: "7.20m", passengers: 8, price: "€280K", sharesFrom: "€28K", image: "https://static.wixstatic.com/media/0fb4c8_ec7a4e7e3cf94c6eb4fe55ac73f3e2e9~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_E23.jpg" },
     { id: "D29", name: "D29", length: "8.50m", passengers: 8, price: "€350K", sharesFrom: "€35K", image: "https://static.wixstatic.com/media/0fb4c8_8a1bc7a5a7044c0b9e3b3e5a1f2c3d4e~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D29.jpg" },
     { id: "D32", name: "D32", length: "9.90m", passengers: 10, price: "€480K", sharesFrom: "€48K", image: "https://static.wixstatic.com/media/0fb4c8_5f6e7d8c9a1b2c3d4e5f6a7b8c9d0e1f~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D32.jpg" },
     { id: "D36", name: "D36", length: "11.50m", passengers: 12, price: "€650K", sharesFrom: "€65K", image: "https://static.wixstatic.com/media/0fb4c8_fbbb6a2569c747d48881f7ac065b947a~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D36.jpg" },
     { id: "D42", name: "D42", length: "12.64m", passengers: 12, price: "€890K", sharesFrom: "€89K", image: "https://static.wixstatic.com/media/0fb4c8_008f1545c8764f8789a2b7415ca9dde7~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D42.jpg" },
+    { id: "D50", name: "D50", length: "15.24m", passengers: 12, price: "€1.5M", sharesFrom: "€150K", image: "https://static.wixstatic.com/media/0fb4c8_60988eb5cf834fcb876c1d06bd8af594~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D50.jpg" },
     { id: "D60", name: "D60", length: "18.50m", passengers: 12, price: "€2.1M", sharesFrom: "€175K", image: "https://static.wixstatic.com/media/0fb4c8_60988eb5cf834fcb876c1d06bd8af594~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D50.jpg" }
   ];
 
-  const selectedYacht = yachtModels.find(y => y.id === selectedModel) || yachtModels[4];
+  const selectedYacht = yachtModels.find(y => y.id === selectedModel) || yachtModels[3];
 
   const ownershipBenefits = [
     { icon: Crown, title: "Premium Ownership", desc: "Fractional ownership with full yacht privileges" },
@@ -71,20 +71,17 @@ export default function OwnershipHomeScreen() {
         {/* Turquoise Sea Background */}
         <div className="absolute inset-0 bg-gradient-ocean">
           <div className="absolute inset-0" style={{
-            backgroundImage: `url('https://images.pexels.com/photos/1435752/pexels-photo-1435752.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&fit=crop')`,
+            backgroundImage: `url('https://images.pexels.com/photos/3408744/pexels-photo-3408744.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&fit=crop')`,
             backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            opacity: 0.8
+            backgroundPosition: 'top center',
+            opacity: 0.6
           }} />
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-400/30 to-teal-500/40" />
+          <div className="absolute inset-0 bg-gradient-to-b from-blue-300/20 via-cyan-400/30 to-blue-600/50" />
         </div>
         
         <div className="relative z-10">
-          <div className="text-center mb-6">
-            <div className="text-center mb-3">
-              <h1 className="text-3xl font-bold text-gray-800">Own Your Dream Yacht</h1>
-            </div>
-            <p className="text-gray-600 text-lg">Fractional ownership starting from €28K</p>
+          <div className="text-center mb-4">
+            <h1 className="text-3xl font-bold text-gray-800">Own Your Dream Yacht</h1>
           </div>
           
           <div className="bg-white rounded-2xl p-6 shadow-xl">
@@ -182,13 +179,10 @@ export default function OwnershipHomeScreen() {
 
       {/* Available Shares - Priority Section */}
       <section className="px-4 py-6">
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl font-bold text-gray-900">Available Shares</h2>
-          <Link href="/share-marketplace">
-            <Button variant="outline" size="sm" className="border-blue-600 text-blue-600 hover:bg-blue-50">
-              View All <ArrowRight className="w-4 h-4 ml-1" />
-            </Button>
-          </Link>
+        <div className="mb-4">
+          <div className="flex items-center justify-between">
+            <h2 className="text-xl font-bold text-gray-900">Available Shares</h2>
+          </div>
         </div>
         
         <div className="space-y-3">
@@ -220,6 +214,14 @@ export default function OwnershipHomeScreen() {
               </CardContent>
             </Card>
           ))}
+        </div>
+        
+        <div className="text-center mt-6">
+          <Link href="/share-marketplace">
+            <Button variant="outline" className="border-blue-600 text-blue-600 hover:bg-blue-50 px-8">
+              View All Available Shares <ArrowRight className="w-4 h-4 ml-2" />
+            </Button>
+          </Link>
         </div>
       </section>
 
