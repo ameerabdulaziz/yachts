@@ -58,13 +58,19 @@ export default function YachtOwnershipDetailScreen() {
         </div>
       </header>
 
-      {/* Image Gallery */}
-      <section className="relative">
-        <img 
-          src={opportunity.yacht.images?.[currentImageIndex] || opportunity.yacht.images?.[0]} 
-          alt={opportunity.yacht.name}
-          className="w-full h-80 object-cover"
-        />
+      {/* Hero Section with Sea Background */}
+      <section className="relative h-80 overflow-hidden">
+        {/* Turquoise Sea Background */}
+        <div className="absolute inset-0 bg-gradient-ocean">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `url('https://images.pexels.com/photos/1001682/pexels-photo-1001682.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&fit=crop')`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            opacity: 0.8
+          }} />
+          <div className="absolute inset-0 bg-gradient-to-br from-cyan-300/30 to-blue-500/40" />
+        </div>
+        
         <div className="absolute bottom-4 right-4 bg-black/50 text-white px-3 py-1 rounded-full text-sm">
           {currentImageIndex + 1} / {opportunity.yacht.images?.length || 1}
         </div>
@@ -251,16 +257,16 @@ export default function YachtOwnershipDetailScreen() {
         {/* Action Buttons */}
         <div className="space-y-3 pb-6">
           <Link href={`/ownership-inquiry/${opportunity.id}`}>
-            <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-xl font-semibold text-lg hover:shadow-lg transition-all duration-300">
+            <Button className="w-full bg-blue-600 text-white p-4 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 hover:bg-blue-700">
               Call Nauttec Team
             </Button>
           </Link>
           
           <div className="grid grid-cols-2 gap-3">
-            <Button variant="outline" className="py-3 rounded-xl font-semibold">
+            <Button variant="outline" className="p-4 rounded-xl font-semibold hover:shadow-lg transition-all duration-300">
               Schedule Viewing
             </Button>
-            <Button variant="outline" className="py-3 rounded-xl font-semibold">
+            <Button variant="outline" className="p-4 rounded-xl font-semibold hover:shadow-lg transition-all duration-300">
               Download Prospectus
             </Button>
           </div>
