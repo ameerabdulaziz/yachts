@@ -40,10 +40,10 @@ export default function OwnershipOpportunitiesScreen() {
         </div>
         
         <div className="relative z-10">
-          <div className="text-center mb-4">
-            <TrendingUp className="w-16 h-16 mx-auto mb-4 text-gray-800" />
-            <h2 className="text-2xl font-bold mb-2 text-gray-800">Fractional Yacht Ownership</h2>
-            <p className="text-gray-700">Own a share of luxury yachts and enjoy exclusive access</p>
+          <div className="bg-white rounded-2xl p-6 text-center shadow-lg">
+            <PieChart className="w-16 h-16 mx-auto mb-4 text-primary" />
+            <h2 className="text-2xl font-bold mb-2 text-gray-900">Fractional Yacht Ownership</h2>
+            <p className="text-gray-600">Luxury Yachting. Full Experience. Fractional Price.</p>
           </div>
         </div>
       </section>
