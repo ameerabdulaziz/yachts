@@ -22,12 +22,12 @@ export default function OwnershipHomeScreen() {
   const [selectedModel, setSelectedModel] = useState("D42");
 
   const yachtModels = [
-    { id: "E23", name: "E23", length: "7.20m", passengers: 8, price: "€280K", sharesFrom: "€28K", image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80" },
-    { id: "D29", name: "D29", length: "8.50m", passengers: 8, price: "€350K", sharesFrom: "€35K", image: "https://images.unsplash.com/photo-1566024287286-457247b70310?auto=format&fit=crop&w=800&q=80" },
-    { id: "D32", name: "D32", length: "9.90m", passengers: 10, price: "€480K", sharesFrom: "€48K", image: "https://images.unsplash.com/photo-1570479398395-87749b0aeca2?auto=format&fit=crop&w=800&q=80" },
-    { id: "D36", name: "D36", length: "11.50m", passengers: 12, price: "€650K", sharesFrom: "€65K", image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&q=80" },
-    { id: "D42", name: "D42", length: "12.64m", passengers: 12, price: "€890K", sharesFrom: "€89K", image: "https://images.unsplash.com/photo-1593351415075-3bac8c2b7e3b?auto=format&fit=crop&w=800&q=80" },
-    { id: "D60", name: "D60", length: "18.50m", passengers: 12, price: "€2.1M", sharesFrom: "€175K", image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?auto=format&fit=crop&w=800&q=80" }
+    { id: "E23", name: "E23", length: "7.20m", passengers: 8, price: "€280K", sharesFrom: "€28K", image: "https://images.pexels.com/photos/1001682/pexels-photo-1001682.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&fit=crop" },
+    { id: "D29", name: "D29", length: "8.50m", passengers: 8, price: "€350K", sharesFrom: "€35K", image: "https://images.pexels.com/photos/210411/pexels-photo-210411.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&fit=crop" },
+    { id: "D32", name: "D32", length: "9.90m", passengers: 10, price: "€480K", sharesFrom: "€48K", image: "https://images.pexels.com/photos/1320684/pexels-photo-1320684.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&fit=crop" },
+    { id: "D36", name: "D36", length: "11.50m", passengers: 12, price: "€650K", sharesFrom: "€65K", image: "https://images.pexels.com/photos/416978/pexels-photo-416978.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&fit=crop" },
+    { id: "D42", name: "D42", length: "12.64m", passengers: 12, price: "€890K", sharesFrom: "€89K", image: "https://images.pexels.com/photos/1266810/pexels-photo-1266810.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&fit=crop" },
+    { id: "D60", name: "D60", length: "18.50m", passengers: 12, price: "€2.1M", sharesFrom: "€175K", image: "https://images.pexels.com/photos/2422915/pexels-photo-2422915.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&fit=crop" }
   ];
 
   const selectedYacht = yachtModels.find(y => y.id === selectedModel) || yachtModels[4];
@@ -82,9 +82,9 @@ export default function OwnershipHomeScreen() {
         <div className="relative z-10">
           <div className="text-center mb-6">
             <div className="text-center mb-3">
-              <h1 className="text-3xl font-bold">Own Your Dream Yacht</h1>
+              <h1 className="text-3xl font-bold text-gray-800">Own Your Dream Yacht</h1>
             </div>
-            <p className="text-blue-100 text-lg">Fractional ownership starting from €28K</p>
+            <p className="text-gray-600 text-lg">Fractional ownership starting from €28K</p>
           </div>
           
           <div className="bg-white rounded-2xl p-6 shadow-xl">
@@ -116,7 +116,11 @@ export default function OwnershipHomeScreen() {
                   variant={selectedModel === yacht.id ? "default" : "outline"}
                   size="sm"
                   onClick={() => setSelectedModel(yacht.id)}
-                  className={`text-xs ${selectedModel === yacht.id ? "bg-blue-600" : ""}`}
+                  className={`text-xs ${
+                    selectedModel === yacht.id 
+                      ? "bg-blue-600 text-white hover:bg-blue-700" 
+                      : "border-gray-300 text-gray-700 hover:bg-gray-50"
+                  }`}
                 >
                   {yacht.name}
                 </Button>
