@@ -105,7 +105,7 @@ export default function TopUpScreen() {
             backgroundImage: `url('https://images.pexels.com/photos/1001682/pexels-photo-1001682.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&fit=crop')`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            opacity: 0.8
+            opacity: 0.3
           }} />
           <div className="absolute inset-0 bg-gradient-to-br from-cyan-300/30 to-blue-500/40" />
         </div>
