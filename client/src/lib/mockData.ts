@@ -1,5 +1,6 @@
 import { Yacht, OwnershipOpportunity, Booking, FuelTransaction, Message } from "@shared/schema";
 import deAntonioD50 from "@assets/image_1754579474724.png";
+import deAntonioD50Aerial from "@assets/de antonio D50 (1)_1754331061302.jpg";
 
 export const mockYachts: (Yacht & { owner: { name: string; avatar: string; verified: boolean; rating: number } })[] = [
   {
@@ -377,7 +378,11 @@ export const mockOwnershipOpportunities: (OwnershipOpportunity & { yacht: Yacht 
       cabins: 2,
       length: "50",
       yearBuilt: 2026,
-      images: ["https://static.wixstatic.com/media/0fb4c8_1105b00d73ee4ddc9f1ad1d4b74d9ece~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D50.jpg"],
+      images: [
+        deAntonioD50,
+        deAntonioD50Aerial,
+        "https://static.wixstatic.com/media/0fb4c8_6858e9c5176b4ce29966b597a896ba3df000.jpg/v1/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0fb4c8_6858e9c5176b4ce29966b597a896ba3df000.jpg"
+      ],
       amenities: ["Hidden Outboard Engines", "Flexiteek Synthetic Teak Deck", "Outdoor Kitchen", "Fusion Audio System", "Simrad Navigation", "Electric Windlass", "LED Lighting", "Freshwater Shower"],
       ownerId: "owner-1",
       isActive: true,
