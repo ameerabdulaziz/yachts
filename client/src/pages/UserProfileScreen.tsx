@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import BottomNavigation from "@/components/BottomNavigation";
 import { ArrowLeft, Edit3, Star, Ship, PieChart, MessageCircle, Settings, LogOut, Camera, Crown } from "lucide-react";
+import seaBackground from "@assets/image_1754575606863.png";
 
 export default function UserProfileScreen() {
   const user = {
@@ -43,43 +44,45 @@ export default function UserProfileScreen() {
 
       {/* Profile Header */}
       <section className="relative px-4 py-8 text-white overflow-hidden">
-        {/* Turquoise Sea Background - Same as Home Page */}
+        {/* Turquoise Sea Background */}
         <div className="absolute inset-0 bg-gradient-ocean">
           <div className="absolute inset-0" style={{
-            backgroundImage: `url('https://images.pexels.com/photos/1001682/pexels-photo-1001682.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&fit=crop')`,
+            backgroundImage: `url(${seaBackground})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            opacity: 0.8
+            opacity: 0.9
           }} />
-          <div className="absolute inset-0 bg-gradient-to-br from-cyan-300/30 to-blue-500/40" />
+          <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-blue-200/20 to-blue-500/30" />
         </div>
         
-        <div className="relative z-10 text-center">
-          <div className="relative inline-block mb-4">
-            <Avatar className="w-24 h-24 border-4 border-white">
-              <AvatarImage src={user.avatar} alt={user.name} />
-              <AvatarFallback className="text-xl font-bold bg-gray-300 text-gray-700">
-                {user.name.split(' ').map(n => n[0]).join('')}
-              </AvatarFallback>
-            </Avatar>
-            <Button 
-              size="sm"
-              className="absolute -bottom-2 -right-2 w-8 h-8 rounded-full bg-white text-primary hover:bg-gray-100 p-0"
-            >
-              <Camera className="w-4 h-4" />
-            </Button>
-          </div>
-          <h2 className="text-2xl font-bold mb-1">{user.name}</h2>
-          <p className="text-blue-100 mb-1">{user.email}</p>
-          <p className="text-blue-200 text-sm">{user.joinDate}</p>
-          
-          <div className="flex items-center justify-center space-x-1 mt-3">
-            <div className="flex text-yellow-400">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-4 h-4 fill-current" />
-              ))}
+        <div className="relative z-10">
+          <div className="bg-white rounded-2xl p-6 mx-4 shadow-xl text-center">
+            <div className="relative inline-block mb-4">
+              <Avatar className="w-24 h-24 border-4 border-gray-100">
+                <AvatarImage src={user.avatar} alt={user.name} />
+                <AvatarFallback className="text-xl font-bold bg-gray-300 text-gray-700">
+                  {user.name.split(' ').map(n => n[0]).join('')}
+                </AvatarFallback>
+              </Avatar>
+              <Button 
+                size="sm"
+                className="absolute -bottom-2 -right-2 w-8 h-8 rounded-full bg-blue-600 text-white hover:bg-blue-700 p-0"
+              >
+                <Camera className="w-4 h-4" />
+              </Button>
             </div>
-            <span className="text-white ml-2">{user.rating} rating</span>
+            <h2 className="text-2xl font-bold mb-1 text-gray-900">{user.name}</h2>
+            <p className="text-gray-600 mb-1">{user.email}</p>
+            <p className="text-gray-500 text-sm">{user.joinDate}</p>
+            
+            <div className="flex items-center justify-center space-x-1 mt-3">
+              <div className="flex text-yellow-500">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-4 h-4 fill-current" />
+                ))}
+              </div>
+              <span className="text-gray-700 ml-2">{user.rating} rating</span>
+            </div>
           </div>
         </div>
       </section>

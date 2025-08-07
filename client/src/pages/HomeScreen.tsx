@@ -7,6 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import BottomNavigation from "@/components/BottomNavigation";
 import { Search, Heart, Star, Users, Bed, Calendar, PieChart, ChevronDown } from "lucide-react";
 import nauttecLogo from "@assets/Nauttec Logo_1754330395988.png";
+import seaBackground from "@assets/image_1754575606863.png";
 import { mockYachts, mockOwnershipOpportunities } from "@/lib/mockData";
 
 export default function HomeScreen() {
@@ -47,12 +48,12 @@ export default function HomeScreen() {
         {/* Turquoise Sea Background */}
         <div className="absolute inset-0 bg-gradient-ocean">
           <div className="absolute inset-0" style={{
-            backgroundImage: `url('https://images.pexels.com/photos/1001682/pexels-photo-1001682.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&fit=crop')`,
+            backgroundImage: `url(${seaBackground})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            opacity: 0.8
+            opacity: 0.9
           }} />
-          <div className="absolute inset-0 bg-gradient-to-br from-cyan-300/30 to-blue-500/40" />
+          <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-blue-200/20 to-blue-500/30" />
         </div>
         
         <div className="relative z-10">

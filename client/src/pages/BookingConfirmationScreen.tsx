@@ -2,6 +2,7 @@ import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { CheckCircle, Calendar, Users, MapPin, Phone, Mail, Download, Share } from "lucide-react";
+import seaBackground from "@assets/image_1754575606863.png";
 
 export default function BookingConfirmationScreen() {
   const booking = {
@@ -26,19 +27,22 @@ export default function BookingConfirmationScreen() {
         {/* Turquoise Sea Background */}
         <div className="absolute inset-0 bg-gradient-ocean">
           <div className="absolute inset-0" style={{
-            backgroundImage: `url('https://images.pexels.com/photos/1001682/pexels-photo-1001682.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&fit=crop')`,
+            backgroundImage: `url(${seaBackground})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            opacity: 0.8
+            opacity: 0.9
           }} />
-          <div className="absolute inset-0 bg-gradient-to-br from-cyan-300/30 to-blue-500/40" />
+          <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-blue-200/20 to-blue-500/30" />
         </div>
+        
         <div className="relative z-10">
-        <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-4">
-          <CheckCircle className="w-12 h-12 text-green-600" />
-        </div>
-        <h1 className="text-2xl font-bold mb-2">Booking Confirmed!</h1>
-        <p className="text-blue-100">Your luxury yacht experience awaits</p>
+          <div className="bg-white rounded-2xl p-6 mx-4 shadow-xl text-center">
+            <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <CheckCircle className="w-12 h-12 text-green-600" />
+            </div>
+            <h1 className="text-2xl font-bold mb-2 text-gray-900">Booking Confirmed!</h1>
+            <p className="text-gray-600">Your luxury yacht experience awaits</p>
+          </div>
         </div>
       </section>
 

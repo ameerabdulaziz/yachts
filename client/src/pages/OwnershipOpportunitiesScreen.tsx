@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import BottomNavigation from "@/components/BottomNavigation";
 import { ArrowLeft, Calendar, MapPin, TrendingUp, Filter, PieChart, Users } from "lucide-react";
+import seaBackground from "@assets/image_1754575606863.png";
 import { mockOwnershipOpportunities } from "@/lib/mockData";
 
 export default function OwnershipOpportunitiesScreen() {
@@ -30,19 +31,20 @@ export default function OwnershipOpportunitiesScreen() {
         {/* Turquoise Sea Background */}
         <div className="absolute inset-0 bg-gradient-ocean">
           <div className="absolute inset-0" style={{
-            backgroundImage: `url('https://images.pexels.com/photos/1001682/pexels-photo-1001682.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&fit=crop')`,
+            backgroundImage: `url(${seaBackground})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            opacity: 0.8
+            opacity: 0.9
           }} />
-          <div className="absolute inset-0 bg-gradient-to-br from-cyan-300/30 to-blue-500/40" />
+          <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-blue-200/20 to-blue-500/30" />
         </div>
+        
         <div className="relative z-10">
-        <div className="text-center">
-          <TrendingUp className="w-16 h-16 mx-auto mb-4 text-white" />
-          <h2 className="text-2xl font-bold mb-2">Fractional Yacht Ownership</h2>
-          <p className="text-blue-100">Own a share of luxury yachts and enjoy exclusive access</p>
-        </div>
+          <div className="text-center mb-4">
+            <TrendingUp className="w-16 h-16 mx-auto mb-4 text-gray-800" />
+            <h2 className="text-2xl font-bold mb-2 text-gray-800">Fractional Yacht Ownership</h2>
+            <p className="text-gray-700">Own a share of luxury yachts and enjoy exclusive access</p>
+          </div>
         </div>
       </section>
 

@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import BottomNavigation from "@/components/BottomNavigation";
 import { Ship, TrendingUp, Calendar, Users, Star, Euro, Plus, ArrowRight, Bell, Search } from "lucide-react";
+import seaBackground from "@assets/image_1754575606863.png";
 
 export default function DashboardScreen() {
   const userStats = {
@@ -65,7 +66,7 @@ export default function DashboardScreen() {
         {/* Turquoise Sea Background */}
         <div className="absolute inset-0 bg-gradient-ocean">
           <div className="absolute inset-0" style={{
-            backgroundImage: `url('https://images.pexels.com/photos/1001682/pexels-photo-1001682.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&fit=crop')`,
+            backgroundImage: `url(${seaBackground})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             opacity: 0.7
