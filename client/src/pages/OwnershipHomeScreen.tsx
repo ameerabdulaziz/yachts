@@ -142,13 +142,20 @@ export default function OwnershipHomeScreen() {
 
             <div className="grid grid-cols-2 gap-3">
               <Link href={`/ownership/${selectedYacht.id}`}>
-                <Button className="w-full bg-blue-600 text-white p-4 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 hover:bg-blue-700 border-0">
+                <Button 
+                  className="w-full bg-blue-600 text-white p-4 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 hover:bg-blue-700 border-0"
+                  style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}
+                >
                   <Anchor className="w-4 h-4 mr-2" />
                   Own This Yacht
                 </Button>
               </Link>
               <Link href="/ownership-opportunities">
-                <Button variant="outline" className="w-full p-4 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 border-blue-600 text-blue-600 hover:bg-blue-50">
+                <Button 
+                  variant="outline" 
+                  className="w-full p-4 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 border-blue-600 text-blue-600 hover:bg-blue-50"
+                  style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}
+                >
                   <ArrowRight className="w-4 h-4 mr-2" />
                   View All
                 </Button>
