@@ -1,10 +1,11 @@
 import { Link, useLocation } from "wouter";
-import { Home, Ship, TrendingUp, User } from "lucide-react";
+import { Home, Ship, TrendingUp, User, Waves } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { enhancedScrollToTop } from "@/utils/scrollToTop";
 
 const tabs = [
-  { icon: Home, label: "Home", route: "/home" },
+  { icon: Home, label: "Home", route: "/ownership-home" },
+  { icon: Waves, label: "Charter", route: "/home" },
   { icon: Ship, label: "My Boats", route: "/my-boats" },
   { icon: TrendingUp, label: "Own a Yacht", route: "/ownership-opportunities" },
   { icon: User, label: "Profile", route: "/profile" }
@@ -15,7 +16,7 @@ export default function BottomNavigation() {
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-2 z-40">
-      <div className="flex items-center justify-around">
+      <div className="flex items-center justify-between px-2">
         {tabs.map(({ icon: Icon, label, route }) => {
           const isActive = location === route;
           return (

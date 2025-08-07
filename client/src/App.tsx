@@ -76,7 +76,7 @@ function Router() {
       <ScrollToTop />
       <ScrollHandler />
       <Switch>
-        <Route path="/" component={SplashScreen} />
+        <Route path="/" component={OwnershipHomeScreen} />
         <Route path="/splash" component={SplashScreen} />
         <Route path="/login" component={PhoneLoginScreen} />
         <Route path="/verify-otp" component={OTPVerificationScreen} />
