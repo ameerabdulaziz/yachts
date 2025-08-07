@@ -14,8 +14,7 @@ const tabs = [
 export default function BottomNavigation() {
   const [location] = useLocation();
   
-  // Debug log for mobile testing - shows what URL we're actually on
-  console.log("Current location:", location, "Full URL:", window.location.href, "Is mobile:", navigator.userAgent.includes("Mobile"));
+
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-2 z-40">

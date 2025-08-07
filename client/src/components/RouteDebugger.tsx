@@ -13,7 +13,13 @@ export default function RouteDebugger() {
     console.log('Search:', window.location.search);
     console.log('Hash:', window.location.hash);
     console.log('User Agent:', navigator.userAgent);
+    console.log('Page title:', document.title);
+    console.log('Body classes:', document.body.className);
     console.log('===================');
+    
+    // Check which component should be rendered
+    const expectedComponent = location === '/' ? 'OwnershipHomeScreen' : 'Other';
+    console.log('Expected component for route "' + location + '":', expectedComponent);
     
     // If we detect /hone, immediately redirect
     if (window.location.pathname === '/hone' || location === '/hone') {

@@ -84,7 +84,7 @@ function Router() {
 
   return (
     <>
-      <RouteDebugger />
+
       <ScrollToTop />
       <ScrollHandler />
       <Switch>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -43,6 +43,8 @@ export default function OwnershipHomeScreen() {
     { icon: Euro, title: "Revenue from Renting", desc: "Earn income when not using your yacht" },
     { icon: Users, title: "Co-Owner Network", desc: "Connect with like-minded yacht enthusiasts" }
   ];
+
+
 
   return (
     <div className="min-h-screen bg-gray-50 pb-20">
