@@ -83,7 +83,8 @@ export default function BookingCalendarScreen() {
     
     // Generate 42 days (6 weeks x 7 days) to fill the calendar grid
     for (let i = 0; i < 42; i++) {
-      const dateStr = current.toISOString().split('T')[0];
+      // Create timezone-safe date string without UTC conversion
+      const dateStr = `${current.getFullYear()}-${String(current.getMonth() + 1).padStart(2, '0')}-${String(current.getDate()).padStart(2, '0')}`;
       const isCurrentMonth = current.getMonth() === month;
       const dayInfo = isCurrentMonth && bookingData ? bookingData.getDateStatus(dateStr) : { status: "unavailable" };
       
