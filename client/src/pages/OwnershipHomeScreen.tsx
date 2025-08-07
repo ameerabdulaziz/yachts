@@ -23,12 +23,12 @@ export default function OwnershipHomeScreen() {
   const [selectedModel, setSelectedModel] = useState("D42");
 
   const yachtModels = [
-    { id: "D29", name: "D29", length: "8.50m", passengers: 8, price: "€350K", sharesFrom: "€35K", image: "https://static.wixstatic.com/media/0fb4c8_8a1bc7a5a7044c0b9e3b3e5a1f2c3d4e~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D29.jpg" },
-    { id: "D32", name: "D32", length: "9.90m", passengers: 10, price: "€480K", sharesFrom: "€48K", image: "https://static.wixstatic.com/media/0fb4c8_5f6e7d8c9a1b2c3d4e5f6a7b8c9d0e1f~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D32.jpg" },
+    { id: "D29", name: "D29", length: "8.50m", passengers: 8, price: "€350K", sharesFrom: "€35K", image: "https://static.wixstatic.com/media/0fb4c8_b9744cfa841b4c4388ad78ac9b49bbe7~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D29.jpg" },
+    { id: "D32", name: "D32", length: "9.90m", passengers: 10, price: "€480K", sharesFrom: "€48K", image: "https://static.wixstatic.com/media/0fb4c8_6cbbd012fc0645009bc4a91a412b293a~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D32.jpg" },
     { id: "D36", name: "D36", length: "11.50m", passengers: 12, price: "€650K", sharesFrom: "€65K", image: "https://static.wixstatic.com/media/0fb4c8_fbbb6a2569c747d48881f7ac065b947a~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D36.jpg" },
     { id: "D42", name: "D42", length: "12.64m", passengers: 12, price: "€890K", sharesFrom: "€89K", image: "https://static.wixstatic.com/media/0fb4c8_008f1545c8764f8789a2b7415ca9dde7~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D42.jpg" },
     { id: "D50", name: "D50", length: "15.24m", passengers: 12, price: "€1.5M", sharesFrom: "€150K", image: "https://static.wixstatic.com/media/0fb4c8_60988eb5cf834fcb876c1d06bd8af594~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D50.jpg" },
-    { id: "D60", name: "D60", length: "18.50m", passengers: 12, price: "€2.1M", sharesFrom: "€175K", image: "https://static.wixstatic.com/media/0fb4c8_60988eb5cf834fcb876c1d06bd8af594~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D50.jpg" }
+    { id: "D60", name: "D60", length: "18.50m", passengers: 12, price: "€2.1M", sharesFrom: "€175K", image: "https://static.wixstatic.com/media/5c3629_a8b1aa6ff9244bddaf7383aa45b4afc1~mv2.jpg/v1/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/5c3629_a8b1aa6ff9244bddaf7383aa45b4afc1~mv2.jpg" }
   ];
 
   const selectedYacht = yachtModels.find(y => y.id === selectedModel) || yachtModels[3];
@@ -82,7 +82,7 @@ export default function OwnershipHomeScreen() {
         
         <div className="relative z-10">
           <div className="text-center mb-4">
-            <h1 className="text-3xl font-bold text-gray-800">Own Your Dream Yacht</h1>
+            <h1 className="text-3xl font-bold text-gray-800" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif' }}>Own Your Dream Yacht</h1>
           </div>
           
           <div className="bg-white rounded-2xl p-6 shadow-xl">
@@ -96,8 +96,8 @@ export default function OwnershipHomeScreen() {
             </div>
             
             <div className="text-center mb-4">
-              <h3 className="text-xl font-bold text-gray-900 mb-2">De Antonio {selectedYacht.name}</h3>
-              <div className="flex items-center justify-center space-x-4 text-sm text-gray-600 mb-4">
+              <h3 className="text-xl font-bold text-gray-900 mb-2" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif' }}>De Antonio {selectedYacht.name}</h3>
+              <div className="flex items-center justify-center space-x-4 text-sm text-gray-600 mb-4" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>
                 <span>{selectedYacht.length}</span>
                 <span>•</span>
                 <span>{selectedYacht.passengers} guests</span>
@@ -129,12 +129,12 @@ export default function OwnershipHomeScreen() {
             <div className="bg-blue-50 rounded-xl p-4 mb-4">
               <div className="grid grid-cols-2 gap-4">
                 <div className="text-center">
-                  <p className="text-sm text-gray-600 mb-1">Full Ownership</p>
-                  <p className="text-xl font-bold text-gray-900">{selectedYacht.price}</p>
+                  <p className="text-sm text-gray-600 mb-1" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>Full Ownership</p>
+                  <p className="text-xl font-bold text-gray-900" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif' }}>{selectedYacht.price}</p>
                 </div>
                 <div className="text-center border-l border-blue-200 pl-4">
-                  <p className="text-sm text-gray-600 mb-1">1/10 Share From</p>
-                  <p className="text-xl font-bold text-blue-600">{selectedYacht.sharesFrom}</p>
+                  <p className="text-sm text-gray-600 mb-1" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>1/10 Share From</p>
+                  <p className="text-xl font-bold text-blue-600" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif' }}>{selectedYacht.sharesFrom}</p>
                 </div>
               </div>
             </div>
@@ -159,7 +159,7 @@ export default function OwnershipHomeScreen() {
 
       {/* Ownership Benefits */}
       <section className="px-4 py-6">
-        <h2 className="text-xl font-bold text-gray-900 mb-4">Why Own with Yachtak?</h2>
+        <h2 className="text-xl font-bold text-gray-900 mb-4" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif' }}>Why Own with Nauttec?</h2>
         <div className="grid grid-cols-2 gap-4">
           {ownershipBenefits.map((benefit, index) => {
             const Icon = benefit.icon;
@@ -169,8 +169,8 @@ export default function OwnershipHomeScreen() {
                   <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
                     <Icon className="w-6 h-6 text-blue-600" />
                   </div>
-                  <h3 className="font-semibold text-gray-900 mb-1">{benefit.title}</h3>
-                  <p className="text-sm text-gray-600">{benefit.desc}</p>
+                  <h3 className="font-semibold text-gray-900 mb-1" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>{benefit.title}</h3>
+                  <p className="text-sm text-gray-600" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>{benefit.desc}</p>
                 </CardContent>
               </Card>
             );
@@ -180,49 +180,65 @@ export default function OwnershipHomeScreen() {
 
       {/* Available Shares - Priority Section */}
       <section className="px-4 py-6">
-        <div className="mb-4">
-          <div className="flex items-center justify-between">
-            <h2 className="text-xl font-bold text-gray-900">Available Shares</h2>
-          </div>
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-2xl font-bold text-gray-900" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif' }}>Available Shares</h2>
+          <Link href="/share-marketplace">
+            <Button 
+              variant="outline" 
+              size="sm" 
+              className="border-blue-500 text-blue-500 hover:bg-blue-50 font-medium px-4 py-2 rounded-lg"
+              style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}
+            >
+              View All <ArrowRight className="w-4 h-4 ml-1" />
+            </Button>
+          </Link>
         </div>
         
-        <div className="space-y-3">
+        <div className="grid gap-4">
           {[
-            { model: "D60", location: "El Gouna", shares: "2/10", price: "€175K", status: "Available", priority: true },
-            { model: "D42", location: "El Gouna", shares: "1/10", price: "€89K", status: "Last Share", priority: true },
-            { model: "D36", location: "El Gouna", shares: "3/10", price: "€65K", status: "Available", priority: false }
+            { model: "D60", location: "El Gouna", shares: "2/10", price: "€175K", status: "Available", priority: true, image: "https://static.wixstatic.com/media/5c3629_a8b1aa6ff9244bddaf7383aa45b4afc1~mv2.jpg/v1/fill/w_400,h_200,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/5c3629_a8b1aa6ff9244bddaf7383aa45b4afc1~mv2.jpg" },
+            { model: "D42", location: "El Gouna", shares: "1/10", price: "€89K", status: "Last Share", priority: true, image: "https://static.wixstatic.com/media/0fb4c8_008f1545c8764f8789a2b7415ca9dde7~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_400,h_200,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D42.jpg" },
+            { model: "D36", location: "El Gouna", shares: "3/10", price: "€65K", status: "Available", priority: false, image: "https://static.wixstatic.com/media/0fb4c8_fbbb6a2569c747d48881f7ac065b947a~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_400,h_200,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D36.jpg" }
           ].map((share, index) => (
-            <Card key={index} className="hover:shadow-md transition-shadow">
-              <CardContent className="p-4">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                      <Anchor className="w-6 h-6 text-blue-600" />
-                    </div>
-                    <div>
-                      <div className="flex items-center space-x-2">
-                        <h3 className="font-semibold text-gray-900">De Antonio {share.model}</h3>
-                        {share.priority && <Badge className="bg-orange-100 text-orange-800">Priority</Badge>}
-                      </div>
-                      <p className="text-sm text-gray-600">{share.location} • {share.shares} shares</p>
-                    </div>
+            <Card key={index} className="overflow-hidden hover:shadow-lg transition-all duration-300 border-0 shadow-md bg-white rounded-xl">
+              <CardContent className="p-0">
+                <div className="flex">
+                  <div className="w-32 h-24 flex-shrink-0">
+                    <img 
+                      src={share.image} 
+                      alt={`De Antonio ${share.model}`}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
-                  <div className="text-right">
-                    <p className="font-bold text-gray-900">{share.price}</p>
-                    <p className="text-sm text-green-600">{share.status}</p>
+                  <div className="flex-1 p-4 flex justify-between items-center">
+                    <div>
+                      <div className="flex items-center space-x-2 mb-1">
+                        <h3 className="font-semibold text-gray-900" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>
+                          De Antonio {share.model}
+                        </h3>
+                        {share.priority && (
+                          <Badge className="bg-orange-100 text-orange-700 text-xs px-2 py-1 rounded-full font-medium">
+                            Priority
+                          </Badge>
+                        )}
+                      </div>
+                      <p className="text-sm text-gray-500" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>
+                        {share.location} • {share.shares} shares
+                      </p>
+                    </div>
+                    <div className="text-right">
+                      <p className="font-bold text-gray-900 text-lg" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif' }}>
+                        {share.price}
+                      </p>
+                      <p className="text-sm text-green-600 font-medium" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>
+                        {share.status}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </CardContent>
             </Card>
           ))}
-        </div>
-        
-        <div className="text-center mt-6">
-          <Link href="/share-marketplace">
-            <Button variant="outline" className="border-blue-600 text-blue-600 hover:bg-blue-50 px-8">
-              View All Available Shares <ArrowRight className="w-4 h-4 ml-2" />
-            </Button>
-          </Link>
         </div>
       </section>
 

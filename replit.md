@@ -154,6 +154,13 @@ The application includes 31+ screens with comprehensive routing:
 # Recent Changes
 
 ## August 2025
+- **August 7, 2025**: Major UX and branding updates:
+  - Updated ownership home screen with iOS-native styling and SF Pro fonts
+  - Replaced all "Yachtak" references with "Nauttec" for consistent branding
+  - Enhanced scroll-to-top functionality across all screens
+  - Updated yacht model range to D29-D60 with authentic De Antonio visuals
+  - Redesigned Available Shares section with card-based layout similar to ownership opportunities
+  - Improved button visibility and text contrast throughout the application
 - **August 5, 2025**: Authentication system enhancement:
   - Added password-based login as primary authentication method
   - Maintained OTP verification as fallback option using tabs interface
