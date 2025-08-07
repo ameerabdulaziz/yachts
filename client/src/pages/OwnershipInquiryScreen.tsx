@@ -88,18 +88,34 @@ export default function OwnershipInquiryScreen() {
               <ArrowLeft className="w-5 h-5 text-gray-600" />
             </Button>
           </Link>
-          <h1 className="text-xl font-bold text-gray-900">Investment Inquiry</h1>
+          <h1 className="text-xl font-bold text-gray-900" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif' }}>Investment Inquiry</h1>
         </div>
       </header>
 
-      {/* Investment Summary */}
-      <section className="bg-gradient-ocean px-4 py-6 text-white">
-        <div className="text-center">
-          <h2 className="text-2xl font-bold mb-2">{opportunity.yacht.name}</h2>
-          <p className="text-blue-100 mb-4">{opportunity.shareFraction} Share Investment</p>
-          <div className="bg-white/20 rounded-xl p-4">
-            <p className="text-3xl font-bold">€{Number(opportunity.sharePrice).toLocaleString()}</p>
-            <p className="text-blue-100">per share</p>
+      {/* Hero Section with Seawater Background */}
+      <section className="relative px-4 py-8 overflow-hidden">
+        {/* Turquoise Sea Background */}
+        <div className="absolute inset-0 bg-gradient-ocean">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `url('https://images.unsplash.com/photo-1505142468610-359e7d316be0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=800')`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            opacity: 0.9
+          }} />
+          <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-blue-200/20 to-blue-500/30" />
+        </div>
+        
+        <div className="relative z-10">
+          <div className="text-center mb-4">
+            <h2 className="text-2xl font-bold text-gray-800 mb-2" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif' }}>{opportunity.yacht.name}</h2>
+            <p className="text-gray-700" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>{opportunity.shareFraction} Share Investment</p>
+          </div>
+          
+          <div className="bg-white rounded-2xl p-6 shadow-xl">
+            <div className="text-center">
+              <p className="text-3xl font-bold text-primary mb-1" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif' }}>€{Number(opportunity.sharePrice).toLocaleString()}</p>
+              <p className="text-gray-600" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>per share</p>
+            </div>
           </div>
         </div>
       </section>
@@ -192,28 +208,6 @@ export default function OwnershipInquiryScreen() {
               </div>
 
               <div>
-                <Label>Investment Experience</Label>
-                <RadioGroup value={formData.investmentExperience} onValueChange={(value) => setFormData({...formData, investmentExperience: value})}>
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="first-time" id="first-time" />
-                    <Label htmlFor="first-time">First-time investor</Label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="some-experience" id="some-experience" />
-                    <Label htmlFor="some-experience">Some investment experience</Label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="experienced" id="experienced" />
-                    <Label htmlFor="experienced">Experienced investor</Label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="professional" id="professional" />
-                    <Label htmlFor="professional">Financial professional</Label>
-                  </div>
-                </RadioGroup>
-              </div>
-
-              <div>
                 <Label>Investment Timeframe</Label>
                 <RadioGroup value={formData.timeframe} onValueChange={(value) => setFormData({...formData, timeframe: value})}>
                   <div className="flex items-center space-x-2">
@@ -286,7 +280,7 @@ export default function OwnershipInquiryScreen() {
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-gray-700">Annual Usage</span>
-                <span className="font-medium">{opportunity.usageWeeks * formData.sharesRequested} weeks</span>
+                <span className="font-medium">{opportunity.usageDaysPerYear} days</span>
               </div>
               <div className="border-t border-blue-200 pt-2 mt-3">
                 <div className="flex items-center justify-between">
