@@ -25,47 +25,47 @@ export default function FuelWalletScreen() {
         </div>
       </header>
 
-      {/* Balance Card with Sea Background */}
-      <section className="px-4 py-6">
-        <Card className="relative text-white shadow-xl overflow-hidden">
-          {/* Turquoise Sea Background */}
-          <div className="absolute inset-0 bg-gradient-ocean">
-            <div className="absolute inset-0" style={{
-              backgroundImage: `url('https://images.pexels.com/photos/1001682/pexels-photo-1001682.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&fit=crop')`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              opacity: 0.3
-            }} />
-            <div className="absolute inset-0 bg-gradient-to-br from-cyan-300/30 to-blue-500/40" />
-          </div>
-          
-          <CardContent className="relative z-10 p-6">
+      {/* Balance Section with Sea Background */}
+      <section className="relative px-4 py-8 text-white overflow-hidden">
+        {/* Turquoise Sea Background */}
+        <div className="absolute inset-0 bg-gradient-ocean">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `url('https://images.pexels.com/photos/1001682/pexels-photo-1001682.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&fit=crop')`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            opacity: 0.8
+          }} />
+          <div className="absolute inset-0 bg-gradient-to-br from-cyan-300/30 to-blue-500/40" />
+        </div>
+        
+        <div className="relative z-10">
+          <div className="bg-white rounded-2xl p-6 shadow-xl">
             <div className="text-center mb-6">
-              <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Fuel className="w-8 h-8 text-white" />
+              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Fuel className="w-8 h-8 text-blue-600" />
               </div>
-              <h2 className="text-lg font-medium text-blue-100 mb-2">Current Balance</h2>
-              <p className="text-4xl font-bold text-white">€{balance.toLocaleString()}</p>
+              <h2 className="text-lg font-medium text-gray-600 mb-2">Current Balance</h2>
+              <p className="text-4xl font-bold text-gray-900">€{balance.toLocaleString()}</p>
               <div className="flex items-center justify-center space-x-2 mt-2">
-                <TrendingUp className="w-4 h-4 text-green-300" />
-                <span className="text-green-300">+€{monthlyChange} this month</span>
+                <TrendingUp className="w-4 h-4 text-green-600" />
+                <span className="text-green-600">+€{monthlyChange} this month</span>
               </div>
             </div>
             
             <div className="grid grid-cols-2 gap-3">
               <Link href="/top-up">
-                <Button className="w-full bg-white text-primary hover:bg-gray-100 font-semibold p-4 rounded-xl hover:shadow-lg transition-all duration-300">
+                <Button className="w-full bg-blue-600 text-white p-4 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 hover:bg-blue-700">
                   <Plus className="w-4 h-4 mr-2" />
                   Top Up
                 </Button>
               </Link>
-              <Button variant="outline" className="w-full border-white text-white hover:bg-white/10 font-semibold p-4 rounded-xl hover:shadow-lg transition-all duration-300">
+              <Button variant="outline" className="w-full p-4 rounded-xl font-semibold hover:shadow-lg transition-all duration-300">
                 <Calendar className="w-4 h-4 mr-2" />
                 Auto-Pay
               </Button>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       </section>
 
       {/* Quick Stats */}
