@@ -13,7 +13,7 @@ import SplashScreen from "@/pages/SplashScreen";
 import PhoneLoginScreen from "@/pages/PhoneLoginScreen";
 import OTPVerificationScreen from "@/pages/OTPVerificationScreen";
 import AccountSetupScreen from "@/pages/AccountSetupScreen";
-import HomeScreen from "@/pages/HomeScreen";
+import CharterScreen from "@/pages/CharterScreen";
 import OwnershipHomeScreen from "@/pages/OwnershipHomeScreen";
 import OwnershipOpportunitiesScreen from "@/pages/OwnershipOpportunitiesScreen";
 import FuelWalletScreen from "@/pages/FuelWalletScreen";
@@ -79,11 +79,12 @@ function Router() {
       <Switch>
         <Route path="/" component={OwnershipHomeScreen} />
         <Route path="/hone" component={OwnershipHomeScreen} />
+        <Route path="/home" component={OwnershipHomeScreen} />
         <Route path="/splash" component={SplashScreen} />
         <Route path="/login" component={PhoneLoginScreen} />
         <Route path="/verify-otp" component={OTPVerificationScreen} />
         <Route path="/account-setup" component={AccountSetupScreen} />
-        <Route path="/home" component={HomeScreen} />
+        <Route path="/charter" component={CharterScreen} />
         <Route path="/ownership-home" component={OwnershipHomeScreen} />
         <Route path="/ownership-opportunities" component={OwnershipOpportunitiesScreen} />
         <Route path="/fuel-wallet" component={FuelWalletScreen} />

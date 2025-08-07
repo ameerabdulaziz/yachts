@@ -10,7 +10,7 @@ import nauttecLogo from "@assets/Nauttec Logo_1754330395988.png";
 import seaBackground from "@assets/image_1754575606863.png";
 import { mockYachts, mockOwnershipOpportunities } from "@/lib/mockData";
 
-export default function HomeScreen() {
+export default function CharterScreen() {
   const [location, setLocation] = useState("");
   const [guests, setGuests] = useState("");
   const [checkIn, setCheckIn] = useState("");

@@ -188,9 +188,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Handle mobile PWA redirect for /hone route
+  // Handle mobile PWA redirects
   app.get("/hone", (req, res) => {
     res.redirect(301, "/");
+  });
+  
+  app.get("/home", (req, res) => {
+    res.redirect(301, "/charter");
   });
 
   // Messaging routes
