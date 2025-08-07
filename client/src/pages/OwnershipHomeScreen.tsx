@@ -37,8 +37,8 @@ export default function OwnershipHomeScreen() {
   const selectedYacht = yachtModels.find(y => y.id === selectedModel) || yachtModels[3];
 
   const ownershipBenefits = [
-    { icon: Crown, title: "Premium Ownership", desc: "Fractional ownership with full yacht privileges" },
     { icon: Star, title: "Hassle Free", desc: "Complete management and maintenance included" },
+    { icon: MapPin, title: "Global Access", desc: "Free days abroad through our dealer partner network" },
     { icon: Euro, title: "Revenue from Renting", desc: "Earn income when not using your yacht" },
     { icon: Users, title: "Co-Owner Network", desc: "Connect with like-minded yacht enthusiasts" }
   ];
