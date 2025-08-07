@@ -5,9 +5,26 @@
 /* Force scroll to top on page navigation */
 html {
   scroll-behavior: auto !important;
+  overflow-x: hidden;
 }
 
 body {
+  scroll-behavior: auto !important;
+  overflow-x: hidden;
+}
+
+/* Ensure no smooth scrolling interferes */
+* {
+  scroll-behavior: auto !important;
+}
+
+/* Force scroll position reset */
+html, body {
+  scroll-padding-top: 0 !important;
+}
+
+/* Reset scroll on route changes */
+.route-container {
   scroll-behavior: auto !important;
 }
 
