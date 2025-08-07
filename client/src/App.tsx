@@ -47,10 +47,20 @@ import BoatOwnershipManagementScreen from "@/pages/BoatOwnershipManagementScreen
 import BookingCalendarScreen from "@/pages/BookingCalendarScreen";
 import ShareTradingScreen from "@/pages/ShareTradingScreen";
 import RedirectToOwnership from "@/components/RedirectToOwnership";
+import RouteDebugger from "@/components/RouteDebugger";
 
 function Router() {
   // Force scroll to top on any route change
   const [location] = useLocation();
+  
+  // Immediate redirect if landing on /hone
+  useEffect(() => {
+    if (location === '/hone') {
+      console.log('Detected /hone route, redirecting to /');
+      window.history.replaceState({}, '', '/');
+      window.location.reload();
+    }
+  }, [location]);
   
   useEffect(() => {
     // Immediate scroll to top
@@ -74,6 +84,7 @@ function Router() {
 
   return (
     <>
+      <RouteDebugger />
       <ScrollToTop />
       <ScrollHandler />
       <Switch>
