@@ -3,6 +3,7 @@ import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import ScrollToTop from "@/components/ScrollToTop";
 import NotFound from "@/pages/not-found";
 
 // Import all screens
@@ -45,47 +46,50 @@ import ShareTradingScreen from "@/pages/ShareTradingScreen";
 
 function Router() {
   return (
-    <Switch>
-      <Route path="/" component={SplashScreen} />
-      <Route path="/splash" component={SplashScreen} />
-      <Route path="/login" component={PhoneLoginScreen} />
-      <Route path="/verify-otp" component={OTPVerificationScreen} />
-      <Route path="/account-setup" component={AccountSetupScreen} />
-      <Route path="/home" component={HomeScreen} />
-      <Route path="/ownership-opportunities" component={OwnershipOpportunitiesScreen} />
-      <Route path="/fuel-wallet" component={FuelWalletScreen} />
-      <Route path="/notifications" component={NotificationCenterScreen} />
-      <Route path="/profile" component={UserProfileScreen} />
-      <Route path="/yacht-details/:id" component={YachtDetailsScreen} />
-      <Route path="/booking/:id" component={BookingCheckoutScreen} />
-      <Route path="/booking-checkout" component={BookingCheckoutScreen} />
-      <Route path="/booking-confirmation" component={BookingConfirmationScreen} />
-      <Route path="/my-bookings" component={MyBookingsScreen} />
-      <Route path="/reservation-detail/:id" component={ReservationDetailScreen} />
-      <Route path="/ownership/:id" component={YachtOwnershipDetailScreen} />
-      <Route path="/ownership-inquiry/:id" component={OwnershipInquiryScreen} />
-      <Route path="/share-marketplace" component={ShareMarketplaceScreen} />
-      <Route path="/share-listing/:id" component={ShareListingDetailScreen} />
-      <Route path="/list-share-for-sale" component={ListShareForSaleScreen} />
-      <Route path="/share-purchase-confirmation/:id" component={SharePurchaseConfirmationScreen} />
-      <Route path="/owner-dashboard" component={OwnerDashboardScreen} />
-      <Route path="/boat-management/:id" component={BoatManagementScreen} />
-      <Route path="/add-boat-listing" component={AddBoatListingScreen} />
-      <Route path="/boat-calendar/:id" component={BoatCalendarScreen} />
-      <Route path="/waitlist-management" component={WaitlistManagementScreen} />
-      <Route path="/messages" component={MessagingCenterScreen} />
-      <Route path="/chat/:id" component={ChatThreadScreen} />
-      <Route path="/edit-profile" component={EditProfileScreen} />
-      <Route path="/settings" component={SettingsScreen} />
-      <Route path="/top-up" component={TopUpScreen} />
-      <Route path="/dashboard" component={DashboardScreen} />
-      <Route path="/dev-navigation" component={DevNavigationScreen} />
-      <Route path="/my-boats" component={MyBoatsScreen} />
-      <Route path="/boat-ownership/:id" component={BoatOwnershipManagementScreen} />
-      <Route path="/booking-calendar/:id" component={BookingCalendarScreen} />
-      <Route path="/share-trading" component={ShareTradingScreen} />
-      <Route component={NotFound} />
-    </Switch>
+    <>
+      <ScrollToTop />
+      <Switch>
+        <Route path="/" component={SplashScreen} />
+        <Route path="/splash" component={SplashScreen} />
+        <Route path="/login" component={PhoneLoginScreen} />
+        <Route path="/verify-otp" component={OTPVerificationScreen} />
+        <Route path="/account-setup" component={AccountSetupScreen} />
+        <Route path="/home" component={HomeScreen} />
+        <Route path="/ownership-opportunities" component={OwnershipOpportunitiesScreen} />
+        <Route path="/fuel-wallet" component={FuelWalletScreen} />
+        <Route path="/notifications" component={NotificationCenterScreen} />
+        <Route path="/profile" component={UserProfileScreen} />
+        <Route path="/yacht-details/:id" component={YachtDetailsScreen} />
+        <Route path="/booking/:id" component={BookingCheckoutScreen} />
+        <Route path="/booking-checkout" component={BookingCheckoutScreen} />
+        <Route path="/booking-confirmation" component={BookingConfirmationScreen} />
+        <Route path="/my-bookings" component={MyBookingsScreen} />
+        <Route path="/reservation-detail/:id" component={ReservationDetailScreen} />
+        <Route path="/ownership/:id" component={YachtOwnershipDetailScreen} />
+        <Route path="/ownership-inquiry/:id" component={OwnershipInquiryScreen} />
+        <Route path="/share-marketplace" component={ShareMarketplaceScreen} />
+        <Route path="/share-listing/:id" component={ShareListingDetailScreen} />
+        <Route path="/list-share-for-sale" component={ListShareForSaleScreen} />
+        <Route path="/share-purchase-confirmation/:id" component={SharePurchaseConfirmationScreen} />
+        <Route path="/owner-dashboard" component={OwnerDashboardScreen} />
+        <Route path="/boat-management/:id" component={BoatManagementScreen} />
+        <Route path="/add-boat-listing" component={AddBoatListingScreen} />
+        <Route path="/boat-calendar/:id" component={BoatCalendarScreen} />
+        <Route path="/waitlist-management" component={WaitlistManagementScreen} />
+        <Route path="/messages" component={MessagingCenterScreen} />
+        <Route path="/chat/:id" component={ChatThreadScreen} />
+        <Route path="/edit-profile" component={EditProfileScreen} />
+        <Route path="/settings" component={SettingsScreen} />
+        <Route path="/top-up" component={TopUpScreen} />
+        <Route path="/dashboard" component={DashboardScreen} />
+        <Route path="/dev-navigation" component={DevNavigationScreen} />
+        <Route path="/my-boats" component={MyBoatsScreen} />
+        <Route path="/boat-ownership/:id" component={BoatOwnershipManagementScreen} />
+        <Route path="/booking-calendar/:id" component={BookingCalendarScreen} />
+        <Route path="/share-trading" component={ShareTradingScreen} />
+        <Route component={NotFound} />
+      </Switch>
+    </>
   );
 }
 
