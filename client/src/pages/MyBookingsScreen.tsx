@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import BottomNavigation from "@/components/BottomNavigation";
 import { ArrowLeft, Calendar, Users, MapPin, Clock, Filter, Search } from "lucide-react";
 import { mockBookings } from "@/lib/mockData";
+import seaBackground from "@assets/image_1754575606863.png";
 
 const statusColors = {
   confirmed: "bg-green-100 text-green-800",
@@ -66,20 +67,39 @@ export default function MyBookingsScreen() {
         </div>
       </header>
 
-      {/* Booking Stats */}
-      <section className="px-4 py-6 bg-gradient-ocean text-white">
-        <div className="grid grid-cols-3 gap-4 text-center">
-          <div>
-            <p className="text-2xl font-bold">{bookings.length}</p>
-            <p className="text-blue-100 text-sm">Total Trips</p>
+      {/* Booking Stats with Sea Background */}
+      <section className="relative px-4 py-8 overflow-hidden">
+        {/* Turquoise Sea Background */}
+        <div className="absolute inset-0 bg-gradient-ocean">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `url(${seaBackground})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            opacity: 0.9
+          }} />
+          <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-blue-200/20 to-blue-500/30" />
+        </div>
+        
+        <div className="relative z-10">
+          <div className="text-center mb-6">
+            <h2 className="text-2xl font-bold mb-2 text-gray-800">My Booking History</h2>
           </div>
-          <div>
-            <p className="text-2xl font-bold">{upcomingBookings.length}</p>
-            <p className="text-blue-100 text-sm">Upcoming</p>
-          </div>
-          <div>
-            <p className="text-2xl font-bold">€{bookings.reduce((sum, b) => sum + Number(b.totalPrice), 0).toLocaleString()}</p>
-            <p className="text-blue-100 text-sm">Total Spent</p>
+          
+          <div className="bg-white rounded-2xl p-6 shadow-xl">
+            <div className="grid grid-cols-3 gap-4 text-center">
+              <div>
+                <p className="text-2xl font-bold text-gray-900">{bookings.length}</p>
+                <p className="text-gray-600 text-sm">Total Trips</p>
+              </div>
+              <div>
+                <p className="text-2xl font-bold text-gray-900">{upcomingBookings.length}</p>
+                <p className="text-gray-600 text-sm">Upcoming</p>
+              </div>
+              <div>
+                <p className="text-2xl font-bold text-gray-900">€{bookings.reduce((sum, b) => sum + Number(b.totalPrice), 0).toLocaleString()}</p>
+                <p className="text-gray-600 text-sm">Total Spent</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
