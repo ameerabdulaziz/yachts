@@ -152,6 +152,13 @@ export default function YachtOwnershipDetailScreen() {
                 </div>
               </div>
               <div className="flex items-start space-x-3">
+                <MapPin className="w-5 h-5 text-orange-600 mt-1" />
+                <div>
+                  <p className="font-medium text-gray-900">Global Access</p>
+                  <p className="text-sm text-gray-600">Free days abroad through our dealer partner network</p>
+                </div>
+              </div>
+              <div className="flex items-start space-x-3">
                 <TrendingUp className="w-5 h-5 text-blue-600 mt-1" />
                 <div>
                   <p className="font-medium text-gray-900">Rental Income</p>

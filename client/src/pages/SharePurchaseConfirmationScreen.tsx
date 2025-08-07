@@ -154,6 +154,14 @@ export default function SharePurchaseConfirmationScreen() {
             <ul className="space-y-2 text-sm text-gray-700">
               <li className="flex items-center space-x-2">
                 <Star className="w-4 h-4 text-amber-500" />
+                <span>Full management and maintenance included</span>
+              </li>
+              <li className="flex items-center space-x-2">
+                <Star className="w-4 h-4 text-amber-500" />
+                <span>Free days abroad through dealer partner network</span>
+              </li>
+              <li className="flex items-center space-x-2">
+                <Star className="w-4 h-4 text-amber-500" />
                 <span>Priority booking for additional weeks</span>
               </li>
               <li className="flex items-center space-x-2">
