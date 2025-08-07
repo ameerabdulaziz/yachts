@@ -58,19 +58,13 @@ export default function YachtOwnershipDetailScreen() {
         </div>
       </header>
 
-      {/* Hero Section with Sea Background */}
-      <section className="relative h-80 overflow-hidden">
-        {/* Turquoise Sea Background */}
-        <div className="absolute inset-0 bg-gradient-ocean">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `url('https://images.pexels.com/photos/1001682/pexels-photo-1001682.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&fit=crop')`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            opacity: 0.8
-          }} />
-          <div className="absolute inset-0 bg-gradient-to-br from-cyan-300/30 to-blue-500/40" />
-        </div>
-        
+      {/* Image Gallery */}
+      <section className="relative">
+        <img 
+          src={opportunity.yacht.images?.[currentImageIndex] || opportunity.yacht.images?.[0]} 
+          alt={opportunity.yacht.name}
+          className="w-full h-80 object-cover"
+        />
         <div className="absolute bottom-4 right-4 bg-black/50 text-white px-3 py-1 rounded-full text-sm">
           {currentImageIndex + 1} / {opportunity.yacht.images?.length || 1}
         </div>
@@ -228,54 +222,7 @@ export default function YachtOwnershipDetailScreen() {
           </CardContent>
         </Card>
 
-        {/* Recent Transactions */}
-        <Card>
-          <CardContent className="p-4">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Recent Transactions</h3>
-            <div className="space-y-3">
-              <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
-                    <Fuel className="w-5 h-5 text-blue-600" />
-                  </div>
-                  <div>
-                    <p className="font-medium text-gray-900">22/07/2024</p>
-                    <p className="text-sm text-gray-600">Trip to Ibiza</p>
-                  </div>
-                </div>
-                <span className="text-lg font-bold text-gray-900">€128</span>
-              </div>
-              
-              <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
-                    <Fuel className="w-5 h-5 text-blue-600" />
-                  </div>
-                  <div>
-                    <p className="font-medium text-gray-900">10/06/2024</p>
-                    <p className="text-sm text-gray-600">Trip to Saint-Tropez</p>
-                  </div>
-                </div>
-                <span className="text-lg font-bold text-gray-900">€285</span>
-              </div>
-              
-              <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
-                    <Fuel className="w-5 h-5 text-blue-600" />
-                  </div>
-                  <div>
-                    <p className="font-medium text-gray-900">10/06/2024</p>
-                    <p className="text-sm text-gray-600">Trip to Mallorca</p>
-                  </div>
-                </div>
-                <span className="text-lg font-bold text-gray-900">€644</span>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* ROI Projection */}
+{/* ROI Projection */}
         <Card>
           <CardContent className="p-4">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">ROI Projection</h3>

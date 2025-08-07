@@ -2,7 +2,7 @@ import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import BottomNavigation from "@/components/BottomNavigation";
-import { ArrowLeft, Plus, TrendingUp, TrendingDown, Calendar } from "lucide-react";
+import { ArrowLeft, Plus, TrendingUp, TrendingDown, Calendar, Fuel } from "lucide-react";
 import { mockFuelTransactions } from "@/lib/mockData";
 
 export default function FuelWalletScreen() {
@@ -11,44 +11,55 @@ export default function FuelWalletScreen() {
 
   return (
     <div className="min-h-screen bg-gray-50 pb-24">
-      {/* Header */}
-      <header className="bg-white border-b border-gray-200 px-4 py-3 sticky top-0 z-40">
-        <div className="flex items-center justify-between">
+      {/* Header with Sea Background */}
+      <header className="relative px-4 py-8 text-white overflow-hidden">
+        {/* Turquoise Sea Background */}
+        <div className="absolute inset-0 bg-gradient-ocean">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `url('https://images.pexels.com/photos/1001682/pexels-photo-1001682.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&fit=crop')`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            opacity: 0.8
+          }} />
+          <div className="absolute inset-0 bg-gradient-to-br from-cyan-300/30 to-blue-500/40" />
+        </div>
+        
+        <div className="relative z-10 flex items-center justify-between">
           <div className="flex items-center space-x-3">
             <Link href="/home">
-              <Button variant="ghost" size="sm" className="p-2">
-                <ArrowLeft className="w-5 h-5 text-gray-600" />
+              <Button variant="ghost" size="sm" className="p-2 bg-white/20 rounded-full hover:bg-white/30">
+                <ArrowLeft className="w-5 h-5 text-white" />
               </Button>
             </Link>
-            <h1 className="text-xl font-bold text-gray-900">Fuel Wallet</h1>
+            <h1 className="text-xl font-bold text-white">Fuel Wallet</h1>
           </div>
         </div>
       </header>
 
       {/* Balance Card */}
-      <section className="px-4 py-6">
-        <Card className="bg-gradient-ocean text-white shadow-xl">
+      <section className="px-4 py-6 -mt-4">
+        <Card className="bg-white text-gray-900 shadow-xl">
           <CardContent className="p-6">
             <div className="text-center mb-6">
-              <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                <i className="fas fa-gas-pump text-3xl text-white"></i>
+              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Fuel className="w-8 h-8 text-blue-600" />
               </div>
-              <h2 className="text-lg font-medium text-blue-100 mb-2">Current Balance</h2>
-              <p className="text-4xl font-bold text-white">€{balance.toLocaleString()}</p>
+              <h2 className="text-lg font-medium text-gray-600 mb-2">Current Balance</h2>
+              <p className="text-4xl font-bold text-gray-900">€{balance.toLocaleString()}</p>
               <div className="flex items-center justify-center space-x-2 mt-2">
-                <TrendingUp className="w-4 h-4 text-green-300" />
-                <span className="text-green-300">+€{monthlyChange} this month</span>
+                <TrendingUp className="w-4 h-4 text-green-600" />
+                <span className="text-green-600">+€{monthlyChange} this month</span>
               </div>
             </div>
             
             <div className="grid grid-cols-2 gap-3">
               <Link href="/top-up">
-                <Button className="w-full bg-white text-primary hover:bg-gray-100 font-semibold py-3">
+                <Button className="w-full bg-blue-600 text-white p-4 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 hover:bg-blue-700">
                   <Plus className="w-4 h-4 mr-2" />
                   Top Up
                 </Button>
               </Link>
-              <Button variant="outline" className="w-full border-white text-white hover:bg-white/10 font-semibold py-3">
+              <Button variant="outline" className="w-full p-4 rounded-xl font-semibold hover:shadow-lg transition-all duration-300">
                 <Calendar className="w-4 h-4 mr-2" />
                 Auto-Pay
               </Button>
@@ -75,40 +86,48 @@ export default function FuelWalletScreen() {
         </div>
       </section>
 
-      {/* Transaction History */}
+      {/* Recent Transactions */}
       <section className="px-4 py-6">
         <h3 className="text-xl font-bold text-gray-900 mb-4">Recent Transactions</h3>
         <div className="space-y-3">
-          {mockFuelTransactions.map((transaction) => (
-            <Card key={transaction.id}>
-              <CardContent className="p-4">
-                <div className="flex items-center space-x-3">
-                  <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
-                    transaction.type === 'topup' ? 'bg-green-100' : 'bg-blue-100'
-                  }`}>
-                    {transaction.type === 'topup' ? (
-                      <TrendingUp className="w-5 h-5 text-green-600" />
-                    ) : (
-                      <TrendingDown className="w-5 h-5 text-blue-600" />
-                    )}
-                  </div>
-                  <div className="flex-1">
-                    <p className="font-medium text-gray-900">{transaction.description}</p>
-                    <p className="text-sm text-gray-600">
-                      {transaction.createdAt.toLocaleDateString()}
-                    </p>
-                  </div>
-                  <div className="text-right">
-                    <p className={`text-lg font-bold ${
-                      transaction.type === 'topup' ? 'text-green-600' : 'text-gray-900'
-                    }`}>
-                      {transaction.type === 'topup' ? '+' : ''}€{Math.abs(Number(transaction.amount))}
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
+          <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+            <div className="flex items-center space-x-3">
+              <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                <Fuel className="w-5 h-5 text-blue-600" />
+              </div>
+              <div>
+                <p className="font-medium text-gray-900">22/07/2024</p>
+                <p className="text-sm text-gray-600">Trip to Ibiza</p>
+              </div>
+            </div>
+            <span className="text-lg font-bold text-gray-900">€128</span>
+          </div>
+          
+          <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+            <div className="flex items-center space-x-3">
+              <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                <Fuel className="w-5 h-5 text-blue-600" />
+              </div>
+              <div>
+                <p className="font-medium text-gray-900">10/06/2024</p>
+                <p className="text-sm text-gray-600">Trip to Saint-Tropez</p>
+              </div>
+            </div>
+            <span className="text-lg font-bold text-gray-900">€285</span>
+          </div>
+          
+          <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+            <div className="flex items-center space-x-3">
+              <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                <Fuel className="w-5 h-5 text-blue-600" />
+              </div>
+              <div>
+                <p className="font-medium text-gray-900">10/06/2024</p>
+                <p className="text-sm text-gray-600">Trip to Mallorca</p>
+              </div>
+            </div>
+            <span className="text-lg font-bold text-gray-900">€644</span>
+          </div>
         </div>
       </section>
 
