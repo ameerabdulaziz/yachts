@@ -142,7 +142,7 @@ export default function BookingCalendarScreen() {
       console.log("Selected available date:", day.dateStr);
     } else if (day.status === "booked") {
       // Show popup to join waitlist
-      const confirmed = confirm(`This date is already booked by ${day.bookedBy || 'another owner'}.\n\nWould you like to join the waitlist for ${new Date(day.dateStr).toLocaleDateString("en-US", { 
+      const confirmed = confirm(`This date is already booked by ${day.bookedBy || 'another owner'}.\n\nWould you like to join the waitlist for ${new Date(day.dateStr + 'T12:00:00').toLocaleDateString("en-US", { 
         weekday: "long", 
         month: "long", 
         day: "numeric" 
@@ -153,7 +153,7 @@ export default function BookingCalendarScreen() {
       }
     } else if (day.status === "waitlist") {
       // Show popup to cancel waitlist
-      const confirmed = confirm(`You are currently on the waitlist for ${new Date(day.dateStr).toLocaleDateString("en-US", { 
+      const confirmed = confirm(`You are currently on the waitlist for ${new Date(day.dateStr + 'T12:00:00').toLocaleDateString("en-US", { 
         weekday: "long", 
         month: "long", 
         day: "numeric" 
@@ -317,7 +317,7 @@ export default function BookingCalendarScreen() {
             {selectedDate && (
               <div className="mt-4 p-3 bg-blue-50 rounded-lg border border-blue-200">
                 <div className="text-sm">
-                  <strong>Selected:</strong> {new Date(selectedDate).toLocaleDateString("en-US", { 
+                  <strong>Selected:</strong> {new Date(selectedDate + 'T12:00:00').toLocaleDateString("en-US", { 
                     weekday: "long", 
                     month: "long", 
                     day: "numeric",
@@ -334,7 +334,7 @@ export default function BookingCalendarScreen() {
           <Card className="border border-blue-200 bg-blue-50">
             <CardHeader className="pb-3">
               <CardTitle className="text-lg">
-                Book {new Date(selectedDate).toLocaleDateString("en-US", { 
+                Book {new Date(selectedDate + 'T12:00:00').toLocaleDateString("en-US", { 
                   weekday: "long", 
                   month: "long", 
                   day: "numeric" 
@@ -384,7 +384,7 @@ export default function BookingCalendarScreen() {
                   variant="outline" 
                   className="flex-1"
                   onClick={() => {
-                    const bookingText = `I'd like to book a yacht for ${new Date(selectedDate).toLocaleDateString("en-US", { 
+                    const bookingText = `I'd like to book a yacht for ${new Date(selectedDate + 'T12:00:00').toLocaleDateString("en-US", { 
                       weekday: "long", 
                       month: "long", 
                       day: "numeric",
