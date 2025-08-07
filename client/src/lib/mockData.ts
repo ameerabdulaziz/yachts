@@ -198,34 +198,7 @@ export const mockYachts: (Yacht & { owner: { name: string; avatar: string; verif
       rating: 4.9
     }
   },
-  {
-    id: "yacht-8",
-    name: "De Antonio E23",
-    description: "Revolutionary electric catamaran yacht with zero emissions and whisper-quiet operation. Features sustainable luxury with innovative electric propulsion system.",
-    location: "El Gouna, Egypt",
-    pricePerDay: "2400",
-    capacity: 8,
-    cabins: 1,
-    length: "23",
-    yearBuilt: 2026,
-    images: [
-      "https://static.wixstatic.com/media/0fb4c8_5c8b9b7d8c4a4a8fa8c2a5f5e8c6b2a3~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_E23.jpg",
-      "https://static.wixstatic.com/media/0fb4c8_e23_interior_luxury_sustainable~mv2.jpg/v1/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/E23_interior.jpg"
-    ],
-    amenities: ["Electric Propulsion", "Zero Emissions", "Silent Operation", "Solar Charging", "Catamaran Hull", "Integrated Foil System", "Touch Screen Controls", "Sustainable Materials"],
-    ownerId: "owner-8",
-    isActive: true,
-    rating: "4.7",
-    reviewCount: 15,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    owner: {
-      name: "Dr. Elena Vasquez",
-      avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100",
-      verified: true,
-      rating: 4.8
-    }
-  }
+
 ];
 
 export const mockOwnershipOpportunities: (OwnershipOpportunity & { yacht: Yacht })[] = [

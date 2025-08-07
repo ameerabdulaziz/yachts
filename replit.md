@@ -158,7 +158,7 @@ The application includes 31+ screens with comprehensive routing:
   - Updated ownership home screen with iOS-native styling and SF Pro fonts
   - Replaced all "Yachtak" references with "Nauttec" for consistent branding
   - Enhanced scroll-to-top functionality across all screens
-  - Updated yacht model range to D29-D60 with authentic De Antonio visuals
+  - Updated yacht model range to D29-D60 with authentic De Antonio visuals (E23 removed from lineup)
   - Redesigned Available Shares section with card-based layout similar to ownership opportunities
   - Improved button visibility and text contrast throughout the application
 - **August 5, 2025**: Authentication system enhancement:
@@ -184,7 +184,6 @@ The application includes 31+ screens with comprehensive routing:
   - D36: 11.50m length, 12 passengers, 1 cabin (corrected from 10.30m)
   - D32: 9.90m length, 10 passengers, 2 cabins with 600HP max power
   - D29: 8.50m length, 8 passengers, 1 cabin (corrected dimensions)
-  - E23: 7.20m length, 8 passengers, electric catamaran with zero emissions
   - All locations standardized to "El Gouna, Egypt" for consistency
   - All dates updated to be after September 15th, 2024
 - Updated yacht ownership detail page with iOS 18 styling and compact layouts
