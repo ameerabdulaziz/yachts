@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import { enhancedScrollToTop } from "@/utils/scrollToTop";
 
 const tabs = [
-  { icon: Home, label: "Home", route: "/ownership-home" },
+  { icon: Home, label: "Home", route: "/" },
   { icon: Anchor, label: "Own a Yacht", route: "/ownership-opportunities" },
   { icon: Ship, label: "My Boats", route: "/my-boats" },
   { icon: Waves, label: "Charter", route: "/home" },
