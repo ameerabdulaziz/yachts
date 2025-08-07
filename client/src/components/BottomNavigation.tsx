@@ -1,13 +1,13 @@
 import { Link, useLocation } from "wouter";
-import { Home, Ship, TrendingUp, User, Waves } from "lucide-react";
+import { Home, Ship, Anchor, User, Waves } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { enhancedScrollToTop } from "@/utils/scrollToTop";
 
 const tabs = [
   { icon: Home, label: "Home", route: "/ownership-home" },
-  { icon: Waves, label: "Charter", route: "/home" },
+  { icon: Anchor, label: "Own a Yacht", route: "/ownership-opportunities" },
   { icon: Ship, label: "My Boats", route: "/my-boats" },
-  { icon: TrendingUp, label: "Own a Yacht", route: "/ownership-opportunities" },
+  { icon: Waves, label: "Charter", route: "/home" },
   { icon: User, label: "Profile", route: "/profile" }
 ];
 
