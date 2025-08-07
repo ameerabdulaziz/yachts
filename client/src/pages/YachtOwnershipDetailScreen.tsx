@@ -14,11 +14,11 @@ export default function YachtOwnershipDetailScreen() {
   const opportunity = mockOwnershipOpportunities.find(o => o.id === id) || mockOwnershipOpportunities[0];
   
   const roiData = [
-    { year: 2026, value: 18 },
-    { year: 2027, value: 14 },
-    { year: 2028, value: 16 },
-    { year: 2029, value: 19 },
-    { year: 2030, value: 21 }
+    { year: 2026, value: 6 },
+    { year: 2027, value: 5 },
+    { year: 2028, value: 7 },
+    { year: 2029, value: 8 },
+    { year: 2030, value: 6 }
   ];
 
   const usageSchedule = [
@@ -91,7 +91,7 @@ export default function YachtOwnershipDetailScreen() {
         <div className="grid grid-cols-3 gap-3 mb-6">
           <div className="bg-gray-50 rounded-xl p-3 text-center">
             <TrendingUp className="w-6 h-6 text-blue-600 mx-auto mb-1" />
-            <p className="text-xl font-bold text-gray-600">15%</p>
+            <p className="text-xl font-bold text-gray-600">6%</p>
             <p className="text-xs text-gray-500">Expected ROI</p>
           </div>
           <div className="bg-gray-50 rounded-xl p-3 text-center">

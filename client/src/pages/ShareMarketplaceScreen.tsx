@@ -236,7 +236,7 @@ export default function ShareMarketplaceScreen() {
               <div className="flex items-center justify-between p-3 bg-green-50 rounded-lg">
                 <div>
                   <p className="font-medium text-green-900">Mediterranean Shares</p>
-                  <p className="text-sm text-green-700">Strong demand, 15% price increase</p>
+                  <p className="text-sm text-green-700">Strong demand, 8% price increase</p>
                 </div>
                 <TrendingUp className="w-6 h-6 text-green-600" />
               </div>

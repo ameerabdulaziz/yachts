@@ -60,7 +60,7 @@ export default function OwnershipOpportunitiesScreen() {
             <p className="text-sm text-gray-600">Weeks usage</p>
           </div>
           <div>
-            <p className="text-2xl font-bold text-gray-900">15%</p>
+            <p className="text-2xl font-bold text-gray-900">6%</p>
             <p className="text-sm text-gray-600">Avg. ROI</p>
           </div>
         </div>
@@ -112,7 +112,7 @@ export default function OwnershipOpportunitiesScreen() {
                       </div>
                       <div className="bg-gray-50 rounded-lg p-3 text-center">
                         <TrendingUp className="w-5 h-5 text-green-600 mx-auto mb-1" />
-                        <p className="font-semibold text-gray-900">12-15%</p>
+                        <p className="font-semibold text-gray-900">5-8%</p>
                         <p className="text-xs text-gray-600">Expected ROI</p>
                       </div>
                     </div>

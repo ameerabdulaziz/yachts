@@ -18,7 +18,7 @@ export default function SharePurchaseConfirmationScreen() {
     purchasePrice: 48000,
     usageDaysPerYear: 40,
     purchaseDate: new Date().toLocaleDateString(),
-    expectedRoi: "12-15%",
+    expectedRoi: "5-7%",
     nextUsageStart: "June 2024"
   };
 
