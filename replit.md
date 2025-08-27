@@ -155,6 +155,12 @@ The application includes 31+ screens with comprehensive routing:
 # Recent Changes
 
 ## August 2025
+- **August 27, 2025**: Completed REST API testing and Django migrations fix:
+  - All Node.js backend APIs working correctly (yachts, users, bookings)
+  - Fixed Django migrations to work with existing database schema
+  - Django backend ready with proper database connection and AppConfig setup
+  - Created comprehensive API testing guide with curl examples
+  - Database connection errors resolved for both Node.js and Django backends
 - **August 26, 2025**: Configured Django backend with proper AppConfig classes:
   - Fixed all Nauttec apps to use AppConfig subclasses with 'path' attributes
   - Corrected settings.py to reference apps in src/ directory structure
