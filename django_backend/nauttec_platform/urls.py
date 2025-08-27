@@ -1,49 +1,53 @@
 """
-Main URL configuration for Nauttec Yacht Platform
+URL configuration for Nauttec Platform project.
+
+The `urlpatterns` list routes URLs to views. For more information please see:
+    https://docs.djangoproject.com/en/4.2/topics/http/urls/
+Examples:
+Function views
+    1. Add an import:  from my_app import views
+    2. Add a URL to urlpatterns:  path('', views.home, name='home')
+Class-based views
+    1. Add an import:  from other_app.views import Home
+    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
+Including another URLconf
+    1. Import the include() function: from django.urls import include, path
+    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from rest_framework.routers import DefaultRouter
-# from rest_framework.documentation import include_docs_urls
-from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView, SpectacularRedocView
+from drf_spectacular.views import (
+    SpectacularAPIView,
+    SpectacularRedocView,
+    SpectacularSwaggerView,
+)
 
-# Import viewsets
-from yachts.views import YachtViewSet
-# from bookings.views import BookingViewSet
-# from ownership.views import OwnershipOpportunityViewSet, ShareTransferViewSet
-
-# API Router
-router = DefaultRouter()
-router.register(r'yachts', YachtViewSet, basename='yacht')
-# router.register(r'bookings', BookingViewSet, basename='booking')
-# router.register(r'ownership', OwnershipOpportunityViewSet, basename='ownership')
-# router.register(r'shares', ShareTransferViewSet, basename='shares')
+# Admin site customization
+admin.site.site_header = "Nauttec Platform Administration"
+admin.site.site_title = "Nauttec Admin Portal"
+admin.site.index_title = "Yacht Platform Management"
 
 urlpatterns = [
     # Admin interface
     path('admin/', admin.site.urls),
     
-    # API endpoints
-    path('api/v1/', include(router.urls)),
-    path('api/auth/', include('djoser.urls')),
-    path('api/auth/', include('djoser.urls.authtoken')),
-    path('o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
+    # API Schema and Documentation
+    path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
+    path('api/schema/swagger-ui/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
+    path('api/schema/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
     
-    # Social authentication
-    path('accounts/', include('allauth.urls')),
+    # API v1 endpoints
+    path('api/v1/auth/', include('accounts.urls')),
+    path('api/v1/yachts/', include('yachts.urls')),
+    path('api/v1/bookings/', include('bookings.urls')),
+    path('api/v1/ownership/', include('ownership.urls')),
+    path('api/v1/shares/', include('shares.urls')),
+    path('api/v1/messaging/', include('messaging.urls')),
+    path('api/v1/fuel-wallet/', include('fuel_wallet.urls')),
     
-    # API documentation
-    # path('api/docs/', include_docs_urls(title='Nauttec Yacht Platform API')),
-# OpenAPI schema (JSON)
-    path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
-    # Swagger UI
-    path("api/docs/", SpectacularSwaggerView.as_view(url_name="schema"), name="swagger-ui"),
-    # (optional) ReDoc UI
-    path("api/redoc/", SpectacularRedocView.as_view(url_name="schema"), name="redoc"),
-    
-    # Health check
+    # Health check endpoint
     path('health/', lambda request: HttpResponse('OK')),
 ]
 
@@ -52,7 +56,5 @@ if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
-# Admin site customization
-admin.site.site_header = "Nauttec Yacht Platform Administration"
-admin.site.site_title = "Nauttec Admin"
-admin.site.index_title = "Welcome to Nauttec Administration"
+# Import HttpResponse for health check
+from django.http import HttpResponse
