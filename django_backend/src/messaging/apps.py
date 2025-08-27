@@ -4,7 +4,7 @@ from django.apps import AppConfig
 class MessagingConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'messaging'
-    path = 'messaging'
+    path = 'src/messaging'
     verbose_name = 'Messaging System'
     
     def ready(self):

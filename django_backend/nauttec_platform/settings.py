@@ -34,14 +34,14 @@ INSTALLED_APPS = [
     'corsheaders',
     'drf_spectacular',
     
-    # Nauttec platform apps - using AppConfig classes
-    'accounts.apps.AccountsConfig',
-    'yachts.apps.YachtsConfig', 
-    'bookings.apps.BookingsConfig',
-    'ownership.apps.OwnershipConfig',
-    'shares.apps.SharesConfig',
-    'messaging.apps.MessagingConfig',
-    'fuel_wallet.apps.FuelWalletConfig',
+    # Nauttec platform apps - using AppConfig classes from src directory
+    'src.accounts.apps.AccountsConfig',
+    'src.yachts.apps.YachtsConfig', 
+    'src.bookings.apps.BookingsConfig',
+    'src.ownership.apps.OwnershipConfig',
+    'src.shares.apps.SharesConfig',
+    'src.messaging.apps.MessagingConfig',
+    'src.fuel_wallet.apps.FuelWalletConfig',
 ]
 
 MIDDLEWARE = [
@@ -89,7 +89,7 @@ DATABASES = {
 }
 
 # Custom User Model
-AUTH_USER_MODEL = 'accounts.User'
+AUTH_USER_MODEL = 'src.accounts.User'
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [

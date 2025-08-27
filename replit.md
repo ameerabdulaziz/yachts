@@ -155,6 +155,12 @@ The application includes 31+ screens with comprehensive routing:
 # Recent Changes
 
 ## August 2025
+- **August 26, 2025**: Configured Django backend with proper AppConfig classes:
+  - Fixed all Nauttec apps to use AppConfig subclasses with 'path' attributes
+  - Corrected settings.py to reference apps in src/ directory structure
+  - Updated all 7 apps (accounts, yachts, bookings, ownership, shares, messaging, fuel_wallet)
+  - Each AppConfig includes proper path pointing to src directory location
+  - Ready for Django management commands and database migrations
 - **August 26, 2025**: Successfully created Python backend as Django alternative:
   - Built comprehensive Python HTTP server with all Nauttec API endpoints
   - Authentic De Antonio yacht data (D29-D60) with official specifications
