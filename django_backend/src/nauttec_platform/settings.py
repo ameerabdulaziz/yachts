@@ -85,15 +85,20 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'nauttec_platform.wsgi.application'
 
-# Database configuration
+# Database configuration - Use Replit DATABASE_URL
+import os
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('DB_NAME', default='nauttec_db'),
-        'USER': config('DB_USER', default='postgres'),
-        'PASSWORD': config('DB_PASSWORD', default=''),
-        'HOST': config('DB_HOST', default='localhost'),
-        'PORT': config('DB_PORT', default='5432'),
+        'NAME': os.environ.get('PGDATABASE', 'nauttec_db'),
+        'USER': os.environ.get('PGUSER', 'postgres'),
+        'PASSWORD': os.environ.get('PGPASSWORD', ''),
+        'HOST': os.environ.get('PGHOST', 'localhost'),
+        'PORT': os.environ.get('PGPORT', '5432'),
+        'OPTIONS': {
+            'sslmode': 'require',
+        } if os.environ.get('DATABASE_URL') and 'neon' in os.environ.get('DATABASE_URL') else {},
     }
 }
 
