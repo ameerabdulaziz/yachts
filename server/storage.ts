@@ -33,8 +33,6 @@ export interface IStorage {
   getUserById(id: string): Promise<User | undefined>;
   getUser(id: string): Promise<User | undefined>;
   getUserByPhone(phone: string): Promise<User | undefined>;
-  getUserByGoogleId(googleId: string): Promise<User | undefined>;
-  getUserByFacebookId(facebookId: string): Promise<User | undefined>;
   createUser(user: InsertUser): Promise<User>;
   updateUser(user: Partial<User> & { id: string }): Promise<User>;
 
@@ -72,7 +70,10 @@ export interface IStorage {
 export class DatabaseStorage implements IStorage {
   // User operations
   async getAllUsers(): Promise<User[]> {
-    return await db.select().from(users);
+    console.log('Storage: Getting all users from database');
+    const result = await db.select().from(users);
+    console.log('Storage: Found', result.length, 'users');
+    return result;
   }
 
   async getUserById(id: string): Promise<User | undefined> {
@@ -90,15 +91,7 @@ export class DatabaseStorage implements IStorage {
     return user;
   }
 
-  async getUserByGoogleId(googleId: string): Promise<User | undefined> {
-    const [user] = await db.select().from(users).where(eq(users.googleId, googleId));
-    return user;
-  }
 
-  async getUserByFacebookId(facebookId: string): Promise<User | undefined> {
-    const [user] = await db.select().from(users).where(eq(users.facebookId, facebookId));
-    return user;
-  }
 
   async createUser(insertUser: InsertUser): Promise<User> {
     const [user] = await db

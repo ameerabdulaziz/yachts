@@ -13,10 +13,10 @@ export async function apiRequest(
   url: string,
   data?: unknown | undefined,
 ): Promise<Response> {
-  // Build full URL for Django backend if relative URL provided
-  const fullUrl = url.startsWith('http') ? url : buildApiUrl(url);
+  // Use relative URL for same-origin requests
+  const requestUrl = url.startsWith('http') ? url : url;
   
-  const res = await fetch(fullUrl, {
+  const res = await fetch(requestUrl, {
     method,
     headers: data ? { "Content-Type": "application/json" } : {},
     body: data ? JSON.stringify(data) : undefined,
@@ -33,11 +33,11 @@ export const getQueryFn: <T>(options: {
 }) => QueryFunction<T> =
   ({ on401: unauthorizedBehavior }) =>
   async ({ queryKey }) => {
-    // Build full URL for API
+    // Build URL for API - use relative URLs for same-origin requests
     const endpoint = queryKey.join("/") as string;
-    const fullUrl = endpoint.startsWith('http') ? endpoint : buildApiUrl(endpoint);
+    const url = endpoint.startsWith('http') ? endpoint : endpoint;
     
-    const res = await fetch(fullUrl, {
+    const res = await fetch(url, {
       credentials: "include",
       headers: {
         'Accept': 'application/json',

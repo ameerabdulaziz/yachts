@@ -1,6 +1,6 @@
 // API configuration for Node.js backend (working backend)
 export const API_CONFIG = {
-  BASE_URL: 'http://localhost:5000', // Node.js backend port
+  BASE_URL: '', // Use relative URLs to avoid CORS issues
   ENDPOINTS: {
     YACHTS: '/api/yachts',
     USERS: '/api/users', 

@@ -34,67 +34,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Google OAuth Strategy
-  if (process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET) {
-    passport.use(new GoogleStrategy({
-      clientID: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: "/api/auth/google/callback"
-    }, async (accessToken, refreshToken, profile, done) => {
-      try {
-        // Check if user exists
-        let user = await storage.getUserByGoogleId(profile.id);
-        
-        if (!user) {
-          // Create new user
-          user = await storage.createUser({
-            googleId: profile.id,
-            email: profile.emails?.[0]?.value,
-            firstName: profile.name?.givenName,
-            lastName: profile.name?.familyName,
-            profileImage: profile.photos?.[0]?.value,
-            role: "renter" // Default role
-          });
-        }
-        
-        return done(null, user);
-      } catch (error) {
-        return done(error, null);
-      }
-    }));
-  }
-
-  // Facebook OAuth Strategy
-  if (process.env.FACEBOOK_APP_ID && process.env.FACEBOOK_APP_SECRET) {
-    passport.use(new FacebookStrategy({
-      clientID: process.env.FACEBOOK_APP_ID,
-      clientSecret: process.env.FACEBOOK_APP_SECRET,
-      callbackURL: "/api/auth/facebook/callback",
-      profileFields: ['id', 'emails', 'name', 'picture.large']
-    }, async (accessToken, refreshToken, profile, done) => {
-      try {
-        // Check if user exists
-        let user = await storage.getUserByFacebookId(profile.id);
-        
-        if (!user) {
-          // Create new user
-          user = await storage.createUser({
-            facebookId: profile.id,
-            email: profile.emails?.[0]?.value,
-            firstName: profile.name?.givenName,
-            lastName: profile.name?.familyName,
-            profileImage: profile.photos?.[0]?.value,
-            role: "renter" // Default role
-          });
-        }
-        
-        return done(null, user);
-      } catch (error) {
-        return done(error, null);
-      }
-    }));
-  }
-
   // OAuth Routes
   app.get("/api/auth/google", 
     passport.authenticate("google", { scope: ["profile", "email"] })
@@ -297,7 +236,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const users = await storage.getAllUsers();
       res.json(users);
     } catch (error) {
-      res.status(500).json({ message: "Failed to fetch users" });
+      console.error('Users API error:', error);
+      res.status(500).json({ message: "Failed to fetch users", error: error instanceof Error ? error.message : 'Unknown error' });
     }
   });
 
