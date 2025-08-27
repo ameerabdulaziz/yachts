@@ -1,4 +1,5 @@
 import { Link } from "wouter";
+import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -7,15 +8,34 @@ import { ArrowLeft, Edit3, Star, Ship, PieChart, MessageCircle, Settings, LogOut
 import seaBackground from "@assets/image_1754575606863.png";
 
 export default function UserProfileScreen() {
-  const user = {
-    name: "John Doe",
-    email: "john@example.com",
+  // Fetch user data from API 
+  const { data: users = [], isLoading: usersLoading } = useQuery({
+    queryKey: ['/api/users'],
+    retry: false,
+  });
+
+  // Type assertion and use first user as current user or fallback data
+  const apiUsers = users as any[];
+  const user = apiUsers.length > 0 ? {
+    name: `${apiUsers[0].firstName} ${apiUsers[0].lastName}`,
+    email: apiUsers[0].email,
+    phone: apiUsers[0].phone,
+    avatar: apiUsers[0].profileImageUrl || "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100",
+    joinDate: "Member since June 2023",
+    rating: 4.8,
+    totalBookings: 12,
+    totalShares: apiUsers[0].role === 'owner' || apiUsers[0].role === 'both' ? 3 : 0,
+    fuelBalance: apiUsers[0].fuelWalletBalance || '0.00'
+  } : {
+    name: "Mohamed Hassan",
+    email: "mohamed.hassan@nauttec.com",
     phone: "+33 123 456 789",
     avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100",
     joinDate: "Member since June 2023",
     rating: 4.8,
     totalBookings: 12,
-    totalShares: 3
+    totalShares: 3,
+    fuelBalance: '2500.00'
   };
 
   const menuItems = [

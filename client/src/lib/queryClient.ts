@@ -33,12 +33,16 @@ export const getQueryFn: <T>(options: {
 }) => QueryFunction<T> =
   ({ on401: unauthorizedBehavior }) =>
   async ({ queryKey }) => {
-    // Build full URL for Django backend
+    // Build full URL for API
     const endpoint = queryKey.join("/") as string;
     const fullUrl = endpoint.startsWith('http') ? endpoint : buildApiUrl(endpoint);
     
     const res = await fetch(fullUrl, {
       credentials: "include",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
     });
 
     if (unauthorizedBehavior === "returnNull" && res.status === 401) {
