@@ -27,6 +27,7 @@ urlpatterns = [
     
     # API endpoints
     path('api/v1/', include(router.urls)),
+    path('api/', include('nauttec_platform.api_urls')),
     path('api/auth/', include('djoser.urls')),
     path('api/auth/', include('djoser.urls.authtoken')),
     path('o/', include('oauth2_provider.urls', namespace='oauth2_provider')),

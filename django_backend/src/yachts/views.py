@@ -1,138 +1,166 @@
-"""
-Yacht API views for Nauttec platform
-"""
-from rest_framework import viewsets, status, filters
-from rest_framework.decorators import action
+from rest_framework import viewsets, status
 from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated, AllowAny
-from django_filters.rest_framework import DjangoFilterBackend
-from django.db.models import Q
-from .models import Yacht, YachtAvailability
-from .serializers import YachtListSerializer, YachtDetailSerializer, YachtAvailabilitySerializer
+from rest_framework.decorators import action
+from django.db import connection
+from .models import Yacht
+from .serializers import YachtSerializer
 
-class YachtViewSet(viewsets.ReadOnlyModelViewSet):
-    """
-    Yacht discovery and details API
-    Supports filtering by model, location, capacity, price range
-    """
-    queryset = Yacht.objects.filter(is_active=True)
-    permission_classes = [AllowAny]  # Public yacht browsing
-    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
-    filterset_fields = ['model', 'location', 'status']
-    search_fields = ['name', 'description', 'amenities']
-    ordering_fields = ['price_per_day', 'rating', 'length', 'capacity']
-    ordering = ['model', 'name']
+class YachtViewSet(viewsets.ModelViewSet):
+    queryset = Yacht.objects.all()
+    serializer_class = YachtSerializer
     
-    def get_serializer_class(self):
-        if self.action == 'retrieve':
-            return YachtDetailSerializer
-        return YachtListSerializer
-    
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        
-        # Filter by capacity
-        min_capacity = self.request.query_params.get('min_capacity')
-        max_capacity = self.request.query_params.get('max_capacity')
-        if min_capacity:
-            queryset = queryset.filter(capacity__gte=min_capacity)
-        if max_capacity:
-            queryset = queryset.filter(capacity__lte=max_capacity)
-        
-        # Filter by price range
-        min_price = self.request.query_params.get('min_price')
-        max_price = self.request.query_params.get('max_price')
-        if min_price:
-            queryset = queryset.filter(price_per_day__gte=min_price)
-        if max_price:
-            queryset = queryset.filter(price_per_day__lte=max_price)
-        
-        # Filter by yacht length
-        min_length = self.request.query_params.get('min_length')
-        max_length = self.request.query_params.get('max_length')
-        if min_length:
-            queryset = queryset.filter(length__gte=min_length)
-        if max_length:
-            queryset = queryset.filter(length__lte=max_length)
-        
-        # Filter available for specific dates
-        start_date = self.request.query_params.get('start_date')
-        end_date = self.request.query_params.get('end_date')
-        if start_date and end_date:
-            # Exclude yachts with bookings or unavailable dates in the range
-            unavailable_yachts = YachtAvailability.objects.filter(
-                date__range=[start_date, end_date],
-                is_available=False
-            ).values_list('yacht_id', flat=True)
-            queryset = queryset.exclude(id__in=unavailable_yachts)
-        
-        return queryset
-    
-    @action(detail=True, methods=['get'])
-    def availability(self, request, pk=None):
-        """Get yacht availability calendar"""
-        yacht = self.get_object()
-        month = request.query_params.get('month')
-        year = request.query_params.get('year')
-        
-        availability_qs = yacht.availability.all()
-        if month and year:
-            availability_qs = availability_qs.filter(date__month=month, date__year=year)
-        
-        serializer = YachtAvailabilitySerializer(availability_qs, many=True)
-        return Response(serializer.data)
-    
-    @action(detail=True, methods=['get'])
-    def pricing(self, request, pk=None):
-        """Get dynamic pricing for date range"""
-        yacht = self.get_object()
-        start_date = request.query_params.get('start_date')
-        end_date = request.query_params.get('end_date')
-        
-        if not start_date or not end_date:
-            return Response(
-                {'error': 'start_date and end_date parameters required'},
-                status=status.HTTP_400_BAD_REQUEST
-            )
-        
+    def list(self, request):
+        """List all yachts"""
         try:
-            from datetime import datetime
-            start = datetime.strptime(start_date, '%Y-%m-%d').date()
-            end = datetime.strptime(end_date, '%Y-%m-%d').date()
-            
-            total_days = (end - start).days
-            base_price = yacht.get_current_price(start)
-            total_price = base_price * total_days
-            
-            return Response({
-                'base_price_per_day': base_price,
-                'total_days': total_days,
-                'total_price': total_price,
-                'seasonal_multiplier': yacht.seasonal_multiplier,
-            })
-        except ValueError:
+            # Get yachts directly from database to match Node.js API format
+            with connection.cursor() as cursor:
+                cursor.execute("""
+                    SELECT id, name, description, location, price_per_day,
+                           capacity, cabins, length, year_built, images,
+                           amenities, owner_id, is_active, rating, review_count,
+                           created_at, updated_at
+                    FROM yachts 
+                    WHERE is_active = true 
+                    ORDER BY created_at DESC
+                """)
+                
+                columns = [col[0] for col in cursor.description]
+                yachts = []
+                
+                for row in cursor.fetchall():
+                    yacht_data = dict(zip(columns, row))
+                    # Convert to frontend format
+                    yacht = {
+                        'id': yacht_data['id'],
+                        'name': yacht_data['name'],
+                        'description': yacht_data['description'],
+                        'location': yacht_data['location'],
+                        'pricePerDay': str(yacht_data['price_per_day']),
+                        'capacity': yacht_data['capacity'],
+                        'cabins': yacht_data['cabins'],
+                        'length': str(yacht_data['length']),
+                        'yearBuilt': yacht_data['year_built'],
+                        'images': yacht_data['images'] or [],
+                        'amenities': yacht_data['amenities'] or [],
+                        'ownerId': yacht_data['owner_id'],
+                        'isActive': yacht_data['is_active'],
+                        'rating': str(yacht_data['rating']),
+                        'reviewCount': yacht_data['review_count'],
+                        'createdAt': yacht_data['created_at'].isoformat(),
+                        'updatedAt': yacht_data['updated_at'].isoformat()
+                    }
+                    yachts.append(yacht)
+                
+                return Response(yachts)
+                
+        except Exception as e:
             return Response(
-                {'error': 'Invalid date format. Use YYYY-MM-DD'},
-                status=status.HTTP_400_BAD_REQUEST
+                {'error': f'Failed to fetch yachts: {str(e)}'}, 
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
     
-    @action(detail=False, methods=['get'])
-    def featured(self, request):
-        """Get featured yachts for homepage"""
-        featured_yachts = self.queryset.filter(
-            rating__gte=4.0,
-            is_active=True
-        ).order_by('-rating', '-review_count')[:6]
-        
-        serializer = self.get_serializer(featured_yachts, many=True)
-        return Response(serializer.data)
-    
-    @action(detail=False, methods=['get'])
-    def models(self, request):
-        """Get available yacht models with counts"""
-        from django.db.models import Count
-        models = Yacht.objects.filter(is_active=True).values('model').annotate(
-            count=Count('id')
-        ).order_by('model')
-        
-        return Response(models)
+    def retrieve(self, request, pk=None):
+        """Get single yacht by ID"""
+        try:
+            with connection.cursor() as cursor:
+                cursor.execute("""
+                    SELECT id, name, description, location, price_per_day,
+                           capacity, cabins, length, year_built, images,
+                           amenities, owner_id, is_active, rating, review_count,
+                           created_at, updated_at
+                    FROM yachts 
+                    WHERE id = %s
+                """, [pk])
+                
+                row = cursor.fetchone()
+                if not row:
+                    return Response(
+                        {'error': 'Yacht not found'}, 
+                        status=status.HTTP_404_NOT_FOUND
+                    )
+                
+                columns = [col[0] for col in cursor.description]
+                yacht_data = dict(zip(columns, row))
+                
+                yacht = {
+                    'id': yacht_data['id'],
+                    'name': yacht_data['name'],
+                    'description': yacht_data['description'],
+                    'location': yacht_data['location'],
+                    'pricePerDay': str(yacht_data['price_per_day']),
+                    'capacity': yacht_data['capacity'],
+                    'cabins': yacht_data['cabins'],
+                    'length': str(yacht_data['length']),
+                    'yearBuilt': yacht_data['year_built'],
+                    'images': yacht_data['images'] or [],
+                    'amenities': yacht_data['amenities'] or [],
+                    'ownerId': yacht_data['owner_id'],
+                    'isActive': yacht_data['is_active'],
+                    'rating': str(yacht_data['rating']),
+                    'reviewCount': yacht_data['review_count'],
+                    'createdAt': yacht_data['created_at'].isoformat(),
+                    'updatedAt': yacht_data['updated_at'].isoformat()
+                }
+                
+                return Response(yacht)
+                
+        except Exception as e:
+            return Response(
+                {'error': f'Failed to fetch yacht: {str(e)}'}, 
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+
+    def create(self, request):
+        """Create new yacht"""
+        try:
+            data = request.data
+            with connection.cursor() as cursor:
+                cursor.execute("""
+                    INSERT INTO yachts (name, description, location, price_per_day,
+                                      capacity, cabins, length, year_built, images,
+                                      amenities, is_active)
+                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                    RETURNING id, created_at, updated_at
+                """, [
+                    data.get('name'),
+                    data.get('description'),
+                    data.get('location'),
+                    float(data.get('pricePerDay', 0)),
+                    int(data.get('capacity', 0)),
+                    int(data.get('cabins', 0)),
+                    float(data.get('length', 0)),
+                    int(data.get('yearBuilt', 2024)),
+                    data.get('images', []),
+                    data.get('amenities', []),
+                    True
+                ])
+                
+                result = cursor.fetchone()
+                yacht_id, created_at, updated_at = result
+                
+                # Return created yacht
+                return Response({
+                    'id': yacht_id,
+                    'name': data.get('name'),
+                    'description': data.get('description'),
+                    'location': data.get('location'),
+                    'pricePerDay': str(data.get('pricePerDay')),
+                    'capacity': int(data.get('capacity')),
+                    'cabins': int(data.get('cabins')),
+                    'length': str(data.get('length')),
+                    'yearBuilt': int(data.get('yearBuilt')),
+                    'images': data.get('images', []),
+                    'amenities': data.get('amenities', []),
+                    'ownerId': None,
+                    'isActive': True,
+                    'rating': '0.00',
+                    'reviewCount': 0,
+                    'createdAt': created_at.isoformat(),
+                    'updatedAt': updated_at.isoformat()
+                }, status=status.HTTP_201_CREATED)
+                
+        except Exception as e:
+            return Response(
+                {'error': f'Failed to create yacht: {str(e)}'}, 
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )

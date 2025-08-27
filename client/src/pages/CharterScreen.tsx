@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
+import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -8,13 +9,22 @@ import BottomNavigation from "@/components/BottomNavigation";
 import { Search, Heart, Star, Users, Bed, Calendar, PieChart, ChevronDown } from "lucide-react";
 import nauttecLogo from "@assets/Nauttec Logo_1754330395988.png";
 import seaBackground from "@assets/image_1754575606863.png";
-import { mockYachts, mockOwnershipOpportunities } from "@/lib/mockData";
 
 export default function CharterScreen() {
   const [location, setLocation] = useState("");
   const [guests, setGuests] = useState("");
   const [checkIn, setCheckIn] = useState("");
   const [checkOut, setCheckOut] = useState("");
+
+  // Fetch yachts from Node.js API
+  const { data: yachts = [], isLoading: yachtsLoading } = useQuery({
+    queryKey: ['/api/yachts'],
+  });
+
+  // Fetch ownership opportunities from Node.js API  
+  const { data: ownershipData = [], isLoading: ownershipLoading } = useQuery({
+    queryKey: ['/api/ownership-opportunities'],
+  });
 
 
 
@@ -130,52 +140,60 @@ export default function CharterScreen() {
         
         <div className="overflow-x-auto">
           <div className="flex space-x-4" style={{ width: "max-content" }}>
-            {mockYachts.map((yacht) => (
-              <Link key={yacht.id} href={`/yacht-details/${yacht.id}`}>
-                <Card className="w-80 card-hover cursor-pointer">
-                  <div className="relative">
-                    <img 
-                      src={yacht.images?.[0] || yacht.images?.[0]} 
-                      alt={yacht.name}
-                      className="w-full h-48 object-cover rounded-t-2xl"
-                    />
-                    <Button 
-                      variant="ghost" 
-                      size="sm" 
-                      className="absolute top-3 right-3 p-2 bg-white/80 rounded-full hover:bg-white"
-                    >
-                      <Heart className="w-4 h-4 text-gray-600" />
-                    </Button>
-                  </div>
-                  <CardContent className="p-4">
-                    <div className="flex items-start justify-between mb-2">
-                      <div>
-                        <h4 className="font-bold text-gray-900">{yacht.name}</h4>
-                        <p className="text-gray-600 text-sm">{yacht.location}</p>
-                      </div>
+            {yachtsLoading ? (
+              <div className="flex space-x-4">
+                {[1,2,3].map((i) => (
+                  <div key={i} className="w-80 h-80 bg-gray-200 rounded-2xl animate-pulse" />
+                ))}
+              </div>
+            ) : (
+              yachts?.map((yacht: any) => (
+                <Link key={yacht.id} href={`/yacht-details/${yacht.id}`}>
+                  <Card className="w-80 card-hover cursor-pointer">
+                    <div className="relative">
+                      <img 
+                        src={yacht.images?.[0] || "https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80"} 
+                        alt={yacht.name}
+                        className="w-full h-48 object-cover rounded-t-2xl"
+                      />
+                      <Button 
+                        variant="ghost" 
+                        size="sm" 
+                        className="absolute top-3 right-3 p-2 bg-white/80 rounded-full hover:bg-white"
+                      >
+                        <Heart className="w-4 h-4 text-gray-600" />
+                      </Button>
                     </div>
-                    <div className="flex items-center space-x-2 mb-2">
-                      <div className="flex text-yellow-400">
-                        {[...Array(5)].map((_, i) => (
-                          <Star key={i} className="w-4 h-4 fill-current" />
-                        ))}
+                    <CardContent className="p-4">
+                      <div className="flex items-start justify-between mb-2">
+                        <div>
+                          <h4 className="font-bold text-gray-900">{yacht.name}</h4>
+                          <p className="text-gray-600 text-sm">{yacht.location}</p>
+                        </div>
                       </div>
-                      <span className="text-sm text-gray-600">{yacht.rating} ({yacht.reviewCount})</span>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-3 text-sm text-gray-600">
-                        <span><Users className="w-4 h-4 inline mr-1" />{yacht.capacity} guests</span>
-                        <span><Bed className="w-4 h-4 inline mr-1" />{yacht.cabins} cabins</span>
+                      <div className="flex items-center space-x-2 mb-2">
+                        <div className="flex text-yellow-400">
+                          {[...Array(5)].map((_, i) => (
+                            <Star key={i} className="w-4 h-4 fill-current" />
+                          ))}
+                        </div>
+                        <span className="text-sm text-gray-600">{yacht.rating} ({yacht.reviewCount})</span>
                       </div>
-                      <div className="text-right">
-                        <p className="text-2xl font-bold text-gray-900">€{yacht.pricePerDay}</p>
-                        <p className="text-sm text-gray-600">per day</p>
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-3 text-sm text-gray-600">
+                          <span><Users className="w-4 h-4 inline mr-1" />{yacht.capacity} guests</span>
+                          <span><Bed className="w-4 h-4 inline mr-1" />{yacht.cabins} cabins</span>
+                        </div>
+                        <div className="text-right">
+                          <p className="text-2xl font-bold text-gray-900">€{yacht.pricePerDay}</p>
+                          <p className="text-sm text-gray-600">per day</p>
+                        </div>
                       </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </Link>
-            ))}
+                    </CardContent>
+                  </Card>
+                </Link>
+              ))
+            )}
           </div>
         </div>
       </section>
@@ -191,7 +209,14 @@ export default function CharterScreen() {
         
         <div className="overflow-x-auto">
           <div className="flex space-x-4" style={{ width: "max-content" }}>
-            {mockOwnershipOpportunities.map((opportunity) => (
+            {ownershipLoading ? (
+              <div className="flex space-x-4">
+                {[1,2,3].map((i) => (
+                  <div key={i} className="w-80 h-96 bg-gray-200 rounded-2xl animate-pulse" />
+                ))}
+              </div>
+            ) : (
+              ownershipData?.map((opportunity: any) => (
               <Link key={opportunity.id} href={`/ownership/${opportunity.id}`}>
                 <Card className="w-80 card-hover cursor-pointer">
                   <div className="relative">
@@ -257,7 +282,8 @@ export default function CharterScreen() {
                   </CardContent>
                 </Card>
               </Link>
-            ))}
+              ))
+            )}
           </div>
         </div>
       </section>

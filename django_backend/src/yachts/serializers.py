@@ -1,59 +1,36 @@
-"""
-Yacht serializers for Nauttec API
-"""
 from rest_framework import serializers
-from .models import Yacht, YachtImage, YachtSpecification, YachtAvailability
+from .models import Yacht
 
-class YachtImageSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = YachtImage
-        fields = ['id', 'image', 'caption', 'is_primary', 'order']
-
-class YachtSpecificationSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = YachtSpecification
-        fields = '__all__'
-
-class YachtAvailabilitySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = YachtAvailability
-        fields = ['date', 'is_available', 'reason', 'price_override']
-
-class YachtListSerializer(serializers.ModelSerializer):
-    """Yacht list view with essential info"""
-    current_price = serializers.SerializerMethodField()
-    is_available_for_booking = serializers.ReadOnlyField()
-    primary_image = serializers.SerializerMethodField()
+class YachtSerializer(serializers.ModelSerializer):
+    images = serializers.ListField(
+        child=serializers.URLField(), 
+        required=False,
+        allow_empty=True
+    )
+    amenities = serializers.ListField(
+        child=serializers.CharField(max_length=100),
+        required=False, 
+        allow_empty=True
+    )
     
     class Meta:
         model = Yacht
         fields = [
-            'id', 'name', 'model', 'location', 'length', 'capacity', 'cabins',
-            'current_price', 'rating', 'review_count', 'is_available_for_booking',
-            'primary_image', 'status'
+            'id', 'name', 'description', 'location', 'price_per_day',
+            'capacity', 'cabins', 'length', 'year_built', 'images',
+            'amenities', 'owner_id', 'is_active', 'rating', 'review_count',
+            'created_at', 'updated_at'
         ]
-    
-    def get_current_price(self, obj):
-        return obj.get_current_price()
-    
-    def get_primary_image(self, obj):
-        primary_img = obj.yacht_images.filter(is_primary=True).first()
-        if primary_img:
-            return primary_img.image.url if primary_img.image else None
-        return None
+        read_only_fields = ['id', 'created_at', 'updated_at']
 
-class YachtDetailSerializer(serializers.ModelSerializer):
-    """Complete yacht details"""
-    yacht_images = YachtImageSerializer(many=True, read_only=True)
-    specifications = YachtSpecificationSerializer(read_only=True)
-    availability = YachtAvailabilitySerializer(many=True, read_only=True)
-    current_price = serializers.SerializerMethodField()
-    ownership_opportunities_count = serializers.ReadOnlyField()
-    total_shares_available = serializers.ReadOnlyField()
-    
-    class Meta:
-        model = Yacht
-        fields = '__all__'
-    
-    def get_current_price(self, obj):
-        return obj.get_current_price()
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        # Convert to match frontend expected format
+        data['pricePerDay'] = str(data.pop('price_per_day'))
+        data['yearBuilt'] = data.pop('year_built')
+        data['reviewCount'] = data.pop('review_count')
+        data['ownerId'] = data.pop('owner_id')
+        data['isActive'] = data.pop('is_active')
+        data['createdAt'] = data.pop('created_at')
+        data['updatedAt'] = data.pop('updated_at')
+        return data
