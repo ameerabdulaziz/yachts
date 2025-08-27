@@ -1,18 +1,41 @@
-import { Link } from "wouter";
-import { useQuery } from "@tanstack/react-query";
+import { Link, useLocation } from "wouter";
+import { useQuery, useMutation } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import BottomNavigation from "@/components/BottomNavigation";
 import { ArrowLeft, Edit3, Star, Ship, PieChart, MessageCircle, Settings, LogOut, Camera, Crown } from "lucide-react";
+import { apiRequest } from "@/lib/queryClient";
 import seaBackground from "@assets/image_1754575606863.png";
 
 export default function UserProfileScreen() {
+  const [, navigate] = useLocation();
+
   // Fetch user data from API 
   const { data: users = [], isLoading: usersLoading } = useQuery({
     queryKey: ['/api/users'],
     retry: false,
   });
+
+  // Logout mutation
+  const logoutMutation = useMutation({
+    mutationFn: async () => {
+      await apiRequest("POST", "/api/auth/logout");
+    },
+    onSuccess: () => {
+      // Redirect to login page after successful logout
+      navigate("/login");
+    },
+    onError: (error) => {
+      console.error("Logout failed:", error);
+      // Still redirect to login even if logout API fails
+      navigate("/login");
+    },
+  });
+
+  const handleLogout = () => {
+    logoutMutation.mutate();
+  };
 
   // Type assertion and use first user as current user or fallback data
   const apiUsers = users as any[];
@@ -173,9 +196,16 @@ export default function UserProfileScreen() {
       <section className="px-4 py-6">
         <Card>
           <CardContent className="p-4">
-            <button className="w-full flex items-center justify-center space-x-3 text-red-600 hover:bg-red-50 p-2 rounded-lg transition-colors">
+            <button 
+              onClick={handleLogout}
+              disabled={logoutMutation.isPending}
+              className="w-full flex items-center justify-center space-x-3 text-red-600 hover:bg-red-50 p-2 rounded-lg transition-colors disabled:opacity-50"
+              data-testid="button-logout"
+            >
               <LogOut className="w-5 h-5" />
-              <span className="font-medium">Sign Out</span>
+              <span className="font-medium">
+                {logoutMutation.isPending ? "Signing Out..." : "Sign Out"}
+              </span>
             </button>
           </CardContent>
         </Card>
