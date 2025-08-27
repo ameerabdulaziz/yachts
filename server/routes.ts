@@ -20,6 +20,39 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.use(passport.initialize());
   app.use(passport.session());
 
+  // Configure Google OAuth strategy
+  if (process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET) {
+    passport.use(new GoogleStrategy({
+      clientID: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      callbackURL: "/api/auth/google/callback"
+    },
+    async (accessToken, refreshToken, profile, done) => {
+      try {
+        // Check if user already exists
+        let user = await storage.getUserByEmail(profile.emails?.[0]?.value || '');
+        
+        if (!user) {
+          // Create new user from Google profile
+          const userData = {
+            email: profile.emails?.[0]?.value || '',
+            firstName: profile.name?.givenName || '',
+            lastName: profile.name?.familyName || '',
+            phone: '', // Will be added later if needed
+            role: 'renter' as const,
+            isVerified: true,
+            fuelWalletBalance: '0.00'
+          };
+          user = await storage.createUser(userData);
+        }
+        
+        return done(null, user);
+      } catch (error) {
+        return done(error, undefined);
+      }
+    }));
+  }
+
   // Passport serialization
   passport.serializeUser((user: any, done) => {
     done(null, user.id);
@@ -107,7 +140,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.post("/api/auth/setup-account", async (req, res) => {
     try {
       const userData = insertUserSchema.parse(req.body);
-      const user = await storage.updateUser(userData);
+      // For account setup, we're creating a new user, not updating existing one
+      const user = await storage.createUser(userData);
       res.json({ user });
     } catch (error) {
       res.status(500).json({ message: "Account setup failed" });
