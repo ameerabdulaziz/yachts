@@ -195,8 +195,7 @@ def register_user(request):
             phone=cleaned_phone,
             email=email,
             first_name=first_name,
-            last_name=last_name,
-            role=role
+            last_name=last_name
         )
         
         logger.info(f"New user registered: {cleaned_phone}")
@@ -209,8 +208,7 @@ def register_user(request):
                 'phone': user.phone,
                 'email': user.email,
                 'first_name': user.first_name,
-                'last_name': user.last_name,
-                'role': user.role
+                'last_name': user.last_name
             }
         })
         
@@ -356,7 +354,6 @@ def user_login(request):
                 'email': user.email or '',
                 'first_name': user.first_name,
                 'last_name': user.last_name,
-                'role': user.role,
                 'is_phone_verified': user.is_phone_verified,
                 'date_joined': user.date_joined.isoformat(),
                 'last_login': user.last_login.isoformat()
@@ -413,7 +410,6 @@ def get_profile(request):
                 'email': user.email or '',
                 'first_name': user.first_name,
                 'last_name': user.last_name,
-                'role': user.role,
                 'is_phone_verified': user.is_phone_verified,
                 'date_joined': user.date_joined.isoformat(),
                 'last_login': user.last_login.isoformat() if user.last_login else None

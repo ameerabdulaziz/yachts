@@ -36,11 +36,9 @@
                                                                         "// Generate user data",
                                                                         "const firstNames = ['Alex', 'Jordan', 'Taylor', 'Casey', 'Morgan', 'Blake'];",
                                                                         "const lastNames = ['Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Garcia'];",
-                                                                        "const roles = ['renter', 'owner', 'admin'];",
                                                                         "",
                                                                         "const firstName = firstNames[Math.floor(Math.random() * firstNames.length)];",
                                                                         "const lastName = lastNames[Math.floor(Math.random() * lastNames.length)];",
-                                                                        "const role = roles[Math.floor(Math.random() * roles.length)];",
                                                                         "const email = `${firstName.toLowerCase()}.${lastName.toLowerCase()}${randomId}@nauttec.com`;",
                                                                         "",
                                                                         "// Set environment variables",
@@ -48,13 +46,11 @@
                                                                         "pm.environment.set('generated_email', email);",
                                                                         "pm.environment.set('generated_first_name', firstName);",
                                                                         "pm.environment.set('generated_last_name', lastName);",
-                                                                        "pm.environment.set('generated_role', role);",
                                                                         "",
                                                                         "console.log('Generated User Data:');",
                                                                         "console.log('Phone:', randomPhone);",
                                                                         "console.log('Email:', email);",
-                                                                        "console.log('Name:', firstName, lastName);",
-                                                                        "console.log('Role:', role);"
+                                                                        "console.log('Name:', firstName, lastName);"
                                                                 ]
                                                         }
                                                 }
@@ -69,7 +65,7 @@
                                                 ],
                                                 "body": {
                                                         "mode": "raw",
-                                                        "raw": "{\n  \"phone\": \"{{generated_phone}}\",\n  \"role\": \"{{generated_role}}\",\n  \"email\": \"{{generated_email}}\",\n  \"first_name\": \"{{generated_first_name}}\",\n  \"last_name\": \"{{generated_last_name}}\"\n}"
+                                                        "raw": "{\n  \"phone\": \"{{generated_phone}}\",\n  \"email\": \"{{generated_email}}\",\n  \"first_name\": \"{{generated_first_name}}\",\n  \"last_name\": \"{{generated_last_name}}\"\n}"
                                                 },
                                                 "url": {
                                                         "raw": "{{base_url}}/auth/register/",
