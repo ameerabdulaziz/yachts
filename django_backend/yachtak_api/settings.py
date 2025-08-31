@@ -97,7 +97,7 @@ AUTH_USER_MODEL = 'accounts.User'
 #     'ROTATE_REFRESH_TOKENS': True,
 # }
 
-# Twilio Settings
+# Twilio SMS/OTP Configuration
 TWILIO_ACCOUNT_SID = os.getenv('TWILIO_ACCOUNT_SID')
 TWILIO_AUTH_TOKEN = os.getenv('TWILIO_AUTH_TOKEN')
 TWILIO_VERIFY_SERVICE_SID = os.getenv('TWILIO_VERIFY_SERVICE_SID')
