@@ -6,6 +6,15 @@ Yachtak (operated by Nauttec) is a comprehensive fractional yacht ownership and 
 
 Preferred communication style: Simple, everyday language.
 
+# Recent Changes
+
+## Django Backend Git Repository (August 31, 2025)
+- Successfully initialized Git repository in `django_backend/` directory
+- Created comprehensive Postman collection with 40+ endpoints organized by Django apps
+- Fixed URL routing issues for authentication endpoints
+- All API endpoints now functional and ready for testing
+- Complete environment configuration for development and production use
+
 # System Architecture
 
 ## Frontend

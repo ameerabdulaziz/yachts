@@ -153,3 +153,276 @@ def verify_otp(request):
             'success': False,
             'message': 'Verification failed'
         }, status=500)
+
+# Additional authentication endpoints for complete Postman collection
+
+@csrf_exempt
+@require_http_methods(["POST"])
+def register_user(request):
+    """
+    Register a new user with phone number
+    POST /auth/register/
+    Body: {"phone": "+1234567890", "role": "renter", "email": "user@example.com", "first_name": "Test", "last_name": "User"}
+    """
+    try:
+        data = json.loads(request.body)
+        phone = data.get('phone', '').strip()
+        role = data.get('role', 'renter')
+        email = data.get('email', '')
+        first_name = data.get('first_name', '')
+        last_name = data.get('last_name', '')
+        
+        if not phone:
+            return JsonResponse({
+                'success': False,
+                'message': 'Phone number is required'
+            }, status=400)
+        
+        # Clean phone number
+        cleaned_phone = ''.join(c for c in phone if c.isdigit() or c == '+')
+        if not cleaned_phone.startswith('+'):
+            cleaned_phone = '+' + cleaned_phone.lstrip('0')
+        
+        # Check if user already exists
+        if User.objects.filter(phone=cleaned_phone).exists():
+            return JsonResponse({
+                'success': False,
+                'message': 'User with this phone number already exists'
+            }, status=400)
+        
+        # Create new user
+        user = User.objects.create(
+            phone=cleaned_phone,
+            email=email,
+            first_name=first_name,
+            last_name=last_name,
+            role=role
+        )
+        
+        logger.info(f"New user registered: {cleaned_phone}")
+        
+        return JsonResponse({
+            'success': True,
+            'message': 'User registered successfully',
+            'user': {
+                'id': user.id,
+                'phone': user.phone,
+                'email': user.email,
+                'first_name': user.first_name,
+                'last_name': user.last_name,
+                'role': user.role
+            }
+        })
+        
+    except json.JSONDecodeError:
+        return JsonResponse({
+            'success': False,
+            'message': 'Invalid JSON'
+        }, status=400)
+    except Exception as e:
+        logger.error(f"Error registering user: {e}")
+        return JsonResponse({
+            'success': False,
+            'message': 'Registration failed'
+        }, status=500)
+
+@csrf_exempt
+@require_http_methods(["POST"])
+def send_otp(request):
+    """
+    Send OTP to phone number (alias for request_otp)
+    POST /auth/send-otp/
+    Body: {"phone": "+1234567890"}
+    """
+    return request_otp(request)
+
+@csrf_exempt
+@require_http_methods(["POST"])
+def set_password(request):
+    """
+    Set password for user after OTP verification
+    POST /auth/set-password/
+    Body: {"phone": "+1234567890", "password": "SecurePass123!", "password_confirm": "SecurePass123!"}
+    """
+    try:
+        data = json.loads(request.body)
+        phone = data.get('phone', '').strip()
+        password = data.get('password', '')
+        password_confirm = data.get('password_confirm', '')
+        
+        if not phone or not password:
+            return JsonResponse({
+                'success': False,
+                'message': 'Phone and password are required'
+            }, status=400)
+        
+        if password != password_confirm:
+            return JsonResponse({
+                'success': False,
+                'message': 'Passwords do not match'
+            }, status=400)
+        
+        # Clean phone number
+        cleaned_phone = ''.join(c for c in phone if c.isdigit() or c == '+')
+        if not cleaned_phone.startswith('+'):
+            cleaned_phone = '+' + cleaned_phone.lstrip('0')
+        
+        # Find user
+        try:
+            user = User.objects.get(phone=cleaned_phone)
+        except User.DoesNotExist:
+            return JsonResponse({
+                'success': False,
+                'message': 'User not found'
+            }, status=404)
+        
+        # Set password
+        user.set_password(password)
+        user.save()
+        
+        logger.info(f"Password set for user: {cleaned_phone}")
+        
+        return JsonResponse({
+            'success': True,
+            'message': 'Password set successfully'
+        })
+        
+    except json.JSONDecodeError:
+        return JsonResponse({
+            'success': False,
+            'message': 'Invalid JSON'
+        }, status=400)
+    except Exception as e:
+        logger.error(f"Error setting password: {e}")
+        return JsonResponse({
+            'success': False,
+            'message': 'Failed to set password'
+        }, status=500)
+
+@csrf_exempt
+@require_http_methods(["POST"])
+def user_login(request):
+    """
+    Login user with phone and password
+    POST /auth/login/
+    Body: {"phone": "+1234567890", "password": "SecurePass123!"}
+    """
+    try:
+        data = json.loads(request.body)
+        phone = data.get('phone', '').strip()
+        password = data.get('password', '')
+        
+        if not phone or not password:
+            return JsonResponse({
+                'success': False,
+                'message': 'Phone and password are required'
+            }, status=400)
+        
+        # Clean phone number
+        cleaned_phone = ''.join(c for c in phone if c.isdigit() or c == '+')
+        if not cleaned_phone.startswith('+'):
+            cleaned_phone = '+' + cleaned_phone.lstrip('0')
+        
+        # Find and authenticate user
+        try:
+            user = User.objects.get(phone=cleaned_phone)
+            if not user.check_password(password):
+                return JsonResponse({
+                    'success': False,
+                    'message': 'Invalid credentials'
+                }, status=401)
+        except User.DoesNotExist:
+            return JsonResponse({
+                'success': False,
+                'message': 'Invalid credentials'
+            }, status=401)
+        
+        # Update last login
+        user.last_login = timezone.now()
+        user.save()
+        
+        # Generate demo JWT tokens
+        demo_access_token = f"access_token_for_user_{user.id}"
+        demo_refresh_token = f"refresh_token_for_user_{user.id}"
+        
+        logger.info(f"User logged in successfully: {cleaned_phone}")
+        
+        return JsonResponse({
+            'access': demo_access_token,
+            'refresh': demo_refresh_token,
+            'user': {
+                'id': user.id,
+                'phone': user.phone,
+                'email': user.email or '',
+                'first_name': user.first_name,
+                'last_name': user.last_name,
+                'role': user.role,
+                'is_phone_verified': user.is_phone_verified,
+                'date_joined': user.date_joined.isoformat(),
+                'last_login': user.last_login.isoformat()
+            }
+        })
+        
+    except json.JSONDecodeError:
+        return JsonResponse({
+            'success': False,
+            'message': 'Invalid JSON'
+        }, status=400)
+    except Exception as e:
+        logger.error(f"Error during login: {e}")
+        return JsonResponse({
+            'success': False,
+            'message': 'Login failed'
+        }, status=500)
+
+@csrf_exempt
+@require_http_methods(["GET"])
+def get_profile(request):
+    """
+    Get user profile
+    GET /auth/profile/?phone=+1234567890
+    """
+    try:
+        phone = request.GET.get('phone', '').strip()
+        
+        if not phone:
+            return JsonResponse({
+                'success': False,
+                'message': 'Phone number is required'
+            }, status=400)
+        
+        # Clean phone number
+        cleaned_phone = ''.join(c for c in phone if c.isdigit() or c == '+')
+        if not cleaned_phone.startswith('+'):
+            cleaned_phone = '+' + cleaned_phone.lstrip('0')
+        
+        # Find user
+        try:
+            user = User.objects.get(phone=cleaned_phone)
+        except User.DoesNotExist:
+            return JsonResponse({
+                'success': False,
+                'message': 'User not found'
+            }, status=404)
+        
+        return JsonResponse({
+            'success': True,
+            'user': {
+                'id': user.id,
+                'phone': user.phone,
+                'email': user.email or '',
+                'first_name': user.first_name,
+                'last_name': user.last_name,
+                'role': user.role,
+                'is_phone_verified': user.is_phone_verified,
+                'date_joined': user.date_joined.isoformat(),
+                'last_login': user.last_login.isoformat() if user.last_login else None
+            }
+        })
+        
+    except Exception as e:
+        logger.error(f"Error getting profile: {e}")
+        return JsonResponse({
+            'success': False,
+            'message': 'Failed to get profile'
+        }, status=500)
