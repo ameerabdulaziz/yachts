@@ -1,0 +1,227 @@
+# Yachtak MVP – Replit Task Board (Django + DRF + Stripe + Twilio)
+
+Use this checklist as copy‑pasteable tasks on Replit. Each task has **Goal**, **Files to touch**, **API/DB**, **Definition of Done (DoD)**, and **Quick test**. Follow order.
+
+---
+
+## Task 0 — Bootstrap & Env
+
+**Goal:** Spin up repo with scaffold from the canvas, install deps, wire .env.
+
+* **Files:** `pyproject.toml` or `requirements.txt`, `.env`, `yachtak_api/settings.py`, `compose.yaml` (optional for local PG)
+* **API/DB:** PostgreSQL DB, DRF installed.
+* **DoD:** `python manage.py migrate` succeeds; server runs on port 8000.
+* **Quick test:** GET `http://localhost:8000/admin/login/` returns admin page.
+
+**Env vars to set** (Replit Secrets):
+
+* `DJANGO_SECRET_KEY`, `DJANGO_DEBUG=true`, `DJANGO_ALLOWED_HOSTS=*`
+* `DB_NAME`, `DB_USER`, `DB_PASSWORD`, `DB_HOST`, `DB_PORT`
+* `TWILIO_ACCOUNT_SID`, `TWILIO_AUTH_TOKEN`, `TWILIO_VERIFY_SERVICE_SID`
+* `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `STRIPE_CURRENCY=usd`
+
+---
+
+## Task 1 — OTP Auth (Twilio Verify)
+
+**Goal:** Phone‑based OTP login issuing JWT.
+
+* **Files:** `apps/accounts/models.py`, `apps/accounts/auth.py`, `apps/accounts/serializers.py`, `apps/accounts/views.py`, `apps/accounts/urls.py`, `yachtak_api/settings.py`
+* **API:**
+
+  * `POST /auth/request-otp` { phone }
+  * `POST /auth/verify-otp` { phone, code } → { access, refresh, user }
+* **DoD:** Valid phone gets SMS; valid code returns JWT.
+* **Quick test:**
+
+```bash
+curl -X POST :8000/auth/request-otp/ -H 'Content-Type: application/json' -d '{"phone":"+201234567890"}'
+# then verify with the code
+```
+
+---
+
+## Task 2 — Boats API (Public)
+
+**Goal:** List boats & basic fields.
+
+* **Files:** `apps/boats/models.py`, `apps/boats/serializers.py`, `apps/boats/views.py`, `apps/boats/urls.py`, `yachtak_api/urls.py`
+* **API:** `GET /boats/`
+* **DoD:** Returns seeded boats array with `id,name,model,capacity,location,allow_public_rental`.
+* **Quick test:** `curl :8000/boats/`
+
+---
+
+## Task 3 — Owner Calendar (Read)
+
+**Goal:** Owners can view their boat calendar (bookings + maintenance).
+
+* **Files:** `apps/owners/models.py` (OwnerBooking), `apps/boats/models.py` (BoatMaintenance), `apps/owners/views.py`, `apps/owners/urls.py`
+* **API:** `GET /owners/{boatId}/calendar`
+* **DoD:** Returns `{bookings:[{date,slot,owner_id}], maintenance:[{date}]}`; JWT required.
+* **Quick test:** create sample boat + booking via admin; call endpoint with Bearer token.
+
+---
+
+## Task 4 — Owner Booking (Write + Rules v1)
+
+**Goal:** Owner books a day/slot with consecutive‑day and conflict checks.
+
+* **Files:** `apps/owners/models.py`, `apps/owners/views.py`
+* **API:** `POST /owners/{boatId}/book` { date, slot: AM|PM|FULL, open\_to\_share }
+* **Rules v1:**
+
+  * Prevent booking if another booking exists for (boat,date,slot).
+  * If `CONSECUTIVE_RULE=true`, block if owner has booking the day before or after.
+* **DoD:** Returns `{ok:true, booking_id}` or `409 CONSECUTIVE_DAY_RULE/ALREADY_BOOKED`.
+* **Quick test:** book two adjacent dates → 409.
+
+---
+
+## Task 5 — Visitor Rental Booking (Pending)
+
+**Goal:** Create pending rental booking before payment.
+
+* **Files:** `apps/rentals/models.py`, `apps/rentals/serializers.py`, `apps/rentals/views.py`, `apps/rentals/urls.py`
+* **API:** `POST /rentals/booking` { boat, date, slot, amount\_cents }
+* **DoD:** Creates row with `status=pending_payment` or `409 slot_unavailable`.
+* **Quick test:** POST pending booking; second booking same slot returns 409.
+
+---
+
+## Task 6 — Stripe PaymentIntent (Rental)
+
+**Goal:** Create client\_secret for pending rental booking.
+
+* **Files:** `apps/payments/models.py`, `apps/payments/stripe_gateway.py`, `apps/payments/views.py`, `apps/payments/urls.py`
+* **API:** `POST /payments/create-intent` { kind:"rental", booking\_id }
+* **DoD:** Returns `{client_secret}`; intent visible in Stripe dashboard (test mode).
+* **Quick test:** call endpoint and confirm PaymentIntent is created.
+
+---
+
+## Task 7 — Stripe Webhook (Confirm Rental)
+
+**Goal:** Flip booking to `confirmed` after `payment_intent.succeeded`.
+
+* **Files:** `apps/payments/webhooks.py`, `apps/payments/urls.py`
+* **API:** `POST /payments/webhook/stripe/` (Stripe → app)
+* **DoD:** On succeeded event with metadata `{kind:rental, booking_id}`, update booking to `confirmed` and store `payment_intent_id`.
+* **Quick test:**
+
+```bash
+stripe listen --forward-to http://localhost:8000/payments/webhook/stripe/
+# confirm PaymentIntent in Stripe test → booking.status == confirmed
+```
+
+---
+
+## Task 8 — Fuel Wallet (View + History)
+
+**Goal:** View fuel balance and last 50 transactions.
+
+* **Files:** `apps/fuel/models.py`, `apps/fuel/serializers.py`, `apps/fuel/views.py`, `apps/fuel/urls.py`
+* **API:** `GET /fuel/{ownerId}/`
+* **DoD:** Returns `{balance, history:[{liters,type,remark,created_at}]}`; creates wallet on first access.
+* **Quick test:** call endpoint for logged‑in owner → `{balance:0, history:[]}`.
+
+---
+
+## Task 9 — Stripe PaymentIntent (Fuel Top‑Up)
+
+**Goal:** Create client\_secret for fuel liters top‑up.
+
+* **Files:** `apps/payments/views.py` (extend), `apps/payments/models.py`
+* **API:** `POST /payments/create-intent` { kind:"fuel", liters }
+* **DoD:** Returns `{client_secret}`; amount = liters × unit\_price (e.g., 200 cents).
+* **Quick test:** Hit endpoint and see PaymentIntent in Stripe.
+
+---
+
+## Task 10 — Stripe Webhook (Apply Fuel)
+
+**Goal:** After successful payment, add liters to wallet and log transaction.
+
+* **Files:** `apps/payments/webhooks.py` (extend), `apps/fuel/models.py`
+* **API:** Stripe webhook (same as Task 7).
+* **DoD:** On `{kind:fuel, liters, user_id}`, increment wallet, create `FuelTransaction.TOPUP`.
+* **Quick test:** Confirm PI in Stripe test → balance increases.
+
+---
+
+## Task 11 — Enforce Fuel Threshold on Owner Booking
+
+**Goal:** Block owner booking if balance < MIN\_FUEL\_LITERS.
+
+* **Files:** `yachtak_api/settings.py` (MIN\_FUEL\_LITERS), `apps/owners/views.py`
+* **API:** `POST /owners/{boatId}/book` returns `409 FUEL_LOW` when below threshold.
+* **DoD:** Rule triggers correctly; booking allowed after top‑up.
+* **Quick test:** set MIN low/high and verify behavior.
+
+---
+
+## Task 12 — Inquiries (Lead Capture)
+
+**Goal:** Store user inquiries for sales follow‑up.
+
+* **Files:** `apps/inquiries/models.py`, `apps/inquiries/views.py`, `apps/inquiries/urls.py`
+* **API:**
+
+  * `POST /inquiries/full`
+  * `POST /inquiries/group`
+  * `POST /inquiries/share`
+* **DoD:** Returns `{ok:true}` and persists row with payload.
+* **Quick test:** POST sample JSON → row appears in admin.
+
+---
+
+## Task 13 — Notifications (In‑App Feed)
+
+**Goal:** Return the latest events (MVP: DB only).
+
+* **Files:** `apps/notifications/models.py`, `apps/notifications/views.py`, `apps/notifications/urls.py`
+* **Events to log:** booking confirmed/canceled, fuel top‑up, inquiry created.
+* **API:** `GET /notifications/` (auth)
+* **DoD:** Returns last N events ordered by time.
+* **Quick test:** Trigger events and fetch endpoint.
+
+---
+
+## Task 14 — Seed Data & Postman Collection
+
+**Goal:** Make the API testable for stakeholders.
+
+* **Files:** `fixtures/seed.json` (1 boat, 1 owner, 1 visitor), `scripts/postman/Yachtak.postman_collection.json`
+* **DoD:** `loaddata fixtures/seed.json` works; collection covers every endpoint with sample bodies and test scripts (sets Bearer token after OTP verify).
+* **Quick test:** Import collection → run in order.
+
+---
+
+## Task 15 — README & Healthcheck
+
+**Goal:** Clear runbook + health ping.
+
+* **Files:** `README.md`, `yachtak_api/urls.py` (add `/healthz`)
+* **DoD:** README covers env, run steps, Stripe CLI, Twilio notes; `/healthz` returns `{status:"ok"}`.
+* **Quick test:** `curl :8000/healthz`.
+
+---
+
+## Optional — Docker/Compose for Local Dev
+
+**Goal:** Standard local stack (PG + Redis optional).
+
+* **Files:** `compose.yaml`, `docker/Dockerfile`
+* **DoD:** `docker compose up` runs API + DB; migrations succeed.
+
+---
+
+# Milestones & Handover
+
+* **Milestone A (Tasks 1–2):** OTP + Boats
+* **Milestone B (Tasks 5–7):** Rentals + Stripe confirm
+* **Milestone C (Tasks 3–4,11):** Owner calendar + rules + fuel block
+* **Milestone D (Tasks 8–10):** Fuel wallet + top‑up
+* **Milestone E (Tasks 12–15):** Inquiries + notifications + docs
+
+**Deliverables:** Running staging URL, Postman collection, seed data, admin creds, Stripe webhook online, testing guide.
