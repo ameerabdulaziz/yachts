@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     'bookings',
     'ownership',
     'payment_system',
+    'inquiries',
 ]
 
 MIDDLEWARE = [

@@ -18,4 +18,6 @@ urlpatterns = [
     path('', include('bookings.urls')),
     # Tasks 6-10 - Payment processing endpoints
     path('', include('payment_system.urls')),
+    # Task 12 - Lead capture and management endpoints
+    path('', include('inquiries.urls')),
 ]

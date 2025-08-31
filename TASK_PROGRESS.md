@@ -224,15 +224,47 @@ curl localhost:8000/admin/login/ # ✅ Returns admin page
 - ✅ Usage limit checking: Maintains existing 48-day annual limit validation
 - ✅ Booking conflict detection: Prevents double-booking scenarios
 - ✅ Comprehensive error messages: Clear guidance for failed bookings
-### Task 12 — Inquiries (Lead Capture) 🔄 PENDING
+### Task 12 — Inquiries (Lead Capture) ✅ COMPLETED
+**Goal:** Comprehensive lead management system for potential yacht buyers and renters.
+
+**Status:** ✅ COMPLETED - Lead capture system operational with 6/6 tests passed
+
+**Implementation Details:**
+- ✅ Complete inquiry model with lead qualification tracking in `inquiries/models.py`
+- ✅ Advanced lead scoring algorithm (0-100 points) based on budget, timeline, inquiry type
+- ✅ Lead source tracking with UTM support and marketing attribution
+- ✅ Follow-up activity logging and communication history
+- ✅ GDPR compliance with consent management
+
+**Lead Scoring Algorithm Features:**
+- ✅ Budget scoring (0-25 points): $500K+ = 25pts, $200K+ = 20pts, $100K+ = 15pts
+- ✅ Timeline urgency (0-20 points): Immediate = 20pts, 1 month = 18pts, 3 months = 15pts
+- ✅ Inquiry type value (0-15 points): Purchase = 15pts, Fractional = 12pts, Charter = 10pts
+- ✅ Contact completeness (0-15 points): Phone + Company + Email validation
+- ✅ Message quality (0-10 points): Length and detail analysis
+- ✅ Source quality (0-15 points): Referral = 15pts, Boat show = 12pts, Website = 8pts
+
+**API Endpoints implemented:**
+- ✅ `POST /inquiries/` → Create new inquiry with automatic lead scoring
+- ✅ `GET /inquiries/list/` → List inquiries with filtering (status, type, priority, qualified_only)
+- ✅ `GET /inquiries/{id}/` → Get detailed inquiry with follow-up history
+
+**Test Results (6/6 passed):**
+- ✅ High-Value Fractional Inquiry: 87/100 lead score (auto-qualified)
+- ✅ Rental Inquiry: 52/100 lead score 
+- ✅ General Information: 22/100 lead score
+- ✅ Premium Purchase Lead: 97/100 lead score (highest category)
+- ✅ Inquiry listing with filtering and statistics
+- ✅ Detailed inquiry retrieval with boat information
 ### Task 13 — Notifications (In‑App Feed) 🔄 PENDING
 ### Task 14 — Seed Data & Postman Collection 🔄 PENDING
 ### Task 15 — README & Healthcheck 🔄 PENDING
 
 ## 🎯 CURRENT STATUS
-- **Milestone A Progress:** Tasks 0-11 ✅ COMPLETED | Task 12 🔄 Ready
-- **Django Environment:** Fully operational with 5 apps (accounts, boats, bookings, ownership, payment_system)
-- **Database:** SQLite with complete yacht platform (auth, fleet, calendar, ownership, payments, fuel)
+- **Milestone A Progress:** Tasks 0-12 ✅ COMPLETED | Task 13 🔄 Ready
+- **Django Environment:** Fully operational with 6 apps (accounts, boats, bookings, ownership, payment_system, inquiries)
+- **Database:** SQLite with complete yacht platform (auth, fleet, calendar, ownership, payments, fuel, leads)
 - **Advanced Booking System:** Complete with fuel threshold enforcement and sophisticated rules engine
+- **Lead Management:** Comprehensive inquiry system with advanced scoring algorithm (6/6 tests passed)
 - **Payment Integration:** Complete Stripe payment processing with mock service ready for production
-- **Next Priority:** Implement Task 12 - Inquiries (Lead Capture)
+- **Next Priority:** Implement Task 13 - Notifications (In-App Feed)
