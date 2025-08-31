@@ -33,11 +33,12 @@ Update environment variables based on your setup:
 
 ## Collection Organization
 
-### 01. Authentication & Accounts (6 endpoints)
+### 01. Authentication & Accounts (6 endpoints) ⚡ AUTO-GENERATED
 - User registration with phone verification
-- OTP-based authentication flow
+- OTP-based authentication flow  
 - Password management
 - User profile access
+- **Smart Features**: Random phone numbers, realistic names, auto-generated emails
 
 ### 02. Yacht Fleet Management (5 endpoints)
 - Complete yacht listings
@@ -45,11 +46,12 @@ Update environment variables based on your setup:
 - Availability checking
 - Advanced filtering (capacity, location)
 
-### 03. Booking Management (6 endpoints)
+### 03. Booking Management (6 endpoints) ⚡ AUTO-GENERATED
 - Create and manage bookings
 - Booking history and details
 - Cancellation handling
 - Admin booking overview
+- **Smart Features**: Future dates, realistic guest counts, varied occasions
 
 ### 04. Fractional Ownership (5 endpoints)
 - Ownership share management
@@ -57,17 +59,19 @@ Update environment variables based on your setup:
 - Transaction history
 - Co-owner management
 
-### 05. Payment System (4 endpoints)
+### 05. Payment System (4 endpoints) ⚡ AUTO-GENERATED
 - Stripe payment integration
 - Payment intent creation
 - Payment confirmation
 - Payment history tracking
+- **Smart Features**: Realistic amounts (€1,200-€9,600), multi-currency, context-aware descriptions
 
-### 06. Lead Management & Inquiries (5 endpoints)
+### 06. Lead Management & Inquiries (5 endpoints) ⚡ AUTO-GENERATED
 - Customer inquiry capture
 - Lead scoring system
-- Qualified lead filtering
+- Qualified lead filtering  
 - Source analytics
+- **Smart Features**: Realistic contact info, varied yacht interests, market budgets, Mediterranean locations
 
 ### 07. Notification System (5 endpoints)
 - In-app notification feed
@@ -184,4 +188,29 @@ If needed, manually set tokens in environment:
 - Comprehensive error responses with details
 - Documentation in collection descriptions
 
-The collection provides complete API coverage for testing all Nauttec platform functionality with organized workflows and comprehensive documentation.
+## ⚡ Auto-Generation Features
+
+### Smart Payload Generation
+The collection now includes **intelligent auto-generation** that eliminates manual data entry:
+
+- **No More Static Data**: Every request generates fresh, realistic data
+- **Context-Aware**: Phone numbers flow between authentication requests
+- **Business Realistic**: Yacht models, locations, and pricing match real market
+- **Console Logging**: See exactly what data was generated for each request
+
+### Enhanced Endpoints
+Key endpoints now auto-generate:
+- **User Registration**: Random phones, names, emails, roles
+- **Booking Creation**: Future dates, realistic guest counts, varied occasions  
+- **Payment Processing**: Market-appropriate amounts and currencies
+- **Lead Inquiries**: Realistic contact info and yacht interests
+- **Notifications**: Context-aware titles and messages
+- **Fuel Purchases**: Appropriate amounts and payment methods
+
+### Usage Benefits
+- **Just Click & Test**: No manual data entry required
+- **Fresh Data**: Each run generates unique, realistic scenarios
+- **Professional Demos**: Impressive, varied data for presentations
+- **Load Testing**: Run collections with diverse realistic data
+
+The collection provides complete API coverage for testing all Nauttec platform functionality with organized workflows, comprehensive documentation, and **intelligent auto-generation**.
