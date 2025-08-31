@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     'boats',
     'bookings',
     'ownership',
+    'payment_system',
 ]
 
 MIDDLEWARE = [

@@ -14,6 +14,8 @@ urlpatterns = [
     path('', include('accounts.urls')),
     # Task 2 - Boats API endpoints
     path('', include('boats.urls')),
-    # Task 3 - Bookings/Calendar endpoints
+    # Task 3-5 - Bookings/Calendar endpoints
     path('', include('bookings.urls')),
+    # Tasks 6-10 - Payment processing endpoints
+    path('', include('payment_system.urls')),
 ]
