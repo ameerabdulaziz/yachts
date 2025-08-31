@@ -14,7 +14,21 @@ The frontend is built with React 18 and TypeScript, using shadcn/ui (Radix UI) f
 
 ## Backend
 
-The backend uses Express.js with TypeScript, following a RESTful API design. It integrates Drizzle ORM with a schema-first approach for type-safe PostgreSQL database operations. API routes are modular, and error handling is centralized. Vite is used for development with hot module replacement.
+The system has a dual backend architecture:
+
+### Django REST API Backend (Primary)
+Located in `django_backend/` directory, this is the main production backend:
+- Django 4.2.7 with REST Framework for API development
+- Phone-based authentication with OTP verification
+- 7 Django apps: accounts, boats, bookings, ownership, payment_system, inquiries, notify_system
+- 34 REST API endpoints with comprehensive Postman documentation
+- Stripe payment integration and health monitoring endpoints
+- SQLite for development, PostgreSQL ready for production
+
+### Node.js/Express Backend (Development)
+- Express.js with TypeScript for development tooling
+- Drizzle ORM integration for schema management
+- Vite development server with hot module replacement
 
 ## Database
 

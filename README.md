@@ -38,27 +38,23 @@ git clone <repository-url>
 cd nauttec-platform
 ```
 
-2. **Install dependencies**:
+2. **Frontend setup** (Node.js/React):
 ```bash
+npm install
+npm run dev
+# Frontend runs on http://localhost:5000
+```
+
+3. **Backend setup** (Django API):
+```bash
+cd django_backend
 pip install -r requirements.txt
-```
-
-3. **Environment setup**:
-```bash
-cp .env.example .env
+cp ../.env.example .env
 # Configure your environment variables
-```
-
-4. **Database setup**:
-```bash
 python manage.py migrate
 python simple_seed_task14.py  # Load test data
-```
-
-5. **Start the server**:
-```bash
 python manage.py runserver
-# Server runs on http://localhost:8000
+# Backend API runs on http://localhost:8000
 ```
 
 ## 📱 API Documentation
