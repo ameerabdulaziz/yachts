@@ -1,227 +1,289 @@
-# 🧪 **REST API Testing Guide - Nauttec Yacht Platform**
+# Nauttec API Testing Guide
 
-## **Backend Servers Available**
-- **Node.js/Express** - Port 5000 (Primary)
-- **Django REST Framework** - Port 8001 (Ready for setup)
-- **Python HTTP Server** - Port 8000 (Standalone)
+## Quick Start
 
----
+### 1. Import Postman Collection
+1. Open Postman
+2. Click "Import" 
+3. Select `nauttec_postman_collection.json`
+4. Collection includes 34 endpoints across 9 areas
 
-## **✅ WORKING APIs - Node.js Backend (Port 5000)**
+### 2. Configure Environment
+Set these variables in Postman:
+- `base_url`: `http://localhost:8000` (development) or your production URL
+- `user_phone`: `+201234567890` (or any test user phone)
 
-### **1. Yachts Management**
+### 3. Authentication Flow
+1. **Register User**: `POST /auth/register/`
+2. **Send OTP**: `POST /auth/send-otp/`
+3. **Verify OTP**: `POST /auth/verify-otp/`
+4. **Set Password**: `POST /auth/set-password/`
+5. **Login**: `POST /auth/login/`
 
-**GET /api/yachts** - List all yachts ✅
-```bash
-curl "http://localhost:5000/api/yachts"
-```
-✅ **Result**: Returns array with De Antonio D60 and D42 yachts
+## API Endpoints Overview
 
-**POST /api/yachts** - Create new yacht ✅
-```bash
-curl -X POST "http://localhost:5000/api/yachts" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "name": "De Antonio D36",
-    "description": "Elegant day cruiser with premium amenities",
-    "location": "El Gouna, Egypt",
-    "pricePerDay": "1200.00",
-    "capacity": 10,
-    "cabins": 1,
-    "length": "11.50",
-    "yearBuilt": 2024,
-    "images": ["https://example.com/d36-1.jpg"],
-    "amenities": ["Air conditioning", "WiFi", "Bluetooth sound"]
-  }'
-```
+### Authentication (5 endpoints)
+- User registration and phone verification
+- OTP-based authentication
+- Password management
+- Session-based login
 
-### **2. Users Management**
+### Yacht Fleet (3 endpoints)
+- List yachts with filtering
+- Yacht details and specifications
+- Availability checking
 
-**GET /api/users** - List all users ✅
-```bash
-curl "http://localhost:5000/api/users"
-```
+### Bookings (4 endpoints)
+- Create and manage bookings
+- Booking history and details
+- Cancellation handling
+- Status tracking
 
-**POST /api/users** - Create new user ✅
-```bash
-curl -X POST "http://localhost:5000/api/users" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "phone": "+201234567890",
-    "email": "owner@nauttec.com",
-    "firstName": "Mohamed",
-    "lastName": "Ahmed",
-    "role": "owner",
-    "password": "securepass123"
-  }'
-```
+### Ownership (4 endpoints)
+- Fractional ownership management
+- Share transactions
+- Ownership details
+- Share marketplace
 
-### **3. Fractional Ownership**
+### Fuel Wallet (4 endpoints)
+- Wallet balance management
+- Fuel credit purchases
+- Transaction history
+- Auto-top-up settings
 
-**GET /api/ownership-opportunities** - List ownership opportunities ⚠️
-```bash
-curl "http://localhost:5000/api/ownership-opportunities"
-```
-**Status**: Returns error - needs schema fix
+### Payments (4 endpoints)
+- Payment intent creation
+- Payment confirmation
+- Payment history
+- Stripe integration
 
-**POST /api/ownership-opportunities** - Create ownership opportunity ✅
-```bash
-curl -X POST "http://localhost:5000/api/ownership-opportunities" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "yachtId": "2ded1cf3-faa6-4191-af1b-5670b3b9c04b",
-    "totalShares": 8,
-    "availableShares": 6,
-    "pricePerShare": "125000.00",
-    "usageDaysPerYear": 48,
-    "description": "Own a share of the luxurious De Antonio D60"
-  }'
-```
+### Inquiries (3 endpoints)
+- Lead capture
+- Inquiry management
+- Lead scoring system
 
-### **4. Bookings System**
+### Notifications (4 endpoints)
+- Notification feed
+- Mark as read
+- Test notifications
+- User preferences
 
-**GET /api/bookings** - List all bookings ✅
-```bash
-curl "http://localhost:5000/api/bookings"
-```
+### Health & Testing (3 endpoints)
+- System health checks
+- Database monitoring
+- Comprehensive testing
 
-**POST /api/bookings** - Create new booking ✅
-```bash
-curl -X POST "http://localhost:5000/api/bookings" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "yachtId": "2ded1cf3-faa6-4191-af1b-5670b3b9c04b",
-    "userId": "user_id_here",
-    "startDate": "2024-12-25T10:00:00Z",
-    "endDate": "2024-12-27T18:00:00Z",
-    "guestCount": 8,
-    "totalPrice": "7500.00"
-  }'
-```
+## Testing Scenarios
 
----
+### Complete User Journey
+1. **New User Registration**
+   ```
+   POST /auth/register/
+   Body: {"phone": "+1234567890", "role": "renter"}
+   ```
 
-## **🧪 Testing Tools & Methods**
+2. **Phone Verification**
+   ```
+   POST /auth/send-otp/
+   Body: {"phone": "+1234567890"}
+   
+   POST /auth/verify-otp/
+   Body: {"phone": "+1234567890", "otp_code": "123456"}
+   ```
 
-### **Method 1: Terminal/Command Line**
-```bash
-# Basic GET request
-curl "http://localhost:5000/api/yachts"
+3. **Browse Yachts**
+   ```
+   GET /boats/?location=Monaco&capacity_min=8
+   ```
 
-# POST with JSON data
-curl -X POST "http://localhost:5000/api/endpoint" \
-  -H "Content-Type: application/json" \
-  -d '{"key": "value"}'
+4. **Create Booking**
+   ```
+   POST /bookings/
+   Body: {
+     "user_phone": "+1234567890",
+     "boat_id": 1,
+     "start_date": "2025-09-15",
+     "end_date": "2025-09-17",
+     "guest_count": 6
+   }
+   ```
 
-# Include response headers
-curl -i "http://localhost:5000/api/yachts"
-```
+5. **Process Payment**
+   ```
+   POST /payment-intents/
+   Body: {
+     "user_phone": "+1234567890",
+     "amount": "2400.00",
+     "currency": "USD"
+   }
+   ```
 
-### **Method 2: Browser Developer Tools**
-1. Open browser → F12 → Console
-2. Test with JavaScript:
-```javascript
-// GET Request
-fetch('http://localhost:5000/api/yachts')
-  .then(r => r.json())
-  .then(console.log)
+### Owner Journey
+1. **View Owned Yachts**
+   ```
+   GET /ownership/?user_phone=+33123456789
+   ```
 
-// POST Request  
-fetch('http://localhost:5000/api/users', {
-  method: 'POST',
-  headers: {'Content-Type': 'application/json'},
-  body: JSON.stringify({
-    email: 'test@example.com',
-    firstName: 'Test',
-    lastName: 'User'
-  })
-}).then(r => r.json()).then(console.log)
-```
+2. **Check Fuel Wallet**
+   ```
+   GET /fuel-wallet/?user_phone=+33123456789
+   ```
 
-### **Method 3: Online Tools**
-- **Postman** - Desktop API client
-- **Insomnia** - Free API testing tool
-- **HTTPie** - Command line tool
-- **Thunder Client** - VS Code extension
+3. **Top Up Fuel**
+   ```
+   POST /fuel-wallet/purchase/
+   Body: {
+     "user_phone": "+33123456789",
+     "amount": "500.00"
+   }
+   ```
 
-### **Method 4: Python Testing Script**
-```python
-import requests
-import json
+### Admin/Staff Journey
+1. **Review Inquiries**
+   ```
+   GET /inquiries/list/?status=new&qualified_only=true
+   ```
 
-# Test GET endpoint
-response = requests.get('http://localhost:5000/api/yachts')
-print(f"Status: {response.status_code}")
-print(f"Data: {response.json()}")
+2. **Check System Health**
+   ```
+   GET /health/
+   GET /health/database/
+   ```
 
-# Test POST endpoint
-data = {
-    "name": "Test Yacht",
-    "location": "Test Location",
-    "pricePerDay": "1000.00",
-    "capacity": 8,
-    "cabins": 2
-}
-response = requests.post(
-    'http://localhost:5000/api/yachts',
-    json=data
-)
-print(f"Created: {response.json()}")
-```
+3. **Run System Tests**
+   ```
+   POST /health/test-systems/
+   Body: {"run_comprehensive_tests": true}
+   ```
 
----
+## Response Formats
 
-## **📊 Expected API Responses**
-
-### **Successful Response**
+### Success Response
 ```json
 {
-  "id": "uuid-here",
-  "name": "De Antonio D60",
-  "description": "Flagship luxury yacht",
-  "location": "El Gouna, Egypt",
-  "pricePerDay": "2500.00",
-  "capacity": 12,
-  "cabins": 3,
-  "length": "18.50",
-  "yearBuilt": 2024,
-  "isActive": true,
-  "createdAt": "2025-08-27T17:21:43.915Z"
+  "status": "success",
+  "data": {...},
+  "message": "Operation completed successfully"
 }
 ```
 
-### **Error Response**
+### Error Response
 ```json
 {
-  "message": "Error description",
-  "status": 400
+  "status": "error",
+  "error": "Error description",
+  "details": {...}
 }
 ```
 
----
+### Pagination
+```json
+{
+  "results": [...],
+  "count": 25,
+  "next": "http://api.example.com/endpoint/?page=2",
+  "previous": null
+}
+```
 
-## **🛠️ Troubleshooting**
+## Common Test Data
 
-### **Common Issues:**
-1. **HTML returned instead of JSON** → Check URL path, ensure it starts with `/api/`
-2. **Connection refused** → Server not running, start with workflow
-3. **404 Not Found** → Wrong endpoint URL
-4. **500 Server Error** → Check server logs in workflow console
+### Test Users
+- `+201234567890` - Ahmed Hassan (renter)
+- `+33123456789` - Pierre Dubois (owner)
+- `+34987654321` - Isabella Rodriguez (owner)
+- `+447123456789` - James Thompson (renter)
 
-### **Debugging Steps:**
-1. Check server is running: `curl http://localhost:5000/api/yachts`
-2. Verify request format: Ensure Content-Type header for POST
-3. Check logs: Look at workflow console for errors
-4. Test simple endpoints first: Start with GET requests
+### Test Yachts
+- ID 1: D29 Mediterranean Dream (€1,200/day)
+- ID 2: D33 Adriatic Explorer (€1,800/day)
+- ID 3: D42 Balearic Beauty (€2,800/day)
+- ID 4: D50 Aegean Voyager (€4,200/day)
+- ID 5: D60 Riviera Prestige (€6,500/day)
 
----
+## Error Handling
 
-## **🚀 Next Steps**
+### Common Error Codes
+- `400`: Bad Request - Invalid input data
+- `401`: Unauthorized - Authentication required
+- `403`: Forbidden - Insufficient permissions
+- `404`: Not Found - Resource doesn't exist
+- `500`: Internal Server Error - System error
 
-1. **Fix ownership opportunities endpoint**
-2. **Add authentication to protected endpoints**
-3. **Set up Django REST Framework APIs**
-4. **Add API documentation with Swagger/OpenAPI**
-5. **Implement rate limiting and security**
+### Validation Errors
+```json
+{
+  "status": "error",
+  "error": "Validation failed",
+  "details": {
+    "phone": ["This field is required"],
+    "guest_count": ["Must be between 1 and yacht capacity"]
+  }
+}
+```
 
-Your Node.js backend APIs are working well for yachts, users, and bookings. The fractional ownership system needs a small fix to complete the testing suite.
+## Performance Testing
+
+### Load Testing Endpoints
+- `GET /boats/` - High read volume
+- `POST /bookings/` - Critical business operation
+- `GET /health/` - Monitoring endpoint
+
+### Expected Response Times
+- Health checks: < 100ms
+- Yacht listings: < 500ms
+- Booking creation: < 1000ms
+- Payment processing: < 2000ms
+
+## Security Testing
+
+### Authentication Tests
+- Invalid phone numbers
+- Expired OTP codes
+- Unauthorized access attempts
+- Session timeout handling
+
+### Input Validation
+- SQL injection attempts
+- XSS payload testing
+- Invalid date ranges
+- Negative amounts
+
+## Monitoring
+
+### Key Metrics
+- API response times
+- Error rates by endpoint
+- Authentication success rates
+- Booking conversion rates
+- Payment success rates
+
+### Health Check Monitoring
+Set up monitoring for:
+- `GET /health/` every 30 seconds
+- `GET /health/database/` every 5 minutes
+- `POST /health/test-systems/` every hour
+
+## Troubleshooting
+
+### Common Issues
+1. **Authentication Failures**
+   - Check phone number format
+   - Verify OTP is not expired
+   - Ensure user exists
+
+2. **Booking Conflicts**
+   - Check yacht availability
+   - Verify date ranges
+   - Confirm guest count limits
+
+3. **Payment Issues**
+   - Verify Stripe configuration
+   - Check payment intent status
+   - Validate amount format
+
+### Debug Tips
+- Enable Django debug mode for detailed errors
+- Check server logs for backend issues
+- Use health endpoints to verify system status
+- Test with known good data first
