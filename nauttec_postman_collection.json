@@ -1,0 +1,711 @@
+{
+  "info": {
+    "name": "Nauttec Yacht Platform API",
+    "description": "Comprehensive API collection for the Nauttec fractional yacht ownership platform. Includes authentication, yacht management, bookings, payments, fuel wallets, ownership, inquiries, and notifications.",
+    "version": "1.0.0",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:5000",
+      "type": "string"
+    },
+    {
+      "key": "user_phone",
+      "value": "+201234567890",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Register User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"phone\": \"+201234567890\",\n  \"role\": \"renter\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/register/",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "register", ""]
+            }
+          }
+        },
+        {
+          "name": "Send OTP",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"phone\": \"{{user_phone}}\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/send-otp/",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "send-otp", ""]
+            }
+          }
+        },
+        {
+          "name": "Verify OTP",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"phone\": \"{{user_phone}}\",\n  \"otp_code\": \"123456\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/verify-otp/",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "verify-otp", ""]
+            }
+          }
+        },
+        {
+          "name": "Set Password",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"phone\": \"{{user_phone}}\",\n  \"password\": \"testpass123\",\n  \"confirm_password\": \"testpass123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/set-password/",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "set-password", ""]
+            }
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"phone\": \"{{user_phone}}\",\n  \"password\": \"testpass123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/login/",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "login", ""]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Yacht Fleet",
+      "item": [
+        {
+          "name": "Get All Yachts",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/boats/?location=Monaco&capacity_min=8",
+              "host": ["{{base_url}}"],
+              "path": ["boats", ""],
+              "query": [
+                {
+                  "key": "location",
+                  "value": "Monaco"
+                },
+                {
+                  "key": "capacity_min",
+                  "value": "8"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Yacht Details",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/boats/1/",
+              "host": ["{{base_url}}"],
+              "path": ["boats", "1", ""]
+            }
+          }
+        },
+        {
+          "name": "Get Yacht Availability",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/boats/1/availability/?start_date=2025-09-01&end_date=2025-09-30",
+              "host": ["{{base_url}}"],
+              "path": ["boats", "1", "availability", ""],
+              "query": [
+                {
+                  "key": "start_date",
+                  "value": "2025-09-01"
+                },
+                {
+                  "key": "end_date",
+                  "value": "2025-09-30"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Bookings",
+      "item": [
+        {
+          "name": "Create Booking",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user_phone\": \"{{user_phone}}\",\n  \"boat_id\": 1,\n  \"start_date\": \"2025-09-15\",\n  \"end_date\": \"2025-09-17\",\n  \"guest_count\": 6,\n  \"special_requests\": \"Birthday celebration, need decorations\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/bookings/",
+              "host": ["{{base_url}}"],
+              "path": ["bookings", ""]
+            }
+          }
+        },
+        {
+          "name": "Get User Bookings",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/bookings/?user_phone={{user_phone}}&status=confirmed",
+              "host": ["{{base_url}}"],
+              "path": ["bookings", ""],
+              "query": [
+                {
+                  "key": "user_phone",
+                  "value": "{{user_phone}}"
+                },
+                {
+                  "key": "status",
+                  "value": "confirmed"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Booking Details",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/bookings/1/",
+              "host": ["{{base_url}}"],
+              "path": ["bookings", "1", ""]
+            }
+          }
+        },
+        {
+          "name": "Cancel Booking",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user_phone\": \"{{user_phone}}\",\n  \"reason\": \"Change of plans\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/bookings/1/cancel/",
+              "host": ["{{base_url}}"],
+              "path": ["bookings", "1", "cancel", ""]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Ownership",
+      "item": [
+        {
+          "name": "Get User Ownerships",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/ownership/?user_phone={{user_phone}}",
+              "host": ["{{base_url}}"],
+              "path": ["ownership", ""],
+              "query": [
+                {
+                  "key": "user_phone",
+                  "value": "{{user_phone}}"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Yacht Ownership Details",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/ownership/yacht/1/",
+              "host": ["{{base_url}}"],
+              "path": ["ownership", "yacht", "1", ""]
+            }
+          }
+        },
+        {
+          "name": "Get Share Transactions",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/ownership/transactions/?user_phone={{user_phone}}&transaction_type=purchase",
+              "host": ["{{base_url}}"],
+              "path": ["ownership", "transactions", ""],
+              "query": [
+                {
+                  "key": "user_phone",
+                  "value": "{{user_phone}}"
+                },
+                {
+                  "key": "transaction_type",
+                  "value": "purchase"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Share Listing",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user_phone\": \"{{user_phone}}\",\n  \"yacht_id\": 1,\n  \"share_percentage\": \"25.00\",\n  \"asking_price\": \"75000.00\",\n  \"description\": \"Selling 25% share in beautiful D42 yacht\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/ownership/list-shares/",
+              "host": ["{{base_url}}"],
+              "path": ["ownership", "list-shares", ""]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Fuel Wallet",
+      "item": [
+        {
+          "name": "Get Fuel Wallet",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/fuel-wallet/?user_phone={{user_phone}}",
+              "host": ["{{base_url}}"],
+              "path": ["fuel-wallet", ""],
+              "query": [
+                {
+                  "key": "user_phone",
+                  "value": "{{user_phone}}"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Purchase Fuel Credits",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user_phone\": \"{{user_phone}}\",\n  \"amount\": \"500.00\",\n  \"payment_method\": \"stripe\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/fuel-wallet/purchase/",
+              "host": ["{{base_url}}"],
+              "path": ["fuel-wallet", "purchase", ""]
+            }
+          }
+        },
+        {
+          "name": "Get Fuel Transactions",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/fuel-wallet/transactions/?user_phone={{user_phone}}&limit=20",
+              "host": ["{{base_url}}"],
+              "path": ["fuel-wallet", "transactions", ""],
+              "query": [
+                {
+                  "key": "user_phone",
+                  "value": "{{user_phone}}"
+                },
+                {
+                  "key": "limit",
+                  "value": "20"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Wallet Settings",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user_phone\": \"{{user_phone}}\",\n  \"low_balance_threshold\": \"150.00\",\n  \"auto_topup_enabled\": true,\n  \"auto_topup_amount\": \"300.00\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/fuel-wallet/settings/",
+              "host": ["{{base_url}}"],
+              "path": ["fuel-wallet", "settings", ""]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Payments",
+      "item": [
+        {
+          "name": "Create Payment Intent",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user_phone\": \"{{user_phone}}\",\n  \"amount\": \"2400.00\",\n  \"currency\": \"USD\",\n  \"description\": \"Yacht booking payment\",\n  \"metadata\": {\n    \"booking_id\": \"1\",\n    \"yacht_name\": \"Mediterranean Dream\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/payment-intents/",
+              "host": ["{{base_url}}"],
+              "path": ["payment-intents", ""]
+            }
+          }
+        },
+        {
+          "name": "Get Payment History",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/payment-intents/?user_phone={{user_phone}}&status=succeeded",
+              "host": ["{{base_url}}"],
+              "path": ["payment-intents", ""],
+              "query": [
+                {
+                  "key": "user_phone",
+                  "value": "{{user_phone}}"
+                },
+                {
+                  "key": "status",
+                  "value": "succeeded"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Payment Details",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/payment-intents/1/",
+              "host": ["{{base_url}}"],
+              "path": ["payment-intents", "1", ""]
+            }
+          }
+        },
+        {
+          "name": "Confirm Payment",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user_phone\": \"{{user_phone}}\",\n  \"payment_method_id\": \"pm_test_card\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/payment-intents/1/confirm/",
+              "host": ["{{base_url}}"],
+              "path": ["payment-intents", "1", "confirm", ""]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Inquiries",
+      "item": [
+        {
+          "name": "Create Inquiry",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"first_name\": \"John\",\n  \"last_name\": \"Smith\",\n  \"email\": \"john.smith@example.com\",\n  \"phone\": \"+1234567890\",\n  \"company\": \"Smith Enterprises\",\n  \"inquiry_type\": \"fractional\",\n  \"boat_id\": 1,\n  \"message\": \"Interested in fractional ownership opportunities for our executive team.\",\n  \"budget_range_min\": 150000,\n  \"budget_range_max\": 300000,\n  \"timeline\": \"3-6 months\",\n  \"source\": \"website\",\n  \"consent_marketing\": true\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/inquiries/",
+              "host": ["{{base_url}}"],
+              "path": ["inquiries", ""]
+            }
+          }
+        },
+        {
+          "name": "Get Inquiries",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/inquiries/list/?status=new&inquiry_type=fractional&qualified_only=true&limit=20",
+              "host": ["{{base_url}}"],
+              "path": ["inquiries", "list", ""],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "new"
+                },
+                {
+                  "key": "inquiry_type",
+                  "value": "fractional"
+                },
+                {
+                  "key": "qualified_only",
+                  "value": "true"
+                },
+                {
+                  "key": "limit",
+                  "value": "20"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Inquiry Details",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/inquiries/1/",
+              "host": ["{{base_url}}"],
+              "path": ["inquiries", "1", ""]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Notifications",
+      "item": [
+        {
+          "name": "Get Notifications",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/notifications/?user_phone={{user_phone}}&unread_only=false&limit=20",
+              "host": ["{{base_url}}"],
+              "path": ["notifications", ""],
+              "query": [
+                {
+                  "key": "user_phone",
+                  "value": "{{user_phone}}"
+                },
+                {
+                  "key": "unread_only",
+                  "value": "false"
+                },
+                {
+                  "key": "limit",
+                  "value": "20"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Mark Notification Read",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user_phone\": \"{{user_phone}}\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/notifications/1/mark-read/",
+              "host": ["{{base_url}}"],
+              "path": ["notifications", "1", "mark-read", ""]
+            }
+          }
+        },
+        {
+          "name": "Create Test Notification",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user_phone\": \"{{user_phone}}\",\n  \"notification_type\": \"booking_confirmed\",\n  \"title\": \"Test Booking Confirmation\",\n  \"message\": \"Your test booking has been confirmed successfully.\",\n  \"priority\": \"high\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/notifications/test/",
+              "host": ["{{base_url}}"],
+              "path": ["notifications", "test", ""]
+            }
+          }
+        },
+        {
+          "name": "Get Notification Preferences",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/notifications/preferences/?user_phone={{user_phone}}",
+              "host": ["{{base_url}}"],
+              "path": ["notifications", "preferences", ""],
+              "query": [
+                {
+                  "key": "user_phone",
+                  "value": "{{user_phone}}"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Testing & Health",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/health/",
+              "host": ["{{base_url}}"],
+              "path": ["health", ""]
+            }
+          }
+        },
+        {
+          "name": "Database Status",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/health/database/",
+              "host": ["{{base_url}}"],
+              "path": ["health", "database", ""]
+            }
+          }
+        },
+        {
+          "name": "Test All Systems",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"test_user_phone\": \"{{user_phone}}\",\n  \"run_comprehensive_tests\": true\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/health/test-systems/",
+              "host": ["{{base_url}}"],
+              "path": ["health", "test-systems", ""]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
