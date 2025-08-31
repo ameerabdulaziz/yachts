@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     'ownership',
     'payment_system',
     'inquiries',
+    'notify_system',
 ]
 
 MIDDLEWARE = [

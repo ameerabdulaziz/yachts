@@ -20,4 +20,6 @@ urlpatterns = [
     path('', include('payment_system.urls')),
     # Task 12 - Lead capture and management endpoints
     path('', include('inquiries.urls')),
+    # Task 13 - Notifications and in-app feed endpoints
+    path('', include('notify_system.urls')),
 ]
