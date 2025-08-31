@@ -197,15 +197,42 @@ curl localhost:8000/admin/login/ # ✅ Returns admin page
 - ✅ FuelTransaction creation for successful fuel purchases
 - ✅ Balance updates and transaction history tracking
 - ✅ Unified webhook handling for both rental and fuel payments
-### Task 11 — Enforce Fuel Threshold on Owner Booking 🔄 PENDING
+### Task 11 — Enforce Fuel Threshold on Owner Booking ✅ COMPLETED
+**Goal:** Enhanced owner booking system with fuel balance validation before booking confirmation.
+
+**Status:** ✅ COMPLETED - Fuel threshold enforcement operational
+
+**Implementation Details:**
+- ✅ Enhanced owner booking endpoint in `bookings/views_task11.py`
+- ✅ Fuel balance validation before booking creation
+- ✅ Dynamic fuel cost calculation based on boat model and engine hours
+- ✅ Safety buffer requirement (20% additional fuel)
+- ✅ Comprehensive eligibility checking system
+
+**Core Fuel Threshold Logic:**
+- ✅ Calculates estimated fuel cost: `engine_hours * fuel_rate_per_hour`
+- ✅ Applies safety buffer: `required_balance = estimated_cost * 1.2`
+- ✅ Validates sufficient balance: `current_balance >= required_balance`
+- ✅ Boat-specific fuel rates: D29 ($15/hr), D40 ($25/hr), D60 ($35/hr)
+
+**API Endpoints implemented:**
+- ✅ `POST /bookings/owner-enhanced/` → Creates owner booking with fuel validation
+- ✅ `GET /boats/{id}/owner-eligibility/` → Checks eligibility including fuel requirements
+
+**Validation Features:**
+- ✅ Fuel balance insufficient: Provides detailed deficit analysis and top-up recommendations
+- ✅ Usage limit checking: Maintains existing 48-day annual limit validation
+- ✅ Booking conflict detection: Prevents double-booking scenarios
+- ✅ Comprehensive error messages: Clear guidance for failed bookings
 ### Task 12 — Inquiries (Lead Capture) 🔄 PENDING
 ### Task 13 — Notifications (In‑App Feed) 🔄 PENDING
 ### Task 14 — Seed Data & Postman Collection 🔄 PENDING
 ### Task 15 — README & Healthcheck 🔄 PENDING
 
 ## 🎯 CURRENT STATUS
-- **Milestone A Progress:** Tasks 0-10 ✅ COMPLETED | Task 11 🔄 Ready
+- **Milestone A Progress:** Tasks 0-11 ✅ COMPLETED | Task 12 🔄 Ready
 - **Django Environment:** Fully operational with 5 apps (accounts, boats, bookings, ownership, payment_system)
 - **Database:** SQLite with complete yacht platform (auth, fleet, calendar, ownership, payments, fuel)
+- **Advanced Booking System:** Complete with fuel threshold enforcement and sophisticated rules engine
 - **Payment Integration:** Complete Stripe payment processing with mock service ready for production
-- **Next Priority:** Implement Task 11 - Enforce Fuel Threshold on Owner Booking
+- **Next Priority:** Implement Task 12 - Inquiries (Lead Capture)

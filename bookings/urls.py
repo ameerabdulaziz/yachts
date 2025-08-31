@@ -3,7 +3,7 @@ URL configuration for bookings app
 Task 3 & 4 - Calendar and Owner Booking endpoints
 """
 from django.urls import path
-from . import views_task3, views_task4, views_task5
+from . import views_task3, views_task4, views_task5, views_task11
 
 app_name = 'bookings'
 
@@ -19,4 +19,8 @@ urlpatterns = [
     # Task 5 - Visitor Rental Booking endpoints
     path('bookings/rental/', views_task5.create_visitor_rental, name='create-visitor-rental'),
     path('boats/<int:boat_id>/rental-quote/', views_task5.get_rental_quote, name='get-rental-quote'),
+    
+    # Task 11 - Enhanced Owner Booking with Fuel Threshold endpoints
+    path('bookings/owner-enhanced/', views_task11.create_owner_booking_with_fuel_check, name='create-owner-booking-enhanced'),
+    path('boats/<int:boat_id>/owner-eligibility/', views_task11.check_owner_booking_eligibility, name='check-owner-booking-eligibility'),
 ]
