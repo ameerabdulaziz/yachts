@@ -129,6 +129,7 @@ def boat_calendar(request, boat_id):
             'error': 'Failed to fetch calendar'
         }, status=500)
 
+@csrf_exempt
 @require_http_methods(["GET"])
 def user_bookings(request):
     """
@@ -194,4 +195,75 @@ def user_bookings(request):
         logger.error(f"Error fetching user bookings: {e}")
         return JsonResponse({
             'error': 'Failed to fetch bookings'
+        }, status=500)
+
+@csrf_exempt
+@require_http_methods(["GET"])
+def list_bookings(request):
+    """
+    List all bookings with optional filtering
+    GET /bookings/list/?status=confirmed&boat_id=1
+    Returns: Array of all bookings with filtering options
+    """
+    try:
+        # Get query parameters for filtering
+        status = request.GET.get('status')
+        boat_id = request.GET.get('boat_id')
+        user_phone = request.GET.get('user_phone')
+        
+        # Base query
+        bookings_query = Booking.objects.all().select_related('boat', 'user')
+        
+        # Apply filters
+        if status:
+            bookings_query = bookings_query.filter(status=status)
+        if boat_id:
+            bookings_query = bookings_query.filter(boat_id=boat_id)
+        if user_phone:
+            bookings_query = bookings_query.filter(user__phone=user_phone)
+        
+        bookings = bookings_query.order_by('-created_at')
+        
+        bookings_data = []
+        for booking in bookings:
+            bookings_data.append({
+                'id': booking.id,
+                'boat': {
+                    'id': booking.boat.id,
+                    'name': booking.boat.name,
+                    'model': booking.boat.model,
+                    'location': booking.boat.location,
+                },
+                'user': {
+                    'phone': booking.user.phone,
+                    'first_name': booking.user.first_name,
+                    'last_name': booking.user.last_name,
+                },
+                'booking_type': booking.booking_type,
+                'status': booking.status,
+                'start_date': booking.start_date.isoformat(),
+                'end_date': booking.end_date.isoformat(),
+                'start_time': booking.start_time.isoformat() if booking.start_time else None,
+                'end_time': booking.end_time.isoformat() if booking.end_time else None,
+                'guest_count': booking.guest_count,
+                'total_amount': str(booking.total_amount) if booking.total_amount else None,
+                'duration_days': booking.duration_days,
+                'notes': booking.notes,
+                'created_at': booking.created_at.isoformat(),
+            })
+        
+        return JsonResponse({
+            'bookings': bookings_data,
+            'total_count': len(bookings_data),
+            'filters': {
+                'status': status,
+                'boat_id': boat_id,
+                'user_phone': user_phone,
+            }
+        })
+        
+    except Exception as e:
+        logger.error(f"Error listing bookings: {e}")
+        return JsonResponse({
+            'error': 'Failed to list bookings'
         }, status=500)
