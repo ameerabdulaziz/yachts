@@ -5,7 +5,10 @@ Public API for listing boats/yachts
 import json
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
+from django.views.decorators.csrf import csrf_exempt
 from .models import Boat
+from bookings.models import Booking
+from datetime import datetime
 import logging
 
 logger = logging.getLogger(__name__)
@@ -166,4 +169,57 @@ def boat_availability(request, boat_id):
         logger.error(f"Error checking availability for boat {boat_id}: {e}")
         return JsonResponse({
             'error': 'Failed to check boat availability'
+        }, status=500)
+
+@csrf_exempt
+@require_http_methods(["GET"])
+def all_boats_availability(request):
+    """
+    Get availability for all boats
+    GET /boats/availability/
+    """
+    try:
+        boats = Boat.objects.all()
+        boats_availability = []
+        
+        for boat in boats:
+            # Get existing bookings for the boat
+            bookings = Booking.objects.filter(
+                boat=boat,
+                status__in=['confirmed', 'pending']
+            ).order_by('start_date')
+            
+            # Create availability data
+            boat_data = {
+                'boat_id': boat.id,
+                'name': boat.name,
+                'model': boat.model,
+                'location': boat.location,
+                'daily_rate': str(boat.daily_rate) if boat.daily_rate else None,
+                'availability_status': 'available' if boat.is_active else 'maintenance',
+                'upcoming_bookings': []
+            }
+            
+            # Add upcoming bookings
+            for booking in bookings:
+                boat_data['upcoming_bookings'].append({
+                    'booking_id': booking.id,
+                    'start_date': booking.start_date.isoformat(),
+                    'end_date': booking.end_date.isoformat(),
+                    'status': booking.status,
+                    'booking_type': booking.booking_type,
+                })
+            
+            boats_availability.append(boat_data)
+        
+        return JsonResponse({
+            'boats_availability': boats_availability,
+            'total_boats': len(boats_availability),
+            'available_boats': len([b for b in boats_availability if b['availability_status'] == 'available']),
+        })
+        
+    except Exception as e:
+        logger.error(f"Error fetching all boats availability: {e}")
+        return JsonResponse({
+            'error': 'Failed to fetch boats availability'
         }, status=500)
