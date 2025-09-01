@@ -8,6 +8,15 @@ Preferred communication style: Simple, everyday language.
 
 # Recent Changes
 
+## Booking System Issues Resolved (September 1, 2025)
+- **FIXED**: Missing booking detail endpoint (GET /bookings/{id}/) causing 404 errors
+- **FIXED**: Missing booking cancellation endpoint (POST /bookings/{id}/cancel/) causing 404 errors  
+- **FIXED**: CSRF verification errors on POST requests - added @csrf_exempt decorators
+- **FIXED**: Method Not Allowed errors on POST /bookings/ - enhanced endpoint to handle both GET and POST
+- **ENHANCED**: Complete booking creation workflow with validation, conflict detection, and pricing
+- **OPTIMIZED**: URL pattern ordering to prevent routing conflicts
+- All booking endpoints now fully functional with comprehensive error handling
+
 ## Django Backend Git Repository (August 31, 2025)
 - Successfully initialized Git repository in `django_backend/` directory
 - Created comprehensive Postman collection with 40+ endpoints organized by Django apps

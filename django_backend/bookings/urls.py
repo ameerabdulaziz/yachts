@@ -10,8 +10,12 @@ app_name = 'bookings'
 urlpatterns = [
     # Task 3 - Owner Calendar (Read) endpoints
     path('boats/<int:boat_id>/calendar/', views_task3.boat_calendar, name='boat-calendar'),
-    path('bookings/', views_task3.user_bookings, name='user-bookings'),
+    
+    # Specific booking endpoints (must come before generic /bookings/)
     path('bookings/list/', views_task3.list_bookings, name='list-bookings'),
+    path('bookings/<int:booking_id>/cancel/', views_task3.cancel_booking, name='cancel-booking'),
+    path('bookings/<int:booking_id>/', views_task3.get_booking_detail, name='booking-detail'),
+    path('bookings/', views_task3.user_bookings, name='user-bookings'),
     
     # Task 4 - Owner Booking (Write + Rules v1) endpoints
     path('bookings/owner/', views_task4.create_owner_booking, name='create-owner-booking'),

@@ -406,3 +406,115 @@ def create_booking(request):
             'success': False,
             'message': 'Failed to create booking'
         }, status=500)
+
+@csrf_exempt
+@require_http_methods(["GET"])
+def get_booking_detail(request, booking_id):
+    """
+    Get detailed information for a specific booking
+    GET /bookings/{id}/
+    """
+    try:
+        booking = Booking.objects.select_related('boat', 'user').get(id=booking_id)
+        
+        return JsonResponse({
+            'id': booking.id,
+            'boat': {
+                'id': booking.boat.id,
+                'name': booking.boat.name,
+                'model': booking.boat.model,
+                'location': booking.boat.location,
+                'daily_rate': str(booking.boat.daily_rate) if booking.boat.daily_rate else None,
+            },
+            'user': {
+                'phone': booking.user.phone,
+                'first_name': booking.user.first_name,
+                'last_name': booking.user.last_name,
+                'email': booking.user.email,
+            },
+            'booking_type': booking.booking_type,
+            'status': booking.status,
+            'start_date': booking.start_date.isoformat(),
+            'end_date': booking.end_date.isoformat(),
+            'start_time': booking.start_time.isoformat() if booking.start_time else None,
+            'end_time': booking.end_time.isoformat() if booking.end_time else None,
+            'guest_count': booking.guest_count,
+            'total_amount': str(booking.total_amount) if booking.total_amount else None,
+            'duration_days': booking.duration_days,
+            'notes': booking.notes,
+            'created_at': booking.created_at.isoformat(),
+            'updated_at': booking.updated_at.isoformat(),
+        })
+        
+    except Booking.DoesNotExist:
+        return JsonResponse({
+            'error': 'Booking not found'
+        }, status=404)
+    except Exception as e:
+        logger.error(f"Error fetching booking detail: {e}")
+        return JsonResponse({
+            'error': 'Failed to fetch booking details'
+        }, status=500)
+
+@csrf_exempt
+@require_http_methods(["POST"])
+def cancel_booking(request, booking_id):
+    """
+    Cancel a specific booking
+    POST /bookings/{id}/cancel/
+    Body: {"reason": "Customer request"} (optional)
+    """
+    try:
+        data = json.loads(request.body) if request.body else {}
+        reason = data.get('reason', 'No reason provided')
+        
+        booking = Booking.objects.select_related('boat', 'user').get(id=booking_id)
+        
+        # Check if booking can be cancelled
+        if booking.status in ['cancelled', 'completed']:
+            return JsonResponse({
+                'success': False,
+                'message': f'Cannot cancel booking with status: {booking.status}'
+            }, status=400)
+        
+        # Update booking status
+        booking.status = 'cancelled'
+        booking.notes = f"{booking.notes}\n[CANCELLED] {reason}".strip()
+        booking.save()
+        
+        logger.info(f"Booking {booking_id} cancelled. Reason: {reason}")
+        
+        return JsonResponse({
+            'success': True,
+            'message': 'Booking cancelled successfully',
+            'booking': {
+                'id': booking.id,
+                'status': booking.status,
+                'boat': {
+                    'id': booking.boat.id,
+                    'name': booking.boat.name,
+                    'model': booking.boat.model,
+                },
+                'start_date': booking.start_date.isoformat(),
+                'end_date': booking.end_date.isoformat(),
+                'cancellation_reason': reason,
+                'updated_at': booking.updated_at.isoformat(),
+            }
+        })
+        
+    except Booking.DoesNotExist:
+        return JsonResponse({
+            'success': False,
+            'message': 'Booking not found'
+        }, status=404)
+    except json.JSONDecodeError:
+        return JsonResponse({
+            'success': False,
+            'message': 'Invalid JSON'
+        }, status=400)
+    except Exception as e:
+        logger.error(f"Error cancelling booking: {e}")
+        return JsonResponse({
+            'success': False,
+            'message': 'Failed to cancel booking'
+        }, status=500)
