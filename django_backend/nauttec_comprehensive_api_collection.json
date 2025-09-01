@@ -14,7 +14,7 @@
         ],
         "item": [
                 {
-                        "name": "01. Authentication & Accounts",
+                        "name": "🔐 Authentication & Accounts",
                         "description": "User authentication, registration, and account management endpoints",
                         "item": [
                                 {
@@ -192,7 +192,7 @@
                         ]
                 },
                 {
-                        "name": "02. Yacht Fleet Management",
+                        "name": "⛵ Yacht Fleet Management",
                         "description": "Yacht listings, details, and availability management",
                         "item": [
                                 {
@@ -284,7 +284,7 @@
                         ]
                 },
                 {
-                        "name": "03. Booking Management",
+                        "name": "📅 Booking Management",
                         "description": "Create, manage, and track yacht bookings with advanced rules engine",
                         "item": [
                                 {
@@ -434,7 +434,7 @@
                         ]
                 },
                 {
-                        "name": "04. Fractional Ownership",
+                        "name": "🏠 Fractional Ownership",
                         "description": "Manage yacht ownership shares, co-owners, and fuel wallets",
                         "item": [
                                 {
@@ -553,7 +553,7 @@
                         ]
                 },
                 {
-                        "name": "05. Payment System",
+                        "name": "💳 Payment System",
                         "description": "Stripe payment integration for bookings and services",
                         "item": [
                                 {
@@ -666,7 +666,7 @@
                         ]
                 },
                 {
-                        "name": "06. Lead Management & Inquiries",
+                        "name": "📞 Lead Management & Inquiries",
                         "description": "Customer inquiry capture and lead scoring system",
                         "item": [
                                 {
@@ -793,7 +793,7 @@
                         ]
                 },
                 {
-                        "name": "07. Notification System",
+                        "name": "🔔 Notification System",
                         "description": "In-app notifications and messaging system",
                         "item": [
                                 {
@@ -943,7 +943,7 @@
                         ]
                 },
                 {
-                        "name": "08. Health Monitoring & Testing",
+                        "name": "🏥 Health Monitoring & Testing",
                         "description": "System health checks and comprehensive testing endpoints",
                         "item": [
                                 {
@@ -1018,7 +1018,7 @@
                         ]
                 },
                 {
-                        "name": "09. Admin & Analytics",
+                        "name": "📊 Admin & Analytics",
                         "description": "Administrative endpoints and platform analytics",
                         "item": [
                                 {
