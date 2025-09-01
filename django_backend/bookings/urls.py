@@ -13,6 +13,7 @@ urlpatterns = [
     
     # Specific booking endpoints (must come before generic /bookings/)
     path('bookings/list/', views_task3.list_bookings, name='list-bookings'),
+    path('bookings/<int:booking_id>/status/', views_task3.update_booking_status, name='update-booking-status'),
     path('bookings/<int:booking_id>/cancel/', views_task3.cancel_booking, name='cancel-booking'),
     path('bookings/<int:booking_id>/', views_task3.get_booking_detail, name='booking-detail'),
     path('bookings/', views_task3.user_bookings, name='user-bookings'),

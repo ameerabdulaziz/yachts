@@ -518,3 +518,100 @@ def cancel_booking(request, booking_id):
             'success': False,
             'message': 'Failed to cancel booking'
         }, status=500)
+
+@csrf_exempt
+@require_http_methods(["POST", "PATCH"])
+def update_booking_status(request, booking_id):
+    """
+    Admin endpoint to update booking status
+    POST/PATCH /bookings/{id}/status/
+    Body: {"status": "confirmed", "admin_notes": "Approved by admin"}
+    """
+    try:
+        data = json.loads(request.body) if request.body else {}
+        new_status = data.get('status')
+        admin_notes = data.get('admin_notes', '')
+        admin_user = data.get('admin_user', 'System Admin')  # In production, get from authentication
+        
+        # Validate status
+        valid_statuses = ['pending', 'confirmed', 'cancelled', 'completed']
+        if not new_status or new_status not in valid_statuses:
+            return JsonResponse({
+                'success': False,
+                'message': f'Invalid status. Must be one of: {", ".join(valid_statuses)}'
+            }, status=400)
+        
+        # Get booking
+        booking = Booking.objects.select_related('boat', 'user').get(id=booking_id)
+        old_status = booking.status
+        
+        # Prevent invalid status transitions
+        if old_status == 'completed' and new_status != 'completed':
+            return JsonResponse({
+                'success': False,
+                'message': 'Cannot change status of completed booking'
+            }, status=400)
+        
+        # Update booking
+        booking.status = new_status
+        
+        # Add admin notes to booking notes
+        timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        status_change_note = f"[{timestamp}] Status changed from '{old_status}' to '{new_status}' by {admin_user}"
+        if admin_notes:
+            status_change_note += f" - {admin_notes}"
+        
+        booking.notes = f"{booking.notes}\n{status_change_note}".strip()
+        booking.save()
+        
+        logger.info(f"Booking {booking_id} status updated from {old_status} to {new_status} by {admin_user}")
+        
+        # Send notification logic can be added here for confirmed bookings
+        notification_sent = False
+        if new_status == 'confirmed':
+            # TODO: Send confirmation notification to user
+            notification_sent = True
+            logger.info(f"Booking confirmation notification should be sent to {booking.user.phone}")
+        
+        return JsonResponse({
+            'success': True,
+            'message': f'Booking status updated to {new_status}',
+            'booking': {
+                'id': booking.id,
+                'old_status': old_status,
+                'new_status': booking.status,
+                'boat': {
+                    'id': booking.boat.id,
+                    'name': booking.boat.name,
+                    'model': booking.boat.model,
+                },
+                'user': {
+                    'phone': booking.user.phone,
+                    'name': f"{booking.user.first_name} {booking.user.last_name}".strip() or 'N/A',
+                },
+                'start_date': booking.start_date.isoformat(),
+                'end_date': booking.end_date.isoformat(),
+                'total_amount': str(booking.total_amount) if booking.total_amount else None,
+                'admin_user': admin_user,
+                'admin_notes': admin_notes,
+                'notification_sent': notification_sent,
+                'updated_at': booking.updated_at.isoformat(),
+            }
+        })
+        
+    except Booking.DoesNotExist:
+        return JsonResponse({
+            'success': False,
+            'message': 'Booking not found'
+        }, status=404)
+    except json.JSONDecodeError:
+        return JsonResponse({
+            'success': False,
+            'message': 'Invalid JSON'
+        }, status=400)
+    except Exception as e:
+        logger.error(f"Error updating booking status: {e}")
+        return JsonResponse({
+            'success': False,
+            'message': 'Failed to update booking status'
+        }, status=500)
