@@ -17,8 +17,8 @@ urlpatterns = [
     path('', include('boats.urls')),
     # Task 3-5 - Bookings/Calendar endpoints
     path('', include('bookings.urls')),
-    # Task 4 - Ownership endpoints (commented out due to missing urls.py)
-    # path('', include('ownership.urls')),
+    # Task 4 - Ownership and Fuel Wallet endpoints
+    path('', include('ownership.urls')),
     # Tasks 6-10 - Payment processing endpoints
     path('', include('payment_system.urls')),
     # Task 12 - Lead capture and management endpoints
