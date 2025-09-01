@@ -130,13 +130,17 @@ def boat_calendar(request, boat_id):
         }, status=500)
 
 @csrf_exempt
-@require_http_methods(["GET"])
+@require_http_methods(["GET", "POST"])
 def user_bookings(request):
     """
-    Get bookings for authenticated user (demo mode)
-    GET /bookings/
-    Query params: status, boat_id (optional)
+    Handle bookings for authenticated user
+    GET /bookings/ - Get user bookings with optional filtering
+    POST /bookings/ - Create new booking
     """
+    if request.method == "POST":
+        return create_booking(request)
+    
+    # GET request handling
     try:
         # Demo mode - get user by phone from query parameter
         user_phone = request.GET.get('user_phone', '+201234567890')
@@ -266,4 +270,139 @@ def list_bookings(request):
         logger.error(f"Error listing bookings: {e}")
         return JsonResponse({
             'error': 'Failed to list bookings'
+        }, status=500)
+
+def create_booking(request):
+    """
+    Create a new booking
+    POST /bookings/
+    Body: {"boat_id": 1, "start_date": "2025-09-15", "end_date": "2025-09-17", "booking_type": "rental", "guest_count": 4}
+    """
+    try:
+        data = json.loads(request.body)
+        
+        # Extract booking data
+        boat_id = data.get('boat_id')
+        user_phone = data.get('user_phone', '+201234567890')  # Demo mode
+        start_date_str = data.get('start_date')
+        end_date_str = data.get('end_date')
+        booking_type = data.get('booking_type', 'rental')
+        guest_count = data.get('guest_count', 1)
+        notes = data.get('notes', '')
+        
+        # Validate required fields
+        if not all([boat_id, start_date_str, end_date_str]):
+            return JsonResponse({
+                'success': False,
+                'message': 'boat_id, start_date, and end_date are required'
+            }, status=400)
+        
+        # Parse dates
+        try:
+            start_date = datetime.strptime(start_date_str, '%Y-%m-%d').date()
+            end_date = datetime.strptime(end_date_str, '%Y-%m-%d').date()
+        except ValueError:
+            return JsonResponse({
+                'success': False,
+                'message': 'Invalid date format. Use YYYY-MM-DD'
+            }, status=400)
+        
+        if start_date >= end_date:
+            return JsonResponse({
+                'success': False,
+                'message': 'start_date must be before end_date'
+            }, status=400)
+        
+        # Get boat and user
+        from boats.models import Boat
+        try:
+            boat = Boat.objects.get(id=boat_id, is_active=True)
+            user, created = User.objects.get_or_create(
+                phone=user_phone,
+                defaults={
+                    'first_name': 'Demo',
+                    'last_name': 'User',
+                    'email': f'demo{user_phone[-4:]}@nauttec.com'
+                }
+            )
+        except Boat.DoesNotExist:
+            return JsonResponse({
+                'success': False,
+                'message': 'Boat not found'
+            }, status=404)
+        
+        # Check for conflicts
+        conflicting_bookings = Booking.objects.filter(
+            boat=boat,
+            status__in=['confirmed', 'pending'],
+            start_date__lt=end_date,
+            end_date__gt=start_date
+        )
+        
+        if conflicting_bookings.exists():
+            return JsonResponse({
+                'success': False,
+                'message': 'Boat is not available for the selected dates',
+                'conflicting_bookings': [
+                    {
+                        'id': b.id,
+                        'start_date': b.start_date.isoformat(),
+                        'end_date': b.end_date.isoformat(),
+                        'status': b.status
+                    } for b in conflicting_bookings
+                ]
+            }, status=400)
+        
+        # Calculate duration and amount
+        duration_days = (end_date - start_date).days
+        total_amount = boat.daily_rate * duration_days if boat.daily_rate else None
+        
+        # Create booking
+        booking = Booking.objects.create(
+            boat=boat,
+            user=user,
+            booking_type=booking_type,
+            start_date=start_date,
+            end_date=end_date,
+            guest_count=guest_count,
+            status='pending',
+            total_amount=total_amount,
+            notes=notes
+        )
+        
+        logger.info(f"Booking created: {booking.id} for boat {boat_id} by {user_phone}")
+        
+        return JsonResponse({
+            'success': True,
+            'message': 'Booking created successfully',
+            'booking': {
+                'id': booking.id,
+                'boat': {
+                    'id': boat.id,
+                    'name': boat.name,
+                    'model': boat.model,
+                    'location': boat.location
+                },
+                'booking_type': booking.booking_type,
+                'status': booking.status,
+                'start_date': booking.start_date.isoformat(),
+                'end_date': booking.end_date.isoformat(),
+                'guest_count': booking.guest_count,
+                'total_amount': str(booking.total_amount) if booking.total_amount else None,
+                'duration_days': booking.duration_days,
+                'notes': booking.notes,
+                'created_at': booking.created_at.isoformat()
+            }
+        })
+        
+    except json.JSONDecodeError:
+        return JsonResponse({
+            'success': False,
+            'message': 'Invalid JSON'
+        }, status=400)
+    except Exception as e:
+        logger.error(f"Error creating booking: {e}")
+        return JsonResponse({
+            'success': False,
+            'message': 'Failed to create booking'
         }, status=500)
