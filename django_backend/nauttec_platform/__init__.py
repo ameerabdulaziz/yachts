@@ -1,1 +1,0 @@
-# Nauttec Platform Django Project

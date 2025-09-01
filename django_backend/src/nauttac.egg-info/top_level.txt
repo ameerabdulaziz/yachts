@@ -1,6 +1,0 @@
-accounts
-bookings
-manage
-nauttec_platform
-ownership
-yachts

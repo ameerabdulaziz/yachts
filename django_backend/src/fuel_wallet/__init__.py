@@ -1,1 +1,0 @@
-default_app_config = 'fuel_wallet.apps.FuelWalletConfig'
