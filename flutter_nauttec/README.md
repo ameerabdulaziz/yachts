@@ -1,24 +1,28 @@
 # Nauttec Flutter Mobile App
 
-A comprehensive Flutter mobile application for the Nauttec premium yacht fractional ownership and rental platform. Built with modern Flutter architecture patterns and designed for iOS and Android.
+A premium Flutter mobile application for yacht fractional ownership and rental platform, featuring modern architecture and seamless integration with Django backend.
 
-## 🌊 Features
+## 🎯 Features
 
-### Core Functionality
-- **Phone-based Authentication** - OTP verification system
-- **Yacht Fleet Management** - Browse and explore De Antonio yacht models (D23-D60)
-- **Booking System** - Complete rental booking lifecycle management
-- **Fractional Ownership** - Track and manage yacht ownership shares
-- **Fuel Wallet System** - Prepaid fuel credit management with transactions
-- **User Profiles** - Visitor, Owner, and Administrator role management
+### Authentication & User Management
+- **Phone-based OTP Authentication** - Secure login with SMS verification
+- **User Registration** - Multi-role account creation (Visitor/Owner/Administrator)
+- **Profile Management** - User profile editing and role-based access
+- **Secure Storage** - Token management with flutter_secure_storage
 
-### Technical Features
-- **State Management** - Riverpod with code generation
-- **Navigation** - GoRouter with stateful shell navigation
-- **API Integration** - Complete Django REST API integration
-- **Payment Processing** - Stripe integration for payments
-- **Offline Support** - Local storage with SharedPreferences
-- **Platform Features** - iOS/Android specific optimizations
+### Core Yacht Platform Features
+- **Yacht Fleet Browser** - Browse De Antonio yacht models D23-D60
+- **Boat Details** - Comprehensive yacht specifications and features
+- **Booking System** - Complete rental booking flow with calendar integration
+- **Fractional Ownership** - Share tracking and ownership management
+- **Fuel Wallet** - Prepaid fuel credit system with transaction history
+
+### Modern Mobile Experience
+- **Ocean-themed UI** - Custom design with #2563EB primary color
+- **Bottom Navigation** - 5 main sections with smooth transitions
+- **Pull-to-refresh** - Data synchronization across all screens
+- **Offline Support** - Local data caching with automatic sync
+- **iOS/Android** - Native styling for both platforms
 
 ## 🏗️ Architecture
 
@@ -26,83 +30,104 @@ A comprehensive Flutter mobile application for the Nauttec premium yacht fractio
 ```
 lib/
 ├── core/                    # Core infrastructure
-│   ├── config/             # App configuration
-│   ├── router/             # Navigation setup
-│   ├── services/           # Core services (API, storage)
-│   └── theme/              # UI theme and styling
+│   ├── config/             # App configuration & API endpoints
+│   ├── router/             # GoRouter navigation setup
+│   ├── services/           # API service and HTTP client
+│   └── theme/              # Ocean-themed UI styling
+│
 ├── features/               # Feature modules
-│   ├── auth/              # Authentication
+│   ├── auth/              # Authentication flow
+│   │   ├── models/        # User models and auth state
+│   │   ├── services/      # Auth API service
+│   │   ├── providers/     # Riverpod state management
+│   │   └── presentation/  # Login, register, OTP pages
+│   │
 │   ├── boats/             # Yacht management
-│   ├── bookings/          # Rental bookings
+│   ├── bookings/          # Rental booking system
 │   ├── ownership/         # Fractional ownership
 │   ├── fuel_wallet/       # Fuel credit system
-│   └── profile/           # User management
-└── shared/                # Shared utilities
+│   └── profile/           # User profile management
+│
+└── shared/                # Shared utilities and widgets
 ```
 
 ### State Management
-- **Riverpod** - Reactive state management
-- **Code Generation** - Type-safe providers and models
-- **Freezed** - Immutable data classes
-- **JSON Serialization** - Automatic API model generation
+- **Riverpod 2.5.1** - Modern reactive state management
+- **Code Generation** - Automatic provider and model generation
+- **Freezed** - Immutable data classes with unions
+- **JSON Serialization** - Automatic API model conversion
+
+### Navigation
+- **GoRouter 14.6.1** - Declarative routing with type safety
+- **Stateful Shell** - Bottom navigation with nested routes
+- **Deep Linking** - External app integration support
+- **Route Guards** - Authentication-based access control
 
 ## 🚀 Quick Start
 
 ### Prerequisites
-- Flutter SDK 3.16.0 or higher
-- Dart SDK 3.0.0 or higher
+- Flutter SDK 3.16.0+
+- Dart SDK 3.2.0+
 - iOS 12.0+ / Android 7.0+ (API 24+)
+- Xcode 14+ (for iOS development)
+- Android Studio / VS Code
 
 ### Installation
 
-1. **Clone and setup**:
+1. **Extract and navigate**:
    ```bash
+   tar -xzf nauttec_flutter_complete.tar.gz
    cd flutter_nauttec
+   ```
+
+2. **Install dependencies**:
+   ```bash
    flutter pub get
    ```
 
-2. **Generate code**:
+3. **Generate code** (required for Riverpod/Freezed):
    ```bash
-   flutter packages pub run build_runner build
+   flutter packages pub run build_runner build --delete-conflicting-outputs
    ```
 
-3. **Configure API endpoint**:
-   Update `lib/core/config/app_config.dart`:
+4. **Configure API connection**:
+   Edit `lib/core/config/app_config.dart`:
    ```dart
-   static const String baseUrl = 'https://your-django-api.com';
+   static const String baseUrl = 'http://your-django-server.com';
+   static const String stripePublishableKey = 'pk_live_...';
    ```
-
-4. **Add Stripe keys**:
-   Update the Stripe publishable key in `app_config.dart`
 
 5. **Run the app**:
    ```bash
    flutter run
    ```
 
-## 📱 Platform Setup
+## 📱 Platform Configuration
 
 ### iOS Setup
 1. Open `ios/Runner.xcworkspace` in Xcode
-2. Update bundle identifier and signing
-3. Configure capabilities for camera, location if needed
-4. Build and test on device/simulator
+2. Update bundle identifier: `com.nauttec.app`
+3. Configure signing and provisioning profile
+4. Update `ios/Runner/Info.plist` with required permissions
+5. Test on iOS Simulator or device
 
 ### Android Setup
-1. Update `android/app/build.gradle` with your app details
-2. Configure signing in `android/app/build.gradle`
-3. Update package name in `AndroidManifest.xml`
-4. Build APK: `flutter build apk`
+1. Update package name in `android/app/build.gradle`
+2. Configure app signing for release builds
+3. Update `android/app/src/main/AndroidManifest.xml`
+4. Build APK: `flutter build apk --release`
+5. Test on Android emulator or device
 
 ## 🔧 Configuration
 
-### API Configuration
-The app connects to your Django backend. Update these endpoints in `app_config.dart`:
+### Django Backend Integration
+The app is pre-configured for these Django API endpoints:
 
 ```dart
 // Authentication
 static const String authRegisterEndpoint = '/auth/register/';
 static const String authSendOtpEndpoint = '/auth/send-otp/';
+static const String authVerifyOtpEndpoint = '/auth/verify-otp/';
 
 // Boats & Bookings
 static const String boatsEndpoint = '/boats/';
@@ -113,18 +138,69 @@ static const String ownershipEndpoint = '/ownership/';
 static const String fuelWalletEndpoint = '/fuel-wallet/';
 ```
 
-### Theme Customization
-Ocean-themed design matching your web platform:
-- Primary color: `#2563EB` (Ocean Blue)
-- SF Pro font family
-- iOS-native styling patterns
-- Responsive design for all screen sizes
+### API Service Configuration
+HTTP client with automatic:
+- Bearer token authentication
+- Request/response logging
+- Error handling for common scenarios
+- Timeout configuration (30 seconds)
+- Retry logic for network failures
 
-## 🧪 Development
+### Latest Package Versions (2024)
+- **flutter_stripe: 11.1.0** - Latest Stripe integration
+- **dio: 5.7.0** - Modern HTTP client
+- **go_router: 14.6.1** - Latest navigation solution
+- **riverpod: 2.5.1** - Current state management
+- **pinput: 5.0.0** - Modern OTP input widget
+
+## 🎨 UI/UX Design
+
+### Ocean-themed Color Palette
+```dart
+static const Color primary = Color(0xFF2563EB);    // Ocean blue
+static const Color secondary = Color(0xFF0EA5E9);  // Sky blue
+static const Color luxury = Color(0xFFD97706);     // Gold accent
+static const Color success = Color(0xFF10B981);    // Green
+static const Color error = Color(0xFFEF4444);      // Red
+```
+
+### Typography
+- **Font Family**: SF Pro (iOS-native styling)
+- **Responsive Sizing**: Dynamic text scaling support
+- **Weight Hierarchy**: Regular (400) to Bold (700)
+- **Accessibility**: Screen reader optimized
+
+### Components
+- **Custom Cards** - Yacht listing and detail cards
+- **Ocean Gradients** - Primary and luxury gradient themes
+- **Bottom Navigation** - 5-tab native-style navigation
+- **Form Inputs** - Consistent styling with validation states
+
+## 🔒 Security Features
+
+### Authentication Security
+- **Secure Token Storage** - flutter_secure_storage integration
+- **Automatic Token Refresh** - Seamless session management
+- **OTP Verification** - SMS-based phone verification
+- **Role-based Access** - UI/feature access by user role
+
+### Data Protection
+- **Input Validation** - Client and server-side validation
+- **SQL Injection Prevention** - Parameterized queries
+- **XSS Protection** - Input sanitization
+- **Deep Link Validation** - Secure navigation parameters
+
+### Network Security
+- **HTTPS Enforcement** - TLS 1.2+ for all API calls
+- **Certificate Pinning** - Production API security
+- **Request Signing** - API request authentication
+- **Rate Limiting** - API abuse prevention
+
+## 🛠️ Development
 
 ### Code Generation
 ```bash
-# Watch for changes and auto-generate
+# Watch for changes (recommended during development)
 flutter packages pub run build_runner watch
 
 # One-time generation
@@ -133,65 +209,55 @@ flutter packages pub run build_runner build --delete-conflicting-outputs
 
 ### Testing
 ```bash
-# Run all tests
+# Unit tests
 flutter test
 
-# Run integration tests
+# Widget tests
+flutter test test/widget_test.dart
+
+# Integration tests
 flutter test integration_test/
 ```
 
-### Build for Production
+### Debugging
 ```bash
-# Android
-flutter build apk --release
-flutter build appbundle --release
+# Run with debugging
+flutter run --debug
 
-# iOS
-flutter build ios --release
+# Performance profiling
+flutter run --profile
+
+# Release testing
+flutter run --release
 ```
 
-## 📦 Dependencies
+### Build Commands
+```bash
+# Android
+flutter build apk --release                    # APK
+flutter build appbundle --release              # App Bundle (Play Store)
 
-### Core Dependencies
-- `flutter_riverpod` - State management
-- `go_router` - Navigation
-- `dio` - HTTP client
-- `freezed` - Immutable classes
-- `json_annotation` - JSON serialization
+# iOS
+flutter build ios --release                    # iOS build
+flutter build ipa --release                    # App Store package
+```
 
-### UI Dependencies
-- `country_code_picker` - Phone number input
-- `pinput` - OTP input widget
-- `cached_network_image` - Image caching
-- `shimmer` - Loading animations
+## 📊 User Roles & Features
 
-### Platform Dependencies
-- `flutter_secure_storage` - Secure key storage
-- `shared_preferences` - Local preferences
-- `url_launcher` - Deep links and external URLs
-- `permission_handler` - Device permissions
-
-## 🔐 Security
-
-- **Secure Storage** - Sensitive data encrypted locally
-- **API Token Management** - Automatic token refresh
-- **Input Validation** - Client and server-side validation
-- **Deep Link Security** - Validated navigation parameters
-
-## 📊 Features by User Role
-
-### Visitors
+### Visitors (Default)
 - Browse yacht fleet
-- View yacht details and specifications
+- View yacht specifications
 - Create rental bookings
 - Basic profile management
+- Access fuel wallet for rentals
 
-### Owners
+### Yacht Owners
 - All visitor features
 - Fractional ownership dashboard
-- Usage quota tracking
-- Fuel wallet management
-- Booking priority access
+- Usage quota tracking and management
+- Priority booking access
+- Enhanced fuel wallet features
+- Co-owner communication tools
 
 ### Administrators
 - All user features
@@ -199,50 +265,138 @@ flutter build ios --release
 - Booking administration
 - User management dashboard
 - System health monitoring
+- Analytics and reporting
 
-## 🛠️ Customization
+## 🚀 Deployment
 
-### Adding New Features
-1. Create feature module in `lib/features/`
-2. Implement models, services, and providers
-3. Add UI pages and widgets
-4. Update navigation in `app_router.dart`
-5. Add tests and documentation
+### App Store Preparation
+1. **iOS App Store**:
+   - Configure app metadata in App Store Connect
+   - Add app screenshots (6.7", 6.5", 5.5")
+   - Create app preview videos
+   - Submit for review
 
-### Styling Updates
-- Update colors in `lib/core/theme/app_colors.dart`
-- Modify typography in `lib/core/theme/app_text_styles.dart`
-- Customize theme in `lib/core/theme/app_theme.dart`
+2. **Google Play Store**:
+   - Configure Play Console metadata
+   - Add feature graphics and screenshots
+   - Create store listing
+   - Upload signed App Bundle
 
-## 🚢 Integration with Django Backend
+### CI/CD Integration
+```yaml
+# Example GitHub Actions workflow
+name: Build and Deploy
+on:
+  push:
+    branches: [main]
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: subosito/flutter-action@v2
+      - run: flutter pub get
+      - run: flutter test
+      - run: flutter build apk --release
+```
 
-This Flutter app is designed to work seamlessly with your Nauttec Django backend:
+## 📈 Performance Optimization
 
-- **Authentication** - Phone-based OTP system
-- **Real-time Data** - Live yacht availability and booking updates
-- **Payment Processing** - Integrated Stripe payment flows
-- **Push Notifications** - Firebase messaging (ready to implement)
-- **File Uploads** - Image handling for profiles and documentation
+### Image Optimization
+- **cached_network_image** - Automatic image caching
+- **Image compression** - Optimized file sizes
+- **Progressive loading** - Shimmer placeholders
+- **Memory management** - Efficient image disposal
 
-## 📋 Production Checklist
+### Network Optimization
+- **Response caching** - API response caching
+- **Request batching** - Multiple API calls optimization
+- **Offline support** - Local data persistence
+- **Background sync** - Automatic data updates
 
-- [ ] Update API base URL for production
-- [ ] Configure Stripe live keys
-- [ ] Set up proper app signing
-- [ ] Test on physical devices
-- [ ] Configure push notifications
-- [ ] Set up app store metadata
-- [ ] Implement crash reporting
-- [ ] Add analytics tracking
+### App Performance
+- **Lazy loading** - On-demand widget creation
+- **Tree shaking** - Unused code elimination
+- **Code splitting** - Feature-based bundling
+- **Memory profiling** - Performance monitoring
+
+## 🔧 Troubleshooting
+
+### Common Issues
+
+**Build Errors**:
+```bash
+# Clean and rebuild
+flutter clean
+flutter pub get
+flutter packages pub run build_runner build --delete-conflicting-outputs
+```
+
+**Code Generation Issues**:
+```bash
+# Delete generated files and regenerate
+find . -name "*.g.dart" -delete
+find . -name "*.freezed.dart" -delete
+flutter packages pub run build_runner build --delete-conflicting-outputs
+```
+
+**iOS Build Issues**:
+```bash
+# Clean iOS build
+cd ios
+rm -rf Pods Podfile.lock
+pod install
+cd ..
+flutter clean
+flutter build ios
+```
+
+**Android Build Issues**:
+```bash
+# Clean Android build
+cd android
+./gradlew clean
+cd ..
+flutter clean
+flutter build apk
+```
+
+### API Connection Issues
+1. Verify Django backend is running
+2. Check `baseUrl` in `app_config.dart`
+3. Ensure network permissions in manifests
+4. Test API endpoints with curl/Postman
+
+### State Management Debugging
+1. Add Riverpod logging:
+   ```dart
+   ProviderScope(
+     observers: [ProviderLogger()],
+     child: MyApp(),
+   )
+   ```
+
+2. Debug provider states in DevTools
+3. Check provider dependencies
+4. Verify code generation completed
+
+## 📚 Additional Resources
+
+- [Flutter Documentation](https://docs.flutter.dev)
+- [Riverpod Documentation](https://riverpod.dev)
+- [GoRouter Documentation](https://pub.dev/packages/go_router)
+- [Stripe Flutter Documentation](https://stripe.dev/stripe-flutter)
+- [Django REST Framework](https://www.django-rest-framework.org)
 
 ## 🤝 Support
 
-For technical support or questions about the Nauttec Flutter app:
-- Review the Django backend API documentation
-- Check the Flutter documentation for platform-specific issues
-- Ensure proper network connectivity to your Django API
+For technical support:
+1. Check the troubleshooting section above
+2. Review Django backend API documentation
+3. Verify network connectivity to Django server
+4. Check Flutter and package versions compatibility
 
 ---
 
-**Built with Flutter for the Nauttec Premium Yacht Platform**
-*Designed for luxury yacht enthusiasts and fractional ownership investors*
+**Built with Flutter 3.16+ for the Nauttec Premium Yacht Platform**
+*Ocean-themed design • Modern architecture • Production ready*
