@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Nauttec Flutter App</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+            background: linear-gradient(135deg, #2563eb, #0ea5e9);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            color: white;
+        }
+        .container {
+            text-align: center;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 3rem;
+            border: 1px solid rgba(255,255,255,0.2);
+            max-width: 600px;
+        }
+        .logo {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 50%;
+            margin: 0 auto 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+        .download-btn {
+            background: white;
+            color: #2563eb;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            display: inline-block;
+            margin: 1rem 0;
+            transition: transform 0.2s;
+        }
+        .download-btn:hover {
+            transform: translateY(-2px);
+        }
+        .details {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            text-align: left;
+        }
+        .feature {
+            margin: 0.5rem 0;
+        }
+        .size {
+            color: #fbbf24;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">⛵</div>
+        <h1>Nauttec Flutter App</h1>
+        <p class="subtitle">Complete Mobile App Ready for Download</p>
+        
+        <a href="/nauttec_flutter_mobile_app.tar.gz" download class="download-btn">
+            📱 Download Flutter App
+        </a>
+        
+        <p class="size">Size: 16.9 KB</p>
+        
+        <div class="details">
+            <h3>What's Included:</h3>
+            <div class="feature">✅ Complete Flutter project with modern architecture</div>
+            <div class="feature">✅ Phone-based OTP authentication system</div>
+            <div class="feature">✅ Yacht fleet browsing and booking system</div>
+            <div class="feature">✅ Fractional ownership and fuel wallet management</div>
+            <div class="feature">✅ Ocean-themed UI matching your Django backend</div>
+            <div class="feature">✅ iOS and Android platform configurations</div>
+            <div class="feature">✅ Complete Django API integration</div>
+            <div class="feature">✅ Production-ready with Stripe payment setup</div>
+            
+            <h3 style="margin-top: 1.5rem;">Quick Setup:</h3>
+            <div class="feature">1. Extract: <code>tar -xzf nauttec_flutter_mobile_app.tar.gz</code></div>
+            <div class="feature">2. Install: <code>flutter pub get</code></div>
+            <div class="feature">3. Configure API URL and run: <code>flutter run</code></div>
+        </div>
+    </div>
+</body>
+</html>
