@@ -172,7 +172,7 @@ export default function BookingCalendarScreen() {
   const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white pb-20">
       {/* Header */}
       <div className="bg-white border-b border-gray-100">
         <div className="flex items-center justify-between p-4">
@@ -186,7 +186,7 @@ export default function BookingCalendarScreen() {
         </div>
       </div>
 
-      <div className="p-4 space-y-4">
+      <div className="p-4 space-y-4 pb-4">
         {/* Usage Summary */}
         <Card className="border border-gray-100">
           <CardHeader className="pb-3">
@@ -378,7 +378,7 @@ export default function BookingCalendarScreen() {
                     setLocation("/booking-confirmation");
                   }}
                 >
-                  <Clock className="h-4 w-4 mr-2" />
+                  <Clock className="h-4 w-4 mr-1" />
                   Book {selectedSlot === "full" ? "Full Day" : selectedSlot}
                 </Button>
                 <Button 
@@ -395,7 +395,7 @@ export default function BookingCalendarScreen() {
                     window.open(whatsappUrl, '_blank');
                   }}
                 >
-                  <Users className="h-4 w-4 mr-2" />
+                  <Users className="h-4 w-4 mr-1" />
                   Share Booking
                 </Button>
               </div>
