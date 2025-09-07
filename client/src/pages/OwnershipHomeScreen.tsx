@@ -71,21 +71,14 @@ export default function OwnershipHomeScreen() {
               <span className="text-xs text-gray-500 hidden">Ownership Home</span>
             </div>
             <div className="flex items-center space-x-3">
-              <Link href="/profile">
-                <Button 
-                  variant="ghost" 
-                  size="sm" 
-                  className="p-2"
-                  onClick={enhancedScrollToTop}
-                >
-                  <div className="w-8 h-8 rounded-full overflow-hidden">
-                    <img 
-                      src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100" 
-                      alt="User Profile" 
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                </Button>
+              <Link href="/profile" onClick={enhancedScrollToTop}>
+                <div className="w-8 h-8 rounded-full overflow-hidden cursor-pointer">
+                  <img 
+                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100" 
+                    alt="User Profile" 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
               </Link>
             </div>
           </div>
