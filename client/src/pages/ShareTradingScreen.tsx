@@ -1,4 +1,4 @@
-import { ArrowLeft, TrendingUp, TrendingDown, Users, Clock, AlertCircle, UserCheck, Calendar, Zap } from "lucide-react";
+import { ArrowLeft, TrendingUp, TrendingDown, Users, Clock, AlertCircle, UserCheck, Calendar, Zap, Euro } from "lucide-react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -17,7 +17,7 @@ const mockShareListings = [
     cabins: 2,
     power: "1200HP",
     shareFraction: "1/8",
-    sharePrice: "62,500",
+    sharePrice: "58,125",
     location: "El Gouna, Egypt",
     availableShares: 2,
     usageDaysPerYear: 45,
@@ -37,7 +37,7 @@ const mockShareListings = [
     cabins: 2,
     power: "600HP",
     shareFraction: "1/8",
-    sharePrice: "50,000",
+    sharePrice: "46,500",
     location: "El Gouna, Egypt",
     availableShares: 1,
     usageDaysPerYear: 45,
@@ -58,7 +58,7 @@ const mockShareListings = [
     cabins: 3,
     power: "2000HP",
     shareFraction: "1/8",
-    sharePrice: "125,000",
+    sharePrice: "116,250",
     location: "El Gouna, Egypt",
     availableShares: 1,
     usageDaysPerYear: 45,
@@ -78,7 +78,7 @@ const mockShareListings = [
     cabins: 1,
     power: "400HP",
     shareFraction: "1/8",
-    sharePrice: "37,500",
+    sharePrice: "34,875",
     location: "El Gouna, Egypt",
     availableShares: 3,
     usageDaysPerYear: 45,
@@ -170,7 +170,8 @@ export default function ShareTradingScreen() {
                     <span className="text-xs text-gray-600">Hours/Year</span>
                   </div>
                   <div className="flex flex-col items-center p-2 bg-purple-50 rounded-lg">
-                    <span className="text-xs font-semibold text-purple-600">${listing.sharePrice}</span>
+                    <Euro className="h-4 w-4 text-purple-600 mb-1" />
+                    <span className="text-xs font-semibold">€{listing.sharePrice}</span>
                     <span className="text-xs text-gray-600">Price</span>
                   </div>
                 </div>
