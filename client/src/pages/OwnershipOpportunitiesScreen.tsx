@@ -13,7 +13,7 @@ export default function OwnershipOpportunitiesScreen() {
       {/* Header with Extended Background */}
       <div className="relative">
         {/* Extended Sea Background */}
-        <div className="absolute inset-0 bg-gradient-ocean" style={{ height: '280px' }}>
+        <div className="absolute inset-0 bg-gradient-ocean" style={{ height: '400px' }}>
           <div className="absolute inset-0" style={{
             backgroundImage: `url(${seaBackground})`,
             backgroundSize: 'cover',
@@ -52,29 +52,11 @@ export default function OwnershipOpportunitiesScreen() {
           <div className="bg-white rounded-2xl p-6 text-center shadow-lg">
             <PieChart className="w-16 h-16 mx-auto mb-4 text-primary" />
             <h2 className="text-2xl font-bold mb-2 text-gray-900">Fractional Yacht Ownership</h2>
-            <p className="text-gray-600">Luxury Yachting. Full Experience. Fractional Price.</p>
+            <p className="text-gray-600">All the fun for a fraction of the cost.</p>
           </div>
         </div>
         </section>
       </div>
-
-      {/* Investment Stats */}
-      <section className="px-4 py-6 bg-white">
-        <div className="grid grid-cols-3 gap-4 text-center">
-          <div>
-            <p className="text-2xl font-bold text-gray-900">€32K</p>
-            <p className="text-sm text-gray-600">Starting from</p>
-          </div>
-          <div>
-            <p className="text-2xl font-bold text-gray-900">6-8</p>
-            <p className="text-sm text-gray-600">Weeks usage</p>
-          </div>
-          <div>
-            <p className="text-2xl font-bold text-gray-900">6%</p>
-            <p className="text-sm text-gray-600">Avg. ROI</p>
-          </div>
-        </div>
-      </section>
 
       {/* Opportunities List */}
       <section className="px-4 py-6">
