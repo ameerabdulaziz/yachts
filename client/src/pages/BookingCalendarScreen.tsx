@@ -378,7 +378,7 @@ export default function BookingCalendarScreen() {
                     setLocation("/booking-confirmation");
                   }}
                 >
-                  <Clock className="h-3.5 w-3.5 mr-0.5" />
+                  <Clock className="h-3 w-3 mr-0.5" />
                   Book {selectedSlot === "full" ? "Full Day" : selectedSlot}
                 </Button>
                 <Button 
@@ -395,7 +395,7 @@ export default function BookingCalendarScreen() {
                     window.open(whatsappUrl, '_blank');
                   }}
                 >
-                  <Users className="h-3.5 w-3.5 mr-0.5" />
+                  <Users className="h-3 w-3 mr-0.5" />
                   Share Booking
                 </Button>
               </div>
