@@ -10,16 +10,6 @@ export default function FuelWalletScreen() {
   const balance = 1250;
   const monthlyChange = 200;
 
-  const handleTopUp = () => {
-    // Navigate to top-up flow
-    window.location.href = '/fuel-wallet/top-up';
-  };
-
-  const handleViewHistory = () => {
-    // Navigate to transaction history
-    window.location.href = '/fuel-wallet/history';
-  };
-
   return (
     <div className="min-h-screen bg-gray-50 pb-24">
       {/* Header */}
@@ -64,22 +54,15 @@ export default function FuelWalletScreen() {
             </div>
             
             <div className="grid grid-cols-2 gap-3">
-              <Button 
-                className="w-full bg-blue-600 text-white p-4 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 hover:bg-blue-700"
-                onClick={handleTopUp}
-                data-testid="button-top-up"
-              >
-                <Plus className="w-4 h-4 mr-2" />
-                Top Up
-              </Button>
-              <Button 
-                variant="outline" 
-                className="w-full p-4 rounded-xl font-semibold hover:shadow-lg transition-all duration-300"
-                onClick={handleViewHistory}
-                data-testid="button-history"
-              >
+              <Link href="/top-up">
+                <Button className="w-full bg-blue-600 text-white p-4 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 hover:bg-blue-700">
+                  <Plus className="w-4 h-4 mr-2" />
+                  Top Up
+                </Button>
+              </Link>
+              <Button variant="outline" className="w-full p-4 rounded-xl font-semibold hover:shadow-lg transition-all duration-300">
                 <Calendar className="w-4 h-4 mr-2" />
-                History
+                Auto-Pay
               </Button>
             </div>
           </div>

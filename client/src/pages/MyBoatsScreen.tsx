@@ -45,14 +45,6 @@ export default function MyBoatsScreen() {
     setLocation(`/boat-ownership/${boatId}`);
   };
 
-  const handleFuelTopUp = () => {
-    setLocation('/fuel-wallet/top-up');
-  };
-
-  const handleFuelHistory = () => {
-    setLocation('/fuel-wallet/history');
-  };
-
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white pb-24">
       {/* Header */}
@@ -87,21 +79,10 @@ export default function MyBoatsScreen() {
             </div>
           </div>
           <div className="mt-3 flex space-x-2">
-            <Button 
-              size="sm" 
-              className="bg-blue-600 hover:bg-blue-700 text-white"
-              onClick={handleFuelTopUp}
-              data-testid="button-fuel-top-up"
-            >
+            <Button size="sm" className="bg-blue-600 hover:bg-blue-700 text-white">
               Top Up
             </Button>
-            <Button 
-              size="sm" 
-              variant="outline" 
-              className="border-blue-600 text-blue-600 hover:bg-blue-50"
-              onClick={handleFuelHistory}
-              data-testid="button-fuel-history"
-            >
+            <Button size="sm" variant="outline" className="border-blue-600 text-blue-600 hover:bg-blue-50">
               History
             </Button>
           </div>
