@@ -4,32 +4,16 @@ import { Card, CardContent } from "@/components/ui/card";
 import BottomNavigation from "@/components/BottomNavigation";
 import { ArrowLeft, Calendar, MapPin, TrendingUp, Filter, PieChart, Users } from "lucide-react";
 import seaBackground from "@assets/image_1754575606863.png";
+import nauttecLogo from "@assets/Nauttec Logo_1754330395988.png";
 import { mockOwnershipOpportunities } from "@/lib/mockData";
 
 export default function OwnershipOpportunitiesScreen() {
   return (
     <div className="min-h-screen bg-gray-50 pb-24">
-      {/* Header */}
-      <header className="bg-white border-b border-gray-200 px-4 py-3 sticky top-0 z-40">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <Link href="/home">
-              <Button variant="ghost" size="sm" className="p-2">
-                <ArrowLeft className="w-5 h-5 text-gray-600" />
-              </Button>
-            </Link>
-            <h1 className="text-xl font-bold text-gray-900">Ownership Opportunities</h1>
-          </div>
-          <Button variant="ghost" size="sm" className="p-2">
-            <Filter className="w-5 h-5 text-gray-600" />
-          </Button>
-        </div>
-      </header>
-
-      {/* Hero Section */}
-      <section className="relative px-4 py-2 overflow-hidden">
-        {/* Turquoise Sea Background */}
-        <div className="absolute inset-0 bg-gradient-ocean">
+      {/* Header with Extended Background */}
+      <div className="relative">
+        {/* Extended Sea Background */}
+        <div className="absolute inset-0 bg-gradient-ocean" style={{ height: '280px' }}>
           <div className="absolute inset-0" style={{
             backgroundImage: `url(${seaBackground})`,
             backgroundSize: 'cover',
@@ -38,6 +22,31 @@ export default function OwnershipOpportunitiesScreen() {
           }} />
           <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-blue-200/20 to-blue-500/30" />
         </div>
+
+        {/* Header */}
+        <header className="relative bg-transparent px-4 py-3 sticky top-0 z-40">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-3">
+              <div className="w-20 h-10 flex items-center justify-center">
+                <img src={nauttecLogo} alt="Nauttec Logo" className="w-full h-full object-contain" />
+              </div>
+            </div>
+            <div className="flex items-center space-x-3">
+              <Link href="/profile">
+                <div className="w-8 h-8 rounded-full overflow-hidden cursor-pointer">
+                  <img 
+                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100" 
+                    alt="User Profile" 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </Link>
+            </div>
+          </div>
+        </header>
+
+        {/* Hero Section */}
+        <section className="relative px-4 py-2 overflow-hidden">
         
         <div className="relative z-10">
           <div className="bg-white rounded-2xl p-6 text-center shadow-lg">
@@ -46,7 +55,8 @@ export default function OwnershipOpportunitiesScreen() {
             <p className="text-gray-600">Luxury Yachting. Full Experience. Fractional Price.</p>
           </div>
         </div>
-      </section>
+        </section>
+      </div>
 
       {/* Investment Stats */}
       <section className="px-4 py-6 bg-white">
