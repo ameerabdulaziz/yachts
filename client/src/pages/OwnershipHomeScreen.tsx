@@ -163,18 +163,18 @@ export default function OwnershipHomeScreen() {
                   style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}
                   onClick={enhancedScrollToTop}
                 >
-                  <Anchor className="w-4 h-4 mr-1" />
+                  <Anchor className="w-4 h-4 mr-0.5" />
                   Own This Yacht
                 </Button>
               </Link>
               <Link href="/ownership-opportunities">
                 <Button 
                   variant="outline" 
-                  className="w-full p-4 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 border-blue-600 text-blue-600 hover:bg-blue-50"
+                  className="w-full p-4 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 border-blue-600 text-blue-600 hover:bg-blue-50 flex items-center justify-center"
                   style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}
                   onClick={enhancedScrollToTop}
                 >
-                  <ArrowRight className="w-4 h-4 mr-2" />
+                  <ArrowRight className="w-4 h-4 mr-0.5" />
                   View All
                 </Button>
               </Link>
