@@ -58,16 +58,6 @@ export default function OwnershipHomeScreen() {
             <span className="text-xs text-gray-500 hidden">Ownership Home</span>
           </div>
           <div className="flex items-center space-x-3">
-            <Link href="/dev-navigation">
-              <Button 
-                variant="ghost" 
-                size="sm" 
-                className="p-2 text-xs"
-                onClick={enhancedScrollToTop}
-              >
-                All Screens
-              </Button>
-            </Link>
             <Link href="/profile">
               <Button 
                 variant="ghost" 
@@ -75,8 +65,12 @@ export default function OwnershipHomeScreen() {
                 className="p-2"
                 onClick={enhancedScrollToTop}
               >
-                <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
-                  <span className="text-white text-sm font-bold">JD</span>
+                <div className="w-8 h-8 rounded-full overflow-hidden">
+                  <img 
+                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100" 
+                    alt="User Profile" 
+                    className="w-full h-full object-cover"
+                  />
                 </div>
               </Button>
             </Link>
@@ -86,8 +80,8 @@ export default function OwnershipHomeScreen() {
 
       {/* Hero Section - Ownership Focus */}
       <section className="relative px-4 py-8 overflow-hidden">
-        {/* Turquoise Sea Background */}
-        <div className="absolute inset-0 bg-gradient-ocean">
+        {/* Turquoise Sea Background - Extended */}
+        <div className="absolute inset-0 bg-gradient-ocean" style={{ top: '-60px' }}>
           <div className="absolute inset-0" style={{
             backgroundImage: `url(${seaBackground})`,
             backgroundSize: 'cover',
