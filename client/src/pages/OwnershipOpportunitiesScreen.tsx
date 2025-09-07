@@ -18,7 +18,7 @@ export default function OwnershipOpportunitiesScreen() {
                 <ArrowLeft className="w-5 h-5 text-gray-600" />
               </Button>
             </Link>
-            <div></div>
+            <h1 className="text-xl font-bold text-gray-900">Ownership Opportunities</h1>
           </div>
           <Button variant="ghost" size="sm" className="p-2">
             <Filter className="w-5 h-5 text-gray-600" />
@@ -42,6 +42,8 @@ export default function OwnershipOpportunitiesScreen() {
         <div className="relative z-10">
           <div className="bg-white rounded-2xl p-6 text-center shadow-lg">
             <PieChart className="w-16 h-16 mx-auto mb-4 text-primary" />
+            <h2 className="text-2xl font-bold mb-2 text-gray-900">Fractional Yacht Ownership</h2>
+            <p className="text-gray-600">Luxury Yachting. Full Experience. Fractional Price.</p>
           </div>
         </div>
       </section>
