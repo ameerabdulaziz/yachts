@@ -46,7 +46,7 @@ export default function OwnershipOpportunitiesScreen() {
         </header>
 
         {/* Hero Section */}
-        <section className="relative px-4 py-2 overflow-hidden">
+        <section className="relative px-4 overflow-hidden" style={{ paddingTop: '6px', paddingBottom: '8px' }}>
         
         <div className="relative z-10">
           <div className="bg-white rounded-2xl p-6 text-center shadow-lg">
