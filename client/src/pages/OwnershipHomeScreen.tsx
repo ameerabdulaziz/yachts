@@ -51,7 +51,7 @@ export default function OwnershipHomeScreen() {
       {/* Header with Extended Background */}
       <div className="relative">
         {/* Extended Sea Background */}
-        <div className="absolute inset-0 bg-gradient-ocean" style={{ height: '450px' }}>
+        <div className="absolute inset-0 bg-gradient-ocean" style={{ height: '520px' }}>
           <div className="absolute inset-0" style={{
             backgroundImage: `url(${seaBackground})`,
             backgroundSize: 'cover',
