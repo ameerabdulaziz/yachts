@@ -182,7 +182,7 @@ export default function TopUpScreen() {
                 <RadioGroupItem value="credit-card" id="credit-card" />
                 <CreditCard className="w-6 h-6 text-blue-600" />
                 <div className="flex-1">
-                  <Label htmlFor="credit-card" className="font-medium text-gray-900">Credit Card</Label>
+                  <Label htmlFor="credit-card" className="font-medium text-gray-900">Debit/Credit Card</Label>
                   <p className="text-sm text-gray-600">•••• •••• •••• 4532</p>
                   <p className="text-xs text-green-600">Verified</p>
                 </div>
@@ -194,7 +194,7 @@ export default function TopUpScreen() {
                 <div className="w-6 h-6 bg-gray-300 rounded"></div>
                 <div className="flex-1">
                   <Label htmlFor="sepa" className="font-medium text-gray-900">SEPA</Label>
-                  <p className="text-sm text-gray-600">1-2 business days</p>
+                  <p className="text-sm text-gray-600">Instant</p>
                   <p className="text-xs text-gray-500">Coming soon</p>
                 </div>
               </div>
