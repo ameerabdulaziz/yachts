@@ -62,7 +62,7 @@ export default function OwnershipHomeScreen() {
         </div>
 
         {/* Header */}
-        <header className="relative bg-transparent px-4 py-3 sticky top-0 z-40">
+        <header className="relative bg-transparent px-4 py-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
               <div className="w-20 h-10 flex items-center justify-center">
