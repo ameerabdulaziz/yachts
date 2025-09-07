@@ -126,7 +126,7 @@ export default function ShareMarketplaceScreen() {
         </div>
       </header>
 
-      {/* Hero Section - Matching Home Page Style */}
+      {/* Hero Section */}
       <section className="relative px-4 py-8 overflow-hidden">
         {/* Turquoise Sea Background */}
         <div className="absolute inset-0 bg-gradient-ocean">
@@ -139,10 +139,12 @@ export default function ShareMarketplaceScreen() {
           <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-blue-200/20 to-blue-500/30" />
         </div>
         
-        <div className="relative z-10 text-center">
-          <TrendingUp className="w-16 h-16 mx-auto mb-4 text-white" />
-          <h1 className="text-3xl font-bold text-gray-800 mb-2" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif' }}>De Antonio Share Marketplace</h1>
-          <p className="text-white/90 text-lg">Buy and sell ownership shares with other yacht investors</p>
+        <div className="relative z-10">
+          <div className="bg-white rounded-2xl p-6 text-center shadow-lg">
+            <TrendingUp className="w-16 h-16 mx-auto mb-4 text-primary" />
+            <h2 className="text-2xl font-bold mb-2 text-gray-900">De Antonio Share Marketplace</h2>
+            <p className="text-gray-600">Buy and sell ownership shares with other yacht investors</p>
+          </div>
         </div>
       </section>
 
