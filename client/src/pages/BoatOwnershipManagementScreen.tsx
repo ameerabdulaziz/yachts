@@ -8,6 +8,30 @@ import BottomNavigation from "@/components/BottomNavigation";
 
 // Mock data for boat ownership details
 const mockBoatOwnership = {
+  "yacht-1": {
+    id: "yacht-1",
+    name: "De Antonio D50 Open",
+    image: "https://static.wixstatic.com/media/0fb4c8_60988eb5cf834fcb876c1d06bd8af594~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D50.jpg",
+    location: "El Gouna, Egypt",
+    length: "50",
+    capacity: 12,
+    yearBuilt: 2026,
+    description: "Premium luxury yacht with exceptional performance and comfort. Features advanced navigation systems and luxury finishes throughout.",
+    amenities: ["Premium Outboards", "Advanced Navigation", "Luxury Finishes", "Master Cabin", "Outdoor Kitchen", "Premium Audio", "Flexiteek Decking", "Entertainment System"],
+    sharesFractionOwned: "2/7",
+    sharesPercentage: 28.6,
+    shareValue: "128,571",
+    totalShares: 7,
+    sharesOwned: 2,
+    availableShares: 1,
+    sharePrice: "64,286",
+    usageDaysPerYear: 35,
+    remainingDays: 35,
+    remainingEngineHours: 42,
+    nextAvailableDate: "November 22, 2025",
+    monthlyMaintenance: "285",
+    annualAppreciation: "+10.5%"
+  },
   "yacht-4": {
     id: "yacht-4",
     name: "De Antonio D32 Open",
