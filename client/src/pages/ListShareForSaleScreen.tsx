@@ -9,6 +9,8 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ArrowLeft, TrendingUp, Euro, Calendar, Info, Upload, AlertCircle } from "lucide-react";
+import seaBackground from "@assets/image_1754575606863.png";
+import nauttecLogo from "@assets/Nauttec Logo_1754330395988.png";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
@@ -35,17 +37,36 @@ export default function ListShareForSaleScreen() {
   const userShares = [
     {
       id: "share-1",
-      yacht: { name: "Azure Legend", location: "French Riviera" },
-      shareFraction: "1/8",
-      originalPrice: 45000,
-      currentValue: 48000
+      yacht: { 
+        name: "De Antonio D32 Open", 
+        location: "El Gouna, Egypt",
+        image: "https://static.wixstatic.com/media/0fb4c8_6cbbd012fc0645009bc4a91a412b293a~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D32.jpg"
+      },
+      shareFraction: "2/8",
+      originalPrice: 48000,
+      currentValue: 51000
     },
     {
       id: "share-2",
-      yacht: { name: "Wind Dancer", location: "Greek Islands" },
-      shareFraction: "1/6",
-      originalPrice: 32000,
-      currentValue: 35000
+      yacht: { 
+        name: "De Antonio D50 Open", 
+        location: "El Gouna, Egypt",
+        image: "https://static.wixstatic.com/media/0fb4c8_60988eb5cf834fcb876c1d06bd8af594~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D50.jpg"
+      },
+      shareFraction: "2/7",
+      originalPrice: 128000,
+      currentValue: 135000
+    },
+    {
+      id: "share-3",
+      yacht: { 
+        name: "De Antonio D42 Open", 
+        location: "El Gouna, Egypt",
+        image: "https://static.wixstatic.com/media/0fb4c8_008f1545c8764f8789a2b7415ca9dde7~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D42.jpg"
+      },
+      shareFraction: "1/8",
+      originalPrice: 89000,
+      currentValue: 94000
     }
   ];
 
@@ -97,22 +118,39 @@ export default function ListShareForSaleScreen() {
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <header className="bg-white border-b border-gray-200 px-4 py-3 sticky top-0 z-40">
-        <div className="flex items-center space-x-3">
-          <Link href="/share-marketplace">
-            <Button variant="ghost" size="sm" className="p-2">
-              <ArrowLeft className="w-5 h-5 text-gray-600" />
-            </Button>
-          </Link>
-          <h1 className="text-xl font-bold text-gray-900">List Share for Sale</h1>
+        <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-3">
+            <Link href="/share-marketplace">
+              <Button variant="ghost" size="sm" className="p-2">
+                <ArrowLeft className="w-5 h-5 text-gray-600" />
+              </Button>
+            </Link>
+            <div className="w-16 h-8 bg-white rounded-lg flex items-center justify-center p-1">
+              <img src={nauttecLogo} alt="Nauttec Logo" className="w-full h-full object-contain" />
+            </div>
+          </div>
         </div>
       </header>
 
       {/* Hero Section */}
-      <section className="bg-gradient-ocean px-4 py-8 text-white">
-        <div className="text-center">
-          <TrendingUp className="w-16 h-16 mx-auto mb-4 text-white" />
-          <h2 className="text-2xl font-bold mb-2">Sell Your Yacht Share</h2>
-          <p className="text-blue-100">Reach qualified buyers in our marketplace</p>
+      <section className="relative px-4 py-8 overflow-hidden">
+        {/* Turquoise Sea Background */}
+        <div className="absolute inset-0 bg-gradient-ocean">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `url(${seaBackground})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            opacity: 0.9
+          }} />
+          <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-blue-200/20 to-blue-500/30" />
+        </div>
+        
+        <div className="relative z-10">
+          <div className="bg-white rounded-2xl p-6 text-center shadow-lg">
+            <TrendingUp className="w-16 h-16 mx-auto mb-4 text-primary" />
+            <h2 className="text-2xl font-bold mb-2 text-gray-900">Sell Your De Antonio Share</h2>
+            <p className="text-gray-600">Reach qualified buyers in our marketplace</p>
+          </div>
         </div>
       </section>
 
