@@ -222,20 +222,24 @@ export default function BoatOwnershipManagementScreen() {
             </div>
 
             <div className="grid grid-cols-2 gap-3">
-              <Button 
-                variant="outline"
-                className="w-full"
-                disabled={boat.availableShares === 0}
-              >
-                Buy More Shares
-              </Button>
-              <Button 
-                variant="outline" 
-                className="w-full"
-                disabled={boat.sharesOwned === 0}
-              >
-                Sell Shares
-              </Button>
+              <Link href="/share-trading">
+                <Button 
+                  variant="outline"
+                  className="w-full"
+                  disabled={boat.availableShares === 0}
+                >
+                  Buy More Shares
+                </Button>
+              </Link>
+              <Link href="/list-share-for-sale">
+                <Button 
+                  variant="outline" 
+                  className="w-full"
+                  disabled={boat.sharesOwned === 0}
+                >
+                  Sell Shares
+                </Button>
+              </Link>
             </div>
 
             {boat.availableShares === 0 && (
