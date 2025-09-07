@@ -19,7 +19,7 @@ export default function TopUpScreen() {
   const [paymentMethod, setPaymentMethod] = useState("credit-card");
   const [selectedQuickAmount, setSelectedQuickAmount] = useState<number | null>(null);
 
-  const quickAmounts = [100, 250, 500, 1000, 2000, 5000];
+  const quickAmounts = [500, 1000, 2000];
   const currentBalance = 1250; // Mock current balance
 
   const topUpMutation = useMutation({
@@ -190,11 +190,11 @@ export default function TopUpScreen() {
               </div>
               
               <div className="flex items-center space-x-3 p-4 border rounded-lg opacity-50">
-                <RadioGroupItem value="bank-transfer" id="bank-transfer" disabled />
+                <RadioGroupItem value="sepa" id="sepa" disabled />
                 <div className="w-6 h-6 bg-gray-300 rounded"></div>
                 <div className="flex-1">
-                  <Label htmlFor="bank-transfer" className="font-medium text-gray-900">Bank Transfer</Label>
-                  <p className="text-sm text-gray-600">3-5 business days</p>
+                  <Label htmlFor="sepa" className="font-medium text-gray-900">SEPA</Label>
+                  <p className="text-sm text-gray-600">1-2 business days</p>
                   <p className="text-xs text-gray-500">Coming soon</p>
                 </div>
               </div>
