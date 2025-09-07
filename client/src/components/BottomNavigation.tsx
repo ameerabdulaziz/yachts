@@ -17,7 +17,7 @@ export default function BottomNavigation() {
 
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-2 z-40">
+    <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-1.5 z-40">
       <div className="flex items-center justify-between px-2">
         {tabs.map(({ icon: Icon, label, route }) => {
           const isActive = location === route || (route === "/" && (location === "" || location === "/hone"));
@@ -26,13 +26,13 @@ export default function BottomNavigation() {
               <button
                 onClick={enhancedScrollToTop}
                 className={cn(
-                  "flex flex-col items-center py-2 px-3 rounded-xl transition-colors",
+                  "flex flex-col items-center py-1.5 px-3 rounded-xl transition-colors",
                   isActive
                     ? "bg-blue-50 text-primary"
                     : "text-gray-600 hover:bg-gray-50"
                 )}
               >
-                <Icon className="w-6 h-6 mb-1" />
+                <Icon className="w-5 h-5 mb-0.5" />
                 <span className="text-xs font-medium">{label}</span>
               </button>
             </Link>
