@@ -27,12 +27,12 @@ export default function OwnershipHomeScreen() {
   const [selectedModel, setSelectedModel] = useState("D42");
 
   const yachtModels = [
-    { id: "D29", name: "D29", length: "8.50m", passengers: 8, price: "€285K", sharesFrom: "€35.6K", image: "https://static.wixstatic.com/media/0fb4c8_b9744cfa841b4c4388ad78ac9b49bbe7~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D29.jpg" },
-    { id: "D32", name: "D32", length: "9.90m", passengers: 10, price: "€412K", sharesFrom: "€51.5K", image: "https://static.wixstatic.com/media/0fb4c8_6cbbd012fc0645009bc4a91a412b293a~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D32.jpg" },
-    { id: "D36", name: "D36", length: "11.50m", passengers: 12, price: "€568K", sharesFrom: "€71K", image: deAntonioD36 },
-    { id: "D42", name: "D42", length: "12.64m", passengers: 12, price: "€684K", sharesFrom: "€85.5K", image: "https://static.wixstatic.com/media/0fb4c8_008f1545c8764f8789a2b7415ca9dde7~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D42.jpg" },
-    { id: "D50", name: "D50", length: "15.24m", passengers: 12, price: "€894K", sharesFrom: "€111.8K", image: "https://static.wixstatic.com/media/0fb4c8_60988eb5cf834fcb876c1d06bd8af594~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D50.jpg" },
-    { id: "D60", name: "D60", length: "18.50m", passengers: 12, price: "€1.693M", sharesFrom: "€211.6K", image: "https://static.wixstatic.com/media/5c3629_a8b1aa6ff9244bddaf7383aa45b4afc1~mv2.jpg/v1/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/5c3629_a8b1aa6ff9244bddaf7383aa45b4afc1~mv2.jpg" }
+    { id: "D29", name: "D29", length: "8.50m", passengers: 8, price: "€285K", sharesFrom: "€28.5K", image: "https://static.wixstatic.com/media/0fb4c8_b9744cfa841b4c4388ad78ac9b49bbe7~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D29.jpg" },
+    { id: "D32", name: "D32", length: "9.90m", passengers: 10, price: "€412K", sharesFrom: "€41.2K", image: "https://static.wixstatic.com/media/0fb4c8_6cbbd012fc0645009bc4a91a412b293a~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D32.jpg" },
+    { id: "D36", name: "D36", length: "11.50m", passengers: 12, price: "€568K", sharesFrom: "€56.8K", image: deAntonioD36 },
+    { id: "D42", name: "D42", length: "12.64m", passengers: 12, price: "€684K", sharesFrom: "€68.4K", image: "https://static.wixstatic.com/media/0fb4c8_008f1545c8764f8789a2b7415ca9dde7~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D42.jpg" },
+    { id: "D50", name: "D50", length: "15.24m", passengers: 12, price: "€894K", sharesFrom: "€89.4K", image: "https://static.wixstatic.com/media/0fb4c8_60988eb5cf834fcb876c1d06bd8af594~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D50.jpg" },
+    { id: "D60", name: "D60", length: "18.50m", passengers: 12, price: "€1.693M", sharesFrom: "€169.3K", image: "https://static.wixstatic.com/media/5c3629_a8b1aa6ff9244bddaf7383aa45b4afc1~mv2.jpg/v1/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/5c3629_a8b1aa6ff9244bddaf7383aa45b4afc1~mv2.jpg" }
   ];
 
   const selectedYacht = yachtModels.find(y => y.id === selectedModel) || yachtModels[3];
@@ -135,11 +135,11 @@ export default function OwnershipHomeScreen() {
               <div className="grid grid-cols-2 gap-4">
                 <div className="text-center">
                   <p className="text-sm text-gray-600 mb-1" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>Full Ownership</p>
-                  <p className="text-xl font-bold text-gray-900" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif' }}>{selectedYacht.price}</p>
+                  <p className="text-xl font-bold text-gray-900 whitespace-nowrap" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif' }}>{selectedYacht.price}</p>
                 </div>
                 <div className="text-center border-l border-blue-200 pl-4">
                   <p className="text-sm text-gray-600 mb-1" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>1/10 Share From</p>
-                  <p className="text-xl font-bold text-blue-600" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif' }}>{selectedYacht.sharesFrom}</p>
+                  <p className="text-xl font-bold text-blue-600 whitespace-nowrap" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif' }}>{selectedYacht.sharesFrom}</p>
                 </div>
               </div>
             </div>
@@ -218,7 +218,7 @@ export default function OwnershipHomeScreen() {
               location: "El Gouna", 
               availableShares: 3, 
               totalShares: 10, 
-              sharePrice: "48000", 
+              sharePrice: "41200", 
               monthlyPayment: "715",
               usageDaysPerYear: 48, 
               capacity: 10, 
@@ -232,7 +232,7 @@ export default function OwnershipHomeScreen() {
               location: "El Gouna", 
               availableShares: 2, 
               totalShares: 10, 
-              sharePrice: "65000", 
+              sharePrice: "56800", 
               monthlyPayment: "920",
               usageDaysPerYear: 48, 
               capacity: 12, 
@@ -246,7 +246,7 @@ export default function OwnershipHomeScreen() {
               location: "El Gouna", 
               availableShares: 1, 
               totalShares: 10, 
-              sharePrice: "128000", 
+              sharePrice: "89400", 
               monthlyPayment: "1,650",
               usageDaysPerYear: 48, 
               capacity: 12, 
@@ -260,7 +260,7 @@ export default function OwnershipHomeScreen() {
               location: "El Gouna", 
               availableShares: 2, 
               totalShares: 10, 
-              sharePrice: "175000", 
+              sharePrice: "169300", 
               monthlyPayment: "2,280",
               usageDaysPerYear: 48, 
               capacity: 12, 
@@ -299,14 +299,14 @@ export default function OwnershipHomeScreen() {
                           {opportunity.location}
                         </p>
                       </div>
-                      <div className="text-right">
-                        <p className="text-2xl font-bold text-blue-600" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif' }}>
+                      <div className="text-right flex flex-col">
+                        <p className="text-2xl font-bold text-blue-600 whitespace-nowrap" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif' }}>
                           €{Number(opportunity.sharePrice).toLocaleString()}
                         </p>
-                        <p className="text-sm text-gray-500" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>
+                        <p className="text-sm text-gray-500 whitespace-nowrap" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>
                           per share
                         </p>
-                        <p className="text-xs text-blue-600 font-medium" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>
+                        <p className="text-xs text-blue-600 font-medium whitespace-nowrap" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>
                           or €{opportunity.monthlyPayment}/month
                         </p>
                       </div>
