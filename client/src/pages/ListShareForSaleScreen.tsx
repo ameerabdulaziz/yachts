@@ -148,7 +148,7 @@ export default function ListShareForSaleScreen() {
         <div className="relative z-10">
           <div className="bg-white rounded-2xl p-6 text-center shadow-lg">
             <TrendingUp className="w-16 h-16 mx-auto mb-4 text-primary" />
-            <h2 className="text-2xl font-bold mb-2 text-gray-900">Sell Your De Antonio Share</h2>
+            <h2 className="text-2xl font-bold mb-2 text-gray-900">Sell Your Shares</h2>
             <p className="text-gray-600">Reach qualified buyers in our marketplace</p>
           </div>
         </div>
@@ -174,6 +174,11 @@ export default function ListShareForSaleScreen() {
                       checked={formData.yachtId === share.id}
                       onChange={() => setFormData({...formData, yachtId: share.id})}
                       className="text-primary"
+                    />
+                    <img 
+                      src={share.yacht.image} 
+                      alt={share.yacht.name}
+                      className="w-16 h-16 object-cover rounded-lg"
                     />
                     <div className="flex-1">
                       <h4 className="font-semibold text-gray-900">{share.yacht.name}</h4>
@@ -397,7 +402,7 @@ export default function ListShareForSaleScreen() {
         <Button 
           onClick={handleSubmit}
           disabled={listingMutation.isPending || !formData.agreeToTerms}
-          className="w-full bg-gradient-ocean text-white py-4 rounded-xl font-semibold text-lg hover:shadow-lg transition-all duration-300"
+          className="w-full bg-primary hover:bg-primary-hover text-white py-4 rounded-xl font-semibold text-lg transition-colors"
         >
           {listingMutation.isPending ? "Creating Listing..." : "List Share for Sale"}
         </Button>
