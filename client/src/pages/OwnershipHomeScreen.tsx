@@ -48,40 +48,10 @@ export default function OwnershipHomeScreen() {
 
   return (
     <div className="min-h-screen bg-gray-50 pb-20">
-      {/* Header */}
-      <header className="bg-white border-b border-gray-200 px-4 py-3 sticky top-0 z-40">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <div className="w-16 h-8 bg-white rounded-lg flex items-center justify-center p-1">
-              <img src={nauttecLogo} alt="Nauttec Logo" className="w-full h-full object-contain" />
-            </div>
-            <span className="text-xs text-gray-500 hidden">Ownership Home</span>
-          </div>
-          <div className="flex items-center space-x-3">
-            <Link href="/profile">
-              <Button 
-                variant="ghost" 
-                size="sm" 
-                className="p-2"
-                onClick={enhancedScrollToTop}
-              >
-                <div className="w-8 h-8 rounded-full overflow-hidden">
-                  <img 
-                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100" 
-                    alt="User Profile" 
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </header>
-
-      {/* Hero Section - Ownership Focus */}
-      <section className="relative px-4 py-8 overflow-hidden">
-        {/* Turquoise Sea Background - Extended */}
-        <div className="absolute inset-0 bg-gradient-ocean" style={{ top: '-60px' }}>
+      {/* Header with Extended Background */}
+      <div className="relative">
+        {/* Extended Sea Background */}
+        <div className="absolute inset-0 bg-gradient-ocean" style={{ height: '280px' }}>
           <div className="absolute inset-0" style={{
             backgroundImage: `url(${seaBackground})`,
             backgroundSize: 'cover',
@@ -90,8 +60,42 @@ export default function OwnershipHomeScreen() {
           }} />
           <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-blue-200/20 to-blue-500/30" />
         </div>
-        
-        <div className="relative z-10">
+
+        {/* Header */}
+        <header className="relative bg-transparent px-4 py-3 sticky top-0 z-40">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-3">
+              <div className="w-20 h-10 bg-white rounded-lg flex items-center justify-center p-1">
+                <img src={nauttecLogo} alt="Nauttec Logo" className="w-full h-full object-contain" />
+              </div>
+              <span className="text-xs text-gray-500 hidden">Ownership Home</span>
+            </div>
+            <div className="flex items-center space-x-3">
+              <Link href="/profile">
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  className="p-2"
+                  onClick={enhancedScrollToTop}
+                >
+                  <div className="w-8 h-8 rounded-full overflow-hidden">
+                    <img 
+                      src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100" 
+                      alt="User Profile" 
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </header>
+
+        {/* Hero Section - Ownership Focus */}
+        <section className="relative px-4 py-8 overflow-hidden">
+          {/* Content is now overlaying the extended background */}
+          
+          <div className="relative z-10">
           <div className="text-center mb-4">
             <h1 className="text-3xl font-bold text-gray-800" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif' }}>Own Your Dream Yacht</h1>
           </div>
@@ -175,7 +179,8 @@ export default function OwnershipHomeScreen() {
             </div>
           </div>
         </div>
-      </section>
+        </section>
+      </div>
 
       {/* Ownership Benefits */}
       <section className="px-4 py-6">
