@@ -12,12 +12,13 @@ export default function BookingConfirmationScreen() {
     startDate: "October 15, 2025",
     endDate: "October 18, 2025",
     guests: 6,
-    totalPrice: 8190,
+    totalPrice: 0, // Zero for owned yacht bookings
     captain: "Captain Laurent",
     captainPhone: "+33 6 12 34 56 78",
     captainEmail: "laurent@nauttec.com",
     checkInTime: "2:00 PM",
-    checkOutTime: "11:00 AM"
+    checkOutTime: "11:00 AM",
+    isOwnedBooking: true // Flag to indicate this is an owned yacht booking
   };
 
   return (
@@ -140,9 +141,9 @@ export default function BookingConfirmationScreen() {
         <Card>
           <CardContent className="p-4 bg-green-50">
             <div className="text-center">
-              <p className="text-sm text-gray-600 mb-1">Total Paid</p>
+              <p className="text-sm text-gray-600 mb-1">{booking.isOwnedBooking ? "Total Cost" : "Total Paid"}</p>
               <p className="text-3xl font-bold text-green-600">€{booking.totalPrice.toLocaleString()}</p>
-              <p className="text-sm text-gray-600 mt-1">Payment successful</p>
+              <p className="text-sm text-gray-600 mt-1">{booking.isOwnedBooking ? "Complimentary - Owner booking" : "Payment successful"}</p>
             </div>
           </CardContent>
         </Card>
