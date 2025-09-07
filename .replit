@@ -4,7 +4,7 @@ hidden = [".config", ".git", "generated-icon.png", "node_modules", "dist"]
 
 [nix]
 channel = "stable-24_05"
-packages = ["freetype", "lcms2", "libimagequant", "libjpeg", "libtiff", "libwebp", "libxcrypt", "openjpeg", "tcl", "tk", "uv", "vim-full", "zlib", "android-tools", "gradle", "openjdk17"]
+packages = ["android-tools", "freetype", "gradle", "lcms2", "libimagequant", "libjpeg", "libtiff", "libwebp", "libxcrypt", "openjdk17", "openjpeg", "tcl", "tk", "uv", "vim-full", "zlib"]
 
 [deployment]
 deploymentTarget = "autoscale"
