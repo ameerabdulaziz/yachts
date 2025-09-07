@@ -85,13 +85,10 @@ export default function OwnershipHomeScreen() {
         </header>
 
         {/* Hero Section - Ownership Focus */}
-        <section className="relative px-4 py-8 overflow-hidden">
+        <section className="relative px-4 py-2 overflow-hidden">
           {/* Content is now overlaying the extended background */}
           
           <div className="relative z-10">
-          <div className="text-center mb-4">
-            <h1 className="text-3xl font-bold text-gray-800" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif' }}>Own Your Dream Yacht</h1>
-          </div>
           
           <div className="bg-white rounded-2xl p-6 shadow-xl">
             {/* Yacht Image */}
