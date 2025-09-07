@@ -52,7 +52,7 @@ export default function MyBoatsScreen() {
       {/* Header with Extended Background */}
       <div className="relative">
         {/* Extended Sea Background */}
-        <div className="absolute inset-0 bg-gradient-ocean" style={{ height: '280px' }}>
+        <div className="absolute inset-0 bg-gradient-ocean" style={{ height: '260px' }}>
           <div className="absolute inset-0" style={{
             backgroundImage: `url(${seaBackground})`,
             backgroundSize: 'cover',
