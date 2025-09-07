@@ -5,6 +5,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import BottomNavigation from "@/components/BottomNavigation";
 import deAntonioD50 from "@assets/image_1754579474724.png";
+import nauttecLogo from "@assets/Nauttec Logo_1754330395988.png";
+import seaBackground from "@assets/image_1754575606863.png";
 
 // Mock data for owned boats - limiting to 2 boats as requested
 const mockOwnedBoats = [
@@ -47,21 +49,43 @@ export default function MyBoatsScreen() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white pb-24">
-      {/* Header */}
-      <div className="bg-white border-b border-gray-100">
-        <div className="flex items-center justify-between p-4">
-          <Link href="/dashboard">
-            <Button variant="ghost" size="sm" className="p-2">
-              <ArrowLeft className="h-5 w-5" />
-            </Button>
-          </Link>
-          <div></div>
-          <div className="w-9" /> {/* Spacer for alignment */}
+      {/* Header with Extended Background */}
+      <div className="relative">
+        {/* Extended Sea Background */}
+        <div className="absolute inset-0 bg-gradient-ocean" style={{ height: '280px' }}>
+          <div className="absolute inset-0" style={{
+            backgroundImage: `url(${seaBackground})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            opacity: 0.9
+          }} />
+          <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-blue-200/20 to-blue-500/30" />
         </div>
-      </div>
 
-      {/* Content */}
-      <div className="p-2 space-y-4">
+        {/* Header */}
+        <header className="relative bg-transparent px-4 py-3 sticky top-0 z-40">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-3">
+              <div className="w-20 h-10 flex items-center justify-center">
+                <img src={nauttecLogo} alt="Nauttec Logo" className="w-full h-full object-contain" />
+              </div>
+            </div>
+            <div className="flex items-center space-x-3">
+              <Link href="/profile">
+                <div className="w-8 h-8 rounded-full overflow-hidden cursor-pointer">
+                  <img 
+                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100" 
+                    alt="User Profile" 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </Link>
+            </div>
+          </div>
+        </header>
+
+        {/* Content */}
+        <div className="relative p-4 space-y-4">
         {/* Fuel Wallet */}
         <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
           <div className="flex items-center justify-between">
@@ -182,6 +206,7 @@ export default function MyBoatsScreen() {
             </Link>
           </div>
         )}
+        </div>
       </div>
       
       <BottomNavigation />
