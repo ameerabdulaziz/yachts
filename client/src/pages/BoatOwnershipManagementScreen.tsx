@@ -32,6 +32,30 @@ const mockBoatOwnership = {
     monthlyMaintenance: "180",
     annualAppreciation: "+8.2%"
   },
+  "yacht-1": {
+    id: "yacht-1", 
+    name: "De Antonio D50 Open",
+    image: "https://static.wixstatic.com/media/0fb4c8_60988eb5cf834fcb876c1d06bd8af594~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D50.jpg",
+    location: "El Gouna, Egypt",
+    length: "50",
+    capacity: 12,
+    yearBuilt: 2026,
+    description: "Premium luxury yacht with exceptional performance and comfort. Features advanced navigation and luxury finishes.",
+    amenities: ["Premium Outboards", "Advanced Navigation", "Luxury Finishes", "Master Cabin", "Outdoor Kitchen", "Premium Audio"],
+    sharesFractionOwned: "2/7",
+    sharesPercentage: 28.6,
+    shareValue: "128,571",
+    totalShares: 7,
+    sharesOwned: 2,
+    availableShares: 3,
+    sharePrice: "75,000",
+    usageDaysPerYear: 35,
+    remainingDays: 35,
+    remainingEngineHours: 42,
+    nextAvailableDate: "March 15, 2025",
+    monthlyMaintenance: "280",
+    annualAppreciation: "+10.5%"
+  },
   "yacht-6": {
     id: "yacht-6", 
     name: "De Antonio D60 Open",
@@ -62,6 +86,16 @@ export default function BoatOwnershipManagementScreen() {
   const [match, params] = useRoute("/boat-ownership/:id");
   const boatId = params?.id;
   const boat = boatId ? mockBoatOwnership[boatId as keyof typeof mockBoatOwnership] : null;
+
+  const handleBuyShares = () => {
+    // Navigate to share purchase flow
+    window.location.href = `/share-purchase/${boatId}`;
+  };
+
+  const handleSellShares = () => {
+    // Navigate to share listing flow
+    window.location.href = `/share-listing/${boatId}`;
+  };
 
   if (!boat) {
     return (
@@ -202,6 +236,8 @@ export default function BoatOwnershipManagementScreen() {
                 variant="outline"
                 className="w-full"
                 disabled={boat.availableShares === 0}
+                onClick={handleBuyShares}
+                data-testid="button-buy-shares"
               >
                 Buy More Shares
               </Button>
@@ -209,6 +245,8 @@ export default function BoatOwnershipManagementScreen() {
                 variant="outline" 
                 className="w-full"
                 disabled={boat.sharesOwned === 0}
+                onClick={handleSellShares}
+                data-testid="button-sell-shares"
               >
                 Sell Shares
               </Button>
