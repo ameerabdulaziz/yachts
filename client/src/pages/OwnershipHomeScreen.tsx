@@ -159,11 +159,11 @@ export default function OwnershipHomeScreen() {
             <div className="grid grid-cols-2 gap-3">
               <Link href={`/ownership/${selectedYacht.id}`}>
                 <Button 
-                  className="w-full bg-blue-600 text-white p-4 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 hover:bg-blue-700 border-0"
+                  className="w-full bg-blue-600 text-white p-4 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 hover:bg-blue-700 border-0 flex items-center justify-center"
                   style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}
                   onClick={enhancedScrollToTop}
                 >
-                  <Anchor className="w-4 h-4 mr-2" />
+                  <Anchor className="w-4 h-4 mr-1" />
                   Own This Yacht
                 </Button>
               </Link>
