@@ -147,7 +147,7 @@ export default function CharterScreen() {
                 ))}
               </div>
             ) : (
-              yachts?.map((yacht: any) => (
+              (yachts as any[])?.map((yacht: any) => (
                 <Link key={yacht.id} href={`/yacht-details/${yacht.id}`}>
                   <Card className="w-80 card-hover cursor-pointer">
                     <div className="relative">
@@ -216,7 +216,7 @@ export default function CharterScreen() {
                 ))}
               </div>
             ) : (
-              ownershipData?.map((opportunity: any) => (
+              (ownershipData as any[])?.map((opportunity: any) => (
               <Link key={opportunity.id} href={`/ownership/${opportunity.id}`}>
                 <Card className="w-80 card-hover cursor-pointer">
                   <div className="relative">
