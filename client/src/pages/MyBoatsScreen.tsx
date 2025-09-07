@@ -79,12 +79,16 @@ export default function MyBoatsScreen() {
             </div>
           </div>
           <div className="mt-3 flex space-x-2">
-            <Button size="sm" className="bg-blue-600 hover:bg-blue-700 text-white">
-              Top Up
-            </Button>
-            <Button size="sm" variant="outline" className="border-blue-600 text-blue-600 hover:bg-blue-50">
-              History
-            </Button>
+            <Link href="/top-up">
+              <Button size="sm" className="bg-blue-600 hover:bg-blue-700 text-white">
+                Top Up
+              </Button>
+            </Link>
+            <Link href="/fuel-wallet">
+              <Button size="sm" variant="outline" className="border-blue-600 text-blue-600 hover:bg-blue-50">
+                History
+              </Button>
+            </Link>
           </div>
         </div>
 
