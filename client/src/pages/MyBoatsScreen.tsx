@@ -55,13 +55,13 @@ export default function MyBoatsScreen() {
               <ArrowLeft className="h-5 w-5" />
             </Button>
           </Link>
-          <h1 className="text-xl font-semibold text-gray-900">My Boats</h1>
+          <div></div>
           <div className="w-9" /> {/* Spacer for alignment */}
         </div>
       </div>
 
       {/* Content */}
-      <div className="p-4 space-y-4">
+      <div className="p-2 space-y-4">
         {/* Fuel Wallet */}
         <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
           <div className="flex items-center justify-between">

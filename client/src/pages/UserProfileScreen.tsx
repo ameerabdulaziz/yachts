@@ -80,13 +80,13 @@ export default function UserProfileScreen() {
                 <ArrowLeft className="w-5 h-5 text-gray-600" />
               </Button>
             </Link>
-            <h1 className="text-xl font-bold text-gray-900">Profile</h1>
+            <div></div>
           </div>
         </div>
       </header>
 
       {/* Profile Header */}
-      <section className="relative px-4 py-8 overflow-hidden">
+      <section className="relative px-4 py-2 overflow-hidden">
         {/* Turquoise Sea Background */}
         <div className="absolute inset-0 bg-gradient-ocean">
           <div className="absolute inset-0" style={{
