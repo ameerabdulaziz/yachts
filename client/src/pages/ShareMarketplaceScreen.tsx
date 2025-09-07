@@ -7,19 +7,21 @@ import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import BottomNavigation from "@/components/BottomNavigation";
 import { ArrowLeft, Search, Filter, TrendingUp, TrendingDown, Calendar, MapPin, Plus } from "lucide-react";
+import seaBackground from "@assets/image_1754575606863.png";
+import nauttecLogo from "@assets/Nauttec Logo_1754330395988.png";
 
 const mockShareListings = [
   {
     id: "listing-1",
     yacht: {
-      name: "Azure Legend",
-      location: "French Riviera",
-      image: "https://images.unsplash.com/photo-1540946485063-a40da27545f8?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&h=120"
+      name: "De Antonio D42 Open",
+      location: "El Gouna, Egypt",
+      image: "https://static.wixstatic.com/media/0fb4c8_008f1545c8764f8789a2b7415ca9dde7~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D42.jpg"
     },
     shareFraction: "1/8",
     sharesForSale: 1,
-    originalPrice: 45000,
-    askingPrice: 48000,
+    originalPrice: 89000,
+    askingPrice: 95000,
     priceChange: 6.7,
     usageWeeks: 6,
     seller: {
@@ -33,16 +35,16 @@ const mockShareListings = [
   {
     id: "listing-2",
     yacht: {
-      name: "Wind Dancer",
-      location: "Greek Islands",
-      image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&h=120"
+      name: "De Antonio D32 Open",
+      location: "El Gouna, Egypt",
+      image: "https://static.wixstatic.com/media/0fb4c8_6cbbd012fc0645009bc4a91a412b293a~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D32.jpg"
     },
-    shareFraction: "1/6",
+    shareFraction: "1/8",
     sharesForSale: 1,
-    originalPrice: 32000,
-    askingPrice: 30000,
+    originalPrice: 48000,
+    askingPrice: 45000,
     priceChange: -6.3,
-    usageWeeks: 8,
+    usageWeeks: 6,
     seller: {
       name: "Michael R.",
       rating: 4.7,
@@ -50,6 +52,48 @@ const mockShareListings = [
     },
     listedDate: new Date("2025-09-20"),
     reason: "Relocating abroad"
+  },
+  {
+    id: "listing-3",
+    yacht: {
+      name: "De Antonio D50 Open",
+      location: "El Gouna, Egypt",
+      image: "https://static.wixstatic.com/media/0fb4c8_60988eb5cf834fcb876c1d06bd8af594~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D50.jpg"
+    },
+    shareFraction: "1/7",
+    sharesForSale: 2,
+    originalPrice: 150000,
+    askingPrice: 158000,
+    priceChange: 5.3,
+    usageWeeks: 7,
+    seller: {
+      name: "James K.",
+      rating: 4.8,
+      verified: true
+    },
+    listedDate: new Date("2025-09-18"),
+    reason: "Portfolio rebalancing"
+  },
+  {
+    id: "listing-4",
+    yacht: {
+      name: "De Antonio D60 Open",
+      location: "El Gouna, Egypt",
+      image: "https://static.wixstatic.com/media/5c3629_a8b1aa6ff9244bddaf7383aa45b4afc1~mv2.jpg/v1/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/5c3629_a8b1aa6ff9244bddaf7383aa45b4afc1~mv2.jpg"
+    },
+    shareFraction: "1/12",
+    sharesForSale: 1,
+    originalPrice: 175000,
+    askingPrice: 185000,
+    priceChange: 5.7,
+    usageWeeks: 4,
+    seller: {
+      name: "Anna P.",
+      rating: 5.0,
+      verified: true
+    },
+    listedDate: new Date("2025-09-22"),
+    reason: "Business expansion"
   }
 ];
 
@@ -69,7 +113,9 @@ export default function ShareMarketplaceScreen() {
                 <ArrowLeft className="w-5 h-5 text-gray-600" />
               </Button>
             </Link>
-            <h1 className="text-xl font-bold text-gray-900">Share Marketplace</h1>
+            <div className="w-16 h-8 bg-white rounded-lg flex items-center justify-center p-1">
+              <img src={nauttecLogo} alt="Nauttec Logo" className="w-full h-full object-contain" />
+            </div>
           </div>
           <Link href="/list-share-for-sale">
             <Button className="bg-primary text-white px-4 py-2 rounded-lg text-sm font-semibold">
@@ -80,12 +126,23 @@ export default function ShareMarketplaceScreen() {
         </div>
       </header>
 
-      {/* Hero Section */}
-      <section className="bg-gradient-ocean px-4 py-8 text-white">
-        <div className="text-center">
+      {/* Hero Section - Matching Home Page Style */}
+      <section className="relative px-4 py-8 overflow-hidden">
+        {/* Turquoise Sea Background */}
+        <div className="absolute inset-0 bg-gradient-ocean">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `url(${seaBackground})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            opacity: 0.9
+          }} />
+          <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-blue-200/20 to-blue-500/30" />
+        </div>
+        
+        <div className="relative z-10 text-center">
           <TrendingUp className="w-16 h-16 mx-auto mb-4 text-white" />
-          <h2 className="text-2xl font-bold mb-2">Trade Yacht Shares</h2>
-          <p className="text-blue-100">Buy and sell ownership shares with other investors</p>
+          <h1 className="text-3xl font-bold text-gray-800 mb-2" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif' }}>De Antonio Share Marketplace</h1>
+          <p className="text-white/90 text-lg">Buy and sell ownership shares with other yacht investors</p>
         </div>
       </section>
 
@@ -101,7 +158,7 @@ export default function ShareMarketplaceScreen() {
             <p className="text-sm text-gray-600">Avg. Price Growth</p>
           </div>
           <div>
-            <p className="text-2xl font-bold text-gray-900">€38K</p>
+            <p className="text-2xl font-bold text-gray-900">€120K</p>
             <p className="text-sm text-gray-600">Avg. Share Price</p>
           </div>
         </div>
