@@ -95,18 +95,6 @@ const mockShareListings = [
 export default function ShareTradingScreen() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
-      {/* Header */}
-      <div className="bg-white border-b border-gray-100">
-        <div className="flex items-center justify-between p-4">
-          <Link href="/my-boats">
-            <Button variant="ghost" size="sm" className="p-2">
-              <ArrowLeft className="h-5 w-5" />
-            </Button>
-          </Link>
-          <h1 className="text-lg font-semibold text-gray-900">Share Trading</h1>
-          <div className="w-9" />
-        </div>
-      </div>
 
       <div className="p-4 space-y-4">
         {/* Right of First Refusal Notice */}
@@ -206,20 +194,26 @@ export default function ShareTradingScreen() {
 
                 <div className="flex gap-2">
                   {listing.rightOfFirstRefusal ? (
-                    <Button className="flex-1 bg-blue-600 hover:bg-blue-700">
-                      <TrendingUp className="h-4 w-4 mr-2" />
-                      Exercise Right
-                    </Button>
+                    <Link href="/inquiry-thank-you" className="flex-1">
+                      <Button className="w-full bg-blue-600 hover:bg-blue-700">
+                        <TrendingUp className="h-4 w-4 mr-2" />
+                        Exercise Right
+                      </Button>
+                    </Link>
                   ) : (
-                    <Button className="flex-1 bg-green-600 hover:bg-green-700">
-                      <TrendingUp className="h-4 w-4 mr-2" />
-                      Purchase Share
-                    </Button>
+                    <Link href="/inquiry-thank-you" className="flex-1">
+                      <Button className="w-full bg-green-600 hover:bg-green-700">
+                        <TrendingUp className="h-4 w-4 mr-2" />
+                        Purchase Share
+                      </Button>
+                    </Link>
                   )}
-                  <Button variant="outline">
-                    <Clock className="h-4 w-4 mr-2" />
-                    Join Waitlist
-                  </Button>
+                  <Link href="/inquiry-thank-you">
+                    <Button variant="outline">
+                      <Clock className="h-4 w-4 mr-2" />
+                      Join Waitlist
+                    </Button>
+                  </Link>
                 </div>
               </CardContent>
             </Card>
@@ -235,10 +229,12 @@ export default function ShareTradingScreen() {
             <p className="text-sm text-orange-800 mb-4">
               List your shares for sale. Co-owners will be notified first with 30-day right of first refusal.
             </p>
-            <Button variant="outline" className="w-full border-orange-300 text-orange-700 hover:bg-orange-100">
-              <TrendingDown className="h-4 w-4 mr-2" />
-              List Share for Sale
-            </Button>
+            <Link href="/inquiry-thank-you">
+              <Button variant="outline" className="w-full border-orange-300 text-orange-700 hover:bg-orange-100">
+                <TrendingDown className="h-4 w-4 mr-2" />
+                List Share for Sale
+              </Button>
+            </Link>
           </CardContent>
         </Card>
 
