@@ -308,7 +308,7 @@ export default function OwnershipHomeScreen() {
                           per share
                         </p>
                         <p className="text-xs text-blue-600 font-medium whitespace-nowrap" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>
-                          from €{Math.round(Number(opportunity.sharePrice) / 60).toLocaleString()} monthly
+                          from €{opportunity.monthlyPayment} monthly
                         </p>
                       </div>
                     </div>

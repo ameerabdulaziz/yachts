@@ -84,7 +84,7 @@ export default function YachtOwnershipDetailScreen() {
           <div className="text-right">
             <p className="text-3xl font-bold text-primary">€{Number(opportunity.sharePrice).toLocaleString()}</p>
             <p className="text-gray-600">per share</p>
-            <p className="text-xs text-blue-600 font-medium">from €{Math.round(Number(opportunity.sharePrice) / 60).toLocaleString()} monthly</p>
+            <p className="text-xs text-blue-600 font-medium">from €{(opportunity.financing as any)?.monthlyPayment ? Number((opportunity.financing as any).monthlyPayment).toLocaleString() : Math.round(Number(opportunity.sharePrice) / 60).toLocaleString()} monthly</p>
           </div>
         </div>
 
@@ -189,7 +189,7 @@ export default function YachtOwnershipDetailScreen() {
                 </div>
                 <div className="text-right">
                   <span className="text-lg font-bold text-blue-500">€{Number(opportunity.sharePrice).toLocaleString()}</span>
-                  <p className="text-xs text-gray-600">from €{Math.round(Number(opportunity.sharePrice) / 60).toLocaleString()} monthly</p>
+                  <p className="text-xs text-gray-600">from €{(opportunity.financing as any)?.monthlyPayment ? Number((opportunity.financing as any).monthlyPayment).toLocaleString() : Math.round(Number(opportunity.sharePrice) / 60).toLocaleString()} monthly</p>
                 </div>
               </div>
               
