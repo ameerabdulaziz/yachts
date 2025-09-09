@@ -50,8 +50,8 @@ export default function UserProfileScreen() {
     totalShares: apiUsers[0].role === 'owner' || apiUsers[0].role === 'both' ? 3 : 0,
     fuelBalance: apiUsers[0].fuelWalletBalance || '0.00'
   } : {
-    name: "Mohamed Hassan",
-    email: "mohamed.hassan@nauttec.com",
+    name: "Marco Benedetti",
+    email: "marco.benedetti@nauttec.com",
     phone: "+33 123 456 789",
     avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100",
     joinDate: "Member since June 2023",
