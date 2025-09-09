@@ -88,6 +88,7 @@ export default function OwnershipOpportunitiesScreen() {
                       <div className="text-right">
                         <p className="text-2xl font-bold text-primary">€{Number(opportunity.sharePrice).toLocaleString()}</p>
                         <p className="text-sm text-gray-500">per share</p>
+                        <p className="text-xs text-blue-600 font-medium">from €{Math.round(Number(opportunity.sharePrice) / 60).toLocaleString()} monthly</p>
                       </div>
                     </div>
 
