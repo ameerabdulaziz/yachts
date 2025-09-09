@@ -11,6 +11,7 @@ import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import seaBackground from "@assets/image_1754575606863.png";
+import BottomNavigation from "@/components/BottomNavigation";
 
 export default function TopUpScreen() {
   const [, setLocation] = useLocation();
@@ -261,6 +262,8 @@ export default function TopUpScreen() {
           )}
         </Button>
       </div>
+      
+      <BottomNavigation />
     </div>
   );
 }
