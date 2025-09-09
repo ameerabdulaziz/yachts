@@ -6,6 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { ArrowLeft, CreditCard, Plus, Euro, Fuel, CheckCircle, AlertCircle } from "lucide-react";
+import nauttecLogo from "@assets/Nauttec Logo_1754330395988.png";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
@@ -83,14 +84,24 @@ export default function TopUpScreen() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-white border-b border-gray-200 px-4 py-3 sticky top-0 z-40">
-        <div className="flex items-center space-x-3">
-          <Link href="/fuel-wallet">
-            <Button variant="ghost" size="sm" className="p-2">
-              <ArrowLeft className="w-5 h-5 text-gray-600" />
-            </Button>
-          </Link>
-          <h1 className="text-xl font-bold text-gray-900">Top Up Fuel Wallet</h1>
+      <header className="relative bg-transparent px-4 py-3">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-3">
+            <div className="w-20 h-10 flex items-center justify-center">
+              <img src={nauttecLogo} alt="Nauttec Logo" className="w-full h-full object-contain" />
+            </div>
+          </div>
+          <div className="flex items-center space-x-3">
+            <Link href="/profile">
+              <div className="w-8 h-8 rounded-full overflow-hidden cursor-pointer">
+                <img 
+                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100" 
+                  alt="User Profile" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </Link>
+          </div>
         </div>
       </header>
 
