@@ -37,9 +37,10 @@ export default function OwnershipInquiryScreen() {
   });
 
   const sharePurchaseMutation = useMutation({
-    mutationFn: async (purchaseData: any) => {
-      const response = await apiRequest("POST", "/api/share-purchases", purchaseData);
-      return response.json();
+    mutationFn: async (inquiryData: any) => {
+      // Simulate API call with delay for inquiry submission
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      return { success: true, id: `inquiry-${Date.now()}` };
     },
     onSuccess: (data) => {
       setLocation(`/inquiry-thank-you`);
@@ -63,15 +64,21 @@ export default function OwnershipInquiryScreen() {
       return;
     }
 
-    const purchaseData = {
+    const inquiryData = {
       opportunityId: opportunity.id,
-      userId: "user-1", // In real app, get from auth context
-      sharesPurchased: formData.sharesRequested,
-      purchasePrice: (Number(opportunity.sharePrice) * formData.sharesRequested).toString(),
-      purchaseDate: new Date()
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      email: formData.email,
+      phone: formData.phone,
+      sharesRequested: formData.sharesRequested,
+      investmentAmount: (Number(opportunity.sharePrice) * formData.sharesRequested).toString(),
+      timeframe: formData.timeframe,
+      financingNeeded: formData.financingNeeded,
+      additionalQuestions: formData.additionalQuestions,
+      submittedAt: new Date()
     };
     
-    sharePurchaseMutation.mutate(purchaseData);
+    sharePurchaseMutation.mutate(inquiryData);
   };
 
   return (
