@@ -84,6 +84,7 @@ export default function YachtOwnershipDetailScreen() {
           <div className="text-right">
             <p className="text-3xl font-bold text-primary">€{Number(opportunity.sharePrice).toLocaleString()}</p>
             <p className="text-gray-600">per share</p>
+            <p className="text-xs text-blue-600 font-medium">from €{Math.round(Number(opportunity.sharePrice) / 60).toLocaleString()} monthly</p>
           </div>
         </div>
 
@@ -186,7 +187,10 @@ export default function YachtOwnershipDetailScreen() {
                   <Euro className="w-5 h-5 text-blue-500" />
                   <span className="font-medium text-gray-900">Share Price</span>
                 </div>
-                <span className="text-lg font-bold text-blue-500">€{Number(opportunity.sharePrice).toLocaleString()}</span>
+                <div className="text-right">
+                  <span className="text-lg font-bold text-blue-500">€{Number(opportunity.sharePrice).toLocaleString()}</span>
+                  <p className="text-xs text-gray-600">from €{Math.round(Number(opportunity.sharePrice) / 60).toLocaleString()} monthly</p>
+                </div>
               </div>
               
               <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">

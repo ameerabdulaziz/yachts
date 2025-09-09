@@ -99,7 +99,10 @@ export default function SharePurchaseConfirmationScreen() {
               <div className="border-t border-gray-200 pt-3 mt-3">
                 <div className="flex items-center justify-between">
                   <span className="text-lg font-bold text-gray-900">Total Investment</span>
-                  <span className="text-xl font-bold text-primary">€{purchase.purchasePrice.toLocaleString()}</span>
+                  <div className="text-right">
+                    <span className="text-xl font-bold text-primary">€{purchase.purchasePrice.toLocaleString()}</span>
+                    <p className="text-xs text-blue-600 font-medium">from €{Math.round(purchase.purchasePrice / 60).toLocaleString()} monthly</p>
+                  </div>
                 </div>
               </div>
             </div>

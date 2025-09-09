@@ -106,6 +106,7 @@ export default function ShareListingDetailScreen() {
           </div>
           <div className="text-right">
             <p className="text-3xl font-bold text-gray-900">€{listing.askingPrice.toLocaleString()}</p>
+            <p className="text-xs text-blue-600 font-medium">from €{Math.round(listing.askingPrice / 60).toLocaleString()} monthly</p>
             <div className={`flex items-center space-x-1 text-sm ${
               listing.priceChange > 0 ? 'text-green-600' : 'text-red-600'
             }`}>
