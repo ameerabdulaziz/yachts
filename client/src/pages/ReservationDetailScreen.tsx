@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Calendar, Users, MapPin, Phone, Mail, MessageCircle, Download, CreditCard, AlertCircle } from "lucide-react";
 import deAntonioD50 from "@assets/image_1754579474724.png";
+import BottomNavigation from "@/components/BottomNavigation";
 
 export default function ReservationDetailScreen() {
   const { id } = useParams<{ id: string }>();
@@ -245,6 +246,8 @@ export default function ReservationDetailScreen() {
           </CardContent>
         </Card>
       </div>
+      
+      <BottomNavigation />
     </div>
   );
 }
