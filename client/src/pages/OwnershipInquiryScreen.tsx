@@ -42,11 +42,7 @@ export default function OwnershipInquiryScreen() {
       return response.json();
     },
     onSuccess: (data) => {
-      toast({
-        title: "Investment Inquiry Submitted!",
-        description: "Our team will contact you within 24 hours.",
-      });
-      setLocation(`/share-purchase-confirmation/${data.id}`);
+      setLocation(`/inquiry-thank-you`);
     },
     onError: () => {
       toast({
@@ -88,37 +84,9 @@ export default function OwnershipInquiryScreen() {
               <ArrowLeft className="w-5 h-5 text-gray-600" />
             </Button>
           </Link>
-          <h1 className="text-xl font-bold text-gray-900" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif' }}>Investment Inquiry</h1>
         </div>
       </header>
 
-      {/* Hero Section with Seawater Background */}
-      <section className="relative px-4 py-8 overflow-hidden">
-        {/* Turquoise Sea Background */}
-        <div className="absolute inset-0 bg-gradient-ocean">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1505142468610-359e7d316be0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=800')`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            opacity: 0.9
-          }} />
-          <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-blue-200/20 to-blue-500/30" />
-        </div>
-        
-        <div className="relative z-10">
-          <div className="text-center mb-4">
-            <h2 className="text-2xl font-bold text-gray-800 mb-2" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif' }}>{opportunity.yacht.name}</h2>
-            <p className="text-gray-700" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>{opportunity.shareFraction} Share Investment</p>
-          </div>
-          
-          <div className="bg-white rounded-2xl p-6 shadow-xl">
-            <div className="text-center">
-              <p className="text-3xl font-bold text-primary mb-1" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif' }}>€{Number(opportunity.sharePrice).toLocaleString()}</p>
-              <p className="text-gray-600" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>per share</p>
-            </div>
-          </div>
-        </div>
-      </section>
 
       <div className="p-4 space-y-6">
         {/* Personal Information */}
@@ -328,7 +296,7 @@ export default function OwnershipInquiryScreen() {
         <Button 
           onClick={handleSubmit}
           disabled={sharePurchaseMutation.isPending || !formData.agreeToTerms}
-          className="w-full bg-gradient-ocean text-white py-4 rounded-xl font-semibold text-lg hover:shadow-lg transition-all duration-300"
+          className="w-full bg-blue-600 text-white py-4 rounded-xl font-semibold hover:bg-blue-700 transition-all duration-300"
         >
           {sharePurchaseMutation.isPending ? "Submitting..." : "Submit Investment Inquiry"}
         </Button>

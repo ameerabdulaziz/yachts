@@ -26,6 +26,7 @@ import MyBookingsScreen from "@/pages/MyBookingsScreen";
 import ReservationDetailScreen from "@/pages/ReservationDetailScreen";
 import YachtOwnershipDetailScreen from "@/pages/YachtOwnershipDetailScreen";
 import OwnershipInquiryScreen from "@/pages/OwnershipInquiryScreen";
+import InquiryThankYouScreen from "@/pages/InquiryThankYouScreen";
 import ShareMarketplaceScreen from "@/pages/ShareMarketplaceScreen";
 import ShareListingDetailScreen from "@/pages/ShareListingDetailScreen";
 import ListShareForSaleScreen from "@/pages/ListShareForSaleScreen";
@@ -109,6 +110,7 @@ function Router() {
         <Route path="/reservation-detail/:id" component={ReservationDetailScreen} />
         <Route path="/ownership/:id" component={YachtOwnershipDetailScreen} />
         <Route path="/ownership-inquiry/:id" component={OwnershipInquiryScreen} />
+        <Route path="/inquiry-thank-you" component={InquiryThankYouScreen} />
         <Route path="/share-marketplace" component={ShareMarketplaceScreen} />
         <Route path="/share-listing/:id" component={ShareListingDetailScreen} />
         <Route path="/list-share-for-sale" component={ListShareForSaleScreen} />
