@@ -138,8 +138,9 @@ export default function OwnershipHomeScreen() {
                   <p className="text-xl font-bold text-gray-900 whitespace-nowrap" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif' }}>{selectedYacht.price}</p>
                 </div>
                 <div className="text-center border-l border-blue-200 pl-4">
-                  <p className="text-sm text-gray-600 mb-1" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>1/10 Share From</p>
+                  <p className="text-sm text-gray-600 mb-1" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>Share From</p>
                   <p className="text-xl font-bold text-blue-600 whitespace-nowrap" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif' }}>{selectedYacht.sharesFrom}</p>
+                  <p className="text-xs text-gray-500 whitespace-nowrap" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>from €{Math.round(parseFloat(selectedYacht.sharesFrom.replace('€', '').replace('K', '')) * 1000 / 60).toLocaleString()} monthly</p>
                 </div>
               </div>
             </div>
