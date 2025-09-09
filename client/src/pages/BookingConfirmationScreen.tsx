@@ -5,6 +5,23 @@ import { CheckCircle, Calendar, Users, MapPin, Phone, Mail, Download, Share } fr
 import seaBackground from "@assets/image_1754575606863.png";
 
 export default function BookingConfirmationScreen() {
+  const handleShareWhatsApp = () => {
+    const message = `🛥️ Yacht Booking Confirmed!
+
+📅 ${booking.yachtName}
+📍 ${booking.location}
+🗓️ ${booking.startDate} - ${booking.endDate}
+👥 ${booking.guests} guests
+🧑‍✈️ Captain: ${booking.captain}
+
+Booking Reference: ${booking.id.toUpperCase()}
+
+Excited for this luxury yacht experience! 🌊`;
+
+    const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
+  };
+
   const booking = {
     id: "booking-12345",
     yachtName: "Serenity Princess",
@@ -155,7 +172,10 @@ export default function BookingConfirmationScreen() {
             Download Booking Confirmation
           </Button>
           
-          <Button className="w-full bg-blue-600 text-white py-4 rounded-xl font-semibold hover:bg-blue-700">
+          <Button 
+            onClick={handleShareWhatsApp}
+            className="w-full bg-blue-600 text-white py-4 rounded-xl font-semibold hover:bg-blue-700"
+          >
             <Share className="w-5 h-5 mr-2" />
             Share Trip Details
           </Button>
