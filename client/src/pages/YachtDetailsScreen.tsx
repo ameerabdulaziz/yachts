@@ -358,7 +358,7 @@ export default function YachtDetailsScreen() {
         
         <Link href={`/booking-checkout${selectedStartDate && selectedEndDate ? `?yacht=${yacht.id}&start=${selectedStartDate.toISOString().split('T')[0]}&end=${selectedEndDate.toISOString().split('T')[0]}&catering=${includeCatering}` : ''}`}>
           <Button 
-            className="w-full bg-gradient-ocean text-white py-4 rounded-xl font-semibold text-lg hover:shadow-lg transition-all duration-300"
+            className="w-full bg-blue-600 text-white py-4 rounded-xl font-semibold hover:bg-blue-700"
             disabled={!selectedStartDate || !selectedEndDate}
           >
             {selectedStartDate && selectedEndDate ? 'Book Selected Dates' : 'Select Dates to Book'}
