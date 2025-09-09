@@ -150,12 +150,12 @@ export default function BookingConfirmationScreen() {
 
         {/* Action Buttons */}
         <div className="space-y-3">
-          <Button className="w-full bg-primary hover:bg-primary-hover text-white py-3 rounded-xl font-semibold">
+          <Button className="w-full bg-blue-600 text-white py-4 rounded-xl font-semibold hover:bg-blue-700">
             <Download className="w-5 h-5 mr-2" />
             Download Booking Confirmation
           </Button>
           
-          <Button variant="outline" className="w-full py-3 rounded-xl font-semibold">
+          <Button className="w-full bg-blue-600 text-white py-4 rounded-xl font-semibold hover:bg-blue-700">
             <Share className="w-5 h-5 mr-2" />
             Share Trip Details
           </Button>
@@ -185,12 +185,12 @@ export default function BookingConfirmationScreen() {
         {/* Navigation Buttons */}
         <div className="grid grid-cols-2 gap-3">
           <Link href="/my-bookings">
-            <Button variant="outline" className="w-full py-3 rounded-xl font-semibold">
+            <Button className="w-full bg-blue-600 text-white py-4 rounded-xl font-semibold hover:bg-blue-700">
               View All Bookings
             </Button>
           </Link>
           <Link href="/home">
-            <Button className="w-full bg-gradient-ocean text-white py-3 rounded-xl font-semibold">
+            <Button className="w-full bg-blue-600 text-white py-4 rounded-xl font-semibold hover:bg-blue-700">
               Back to Home
             </Button>
           </Link>
