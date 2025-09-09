@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Calendar, Users, MapPin, Phone, Mail, MessageCircle, Download, CreditCard, AlertCircle } from "lucide-react";
+import deAntonioD50 from "@assets/image_1754579474724.png";
 
 export default function ReservationDetailScreen() {
   const { id } = useParams<{ id: string }>();
@@ -11,9 +12,9 @@ export default function ReservationDetailScreen() {
     id: id || "booking-1",
     status: "confirmed" as const,
     yacht: {
-      name: "Serenity Princess",
-      location: "Monaco, France",
-      image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400"
+      name: "De Antonio D50 Open",
+      location: "El Gouna, Egypt",
+      image: deAntonioD50
     },
     startDate: new Date("2025-10-15"),
     endDate: new Date("2025-10-18"),
@@ -198,12 +199,12 @@ export default function ReservationDetailScreen() {
         <div className="space-y-3">
           {isUpcoming && (
             <>
-              <Button className="w-full bg-gradient-ocean text-white py-3 rounded-xl font-semibold">
+              <Button className="w-full bg-blue-600 text-white py-4 rounded-xl font-semibold hover:bg-blue-700">
                 <MessageCircle className="w-5 h-5 mr-2" />
                 Contact Captain
               </Button>
               
-              <Button variant="outline" className="w-full py-3 rounded-xl font-semibold">
+              <Button className="w-full bg-blue-600 text-white py-4 rounded-xl font-semibold hover:bg-blue-700">
                 <Download className="w-5 h-5 mr-2" />
                 Download Itinerary
               </Button>
@@ -211,16 +212,16 @@ export default function ReservationDetailScreen() {
           )}
           
           {isPast && (
-            <Button className="w-full bg-gradient-ocean text-white py-3 rounded-xl font-semibold">
+            <Button className="w-full bg-blue-600 text-white py-4 rounded-xl font-semibold hover:bg-blue-700">
               Leave a Review
             </Button>
           )}
           
           <div className="grid grid-cols-2 gap-3">
-            <Button variant="outline" className="py-3 rounded-xl font-semibold">
+            <Button className="bg-blue-600 text-white py-4 rounded-xl font-semibold hover:bg-blue-700">
               Download Receipt
             </Button>
-            <Button variant="outline" className="py-3 rounded-xl font-semibold text-red-600 border-red-200 hover:bg-red-50">
+            <Button className="bg-red-600 text-white py-4 rounded-xl font-semibold hover:bg-red-700">
               Cancel Booking
             </Button>
           </div>
