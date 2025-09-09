@@ -24,17 +24,13 @@ export default function TopUpScreen() {
 
   const topUpMutation = useMutation({
     mutationFn: async (data: { amount: number; paymentMethod: string }) => {
-      const response = await apiRequest("POST", "/api/fuel-wallet/topup", {
-        userId: "user-1", // In real app, get from auth context
-        amount: data.amount.toString(),
-        type: "topup",
-        description: "Fuel wallet top-up"
-      });
-      return response.json();
+      // Simulate API call with delay for top-up
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      return { success: true, amount: data.amount };
     },
-    onSuccess: () => {
+    onSuccess: (data) => {
       toast({
-        title: "Top-up Successful!",
+        title: "Top up successful!",
         description: `€${amount} has been added to your fuel wallet.`,
       });
       setLocation("/fuel-wallet");
@@ -250,10 +246,7 @@ export default function TopUpScreen() {
           {topUpMutation.isPending ? (
             "Processing..."
           ) : (
-            <>
-              <Plus className="w-5 h-5 mr-2" />
-              {amount ? `Top Up €${parseInt(amount).toLocaleString()}` : "Enter Amount"}
-            </>
+            amount ? `Top Up €${parseInt(amount).toLocaleString()}` : "Enter Amount"
           )}
         </Button>
       </div>
