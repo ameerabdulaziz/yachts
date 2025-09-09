@@ -2,9 +2,58 @@ import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { CheckCircle, Calendar, Users, MapPin, Phone, Mail, Download, Share } from "lucide-react";
+import { mockYachts } from "@/lib/mockData";
+import BottomNavigation from "@/components/BottomNavigation";
 import seaBackground from "@assets/image_1754575606863.png";
 
 export default function BookingConfirmationScreen() {
+  // Parse URL parameters to get booking details
+  const urlParams = new URLSearchParams(window.location.search);
+  const yachtId = urlParams.get('yacht');
+  const startDate = urlParams.get('start');
+  const endDate = urlParams.get('end');
+  const catering = urlParams.get('catering') === 'true';
+  
+  // Find yacht details
+  const yacht = mockYachts.find(y => y.id === yachtId) || mockYachts[0];
+  
+  // Calculate booking details
+  const formatDate = (dateStr: string) => {
+    if (!dateStr) return "October 15, 2025";
+    const date = new Date(dateStr);
+    return date.toLocaleDateString('en-US', { 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric' 
+    });
+  };
+  
+  const calculateTotal = () => {
+    if (!startDate || !endDate) return 2400;
+    const days = Math.ceil((new Date(endDate).getTime() - new Date(startDate).getTime()) / (1000 * 60 * 60 * 24)) + 1;
+    const basePrice = Number(yacht.pricePerDay) * days;
+    const cateringPrice = catering ? 200 * days : 0;
+    const serviceFee = Math.round((basePrice + cateringPrice) * 0.05);
+    return basePrice + cateringPrice + serviceFee;
+  };
+  
+  const booking = {
+    id: "booking-12345",
+    yachtName: yacht.name,
+    location: yacht.location,
+    startDate: formatDate(startDate),
+    endDate: formatDate(endDate),
+    guests: yacht.capacity,
+    totalPrice: calculateTotal(),
+    captain: "Captain Laurent",
+    captainPhone: "+33 6 12 34 56 78",
+    captainEmail: "laurent@nauttec.com",
+    checkInTime: "2:00 PM",
+    checkOutTime: "11:00 AM",
+    isOwnedBooking: false,
+    hasCatering: catering
+  };
+  
   const handleShareWhatsApp = () => {
     const message = `🛥️ Yacht Booking Confirmed!
 
@@ -13,7 +62,7 @@ export default function BookingConfirmationScreen() {
 🗓️ ${booking.startDate} - ${booking.endDate}
 👥 ${booking.guests} guests
 🧑‍✈️ Captain: ${booking.captain}
-
+${booking.hasCatering ? '🍽️ Catering included\n' : ''}
 Booking Reference: ${booking.id.toUpperCase()}
 
 Excited for this luxury yacht experience! 🌊`;
@@ -22,24 +71,8 @@ Excited for this luxury yacht experience! 🌊`;
     window.open(whatsappUrl, '_blank');
   };
 
-  const booking = {
-    id: "booking-12345",
-    yachtName: "Serenity Princess",
-    location: "Monaco, France",
-    startDate: "October 15, 2025",
-    endDate: "October 18, 2025",
-    guests: 6,
-    totalPrice: 0, // Zero for owned yacht bookings
-    captain: "Captain Laurent",
-    captainPhone: "+33 6 12 34 56 78",
-    captainEmail: "laurent@nauttec.com",
-    checkInTime: "2:00 PM",
-    checkOutTime: "11:00 AM",
-    isOwnedBooking: true // Flag to indicate this is an owned yacht booking
-  };
-
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 pb-24">
       {/* Success Header */}
       <section className="relative px-4 py-12 text-center overflow-hidden">
         {/* Turquoise Sea Background */}
@@ -158,9 +191,9 @@ Excited for this luxury yacht experience! 🌊`;
         <Card>
           <CardContent className="p-4 bg-green-50">
             <div className="text-center">
-              <p className="text-sm text-gray-600 mb-1">{booking.isOwnedBooking ? "Total Cost" : "Total Paid"}</p>
+              <p className="text-sm text-gray-600 mb-1">Total Paid</p>
               <p className="text-3xl font-bold text-green-600">€{booking.totalPrice.toLocaleString()}</p>
-              <p className="text-sm text-gray-600 mt-1">{booking.isOwnedBooking ? "Complimentary - Owner booking" : "Payment successful"}</p>
+              <p className="text-sm text-gray-600 mt-1">Payment successful{booking.hasCatering ? ' • Catering included' : ''}</p>
             </div>
           </CardContent>
         </Card>
@@ -216,6 +249,8 @@ Excited for this luxury yacht experience! 🌊`;
           </Link>
         </div>
       </div>
+      
+      <BottomNavigation />
     </div>
   );
 }
