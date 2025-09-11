@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -22,7 +22,15 @@ export default function TopUpScreen() {
   const [selectedQuickAmount, setSelectedQuickAmount] = useState<number | null>(null);
 
   const quickAmounts = [500, 1000, 2000];
-  const currentBalance = 1250; // Mock current balance
+  const [currentBalance, setCurrentBalance] = useState(1250);
+  
+  // Load current balance from localStorage
+  useEffect(() => {
+    const savedBalance = localStorage.getItem('fuelWalletBalance');
+    if (savedBalance) {
+      setCurrentBalance(parseInt(savedBalance));
+    }
+  }, []);
 
   const topUpMutation = useMutation({
     mutationFn: async (data: { amount: number; paymentMethod: string }) => {
@@ -31,6 +39,24 @@ export default function TopUpScreen() {
       return { success: true, amount: data.amount };
     },
     onSuccess: (data) => {
+      // Update the balance and save to localStorage
+      const topUpAmount = parseInt(amount);
+      const newBalance = currentBalance + topUpAmount;
+      localStorage.setItem('fuelWalletBalance', newBalance.toString());
+      
+      // Add transaction to history
+      const newTransaction = {
+        id: Date.now().toString(),
+        date: new Date().toLocaleDateString('en-GB'),
+        description: 'Wallet Top-up',
+        amount: topUpAmount,
+        type: 'credit'
+      };
+      
+      const existingTransactions = JSON.parse(localStorage.getItem('fuelTransactions') || '[]');
+      existingTransactions.unshift(newTransaction); // Add to beginning
+      localStorage.setItem('fuelTransactions', JSON.stringify(existingTransactions));
+      
       toast({
         title: "Top up successful!",
         description: `€${amount} has been added to your fuel wallet.`,

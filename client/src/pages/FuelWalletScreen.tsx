@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -7,8 +8,20 @@ import seaBackground from "@assets/image_1754575606863.png";
 import { mockFuelTransactions } from "@/lib/mockData";
 
 export default function FuelWalletScreen() {
-  const balance = 1250;
+  const [balance, setBalance] = useState(1250);
+  const [transactions, setTransactions] = useState([]);
   const monthlyChange = 200;
+  
+  // Load balance and transactions from localStorage
+  useEffect(() => {
+    const savedBalance = localStorage.getItem('fuelWalletBalance');
+    if (savedBalance) {
+      setBalance(parseInt(savedBalance));
+    }
+    
+    const savedTransactions = JSON.parse(localStorage.getItem('fuelTransactions') || '[]');
+    setTransactions(savedTransactions);
+  }, []);
 
   return (
     <div className="min-h-screen bg-gray-50 pb-24">
@@ -91,70 +104,74 @@ export default function FuelWalletScreen() {
       <section className="px-4 py-6">
         <h3 className="text-xl font-bold text-gray-900 mb-4">Recent Transactions</h3>
         <div className="space-y-3">
-          <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
-                <Plus className="w-5 h-5 text-green-600" />
+          {transactions.length > 0 ? (
+            transactions.slice(0, 6).map((transaction: any) => (
+              <div key={transaction.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                <div className="flex items-center space-x-3">
+                  <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
+                    transaction.type === 'credit' ? 'bg-green-100' : 'bg-red-100'
+                  }`}>
+                    {transaction.type === 'credit' ? (
+                      <Plus className="w-5 h-5 text-green-600" />
+                    ) : (
+                      <Fuel className="w-5 h-5 text-red-600" />
+                    )}
+                  </div>
+                  <div>
+                    <p className="font-medium text-gray-900">{transaction.date}</p>
+                    <p className="text-sm text-gray-600">{transaction.description}</p>
+                  </div>
+                </div>
+                <span className={`text-lg font-bold ${
+                  transaction.type === 'credit' ? 'text-green-600' : 'text-red-600'
+                }`}>
+                  {transaction.type === 'credit' ? '+' : '-'}€{transaction.amount}
+                </span>
               </div>
-              <div>
-                <p className="font-medium text-gray-900">25/07/2024</p>
-                <p className="text-sm text-gray-600">Wallet Top-up</p>
+            ))
+          ) : (
+            // Default transactions when no user transactions exist
+            <>
+              <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                <div className="flex items-center space-x-3">
+                  <div className="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center">
+                    <Fuel className="w-5 h-5 text-red-600" />
+                  </div>
+                  <div>
+                    <p className="font-medium text-gray-900">22/07/2024</p>
+                    <p className="text-sm text-gray-600">Trip to Ibiza</p>
+                  </div>
+                </div>
+                <span className="text-lg font-bold text-red-600">-€128</span>
               </div>
-            </div>
-            <span className="text-lg font-bold text-green-600">+€500</span>
-          </div>
-          
-          <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center">
-                <Fuel className="w-5 h-5 text-red-600" />
+              
+              <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                <div className="flex items-center space-x-3">
+                  <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
+                    <Plus className="w-5 h-5 text-green-600" />
+                  </div>
+                  <div>
+                    <p className="font-medium text-gray-900">15/06/2024</p>
+                    <p className="text-sm text-gray-600">Wallet Top-up</p>
+                  </div>
+                </div>
+                <span className="text-lg font-bold text-green-600">+€300</span>
               </div>
-              <div>
-                <p className="font-medium text-gray-900">22/07/2024</p>
-                <p className="text-sm text-gray-600">Trip to Ibiza</p>
+              
+              <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                <div className="flex items-center space-x-3">
+                  <div className="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center">
+                    <Fuel className="w-5 h-5 text-red-600" />
+                  </div>
+                  <div>
+                    <p className="font-medium text-gray-900">10/06/2024</p>
+                    <p className="text-sm text-gray-600">Trip to Saint-Tropez</p>
+                  </div>
+                </div>
+                <span className="text-lg font-bold text-red-600">-€285</span>
               </div>
-            </div>
-            <span className="text-lg font-bold text-red-600">-€128</span>
-          </div>
-          
-          <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
-                <Plus className="w-5 h-5 text-green-600" />
-              </div>
-              <div>
-                <p className="font-medium text-gray-900">15/06/2024</p>
-                <p className="text-sm text-gray-600">Wallet Top-up</p>
-              </div>
-            </div>
-            <span className="text-lg font-bold text-green-600">+€300</span>
-          </div>
-          
-          <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center">
-                <Fuel className="w-5 h-5 text-red-600" />
-              </div>
-              <div>
-                <p className="font-medium text-gray-900">10/06/2024</p>
-                <p className="text-sm text-gray-600">Trip to Saint-Tropez</p>
-              </div>
-            </div>
-            <span className="text-lg font-bold text-red-600">-€285</span>
-          </div>
-          
-          <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center">
-                <Fuel className="w-5 h-5 text-red-600" />
-              </div>
-              <div>
-                <p className="font-medium text-gray-900">05/06/2024</p>
-                <p className="text-sm text-gray-600">Trip to Mallorca</p>
-              </div>
-            </div>
-            <span className="text-lg font-bold text-red-600">-€644</span>
-          </div>
+            </>
+          )}
         </div>
       </section>
 
