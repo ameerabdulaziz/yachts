@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -101,6 +101,16 @@ export default function ShareMarketplaceScreen() {
   const [searchQuery, setSearchQuery] = useState("");
   const [sortBy, setSortBy] = useState("newest");
   const [filterBy, setFilterBy] = useState("all");
+  const [userListings, setUserListings] = useState([]);
+  
+  // Load user's listed shares from localStorage
+  useEffect(() => {
+    const storedListings = JSON.parse(localStorage.getItem('userShareListings') || '[]');
+    setUserListings(storedListings);
+  }, []);
+  
+  // Combine mock listings with user listings
+  const allListings = [...userListings, ...mockShareListings];
 
   return (
     <div className="min-h-screen bg-gray-50 pb-24">
@@ -152,7 +162,7 @@ export default function ShareMarketplaceScreen() {
       <section className="px-4 py-6 bg-white">
         <div className="grid grid-cols-3 gap-4 text-center">
           <div>
-            <p className="text-2xl font-bold text-gray-900">{mockShareListings.length}</p>
+            <p className="text-2xl font-bold text-gray-900">{allListings.length}</p>
             <p className="text-sm text-gray-600">Active Listings</p>
           </div>
           <div>
@@ -221,7 +231,7 @@ export default function ShareMarketplaceScreen() {
           </div>
           
           <div className="space-y-4">
-            {mockShareListings.map((listing) => (
+            {allListings.map((listing) => (
               <Link key={listing.id} href={`/share-listing/${listing.id}`}>
                 <Card className="card-hover cursor-pointer">
                   <CardContent className="p-0">
@@ -243,6 +253,11 @@ export default function ShareMarketplaceScreen() {
                               <Badge variant="outline" className="text-xs">
                                 {listing.usageWeeks} weeks/year
                               </Badge>
+                              {listing.isUserListing && (
+                                <Badge className="bg-blue-600 text-white text-xs">
+                                  Your Listing
+                                </Badge>
+                              )}
                             </div>
                           </div>
                           <div className="text-right">
