@@ -13,6 +13,7 @@ export default function BookingConfirmationScreen() {
   const startDate = urlParams.get('start');
   const endDate = urlParams.get('end');
   const catering = urlParams.get('catering') === 'true';
+  const fromMyBoats = urlParams.get('owner') === 'true' || document.referrer.includes('/my-boats');
   
   // Find yacht details
   const yacht = mockYachts.find(y => y.id === yachtId) || mockYachts[0];
@@ -29,6 +30,7 @@ export default function BookingConfirmationScreen() {
   };
   
   const calculateTotal = () => {
+    if (fromMyBoats) return 0; // Owner booking - no cost
     if (!startDate || !endDate) return 2400;
     const days = Math.ceil((new Date(endDate).getTime() - new Date(startDate).getTime()) / (1000 * 60 * 60 * 24)) + 1;
     const basePrice = Number(yacht.pricePerDay) * days;
@@ -50,7 +52,7 @@ export default function BookingConfirmationScreen() {
     captainEmail: "laurent@nauttec.com",
     checkInTime: "2:00 PM",
     checkOutTime: "11:00 AM",
-    isOwnedBooking: false,
+    isOwnedBooking: fromMyBoats,
     hasCatering: catering
   };
   
@@ -91,8 +93,8 @@ Excited for this luxury yacht experience! 🌊`;
             <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
               <CheckCircle className="w-12 h-12 text-green-600" />
             </div>
-            <h1 className="text-2xl font-bold mb-2 text-gray-900">Booking Confirmed!</h1>
-            <p className="text-gray-600">Your luxury yacht experience awaits</p>
+            <h1 className="text-2xl font-bold mb-2 text-gray-900">{booking.yachtName} Confirmed!</h1>
+            <p className="text-gray-600">{booking.isOwnedBooking ? 'Your yacht is ready for your trip' : 'Your luxury yacht experience awaits'}</p>
           </div>
         </div>
       </section>
@@ -187,13 +189,23 @@ Excited for this luxury yacht experience! 🌊`;
           </CardContent>
         </Card>
 
-        {/* Total Paid */}
+        {/* Total Paid / Owner Booking */}
         <Card>
           <CardContent className="p-4 bg-green-50">
             <div className="text-center">
-              <p className="text-sm text-gray-600 mb-1">Total Paid</p>
-              <p className="text-3xl font-bold text-green-600">€{booking.totalPrice.toLocaleString()}</p>
-              <p className="text-sm text-gray-600 mt-1">Payment successful{booking.hasCatering ? ' • Catering included' : ''}</p>
+              {booking.isOwnedBooking ? (
+                <>
+                  <p className="text-sm text-gray-600 mb-1">Owner's Booking</p>
+                  <p className="text-3xl font-bold text-green-600">Complimentary</p>
+                  <p className="text-sm text-gray-600 mt-1">No charge for yacht owner{booking.hasCatering ? ' • Catering included' : ''}</p>
+                </>
+              ) : (
+                <>
+                  <p className="text-sm text-gray-600 mb-1">Total Paid</p>
+                  <p className="text-3xl font-bold text-green-600">€{booking.totalPrice.toLocaleString()}</p>
+                  <p className="text-sm text-gray-600 mt-1">Payment successful{booking.hasCatering ? ' • Catering included' : ''}</p>
+                </>
+              )}
             </div>
           </CardContent>
         </Card>
