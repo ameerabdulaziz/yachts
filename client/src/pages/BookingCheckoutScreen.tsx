@@ -53,7 +53,14 @@ export default function BookingCheckoutScreen() {
         title: "Booking Confirmed!",
         description: "Your yacht booking has been successfully confirmed.",
       });
-      setLocation("/booking-confirmation");
+      const params = new URLSearchParams({
+        yacht: yacht.id,
+        start: startDate,
+        end: endDate,
+        catering: addCatering.toString(),
+        owner: 'false'
+      });
+      setLocation(`/booking-confirmation?${params.toString()}`);
     },
     onError: () => {
       // Fallback: redirect to confirmation even on error for UI flow
@@ -61,7 +68,14 @@ export default function BookingCheckoutScreen() {
         title: "Booking Confirmed!",
         description: "Your yacht booking has been successfully confirmed.",
       });
-      setLocation("/booking-confirmation");
+      const params = new URLSearchParams({
+        yacht: yacht.id,
+        start: startDate,
+        end: endDate,
+        catering: addCatering.toString(),
+        owner: 'false'
+      });
+      setLocation(`/booking-confirmation?${params.toString()}`);
     }
   });
 

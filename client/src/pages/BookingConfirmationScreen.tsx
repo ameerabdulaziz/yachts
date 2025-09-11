@@ -13,7 +13,7 @@ export default function BookingConfirmationScreen() {
   const startDate = urlParams.get('start');
   const endDate = urlParams.get('end');
   const catering = urlParams.get('catering') === 'true';
-  const fromMyBoats = urlParams.get('owner') === 'true' || document.referrer.includes('/my-boats');
+  const fromMyBoats = urlParams.get('owner') === 'true';
   
   // Find yacht details
   const yacht = mockYachts.find(y => y.id === yachtId) || mockYachts[0];

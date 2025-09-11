@@ -374,8 +374,21 @@ export default function BookingCalendarScreen() {
                 <Button 
                   className="flex-1 bg-blue-600 hover:bg-blue-700"
                   onClick={() => {
-                    // Finalize booking and redirect to confirmation
-                    setLocation("/booking-confirmation");
+                    // Finalize booking and redirect to confirmation with proper parameters
+                    const tomorrow = new Date();
+                    tomorrow.setDate(tomorrow.getDate() + 1);
+                    const endDate = new Date(tomorrow);
+                    endDate.setDate(endDate.getDate() + 2);
+                    
+                    const params = new URLSearchParams({
+                      yacht: boatId || 'yacht-1',
+                      start: selectedDate || tomorrow.toISOString().split('T')[0],
+                      end: endDate.toISOString().split('T')[0],
+                      catering: 'false',
+                      owner: 'true'
+                    });
+                    
+                    setLocation(`/booking-confirmation?${params.toString()}`);
                   }}
                 >
                   <Clock className="h-3 w-3 mr-0.5" />
