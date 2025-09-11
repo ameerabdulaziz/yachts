@@ -83,7 +83,7 @@ export default function TopUpScreen() {
   const newBalance = amount ? currentBalance + parseInt(amount) : currentBalance;
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 pb-24">
       {/* Header */}
       <header className="relative bg-transparent px-4 py-3">
         <div className="flex items-center justify-between">
