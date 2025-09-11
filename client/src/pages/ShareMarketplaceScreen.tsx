@@ -106,7 +106,12 @@ export default function ShareMarketplaceScreen() {
   // Load user's listed shares from localStorage
   useEffect(() => {
     const storedListings = JSON.parse(localStorage.getItem('userShareListings') || '[]');
-    setUserListings(storedListings);
+    // Convert listedDate strings back to Date objects
+    const listingsWithDates = storedListings.map((listing: any) => ({
+      ...listing,
+      listedDate: new Date(listing.listedDate)
+    }));
+    setUserListings(listingsWithDates);
   }, []);
   
   // Combine mock listings with user listings
@@ -253,7 +258,7 @@ export default function ShareMarketplaceScreen() {
                               <Badge variant="outline" className="text-xs">
                                 {listing.usageWeeks} weeks/year
                               </Badge>
-                              {listing.isUserListing && (
+                              {(listing as any).isUserListing && (
                                 <Badge className="bg-blue-600 text-white text-xs">
                                   Your Listing
                                 </Badge>
