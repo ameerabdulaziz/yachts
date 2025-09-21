@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yachtak Platform - Commercial Presentation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8fafc;
+        }
+        
+        .presentation {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .slide {
+            background: white;
+            margin: 30px 0;
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border-left: 6px solid #2563eb;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, #2563eb20, #7c3aed20);
+            border-radius: 50%;
+            transform: translate(50%, -50%);
+            z-index: 1;
+        }
+        
+        .slide-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .slide h1 {
+            color: #2563eb;
+            margin-bottom: 40px;
+            font-size: 3em;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .slide h2 {
+            color: #1e40af;
+            margin: 35px 0 20px 0;
+            font-size: 2em;
+            display: flex;
+            align-items: center;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 10px;
+        }
+        
+        .slide h3 {
+            color: #3730a3;
+            margin: 25px 0 15px 0;
+            font-size: 1.5em;
+        }
+        
+        .hero-section {
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 80px 50px;
+            border-radius: 20px;
+            margin: 40px 0;
+        }
+        
+        .hero-title {
+            font-size: 4em;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+        }
+        
+        .hero-subtitle {
+            font-size: 1.8em;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+        
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 60px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+        
+        .logo-container img {
+            max-height: 120px;
+            max-width: 300px;
+            object-fit: contain;
+            filter: drop-shadow(0 8px 16px rgba(0,0,0,0.1));
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .feature-card {
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            padding: 30px;
+            border-radius: 15px;
+            border: 2px solid #e2e8f0;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(37, 99, 235, 0.2);
+            border-color: #2563eb;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #2563eb, #7c3aed);
+        }
+        
+        .screen-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+            margin: 50px 0;
+        }
+        
+        .screen-item {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .screen-item:hover {
+            transform: scale(1.02);
+        }
+        
+        .screen-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            object-position: top;
+        }
+        
+        .screen-info {
+            padding: 25px;
+        }
+        
+        .screen-title {
+            color: #2563eb;
+            font-size: 1.4em;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .screen-description {
+            color: #64748b;
+            font-size: 1em;
+            line-height: 1.6;
+        }
+        
+        .yacht-showcase {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            margin: 40px 0;
+            padding: 40px;
+            background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+            border-radius: 20px;
+        }
+        
+        .yacht-image {
+            flex: 1;
+            max-width: 500px;
+        }
+        
+        .yacht-image img {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+        
+        .yacht-info {
+            flex: 1;
+            padding: 20px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 30px 20px;
+            background: linear-gradient(135deg, #2563eb, #3b82f6);
+            color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+        }
+        
+        .stat-number {
+            font-size: 3em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .stat-label {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .tech-stack {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .tech-item {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: transform 0.3s ease;
+        }
+        
+        .tech-item:hover {
+            transform: translateY(-4px);
+        }
+        
+        .flow-diagram {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 40px 0;
+            padding: 30px;
+            background: #f8fafc;
+            border-radius: 15px;
+        }
+        
+        .flow-step {
+            background: #2563eb;
+            color: white;
+            padding: 18px 25px;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 1em;
+            min-width: 180px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+        }
+        
+        .flow-arrow {
+            font-size: 2em;
+            color: #2563eb;
+            margin: 0 10px;
+        }
+        
+        .benefits-section {
+            background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+            border: 2px solid #10b981;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+        }
+        
+        .benefits-title {
+            color: #047857;
+            text-align: center;
+            font-size: 2.2em;
+            margin-bottom: 30px;
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .benefit-item {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 4px solid #10b981;
+        }
+        
+        .benefit-icon {
+            font-size: 2.5em;
+            color: #10b981;
+            margin-bottom: 15px;
+        }
+        
+        .toc {
+            background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+            border: 3px solid #2563eb;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+        }
+        
+        .toc h3 {
+            text-align: center;
+            color: #2563eb;
+            font-size: 2.2em;
+            margin-bottom: 30px;
+        }
+        
+        .toc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+        }
+        
+        .toc-item {
+            padding: 15px 20px;
+            background: white;
+            border-radius: 10px;
+            border-left: 4px solid #2563eb;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .toc-item:hover {
+            background: #2563eb;
+            color: white;
+            transform: translateX(5px);
+        }
+        
+        .icon {
+            margin-right: 15px;
+            font-size: 1.4em;
+        }
+        
+        ul {
+            margin: 20px 0;
+            padding-left: 30px;
+        }
+        
+        li {
+            margin: 10px 0;
+            font-size: 1.1em;
+        }
+        
+        .highlight {
+            background: linear-gradient(135deg, #fef3c7, #fbbf24);
+            padding: 30px;
+            border-radius: 15px;
+            border: 2px solid #f59e0b;
+            margin: 30px 0;
+        }
+        
+        .highlight h4 {
+            color: #d97706;
+            font-size: 1.6em;
+            margin-bottom: 15px;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5em;
+            }
+            
+            .slide {
+                padding: 30px;
+                margin: 20px 0;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .screen-showcase {
+                grid-template-columns: 1fr;
+            }
+            
+            .yacht-showcase {
+                flex-direction: column;
+            }
+            
+            .flow-diagram {
+                flex-direction: column;
+            }
+            
+            .flow-arrow {
+                transform: rotate(90deg);
+            }
+        }
+        
+        .cta-section {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 60px;
+            text-align: center;
+            border-radius: 20px;
+            margin: 50px 0;
+        }
+        
+        .cta-title {
+            font-size: 2.8em;
+            margin-bottom: 20px;
+        }
+        
+        .cta-subtitle {
+            font-size: 1.4em;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation">
+        
+        <!-- Title Slide -->
+        <div class="slide">
+            <div class="slide-content">
+                <div class="hero-section">
+                    <h1 class="hero-title">🛥️ YACHTAK PLATFORM</h1>
+                    <p class="hero-subtitle">Comprehensive Fractional Yacht Ownership & Charter Platform</p>
+                    <p style="font-size: 1.3em; margin-top: 30px; opacity: 0.8;">Revolutionizing luxury boating access through De Antonio Yachts (D23-D60)</p>
+                </div>
+                
+                <div class="logo-container">
+                    <img src="attached_assets/Nauttec Logo_1754330395988.png" alt="Nauttec Logo" />
+                    <img src="attached_assets/DE-ANTONIO-YACHTS_LOGO-removebg-preview_1754331163197.png" alt="De Antonio Yachts Logo" />
+                </div>
+                
+                <div class="toc">
+                    <h3>📋 Presentation Contents</h3>
+                    <div class="toc-grid">
+                        <div class="toc-item">1. Platform Overview & Vision</div>
+                        <div class="toc-item">2. De Antonio Yacht Fleet</div>
+                        <div class="toc-item">3. User Authentication System</div>
+                        <div class="toc-item">4. Yacht Fleet Management</div>
+                        <div class="toc-item">5. Advanced Booking System</div>
+                        <div class="toc-item">6. Fractional Ownership Management</div>
+                        <div class="toc-item">7. Share Trading Marketplace</div>
+                        <div class="toc-item">8. Fuel Wallet System</div>
+                        <div class="toc-item">9. Owner Dashboard & Controls</div>
+                        <div class="toc-item">10. Communication & Messaging</div>
+                        <div class="toc-item">11. Technical Architecture</div>
+                        <div class="toc-item">12. Market Advantages</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Platform Overview -->
+        <div class="slide">
+            <div class="slide-content">
+                <h1>📊 Platform Overview & Vision</h1>
+                
+                <h2><span class="icon">🎯</span>Mission Statement</h2>
+                <p style="font-size: 1.4em; text-align: center; padding: 30px; background: linear-gradient(135deg, #f1f5f9, #e2e8f0); border-radius: 15px; margin: 30px 0;">
+                    <em>"Democratizing luxury yacht ownership through innovative technology, making premium boating experiences accessible to a broader audience while maintaining the exclusivity and quality that defines the luxury marine industry."</em>
+                </p>
+                
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number">38+</div>
+                        <div class="stat-label">Application Screens</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">D23-D60</div>
+                        <div class="stat-label">De Antonio Fleet</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">3</div>
+                        <div class="stat-label">User Types</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label">Digital Experience</div>
+                    </div>
+                </div>
+
+                <h2><span class="icon">👥</span>User Ecosystem</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>🏃‍♂️ Visitors & Renters</h3>
+                        <ul>
+                            <li>Browse premium yacht fleet</li>
+                            <li>Make charter bookings</li>
+                            <li>Manage fuel wallet</li>
+                            <li>Explore ownership opportunities</li>
+                            <li>Access concierge services</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <h3>⚓ Yacht Owners</h3>
+                        <ul>
+                            <li>Manage fractional ownership</li>
+                            <li>Priority booking access</li>
+                            <li>Trade ownership shares</li>
+                            <li>Revenue optimization</li>
+                            <li>Asset management tools</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <h3>🛠️ Platform Administrators</h3>
+                        <ul>
+                            <li>System oversight & analytics</li>
+                            <li>Fleet management</li>
+                            <li>User support & service</li>
+                            <li>Business intelligence</li>
+                            <li>Operations management</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- De Antonio Yacht Fleet -->
+        <div class="slide">
+            <div class="slide-content">
+                <h1>⛵ Premium De Antonio Yacht Fleet</h1>
+                
+                <div class="yacht-showcase">
+                    <div class="yacht-image">
+                        <img src="attached_assets/de antonio D50 (1)_1754331061302.jpg" alt="De Antonio D50 Yacht" />
+                    </div>
+                    <div class="yacht-info">
+                        <h2>🚢 De Antonio D50</h2>
+                        <p style="font-size: 1.2em; margin-bottom: 25px; color: #64748b;">Experience luxury at its finest with our flagship De Antonio D50, featuring cutting-edge design and premium amenities.</p>
+                        <div class="feature-grid">
+                            <div class="feature-card">
+                                <h4>🏗️ Specifications</h4>
+                                <ul>
+                                    <li>Length: 50+ feet</li>
+                                    <li>Premium Italian design</li>
+                                    <li>State-of-the-art navigation</li>
+                                    <li>Luxury accommodations</li>
+                                </ul>
+                            </div>
+                            <div class="feature-card">
+                                <h4>🌊 Experience</h4>
+                                <ul>
+                                    <li>Mediterranean styling</li>
+                                    <li>Professional crew available</li>
+                                    <li>Water sports equipment</li>
+                                    <li>Gourmet catering options</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="benefits-section">
+                    <h3 class="benefits-title">🎯 Fleet Advantages</h3>
+                    <div class="benefits-grid">
+                        <div class="benefit-item">
+                            <div class="benefit-icon">🏆</div>
+                            <h4>Premium Brand Partnership</h4>
+                            <p>Exclusive access to De Antonio Yachts' renowned D-series fleet, known for Italian craftsmanship and innovative design.</p>
+                        </div>
+                        <div class="benefit-item">
+                            <div class="benefit-icon">🔧</div>
+                            <h4>Professional Management</h4>
+                            <p>Complete maintenance, cleaning, and operational support ensuring each yacht is in pristine condition.</p>
+                        </div>
+                        <div class="benefit-item">
+                            <div class="benefit-icon">📍</div>
+                            <h4>Prime Locations</h4>
+                            <p>Strategic positioning in premium marinas across prime boating destinations.</p>
+                        </div>
+                        <div class="benefit-item">
+                            <div class="benefit-icon">💰</div>
+                            <h4>Smart Investment</h4>
+                            <p>Fractional ownership model makes luxury yacht ownership financially accessible while maintaining exclusivity.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Application Screenshots -->
+        <div class="slide">
+            <div class="slide-content">
+                <h1>📱 Application Interface Showcase</h1>
+                
+                <h2><span class="icon">🖥️</span>Live Application Screens</h2>
+                <p style="font-size: 1.2em; text-align: center; margin: 30px 0; color: #64748b;">
+                    Here are actual screenshots from the Yachtak platform, demonstrating our comprehensive user interface and seamless user experience.
+                </p>
+                
+                <div class="screen-showcase">
+                    <div class="screen-item">
+                        <img src="attached_assets/Screenshot 2025-08-04 at 9.15.20 PM_1754331335266.png" alt="Main Dashboard Interface" class="screen-image" />
+                        <div class="screen-info">
+                            <div class="screen-title">🏠 Main Dashboard</div>
+                            <p class="screen-description">Central command center providing users with quick access to all platform features, recent activity, and personalized recommendations.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="screen-item">
+                        <img src="attached_assets/Screenshot 2025-08-04 at 9.18.20 PM_1754331528285.png" alt="Yacht Fleet Interface" class="screen-image" />
+                        <div class="screen-info">
+                            <div class="screen-title">⛵ Yacht Fleet Browser</div>
+                            <p class="screen-description">Comprehensive yacht catalog with advanced filtering, real-time availability, high-quality imagery, and detailed specifications.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="screen-item">
+                        <img src="attached_assets/Screenshot 2025-08-05 at 5.57.21 PM_1754405861870.png" alt="Booking Management" class="screen-image" />
+                        <div class="screen-info">
+                            <div class="screen-title">📅 Booking Management</div>
+                            <p class="screen-description">Sophisticated booking system with calendar integration, pricing optimization, and seamless reservation management.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="screen-item">
+                        <img src="attached_assets/Screenshot 2025-08-07 at 4.07.34 PM_1754572067524.png" alt="Owner Dashboard" class="screen-image" />
+                        <div class="screen-info">
+                            <div class="screen-title">⚓ Owner Control Panel</div>
+                            <p class="screen-description">Advanced owner dashboard with revenue analytics, booking management, and comprehensive asset control features.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="highlight">
+                    <h4>🎨 Design Excellence</h4>
+                    <p style="font-size: 1.1em;">Our application features a modern, ocean-themed design with intuitive navigation, responsive layouts, and premium visual elements that reflect the luxury yacht experience.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Authentication System -->
+        <div class="slide">
+            <div class="slide-content">
+                <h1>🔐 Secure Authentication System</h1>
+                
+                <div class="flow-diagram">
+                    <div class="flow-step">📱 Phone Login</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-step">🔢 OTP Verification</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-step">⚙️ Account Setup</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-step">👤 Role Selection</div>
+                </div>
+                
+                <h2><span class="icon">🔑</span>Multi-Layer Security</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>📞 Phone-Based Authentication</h3>
+                        <ul>
+                            <li>Primary login method</li>
+                            <li>International number support</li>
+                            <li>SMS OTP integration</li>
+                            <li>Anti-fraud protection</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <h3>🔢 OTP Verification</h3>
+                        <ul>
+                            <li>6-digit security codes</li>
+                            <li>Time-limited validity</li>
+                            <li>Resend capabilities</li>
+                            <li>Demo mode support</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <h3>⚙️ Smart Account Setup</h3>
+                        <ul>
+                            <li>Role-based configuration</li>
+                            <li>Profile completion guided</li>
+                            <li>Security preferences</li>
+                            <li>Terms acceptance</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="benefits-section">
+                    <h3 class="benefits-title">🔒 Security Benefits</h3>
+                    <div class="benefits-grid">
+                        <div class="benefit-item">
+                            <div class="benefit-icon">🛡️</div>
+                            <h4>Enterprise-Grade Security</h4>
+                            <p>Multi-factor authentication with encrypted sessions and PostgreSQL-backed security storage.</p>
+                        </div>
+                        <div class="benefit-item">
+                            <div class="benefit-icon">🎯</div>
+                            <h4>Role-Based Access Control</h4>
+                            <p>Dynamic interface adaptation based on user roles with intelligent routing and feature access.</p>
+                        </div>
+                        <div class="benefit-item">
+                            <div class="benefit-icon">🔄</div>
+                            <h4>Seamless User Experience</h4>
+                            <p>Smart routing to relevant dashboards with persistent sessions and automatic security updates.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Booking System -->
+        <div class="slide">
+            <div class="slide-content">
+                <h1>📅 Advanced Booking & Reservation System</h1>
+                
+                <div class="flow-diagram">
+                    <div class="flow-step">⛵ Yacht Selection</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-step">🛒 Booking Checkout</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-step">💳 Payment Processing</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-step">✅ Confirmation</div>
+                </div>
+                
+                <h2><span class="icon">🎯</span>Intelligent Booking Rules</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>📊 Dynamic Pricing</h3>
+                        <ul>
+                            <li>Seasonal multipliers</li>
+                            <li>Demand-based pricing</li>
+                            <li>Owner vs. renter rates</li>
+                            <li>Early booking discounts</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <h3>⚓ Owner Privileges</h3>
+                        <ul>
+                            <li>48-day annual allocations</li>
+                            <li>Priority booking access</li>
+                            <li>Advance reservations</li>
+                            <li>Usage day tracking</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <h3>🔧 Smart Management</h3>
+                        <ul>
+                            <li>Conflict detection</li>
+                            <li>Availability optimization</li>
+                            <li>Maintenance scheduling</li>
+                            <li>Blackout period management</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h2><span class="icon">🎪</span>Premium Services & Add-ons</h2>
+                <div class="benefits-section">
+                    <div class="benefits-grid">
+                        <div class="benefit-item">
+                            <div class="benefit-icon">👨‍✈️</div>
+                            <h4>Professional Crew Services</h4>
+                            <p>Certified captains and crew members available for safe and luxurious sailing experiences.</p>
+                        </div>
+                        <div class="benefit-item">
+                            <div class="benefit-icon">🍾</div>
+                            <h4>Gourmet Catering</h4>
+                            <p>Premium dining experiences with professional chefs and customized menus for every occasion.</p>
+                        </div>
+                        <div class="benefit-item">
+                            <div class="benefit-icon">🏄‍♂️</div>
+                            <h4>Water Sports Equipment</h4>
+                            <p>Complete range of water sports gear including jet skis, paddle boards, snorkeling equipment, and more.</p>
+                        </div>
+                        <div class="benefit-item">
+                            <div class="benefit-icon">🎯</div>
+                            <h4>Concierge Services</h4>
+                            <p>Personalized assistance for special requests, event planning, and destination recommendations.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fractional Ownership -->
+        <div class="slide">
+            <div class="slide-content">
+                <h1>🏛️ Revolutionary Fractional Ownership</h1>
+                
+                <div class="flow-diagram">
+                    <div class="flow-step">🏠 Ownership Home</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-step">💼 Opportunities</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-step">📊 Ownership Details</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-step">📝 Purchase Process</div>
+                </div>
+                
+                <h2><span class="icon">💎</span>Ownership Structure Options</h2>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number">1/6</div>
+                        <div class="stat-label">Premium Share</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">1/8</div>
+                        <div class="stat-label">Standard Share</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">48</div>
+                        <div class="stat-label">Annual Usage Days</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">ROI</div>
+                        <div class="stat-label">Value Appreciation</div>
+                    </div>
+                </div>
+                
+                <h2><span class="icon">📈</span>Investment Advantages</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>💰 Financial Benefits</h3>
+                        <ul>
+                            <li>Fractional cost entry</li>
+                            <li>Shared maintenance costs</li>
+                            <li>Revenue generation potential</li>
+                            <li>Appreciation value sharing</li>
+                            <li>Financing options available</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <h3>⚓ Usage Rights</h3>
+                        <ul>
+                            <li>Guaranteed annual days</li>
+                            <li>Priority booking windows</li>
+                            <li>Peak season access</li>
+                            <li>Flexible scheduling</li>
+                            <li>Transfer capabilities</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <h3>🤝 Co-ownership Management</h3>
+                        <ul>
+                            <li>Structured decision making</li>
+                            <li>Communication tools</li>
+                            <li>Expense transparency</li>
+                            <li>Voting mechanisms</li>
+                            <li>Conflict resolution</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="highlight">
+                    <h4>🎯 Smart Investment Strategy</h4>
+                    <p style="font-size: 1.1em;">Fractional yacht ownership provides access to luxury vessels at a fraction of the cost, with professional management, guaranteed usage rights, and potential for value appreciation - making luxury yachting accessible to a broader market.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Share Trading Marketplace -->
+        <div class="slide">
+            <div class="slide-content">
+                <h1>💹 Dynamic Share Trading Marketplace</h1>
+                
+                <div class="flow-diagram">
+                    <div class="flow-step">🏪 Marketplace</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-step">📋 Listing Details</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-step">💰 Buy/Sell</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-step">✅ Transaction Complete</div>
+                </div>
+                
+                <h2><span class="icon">🔄</span>Advanced Trading Features</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>🎯 Smart Marketplace</h3>
+                        <ul>
+                            <li>Real-time price discovery</li>
+                            <li>Market trend analysis</li>
+                            <li>Automated valuations</li>
+                            <li>Liquidity optimization</li>
+                            <li>Performance tracking</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <h3>🤝 Peer-to-Peer Trading</h3>
+                        <ul>
+                            <li>Direct owner transactions</li>
+                            <li>Escrow services</li>
+                            <li>Legal documentation</li>
+                            <li>Right of first refusal</li>
+                            <li>Transfer assistance</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <h3>📊 Market Intelligence</h3>
+                        <ul>
+                            <li>Historical performance</li>
+                            <li>Demand analytics</li>
+                            <li>Pricing recommendations</li>
+                            <li>Investment insights</li>
+                            <li>Market reports</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="benefits-section">
+                    <h3 class="benefits-title">💎 Trading Advantages</h3>
+                    <div class="benefits-grid">
+                        <div class="benefit-item">
+                            <div class="benefit-icon">💧</div>
+                            <h4>Enhanced Liquidity</h4>
+                            <p>Easy entry and exit from yacht ownership with transparent, market-driven pricing and secure transaction processing.</p>
+                        </div>
+                        <div class="benefit-item">
+                            <div class="benefit-icon">🔒</div>
+                            <h4>Secure Transactions</h4>
+                            <p>Professional escrow services, legal documentation, and verified ownership transfers ensure complete transaction security.</p>
+                        </div>
+                        <div class="benefit-item">
+                            <div class="benefit-icon">📈</div>
+                            <h4>Price Transparency</h4>
+                            <p>Real-time market data, historical performance tracking, and automated valuation tools provide complete pricing transparency.</p>
+                        </div>
+                        <div class="benefit-item">
+                            <div class="benefit-icon">⚡</div>
+                            <h4>Efficient Processing</h4>
+                            <p>Streamlined buying and selling process with automated documentation and rapid transaction completion.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fuel Wallet System -->
+        <div class="slide">
+            <div class="slide-content">
+                <h1>⛽ Revolutionary Fuel Wallet System</h1>
+                
+                <div class="flow-diagram">
+                    <div class="flow-step">💳 Fuel Wallet</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-step">💰 Top-Up</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-step">📊 Usage Tracking</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-step">🔄 Auto-Reload</div>
+                </div>
+                
+                <h2><span class="icon">⛽</span>Smart Fuel Management</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>💳 Wallet Features</h3>
+                        <ul>
+                            <li>Real-time balance tracking</li>
+                            <li>Multiple payment methods</li>
+                            <li>Auto-reload thresholds</li>
+                            <li>Usage analytics</li>
+                            <li>Transaction history</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <h3>🎯 Smart Controls</h3>
+                        <ul>
+                            <li>Owner minimum balances</li>
+                            <li>Automatic deductions</li>
+                            <li>Refund processing</li>
+                            <li>Budget management</li>
+                            <li>Spending limits</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <h3>📊 Analytics & Insights</h3>
+                        <ul>
+                            <li>Consumption patterns</li>
+                            <li>Cost optimization</li>
+                            <li>Seasonal analysis</li>
+                            <li>Efficiency reporting</li>
+                            <li>Trend monitoring</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="highlight">
+                    <h4>⛽ Seamless Fuel Management</h4>
+                    <p style="font-size: 1.1em;">Our prepaid fuel wallet system eliminates payment friction, provides cost transparency, and ensures owners meet minimum fuel requirements while offering convenient auto-reload and detailed usage analytics.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Technical Architecture -->
+        <div class="slide">
+            <div class="slide-content">
+                <h1>🏗️ Advanced Technical Architecture</h1>
+                
+                <h2><span class="icon">⚙️</span>Modern Technology Stack</h2>
+                <div class="tech-stack">
+                    <div class="tech-item">React 18 + TypeScript</div>
+                    <div class="tech-item">Node.js + Express</div>
+                    <div class="tech-item">PostgreSQL + Drizzle</div>
+                    <div class="tech-item">React Query</div>
+                    <div class="tech-item">Wouter Routing</div>
+                    <div class="tech-item">shadcn/ui Components</div>
+                    <div class="tech-item">Tailwind CSS</div>
+                    <div class="tech-item">Stripe Payments</div>
+                    <div class="tech-item">Session-based Auth</div>
+                </div>
+                
+                <h2><span class="icon">🗄️</span>Robust Database Architecture</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>📊 Core Entities</h3>
+                        <ul>
+                            <li>Users & Authentication</li>
+                            <li>Yacht Fleet Data</li>
+                            <li>Booking Management</li>
+                            <li>Ownership Records</li>
+                            <li>Transaction History</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <h3>🔗 Smart Relations</h3>
+                        <ul>
+                            <li>Share Purchase Tracking</li>
+                            <li>Marketplace Listings</li>
+                            <li>Message Threading</li>
+                            <li>Fuel Transactions</li>
+                            <li>Analytics Data</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <h3>⚡ Performance Features</h3>
+                        <ul>
+                            <li>Optimized queries</li>
+                            <li>Intelligent caching</li>
+                            <li>Real-time updates</li>
+                            <li>Scalable architecture</li>
+                            <li>Security enforcement</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="benefits-section">
+                    <h3 class="benefits-title">🚀 Technical Excellence</h3>
+                    <div class="benefits-grid">
+                        <div class="benefit-item">
+                            <div class="benefit-icon">⚡</div>
+                            <h4>High Performance</h4>
+                            <p>Optimized architecture with intelligent caching, efficient queries, and responsive design for seamless user experience.</p>
+                        </div>
+                        <div class="benefit-item">
+                            <div class="benefit-icon">🔒</div>
+                            <h4>Enterprise Security</h4>
+                            <p>Multi-layer security with encrypted sessions, input validation, and comprehensive authorization systems.</p>
+                        </div>
+                        <div class="benefit-item">
+                            <div class="benefit-icon">📈</div>
+                            <h4>Scalable Growth</h4>
+                            <p>Modular architecture designed for expansion, with cloud-ready deployment and auto-scaling capabilities.</p>
+                        </div>
+                        <div class="benefit-item">
+                            <div class="benefit-icon">🛠️</div>
+                            <h4>Maintainable Code</h4>
+                            <p>Clean architecture, comprehensive testing, detailed documentation, and modern development practices.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Market Advantages -->
+        <div class="slide">
+            <div class="slide-content">
+                <h1>🏆 Competitive Market Advantages</h1>
+                
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label">Digital Platform</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">D23-D60</div>
+                        <div class="stat-label">Premium Fleet</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">3-in-1</div>
+                        <div class="stat-label">Platform Solution</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">24/7</div>
+                        <div class="stat-label">Platform Access</div>
+                    </div>
+                </div>
+                
+                <h2><span class="icon">🎯</span>Unique Value Propositions</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>🚢 Exclusive Fleet Partnership</h3>
+                        <ul>
+                            <li>Premium De Antonio Yachts</li>
+                            <li>Italian design excellence</li>
+                            <li>Professional maintenance</li>
+                            <li>Luxury amenities included</li>
+                            <li>Strategic marina locations</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <h3>💎 Revolutionary Ownership Model</h3>
+                        <ul>
+                            <li>Flexible fractional shares</li>
+                            <li>Accessible luxury ownership</li>
+                            <li>Built-in trading marketplace</li>
+                            <li>Professional asset management</li>
+                            <li>Guaranteed usage rights</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <h3>🔧 Integrated Platform Solution</h3>
+                        <ul>
+                            <li>End-to-end digital experience</li>
+                            <li>Seamless booking system</li>
+                            <li>Integrated fuel management</li>
+                            <li>Built-in communication tools</li>
+                            <li>Comprehensive owner controls</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="benefits-section">
+                    <h3 class="benefits-title">🌊 Market Innovation</h3>
+                    <div class="benefits-grid">
+                        <div class="benefit-item">
+                            <div class="benefit-icon">🎯</div>
+                            <h4>Market Disruption</h4>
+                            <p>First comprehensive platform combining yacht chartering, fractional ownership, and share trading in a seamless digital experience.</p>
+                        </div>
+                        <div class="benefit-item">
+                            <div class="benefit-icon">💰</div>
+                            <h4>Accessible Luxury</h4>
+                            <p>Democratizing yacht ownership through technology while maintaining premium quality and exclusive experiences.</p>
+                        </div>
+                        <div class="benefit-item">
+                            <div class="benefit-icon">🔄</div>
+                            <h4>Operational Excellence</h4>
+                            <p>Streamlined operations with automated systems, professional management, and comprehensive user support.</p>
+                        </div>
+                        <div class="benefit-item">
+                            <div class="benefit-icon">📈</div>
+                            <h4>Growth Potential</h4>
+                            <p>Scalable business model with multiple revenue streams and expansion opportunities in the luxury marine market.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Call to Action -->
+        <div class="slide">
+            <div class="slide-content">
+                <div class="cta-section">
+                    <h1 class="cta-title">🌊 Ready to Revolutionize Yachting?</h1>
+                    <p class="cta-subtitle">Join us in transforming luxury yacht ownership and charter experiences</p>
+                    
+                    <div class="feature-grid" style="margin-top: 50px;">
+                        <div class="feature-card" style="background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.3); color: white;">
+                            <h3>🚀 Platform Ready</h3>
+                            <p>Comprehensive application with 38+ screens, complete functionality, and premium user experience.</p>
+                        </div>
+                        <div class="feature-card" style="background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.3); color: white;">
+                            <h3>⛵ Fleet Partnership</h3>
+                            <p>Exclusive access to De Antonio Yachts premium fleet with professional management and luxury amenities.</p>
+                        </div>
+                        <div class="feature-card" style="background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.3); color: white;">
+                            <h3>💎 Market Innovation</h3>
+                            <p>Revolutionary fractional ownership model with integrated trading marketplace and seamless user experience.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 60px;">
+                    <h2 style="color: #2563eb; margin-bottom: 20px;">Thank you for exploring Yachtak Platform!</h2>
+                    <p style="font-size: 1.3em; color: #64748b;">The future of luxury yacht ownership and charter experiences</p>
+                    
+                    <div class="logo-container" style="margin-top: 40px;">
+                        <img src="attached_assets/Nauttec Logo_1754330395988.png" alt="Nauttec" style="max-height: 80px;" />
+                        <img src="attached_assets/DE-ANTONIO-YACHTS_LOGO-removebg-preview_1754331163197.png" alt="De Antonio Yachts" style="max-height: 80px;" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
