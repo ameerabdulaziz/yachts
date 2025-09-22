@@ -1,4 +1,22 @@
-the dow<!DOCTYPE html>
+YACHTAK COMMERCIAL PRESENTATION - READY TO COPY AND SAVE
+
+Dear User,
+
+Since the download links aren't working, here's a simple solution:
+
+STEP 1: Copy the entire content below (everything between the === lines)
+STEP 2: Create a new file on your computer called "Yachtak_Commercial_Presentation.html"  
+STEP 3: Paste the content into that file
+STEP 4: Save the file
+STEP 5: Double-click the file to open it in your web browser
+
+The file contains your complete commercial presentation with all the visuals and professional formatting.
+
+================================================================================
+
+COPY EVERYTHING BELOW THIS LINE AND SAVE AS "Yachtak_Commercial_Presentation.html"
+
+================================================================================the dow<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -1218,3 +1236,7 @@ the dow<!DOCTYPE html>
     </div>
 </body>
 </html>
+
+================================================================================
+END OF PRESENTATION CONTENT
+================================================================================
