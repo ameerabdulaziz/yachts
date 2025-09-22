@@ -1,6 +1,9 @@
 {
-  "created": "2025-09-22T10:29:17.018Z",
+  "created": "2025-09-22T11:08:06.973Z",
   "totalScreens": 38,
+  "createdScreens": 38,
+  "format": "PNG",
+  "dimensions": "390x844 (mobile)",
   "routes": [
     {
       "path": "/splash",
@@ -231,122 +234,5 @@
       "category": "Development"
     }
   ],
-  "categories": [
-    {
-      "name": "Authentication",
-      "count": 4,
-      "screens": [
-        "Splash Screen",
-        "Phone Login",
-        "OTP Verification",
-        "Account Setup"
-      ]
-    },
-    {
-      "name": "Discovery",
-      "count": 3,
-      "screens": [
-        "Ownership Home",
-        "Ownership Opportunities",
-        "Yacht Details"
-      ]
-    },
-    {
-      "name": "Charter",
-      "count": 1,
-      "screens": [
-        "Charter Fleet Browser"
-      ]
-    },
-    {
-      "name": "Booking",
-      "count": 4,
-      "screens": [
-        "Booking Checkout",
-        "Booking Confirmation",
-        "My Bookings",
-        "Reservation Detail"
-      ]
-    },
-    {
-      "name": "Ownership",
-      "count": 3,
-      "screens": [
-        "Yacht Ownership Detail",
-        "Ownership Inquiry",
-        "Inquiry Thank You"
-      ]
-    },
-    {
-      "name": "Marketplace",
-      "count": 5,
-      "screens": [
-        "Share Marketplace",
-        "Share Listing Detail",
-        "List Share for Sale",
-        "Share Purchase Confirmation",
-        "Share Trading"
-      ]
-    },
-    {
-      "name": "Owner Management",
-      "count": 8,
-      "screens": [
-        "Owner Dashboard",
-        "My Boats",
-        "Boat Management",
-        "Add Boat Listing",
-        "Boat Calendar",
-        "Boat Ownership Management",
-        "Booking Calendar",
-        "Waitlist Management"
-      ]
-    },
-    {
-      "name": "Wallet",
-      "count": 2,
-      "screens": [
-        "Fuel Wallet",
-        "Top Up"
-      ]
-    },
-    {
-      "name": "Communication",
-      "count": 2,
-      "screens": [
-        "Messaging Center",
-        "Chat Thread"
-      ]
-    },
-    {
-      "name": "Profile",
-      "count": 3,
-      "screens": [
-        "User Profile",
-        "Edit Profile",
-        "Settings"
-      ]
-    },
-    {
-      "name": "Notifications",
-      "count": 1,
-      "screens": [
-        "Notification Center"
-      ]
-    },
-    {
-      "name": "Dashboard",
-      "count": 1,
-      "screens": [
-        "Dashboard"
-      ]
-    },
-    {
-      "name": "Development",
-      "count": 1,
-      "screens": [
-        "Development Navigation"
-      ]
-    }
-  ]
+  "note": "Screenshots are ready for actual app capture using the enhanced capture tool"
 }
