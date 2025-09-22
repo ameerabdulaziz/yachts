@@ -359,6 +359,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get('/presentation', (_req, res) => {
     res.sendFile(path.resolve('Yachtak_Commercial_Presentation.html'));
   });
+  
+  // Force download the presentation
+  app.get('/download-presentation', (_req, res) => {
+    res.download(path.resolve('Yachtak_Commercial_Presentation.html'), 'Yachtak_Commercial_Presentation.html');
+  });
+  
+  // Download page
+  app.get('/download', (_req, res) => {
+    res.sendFile(path.resolve('download-page.html'));
+  });
 
   const httpServer = createServer(app);
   return httpServer;
