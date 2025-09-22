@@ -1,5 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
+import path from "path";
+import express from "express";
 import { storage } from "./storage";
 import passport from "passport";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
@@ -348,6 +350,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       res.status(500).json({ message: "Failed to send message" });
     }
+  });
+
+  // Serve presentation assets
+  app.use('/presentation-assets', express.static(path.resolve('attached_assets'), { index: false }));
+  
+  // Serve the commercial presentation
+  app.get('/presentation', (_req, res) => {
+    res.sendFile(path.resolve('Yachtak_Commercial_Presentation.html'));
   });
 
   const httpServer = createServer(app);
