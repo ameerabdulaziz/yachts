@@ -1,0 +1,13 @@
+SCREENSHOT NEEDED: Ownership Home
+
+URL: http://localhost:5000/
+Category: Discovery
+Expected filename: 10_discovery_ownership_home.png
+
+To capture this screen:
+1. Visit the URL above in your browser
+2. Take a screenshot (mobile view recommended)
+3. Save as "10_discovery_ownership_home.png" in the all_app_screens folder
+4. Delete this placeholder file
+
+Generated: 2025-09-22T10:29:17.054Z

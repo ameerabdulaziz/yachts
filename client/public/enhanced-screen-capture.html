@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yachtak Complete Screen Capture</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .capture-tool {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .controls {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        .btn {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+        .btn:hover { background: #1d4ed8; }
+        .btn:disabled { background: #94a3b8; cursor: not-allowed; }
+        .btn.success { background: #059669; }
+        .btn.success:hover { background: #047857; }
+        .progress {
+            margin: 20px 0;
+            padding: 20px;
+            background: #f8fafc;
+            border-radius: 8px;
+            border-left: 4px solid #2563eb;
+        }
+        .progress-bar {
+            background: #e2e8f0;
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        .progress-fill {
+            background: #2563eb;
+            height: 100%;
+            transition: width 0.3s ease;
+        }
+        .log {
+            height: 200px;
+            overflow-y: auto;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 10px;
+            font-family: monospace;
+            font-size: 12px;
+            background: #fafafa;
+        }
+        .routes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 15px;
+        }
+        .route-card {
+            padding: 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            background: white;
+            transition: all 0.3s ease;
+        }
+        .route-card.capturing { border-color: #2563eb; background: #dbeafe; }
+        .route-card.success { border-color: #059669; background: #d1fae5; }
+        .route-card.error { border-color: #dc2626; background: #fee2e2; }
+        .route-name { font-weight: 600; color: #1f2937; margin-bottom: 4px; }
+        .route-path { font-size: 12px; color: #6b7280; font-family: monospace; }
+        .route-status { font-size: 11px; font-weight: 500; margin-top: 6px; }
+        iframe { display: none; }
+        .stats { 
+            display: flex; 
+            justify-content: space-around; 
+            margin: 20px 0; 
+            text-align: center; 
+        }
+        .stat { 
+            padding: 15px; 
+            background: #f1f5f9; 
+            border-radius: 8px; 
+            min-width: 120px; 
+        }
+        .stat-number { 
+            font-size: 2em; 
+            font-weight: bold; 
+            color: #2563eb; 
+        }
+        .stat-label { 
+            font-size: 0.9em; 
+            color: #64748b; 
+        }
+    </style>
+</head>
+<body>
+    <div class="capture-tool">
+        <div class="header">
+            <h1>📱 Yachtak Complete Screen Capture</h1>
+            <p>Capture all 38+ application screens and save to downloadable folder</p>
+        </div>
+
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-number" id="totalScreens">38</div>
+                <div class="stat-label">Total Screens</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number" id="capturedCount">0</div>
+                <div class="stat-label">Captured</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number" id="savedCount">0</div>
+                <div class="stat-label">Saved to Folder</div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="btn" onclick="startCapture()" id="startBtn">🚀 Start Full Capture</button>
+            <button class="btn" onclick="pauseCapture()" id="pauseBtn" disabled>⏸️ Pause</button>
+            <button class="btn" onclick="stopCapture()" id="stopBtn" disabled>⏹️ Stop</button>
+            <button class="btn success" onclick="downloadFolder()" id="downloadBtn" disabled>📁 Download Complete Folder</button>
+        </div>
+
+        <div class="progress" id="progressContainer" style="display: none;">
+            <div id="progressText">Preparing capture...</div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+            </div>
+            <div id="progressStats">0 / 38 screens captured and saved</div>
+        </div>
+
+        <div>
+            <h3>📊 Screen Capture Status</h3>
+            <div class="routes-grid" id="routesGrid">
+                <!-- Routes will be populated here -->
+            </div>
+        </div>
+
+        <div>
+            <h3>📋 Capture Log</h3>
+            <div class="log" id="captureLog"></div>
+        </div>
+    </div>
+
+    <!-- Hidden iframe for capturing screens -->
+    <iframe id="captureFrame" width="390" height="844"></iframe>
+
+    <script>
+        // Complete route manifest - all 38+ application screens
+        const routeManifest = [
+            // Authentication & Onboarding (01-04)
+            { path: '/splash', filename: '01_auth_splash.png', name: 'Splash Screen', category: 'Authentication' },
+            { path: '/login', filename: '02_auth_phone_login.png', name: 'Phone Login', category: 'Authentication' },
+            { path: '/verify-otp', filename: '03_auth_otp_verification.png', name: 'OTP Verification', category: 'Authentication' },
+            { path: '/account-setup', filename: '04_auth_account_setup.png', name: 'Account Setup', category: 'Authentication' },
+
+            // Discovery & Home (10-12)
+            { path: '/', filename: '10_discovery_ownership_home.png', name: 'Ownership Home', category: 'Discovery' },
+            { path: '/ownership-opportunities', filename: '11_discovery_ownership_opportunities.png', name: 'Ownership Opportunities', category: 'Discovery' },
+            { path: '/yacht-details/1', filename: '12_discovery_yacht_details.png', name: 'Yacht Details', category: 'Discovery' },
+
+            // Charter & Fleet (15-16)
+            { path: '/charter', filename: '15_charter_fleet_browser.png', name: 'Charter Fleet Browser', category: 'Charter' },
+
+            // Booking System (20-23)
+            { path: '/booking/1', filename: '20_booking_checkout.png', name: 'Booking Checkout', category: 'Booking' },
+            { path: '/booking-confirmation', filename: '21_booking_confirmation.png', name: 'Booking Confirmation', category: 'Booking' },
+            { path: '/my-bookings', filename: '22_bookings_my_bookings.png', name: 'My Bookings', category: 'Booking' },
+            { path: '/reservation-detail/1', filename: '23_bookings_reservation_detail.png', name: 'Reservation Detail', category: 'Booking' },
+
+            // Ownership Management (30-32)
+            { path: '/ownership/1', filename: '30_ownership_detail.png', name: 'Yacht Ownership Detail', category: 'Ownership' },
+            { path: '/ownership-inquiry/1', filename: '31_ownership_inquiry.png', name: 'Ownership Inquiry', category: 'Ownership' },
+            { path: '/inquiry-thank-you', filename: '32_ownership_inquiry_thank_you.png', name: 'Inquiry Thank You', category: 'Ownership' },
+
+            // Share Trading Marketplace (40-44)
+            { path: '/share-marketplace', filename: '40_marketplace_share_marketplace.png', name: 'Share Marketplace', category: 'Marketplace' },
+            { path: '/share-listing/1', filename: '41_marketplace_share_listing_detail.png', name: 'Share Listing Detail', category: 'Marketplace' },
+            { path: '/list-share-for-sale', filename: '42_marketplace_list_share_for_sale.png', name: 'List Share for Sale', category: 'Marketplace' },
+            { path: '/share-purchase-confirmation/1', filename: '43_marketplace_share_purchase_confirmation.png', name: 'Share Purchase Confirmation', category: 'Marketplace' },
+            { path: '/share-trading', filename: '44_marketplace_share_trading.png', name: 'Share Trading', category: 'Marketplace' },
+
+            // Owner Dashboard & Management (50-57)
+            { path: '/owner-dashboard', filename: '50_owner_dashboard.png', name: 'Owner Dashboard', category: 'Owner Management' },
+            { path: '/my-boats', filename: '51_owner_my_boats.png', name: 'My Boats', category: 'Owner Management' },
+            { path: '/boat-management/1', filename: '52_owner_boat_management.png', name: 'Boat Management', category: 'Owner Management' },
+            { path: '/add-boat-listing', filename: '53_owner_add_boat_listing.png', name: 'Add Boat Listing', category: 'Owner Management' },
+            { path: '/boat-calendar/1', filename: '54_owner_boat_calendar.png', name: 'Boat Calendar', category: 'Owner Management' },
+            { path: '/boat-ownership/1', filename: '55_owner_boat_ownership_management.png', name: 'Boat Ownership Management', category: 'Owner Management' },
+            { path: '/booking-calendar/1', filename: '56_owner_booking_calendar.png', name: 'Booking Calendar', category: 'Owner Management' },
+            { path: '/waitlist-management', filename: '57_owner_waitlist_management.png', name: 'Waitlist Management', category: 'Owner Management' },
+
+            // Fuel Wallet System (60-61)
+            { path: '/fuel-wallet', filename: '60_wallet_fuel_wallet.png', name: 'Fuel Wallet', category: 'Wallet' },
+            { path: '/top-up', filename: '61_wallet_top_up.png', name: 'Top Up', category: 'Wallet' },
+
+            // Communication & Messaging (70-71)
+            { path: '/messages', filename: '70_messaging_center.png', name: 'Messaging Center', category: 'Communication' },
+            { path: '/chat/1', filename: '71_chat_thread.png', name: 'Chat Thread', category: 'Communication' },
+
+            // Profile & Settings (80-82)
+            { path: '/profile', filename: '80_profile_user_profile.png', name: 'User Profile', category: 'Profile' },
+            { path: '/edit-profile', filename: '81_profile_edit_profile.png', name: 'Edit Profile', category: 'Profile' },
+            { path: '/settings', filename: '82_profile_settings.png', name: 'Settings', category: 'Profile' },
+
+            // Notifications & Dashboard (90-99)
+            { path: '/notifications', filename: '90_notifications.png', name: 'Notification Center', category: 'Notifications' },
+            { path: '/dashboard', filename: '99_dashboard.png', name: 'Dashboard', category: 'Dashboard' },
+
+            // Development & Utility (98-97)
+            { path: '/dev-navigation', filename: '98_dev_navigation.png', name: 'Development Navigation', category: 'Development' }
+        ];
+
+        let captureState = {
+            isCapturing: false,
+            isPaused: false,
+            currentIndex: 0,
+            capturedScreens: 0,
+            savedScreens: 0,
+            totalScreens: routeManifest.length,
+            screenshots: {}
+        };
+
+        function log(message) {
+            const logDiv = document.getElementById('captureLog');
+            const timestamp = new Date().toLocaleTimeString();
+            logDiv.innerHTML += `[${timestamp}] ${message}\n`;
+            logDiv.scrollTop = logDiv.scrollHeight;
+        }
+
+        function updateProgress() {
+            const percentage = (captureState.savedScreens / captureState.totalScreens) * 100;
+            
+            document.getElementById('progressFill').style.width = `${percentage}%`;
+            document.getElementById('progressStats').textContent = 
+                `${captureState.savedScreens} / ${captureState.totalScreens} screens captured and saved`;
+            document.getElementById('capturedCount').textContent = captureState.capturedScreens;
+            document.getElementById('savedCount').textContent = captureState.savedScreens;
+
+            if (captureState.savedScreens === captureState.totalScreens && captureState.savedScreens > 0) {
+                document.getElementById('downloadBtn').disabled = false;
+                log(`🎉 All ${captureState.totalScreens} screens captured and saved to folder!`);
+            }
+        }
+
+        function updateRouteCard(route, status) {
+            const card = document.querySelector(`[data-route="${route.path}"]`);
+            if (card) {
+                card.className = `route-card ${status}`;
+                const statusElement = card.querySelector('.route-status');
+                if (statusElement) {
+                    statusElement.textContent = status.charAt(0).toUpperCase() + status.slice(1);
+                }
+            }
+        }
+
+        function initializeRoutesGrid() {
+            const grid = document.getElementById('routesGrid');
+            grid.innerHTML = routeManifest.map(route => `
+                <div class="route-card" data-route="${route.path}">
+                    <div class="route-name">${route.name}</div>
+                    <div class="route-path">${route.path}</div>
+                    <div class="route-status">Pending</div>
+                </div>
+            `).join('');
+        }
+
+        async function saveScreenshotToServer(route, imageData) {
+            try {
+                const response = await fetch('/api/save-screenshot', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        filename: route.filename,
+                        imageData: imageData
+                    })
+                });
+
+                const result = await response.json();
+                if (result.success) {
+                    captureState.savedScreens++;
+                    log(`💾 Saved to folder: ${route.filename}`);
+                    updateRouteCard(route, 'success');
+                    updateProgress();
+                    return true;
+                } else {
+                    log(`❌ Failed to save: ${route.filename} - ${result.error}`);
+                    updateRouteCard(route, 'error');
+                    return false;
+                }
+            } catch (error) {
+                log(`❌ Server error saving: ${route.filename} - ${error.message}`);
+                updateRouteCard(route, 'error');
+                return false;
+            }
+        }
+
+        async function captureScreen(route) {
+            return new Promise((resolve) => {
+                log(`📸 Capturing: ${route.name} (${route.path})`);
+                updateRouteCard(route, 'capturing');
+
+                const iframe = document.getElementById('captureFrame');
+                
+                iframe.onload = async function() {
+                    try {
+                        // Wait for content to load
+                        await new Promise(resolve => setTimeout(resolve, 3000));
+                        
+                        const canvas = await html2canvas(iframe.contentDocument.body, {
+                            width: 390,
+                            height: 844,
+                            useCORS: true,
+                            allowTaint: true,
+                            scale: 2
+                        });
+
+                        const imageData = canvas.toDataURL('image/png');
+                        captureState.capturedScreens++;
+                        
+                        // Save to server
+                        const saved = await saveScreenshotToServer(route, imageData);
+                        
+                        log(`✅ Captured: ${route.name}`);
+                        resolve(saved);
+
+                    } catch (error) {
+                        log(`❌ Failed to capture: ${route.name} - ${error.message}`);
+                        updateRouteCard(route, 'error');
+                        resolve(false);
+                    }
+                };
+
+                iframe.onerror = function() {
+                    log(`❌ Failed to load: ${route.path}`);
+                    updateRouteCard(route, 'error');
+                    resolve(false);
+                };
+
+                iframe.src = route.path;
+            });
+        }
+
+        async function startCapture() {
+            captureState.isCapturing = true;
+            captureState.isPaused = false;
+            captureState.currentIndex = 0;
+            captureState.capturedScreens = 0;
+            captureState.savedScreens = 0;
+
+            document.getElementById('startBtn').disabled = true;
+            document.getElementById('pauseBtn').disabled = false;
+            document.getElementById('stopBtn').disabled = false;
+            document.getElementById('progressContainer').style.display = 'block';
+
+            log(`🚀 Starting capture of ${captureState.totalScreens} screens...`);
+            log(`📁 Screenshots will be saved to 'all_app_screens' folder`);
+
+            for (let i = 0; i < routeManifest.length; i++) {
+                if (!captureState.isCapturing) break;
+                
+                while (captureState.isPaused) {
+                    await new Promise(resolve => setTimeout(resolve, 100));
+                }
+
+                captureState.currentIndex = i;
+                await captureScreen(routeManifest[i]);
+                
+                // Small delay between captures
+                await new Promise(resolve => setTimeout(resolve, 1500));
+            }
+
+            stopCapture();
+        }
+
+        function pauseCapture() {
+            captureState.isPaused = !captureState.isPaused;
+            const pauseBtn = document.getElementById('pauseBtn');
+            pauseBtn.textContent = captureState.isPaused ? '▶️ Resume' : '⏸️ Pause';
+            log(captureState.isPaused ? '⏸️ Capture paused' : '▶️ Capture resumed');
+        }
+
+        function stopCapture() {
+            captureState.isCapturing = false;
+            captureState.isPaused = false;
+
+            document.getElementById('startBtn').disabled = false;
+            document.getElementById('pauseBtn').disabled = true;
+            document.getElementById('stopBtn').disabled = true;
+            document.getElementById('pauseBtn').textContent = '⏸️ Pause';
+
+            log('⏹️ Capture stopped');
+        }
+
+        function downloadFolder() {
+            log('📦 Opening download for complete screenshots folder...');
+            
+            // Trigger download of the entire folder
+            const link = document.createElement('a');
+            link.href = '/all_app_screens.tar.gz';
+            link.download = 'yachtak_all_app_screens.tar.gz';
+            link.click();
+            
+            log(`📥 Downloaded complete folder with ${captureState.savedScreens} screenshots!`);
+        }
+
+        // Initialize the tool
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeRoutesGrid();
+            updateProgress();
+            log('🔧 Enhanced screen capture tool initialized');
+            log(`📋 ${captureState.totalScreens} screens ready for capture`);
+            log('📁 Screenshots will be automatically saved to downloadable folder');
+        });
+    </script>
+</body>
+</html>

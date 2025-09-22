@@ -1,0 +1,13 @@
+SCREENSHOT NEEDED: Share Marketplace
+
+URL: http://localhost:5000/share-marketplace
+Category: Marketplace
+Expected filename: 40_marketplace_share_marketplace.png
+
+To capture this screen:
+1. Visit the URL above in your browser
+2. Take a screenshot (mobile view recommended)
+3. Save as "40_marketplace_share_marketplace.png" in the all_app_screens folder
+4. Delete this placeholder file
+
+Generated: 2025-09-22T10:29:17.056Z

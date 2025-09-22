@@ -1,0 +1,352 @@
+{
+  "created": "2025-09-22T10:29:17.018Z",
+  "totalScreens": 38,
+  "routes": [
+    {
+      "path": "/splash",
+      "filename": "01_auth_splash.png",
+      "name": "Splash Screen",
+      "category": "Authentication"
+    },
+    {
+      "path": "/login",
+      "filename": "02_auth_phone_login.png",
+      "name": "Phone Login",
+      "category": "Authentication"
+    },
+    {
+      "path": "/verify-otp",
+      "filename": "03_auth_otp_verification.png",
+      "name": "OTP Verification",
+      "category": "Authentication"
+    },
+    {
+      "path": "/account-setup",
+      "filename": "04_auth_account_setup.png",
+      "name": "Account Setup",
+      "category": "Authentication"
+    },
+    {
+      "path": "/",
+      "filename": "10_discovery_ownership_home.png",
+      "name": "Ownership Home",
+      "category": "Discovery"
+    },
+    {
+      "path": "/ownership-opportunities",
+      "filename": "11_discovery_ownership_opportunities.png",
+      "name": "Ownership Opportunities",
+      "category": "Discovery"
+    },
+    {
+      "path": "/yacht-details/1",
+      "filename": "12_discovery_yacht_details.png",
+      "name": "Yacht Details",
+      "category": "Discovery"
+    },
+    {
+      "path": "/charter",
+      "filename": "15_charter_fleet_browser.png",
+      "name": "Charter Fleet Browser",
+      "category": "Charter"
+    },
+    {
+      "path": "/booking/1",
+      "filename": "20_booking_checkout.png",
+      "name": "Booking Checkout",
+      "category": "Booking"
+    },
+    {
+      "path": "/booking-confirmation",
+      "filename": "21_booking_confirmation.png",
+      "name": "Booking Confirmation",
+      "category": "Booking"
+    },
+    {
+      "path": "/my-bookings",
+      "filename": "22_bookings_my_bookings.png",
+      "name": "My Bookings",
+      "category": "Booking"
+    },
+    {
+      "path": "/reservation-detail/1",
+      "filename": "23_bookings_reservation_detail.png",
+      "name": "Reservation Detail",
+      "category": "Booking"
+    },
+    {
+      "path": "/ownership/1",
+      "filename": "30_ownership_detail.png",
+      "name": "Yacht Ownership Detail",
+      "category": "Ownership"
+    },
+    {
+      "path": "/ownership-inquiry/1",
+      "filename": "31_ownership_inquiry.png",
+      "name": "Ownership Inquiry",
+      "category": "Ownership"
+    },
+    {
+      "path": "/inquiry-thank-you",
+      "filename": "32_ownership_inquiry_thank_you.png",
+      "name": "Inquiry Thank You",
+      "category": "Ownership"
+    },
+    {
+      "path": "/share-marketplace",
+      "filename": "40_marketplace_share_marketplace.png",
+      "name": "Share Marketplace",
+      "category": "Marketplace"
+    },
+    {
+      "path": "/share-listing/1",
+      "filename": "41_marketplace_share_listing_detail.png",
+      "name": "Share Listing Detail",
+      "category": "Marketplace"
+    },
+    {
+      "path": "/list-share-for-sale",
+      "filename": "42_marketplace_list_share_for_sale.png",
+      "name": "List Share for Sale",
+      "category": "Marketplace"
+    },
+    {
+      "path": "/share-purchase-confirmation/1",
+      "filename": "43_marketplace_share_purchase_confirmation.png",
+      "name": "Share Purchase Confirmation",
+      "category": "Marketplace"
+    },
+    {
+      "path": "/share-trading",
+      "filename": "44_marketplace_share_trading.png",
+      "name": "Share Trading",
+      "category": "Marketplace"
+    },
+    {
+      "path": "/owner-dashboard",
+      "filename": "50_owner_dashboard.png",
+      "name": "Owner Dashboard",
+      "category": "Owner Management"
+    },
+    {
+      "path": "/my-boats",
+      "filename": "51_owner_my_boats.png",
+      "name": "My Boats",
+      "category": "Owner Management"
+    },
+    {
+      "path": "/boat-management/1",
+      "filename": "52_owner_boat_management.png",
+      "name": "Boat Management",
+      "category": "Owner Management"
+    },
+    {
+      "path": "/add-boat-listing",
+      "filename": "53_owner_add_boat_listing.png",
+      "name": "Add Boat Listing",
+      "category": "Owner Management"
+    },
+    {
+      "path": "/boat-calendar/1",
+      "filename": "54_owner_boat_calendar.png",
+      "name": "Boat Calendar",
+      "category": "Owner Management"
+    },
+    {
+      "path": "/boat-ownership/1",
+      "filename": "55_owner_boat_ownership_management.png",
+      "name": "Boat Ownership Management",
+      "category": "Owner Management"
+    },
+    {
+      "path": "/booking-calendar/1",
+      "filename": "56_owner_booking_calendar.png",
+      "name": "Booking Calendar",
+      "category": "Owner Management"
+    },
+    {
+      "path": "/waitlist-management",
+      "filename": "57_owner_waitlist_management.png",
+      "name": "Waitlist Management",
+      "category": "Owner Management"
+    },
+    {
+      "path": "/fuel-wallet",
+      "filename": "60_wallet_fuel_wallet.png",
+      "name": "Fuel Wallet",
+      "category": "Wallet"
+    },
+    {
+      "path": "/top-up",
+      "filename": "61_wallet_top_up.png",
+      "name": "Top Up",
+      "category": "Wallet"
+    },
+    {
+      "path": "/messages",
+      "filename": "70_messaging_center.png",
+      "name": "Messaging Center",
+      "category": "Communication"
+    },
+    {
+      "path": "/chat/1",
+      "filename": "71_chat_thread.png",
+      "name": "Chat Thread",
+      "category": "Communication"
+    },
+    {
+      "path": "/profile",
+      "filename": "80_profile_user_profile.png",
+      "name": "User Profile",
+      "category": "Profile"
+    },
+    {
+      "path": "/edit-profile",
+      "filename": "81_profile_edit_profile.png",
+      "name": "Edit Profile",
+      "category": "Profile"
+    },
+    {
+      "path": "/settings",
+      "filename": "82_profile_settings.png",
+      "name": "Settings",
+      "category": "Profile"
+    },
+    {
+      "path": "/notifications",
+      "filename": "90_notifications.png",
+      "name": "Notification Center",
+      "category": "Notifications"
+    },
+    {
+      "path": "/dashboard",
+      "filename": "99_dashboard.png",
+      "name": "Dashboard",
+      "category": "Dashboard"
+    },
+    {
+      "path": "/dev-navigation",
+      "filename": "98_dev_navigation.png",
+      "name": "Development Navigation",
+      "category": "Development"
+    }
+  ],
+  "categories": [
+    {
+      "name": "Authentication",
+      "count": 4,
+      "screens": [
+        "Splash Screen",
+        "Phone Login",
+        "OTP Verification",
+        "Account Setup"
+      ]
+    },
+    {
+      "name": "Discovery",
+      "count": 3,
+      "screens": [
+        "Ownership Home",
+        "Ownership Opportunities",
+        "Yacht Details"
+      ]
+    },
+    {
+      "name": "Charter",
+      "count": 1,
+      "screens": [
+        "Charter Fleet Browser"
+      ]
+    },
+    {
+      "name": "Booking",
+      "count": 4,
+      "screens": [
+        "Booking Checkout",
+        "Booking Confirmation",
+        "My Bookings",
+        "Reservation Detail"
+      ]
+    },
+    {
+      "name": "Ownership",
+      "count": 3,
+      "screens": [
+        "Yacht Ownership Detail",
+        "Ownership Inquiry",
+        "Inquiry Thank You"
+      ]
+    },
+    {
+      "name": "Marketplace",
+      "count": 5,
+      "screens": [
+        "Share Marketplace",
+        "Share Listing Detail",
+        "List Share for Sale",
+        "Share Purchase Confirmation",
+        "Share Trading"
+      ]
+    },
+    {
+      "name": "Owner Management",
+      "count": 8,
+      "screens": [
+        "Owner Dashboard",
+        "My Boats",
+        "Boat Management",
+        "Add Boat Listing",
+        "Boat Calendar",
+        "Boat Ownership Management",
+        "Booking Calendar",
+        "Waitlist Management"
+      ]
+    },
+    {
+      "name": "Wallet",
+      "count": 2,
+      "screens": [
+        "Fuel Wallet",
+        "Top Up"
+      ]
+    },
+    {
+      "name": "Communication",
+      "count": 2,
+      "screens": [
+        "Messaging Center",
+        "Chat Thread"
+      ]
+    },
+    {
+      "name": "Profile",
+      "count": 3,
+      "screens": [
+        "User Profile",
+        "Edit Profile",
+        "Settings"
+      ]
+    },
+    {
+      "name": "Notifications",
+      "count": 1,
+      "screens": [
+        "Notification Center"
+      ]
+    },
+    {
+      "name": "Dashboard",
+      "count": 1,
+      "screens": [
+        "Dashboard"
+      ]
+    },
+    {
+      "name": "Development",
+      "count": 1,
+      "screens": [
+        "Development Navigation"
+      ]
+    }
+  ]
+}

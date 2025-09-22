@@ -1,6 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import path from "path";
+import fs from "fs";
 import express from "express";
 import { storage } from "./storage";
 import passport from "passport";
@@ -66,6 +67,36 @@ export async function registerRoutes(app: Express): Promise<Server> {
       done(null, user);
     } catch (error) {
       done(error, null);
+    }
+  });
+
+  // Screenshot saving endpoint
+  app.post('/api/save-screenshot', express.json({limit: '50mb'}), (req, res) => {
+    try {
+      const { filename, imageData } = req.body;
+      
+      if (!filename || !imageData) {
+        return res.status(400).json({ error: 'Missing filename or imageData' });
+      }
+
+      // Remove data URL prefix
+      const base64Data = imageData.replace(/^data:image\/png;base64,/, '');
+      
+      // Save to all_app_screens folder
+      const screenshotsDir = path.join(process.cwd(), 'all_app_screens');
+      if (!fs.existsSync(screenshotsDir)) {
+        fs.mkdirSync(screenshotsDir, { recursive: true });
+      }
+      
+      const filepath = path.join(screenshotsDir, filename);
+      fs.writeFileSync(filepath, base64Data, 'base64');
+      
+      console.log(`📸 Saved screenshot: ${filename}`);
+      res.json({ success: true, filename, path: filepath });
+      
+    } catch (error) {
+      console.error('Error saving screenshot:', error);
+      res.status(500).json({ error: 'Failed to save screenshot' });
     }
   });
 

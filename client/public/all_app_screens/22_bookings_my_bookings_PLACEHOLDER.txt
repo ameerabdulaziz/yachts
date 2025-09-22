@@ -1,0 +1,13 @@
+SCREENSHOT NEEDED: My Bookings
+
+URL: http://localhost:5000/my-bookings
+Category: Booking
+Expected filename: 22_bookings_my_bookings.png
+
+To capture this screen:
+1. Visit the URL above in your browser
+2. Take a screenshot (mobile view recommended)
+3. Save as "22_bookings_my_bookings.png" in the all_app_screens folder
+4. Delete this placeholder file
+
+Generated: 2025-09-22T10:29:17.055Z

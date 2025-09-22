@@ -1,0 +1,192 @@
+# Yachtak App Screenshots Collection
+
+## How to Capture All Screens:
+
+### Method 1: Automated Web Tool
+1. Open: http://localhost:5000/screen-capture.html
+2. Click "🚀 Start Capture" 
+3. Wait for all 38 screens to be captured
+4. Click "📦 Download All"
+5. Move downloaded PNG files to this folder
+
+### Method 2: Manual Capture
+For each screen listed below, visit the URL and take a screenshot:
+
+## All 38 Application Screens:
+
+
+### Authentication (4 screens)
+- **Splash Screen**
+  - URL: http://localhost:5000/splash
+  - Save as: 01_auth_splash.png
+- **Phone Login**
+  - URL: http://localhost:5000/login
+  - Save as: 02_auth_phone_login.png
+- **OTP Verification**
+  - URL: http://localhost:5000/verify-otp
+  - Save as: 03_auth_otp_verification.png
+- **Account Setup**
+  - URL: http://localhost:5000/account-setup
+  - Save as: 04_auth_account_setup.png
+
+
+### Discovery (3 screens)
+- **Ownership Home**
+  - URL: http://localhost:5000/
+  - Save as: 10_discovery_ownership_home.png
+- **Ownership Opportunities**
+  - URL: http://localhost:5000/ownership-opportunities
+  - Save as: 11_discovery_ownership_opportunities.png
+- **Yacht Details**
+  - URL: http://localhost:5000/yacht-details/1
+  - Save as: 12_discovery_yacht_details.png
+
+
+### Charter (1 screens)
+- **Charter Fleet Browser**
+  - URL: http://localhost:5000/charter
+  - Save as: 15_charter_fleet_browser.png
+
+
+### Booking (4 screens)
+- **Booking Checkout**
+  - URL: http://localhost:5000/booking/1
+  - Save as: 20_booking_checkout.png
+- **Booking Confirmation**
+  - URL: http://localhost:5000/booking-confirmation
+  - Save as: 21_booking_confirmation.png
+- **My Bookings**
+  - URL: http://localhost:5000/my-bookings
+  - Save as: 22_bookings_my_bookings.png
+- **Reservation Detail**
+  - URL: http://localhost:5000/reservation-detail/1
+  - Save as: 23_bookings_reservation_detail.png
+
+
+### Ownership (3 screens)
+- **Yacht Ownership Detail**
+  - URL: http://localhost:5000/ownership/1
+  - Save as: 30_ownership_detail.png
+- **Ownership Inquiry**
+  - URL: http://localhost:5000/ownership-inquiry/1
+  - Save as: 31_ownership_inquiry.png
+- **Inquiry Thank You**
+  - URL: http://localhost:5000/inquiry-thank-you
+  - Save as: 32_ownership_inquiry_thank_you.png
+
+
+### Marketplace (5 screens)
+- **Share Marketplace**
+  - URL: http://localhost:5000/share-marketplace
+  - Save as: 40_marketplace_share_marketplace.png
+- **Share Listing Detail**
+  - URL: http://localhost:5000/share-listing/1
+  - Save as: 41_marketplace_share_listing_detail.png
+- **List Share for Sale**
+  - URL: http://localhost:5000/list-share-for-sale
+  - Save as: 42_marketplace_list_share_for_sale.png
+- **Share Purchase Confirmation**
+  - URL: http://localhost:5000/share-purchase-confirmation/1
+  - Save as: 43_marketplace_share_purchase_confirmation.png
+- **Share Trading**
+  - URL: http://localhost:5000/share-trading
+  - Save as: 44_marketplace_share_trading.png
+
+
+### Owner Management (8 screens)
+- **Owner Dashboard**
+  - URL: http://localhost:5000/owner-dashboard
+  - Save as: 50_owner_dashboard.png
+- **My Boats**
+  - URL: http://localhost:5000/my-boats
+  - Save as: 51_owner_my_boats.png
+- **Boat Management**
+  - URL: http://localhost:5000/boat-management/1
+  - Save as: 52_owner_boat_management.png
+- **Add Boat Listing**
+  - URL: http://localhost:5000/add-boat-listing
+  - Save as: 53_owner_add_boat_listing.png
+- **Boat Calendar**
+  - URL: http://localhost:5000/boat-calendar/1
+  - Save as: 54_owner_boat_calendar.png
+- **Boat Ownership Management**
+  - URL: http://localhost:5000/boat-ownership/1
+  - Save as: 55_owner_boat_ownership_management.png
+- **Booking Calendar**
+  - URL: http://localhost:5000/booking-calendar/1
+  - Save as: 56_owner_booking_calendar.png
+- **Waitlist Management**
+  - URL: http://localhost:5000/waitlist-management
+  - Save as: 57_owner_waitlist_management.png
+
+
+### Wallet (2 screens)
+- **Fuel Wallet**
+  - URL: http://localhost:5000/fuel-wallet
+  - Save as: 60_wallet_fuel_wallet.png
+- **Top Up**
+  - URL: http://localhost:5000/top-up
+  - Save as: 61_wallet_top_up.png
+
+
+### Communication (2 screens)
+- **Messaging Center**
+  - URL: http://localhost:5000/messages
+  - Save as: 70_messaging_center.png
+- **Chat Thread**
+  - URL: http://localhost:5000/chat/1
+  - Save as: 71_chat_thread.png
+
+
+### Profile (3 screens)
+- **User Profile**
+  - URL: http://localhost:5000/profile
+  - Save as: 80_profile_user_profile.png
+- **Edit Profile**
+  - URL: http://localhost:5000/edit-profile
+  - Save as: 81_profile_edit_profile.png
+- **Settings**
+  - URL: http://localhost:5000/settings
+  - Save as: 82_profile_settings.png
+
+
+### Notifications (1 screens)
+- **Notification Center**
+  - URL: http://localhost:5000/notifications
+  - Save as: 90_notifications.png
+
+
+### Dashboard (1 screens)
+- **Dashboard**
+  - URL: http://localhost:5000/dashboard
+  - Save as: 99_dashboard.png
+
+
+### Development (1 screens)
+- **Development Navigation**
+  - URL: http://localhost:5000/dev-navigation
+  - Save as: 98_dev_navigation.png
+
+
+## File Organization:
+- Screenshots should be saved in the main folder
+- Use the exact filename shown above for each screen
+- All files will be PNG format (mobile-optimized 390x844px)
+
+## Categories:
+- **Authentication**: 4 screens
+- **Discovery**: 3 screens
+- **Charter**: 1 screens
+- **Booking**: 4 screens
+- **Ownership**: 3 screens
+- **Marketplace**: 5 screens
+- **Owner Management**: 8 screens
+- **Wallet**: 2 screens
+- **Communication**: 2 screens
+- **Profile**: 3 screens
+- **Notifications**: 1 screens
+- **Dashboard**: 1 screens
+- **Development**: 1 screens
+
+Total: 38 unique application screens
+Generated: 9/22/2025, 10:29:17 AM
