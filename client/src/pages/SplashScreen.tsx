@@ -21,7 +21,7 @@ export default function SplashScreen() {
       <div className="absolute inset-0">
         <img 
           src={yachtBackground} 
-          alt="De Antonio Yacht" 
+          alt="Saxdor Yacht" 
           className="w-full h-full object-cover"
         />
       </div>
@@ -43,15 +43,15 @@ export default function SplashScreen() {
           </div>
         </div>
         
-        {/* Spacer to push De Antonio logo to bottom */}
+        {/* Spacer to push Saxdor logo to bottom */}
         <div className="flex-1"></div>
         
-        {/* Bottom Section - De Antonio Yachts Logo positioned at very bottom */}
+        {/* Bottom Section - Saxdor Yachts Logo positioned at very bottom */}
         <div className="text-center pb-8 px-8">
           <div className="w-64 h-14 mx-auto flex items-center justify-center">
             <img 
               src={deAntonioLogo} 
-              alt="De Antonio Yachts" 
+              alt="Saxdor Yachts" 
               className="h-full object-contain drop-shadow-xl"
             />
           </div>

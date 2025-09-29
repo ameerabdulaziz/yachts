@@ -10,7 +10,7 @@ import BottomNavigation from "@/components/BottomNavigation";
 const mockBoatOwnership = {
   "yacht-1": {
     id: "yacht-1",
-    name: "De Antonio D50 Open",
+    name: "Saxdor D50 Open",
     image: "https://static.wixstatic.com/media/0fb4c8_60988eb5cf834fcb876c1d06bd8af594~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D50.jpg",
     location: "El Gouna, Egypt",
     length: "50",
@@ -34,7 +34,7 @@ const mockBoatOwnership = {
   },
   "yacht-4": {
     id: "yacht-4",
-    name: "De Antonio D32 Open",
+    name: "Saxdor D32 Open",
     image: "https://static.wixstatic.com/media/0fb4c8_6cbbd012fc0645009bc4a91a412b293a~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D32.jpg",
     location: "El Gouna, Egypt",
     length: "32",
@@ -58,7 +58,7 @@ const mockBoatOwnership = {
   },
   "yacht-6": {
     id: "yacht-6", 
-    name: "De Antonio D60 Open",
+    name: "Saxdor D60 Open",
     image: "https://static.wixstatic.com/media/0fb4c8_1105b00d73ee4ddc9f1ad1d4b74d9ece~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D60.jpg",
     location: "El Gouna, Egypt",
     length: "60",

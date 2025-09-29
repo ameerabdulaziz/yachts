@@ -95,13 +95,13 @@ export default function OwnershipHomeScreen() {
             <div className="mb-4">
               <img 
                 src={selectedYacht.image} 
-                alt={`De Antonio ${selectedYacht.name}`}
+                alt={`Saxdor ${selectedYacht.name}`}
                 className="w-full h-48 object-cover rounded-xl"
               />
             </div>
             
             <div className="text-center mb-4">
-              <h3 className="text-xl font-bold text-gray-900 mb-2" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif' }}>De Antonio {selectedYacht.name}</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-2" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif' }}>Saxdor {selectedYacht.name}</h3>
               <div className="flex items-center justify-center space-x-4 text-sm text-gray-600 mb-4" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>
                 <span>{selectedYacht.length}</span>
                 <span>•</span>
@@ -279,7 +279,7 @@ export default function OwnershipHomeScreen() {
                   <div className="relative">
                     <img 
                       src={opportunity.image} 
-                      alt={`De Antonio ${opportunity.model}`}
+                      alt={`Saxdor ${opportunity.model}`}
                       className="w-full h-48 object-cover"
                     />
                     <div className="absolute top-3 left-3 bg-white/90 p-2 rounded-full">
@@ -294,7 +294,7 @@ export default function OwnershipHomeScreen() {
                     <div className="flex items-start justify-between mb-3">
                       <div>
                         <h3 className="text-xl font-bold text-gray-900" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif' }}>
-                          De Antonio {opportunity.model}
+                          Saxdor {opportunity.model}
                         </h3>
                         <p className="text-gray-600" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>
                           {opportunity.location}

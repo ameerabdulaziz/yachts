@@ -146,7 +146,7 @@ export const mockYachts: (Yacht & { owner: { name: string; avatar: string; verif
   },
   {
     id: "yacht-6",
-    name: "Saxdor 400 GTO Premium",
+    name: "Saxdor 400 GTS",
     description: "The ultimate Saxdor flagship with premium configuration and extended side terraces. Features twin Mercury V10 engines with advanced electronics and luxury appointments.",
     location: "El Gouna, Egypt",
     pricePerDay: "3080",
@@ -207,7 +207,7 @@ export const mockOwnershipOpportunities: (OwnershipOpportunity & { yacht: Yacht 
   {
     id: "share-saxdor-320-gto",
     yachtId: "yacht-4",
-    sharePrice: "33000",
+    sharePrice: "48200",
     shareFraction: "1/5",
     usageDaysPerYear: 73,
     totalShares: 5,
@@ -244,7 +244,7 @@ export const mockOwnershipOpportunities: (OwnershipOpportunity & { yacht: Yacht 
   {
     id: "share-saxdor-320-gtc",
     yachtId: "yacht-3",
-    sharePrice: "39400",
+    sharePrice: "54600",
     shareFraction: "1/5",
     usageDaysPerYear: 73,
     totalShares: 5,
@@ -281,7 +281,7 @@ export const mockOwnershipOpportunities: (OwnershipOpportunity & { yacht: Yacht 
   {
     id: "share-saxdor-340-gtwa",
     yachtId: "yacht-2",
-    sharePrice: "37000",
+    sharePrice: "52200",
     shareFraction: "1/5",
     usageDaysPerYear: 73,
     totalShares: 5,
@@ -316,9 +316,9 @@ export const mockOwnershipOpportunities: (OwnershipOpportunity & { yacht: Yacht 
     }
   },
   {
-    id: "share-saxdor-400-gto-premium",
+    id: "share-saxdor-400-gts",
     yachtId: "yacht-6",
-    sharePrice: "88000",
+    sharePrice: "103200",
     shareFraction: "1/5",
     usageDaysPerYear: 73,
     totalShares: 5,
@@ -334,7 +334,7 @@ export const mockOwnershipOpportunities: (OwnershipOpportunity & { yacht: Yacht 
     updatedAt: new Date(),
     yacht: {
       id: "yacht-6",
-      name: "Saxdor 400 GTO Premium",
+      name: "Saxdor 400 GTS",
       description: "The ultimate Saxdor flagship with premium configuration and extended side terraces. Features twin Mercury V10 engines with advanced electronics and luxury appointments.",
       location: "El Gouna, Egypt",
       pricePerDay: "3080",
@@ -355,7 +355,7 @@ export const mockOwnershipOpportunities: (OwnershipOpportunity & { yacht: Yacht 
   {
     id: "share-saxdor-400-gto",
     yachtId: "yacht-1",
-    sharePrice: "66000",
+    sharePrice: "81200",
     shareFraction: "1/5",
     usageDaysPerYear: 73,
     totalShares: 5,
@@ -395,7 +395,7 @@ export const mockOwnershipOpportunities: (OwnershipOpportunity & { yacht: Yacht 
   {
     id: "share-saxdor-270-gto",
     yachtId: "yacht-5",
-    sharePrice: "21800",
+    sharePrice: "37000",
     shareFraction: "1/5",
     usageDaysPerYear: 73,
     totalShares: 5,

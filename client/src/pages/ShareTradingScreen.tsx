@@ -6,11 +6,11 @@ import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import BottomNavigation from "@/components/BottomNavigation";
 
-// Authentic De Antonio Yachts share listings
+// Authentic Saxdor Yachts share listings
 const mockShareListings = [
   {
     id: "listing-1",
-    boatName: "De Antonio D42 Open",
+    boatName: "Saxdor D42 Open",
     boatImage: "https://static.wixstatic.com/media/0fb4c8_008f1545c8764f8789a2b7415ca9dde7~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D42.jpg",
     length: "12.64m",
     passengers: 12,
@@ -30,7 +30,7 @@ const mockShareListings = [
   },
   {
     id: "listing-2",
-    boatName: "De Antonio D32 Open",
+    boatName: "Saxdor D32 Open",
     boatImage: "https://static.wixstatic.com/media/0fb4c8_6cbbd012fc0645009bc4a91a412b293a~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D32.jpg",
     length: "9.90m",
     passengers: 10,
@@ -51,7 +51,7 @@ const mockShareListings = [
   },
   {
     id: "listing-3",
-    boatName: "De Antonio D60",
+    boatName: "Saxdor D60",
     boatImage: "https://static.wixstatic.com/media/5c3629_a8b1aa6ff9244bddaf7383aa45b4afc1~mv2.jpg/v1/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/5c3629_a8b1aa6ff9244bddaf7383aa45b4afc1~mv2.jpg",
     length: "18.50m",
     passengers: 12,
@@ -71,7 +71,7 @@ const mockShareListings = [
   },
   {
     id: "listing-4",
-    boatName: "De Antonio D29",
+    boatName: "Saxdor D29",
     boatImage: "https://static.wixstatic.com/media/0fb4c8_b9744cfa841b4c4388ad78ac9b49bbe7~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D29.jpg",
     length: "8.50m",
     passengers: 8,

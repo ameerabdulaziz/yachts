@@ -14,7 +14,7 @@ const mockShareListings = [
   {
     id: "listing-1",
     yacht: {
-      name: "De Antonio D42 Open",
+      name: "Saxdor D42 Open",
       location: "El Gouna, Egypt",
       image: "https://static.wixstatic.com/media/0fb4c8_008f1545c8764f8789a2b7415ca9dde7~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D42.jpg"
     },
@@ -35,7 +35,7 @@ const mockShareListings = [
   {
     id: "listing-2",
     yacht: {
-      name: "De Antonio D32 Open",
+      name: "Saxdor D32 Open",
       location: "El Gouna, Egypt",
       image: "https://static.wixstatic.com/media/0fb4c8_6cbbd012fc0645009bc4a91a412b293a~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D32.jpg"
     },
@@ -56,7 +56,7 @@ const mockShareListings = [
   {
     id: "listing-3",
     yacht: {
-      name: "De Antonio D50 Open",
+      name: "Saxdor D50 Open",
       location: "El Gouna, Egypt",
       image: "https://static.wixstatic.com/media/0fb4c8_60988eb5cf834fcb876c1d06bd8af594~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D50.jpg"
     },
@@ -77,7 +77,7 @@ const mockShareListings = [
   {
     id: "listing-4",
     yacht: {
-      name: "De Antonio D60 Open",
+      name: "Saxdor D60 Open",
       location: "El Gouna, Egypt",
       image: "https://static.wixstatic.com/media/5c3629_a8b1aa6ff9244bddaf7383aa45b4afc1~mv2.jpg/v1/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/5c3629_a8b1aa6ff9244bddaf7383aa45b4afc1~mv2.jpg"
     },
@@ -157,7 +157,7 @@ export default function ShareMarketplaceScreen() {
         <div className="relative z-10">
           <div className="bg-white rounded-2xl p-6 text-center shadow-lg">
             <TrendingUp className="w-16 h-16 mx-auto mb-4 text-primary" />
-            <h2 className="text-2xl font-bold mb-2 text-gray-900">De Antonio Share Marketplace</h2>
+            <h2 className="text-2xl font-bold mb-2 text-gray-900">Saxdor Share Marketplace</h2>
             <p className="text-gray-600">Buy and sell ownership shares with other yacht investors</p>
           </div>
         </div>

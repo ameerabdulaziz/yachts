@@ -12,7 +12,7 @@ import seaBackground from "@assets/image_1754575606863.png";
 const mockOwnedBoats = [
   {
     id: "yacht-4",
-    name: "De Antonio D32 Open",
+    name: "Saxdor D32 Open",
     image: "https://static.wixstatic.com/media/0fb4c8_6cbbd012fc0645009bc4a91a412b293a~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D32.jpg",
     location: "El Gouna, Egypt",
     length: "32",
@@ -26,7 +26,7 @@ const mockOwnedBoats = [
   },
   {
     id: "yacht-1",
-    name: "De Antonio D50 Open",
+    name: "Saxdor D50 Open",
     image: deAntonioD50,
     location: "El Gouna, Egypt",
     length: "50",
