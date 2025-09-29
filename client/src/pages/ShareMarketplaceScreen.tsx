@@ -14,14 +14,14 @@ const mockShareListings = [
   {
     id: "listing-1",
     yacht: {
-      name: "Saxdor D42 Open",
+      name: "Saxdor 400 GTO",
       location: "El Gouna, Egypt",
       image: "https://static.wixstatic.com/media/0fb4c8_008f1545c8764f8789a2b7415ca9dde7~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D42.jpg"
     },
     shareFraction: "1/8",
     sharesForSale: 1,
-    originalPrice: 89000,
-    askingPrice: 95000,
+    originalPrice: 124600,
+    askingPrice: 133000,
     priceChange: 6.7,
     usageWeeks: 6,
     seller: {
@@ -35,14 +35,14 @@ const mockShareListings = [
   {
     id: "listing-2",
     yacht: {
-      name: "Saxdor D32 Open",
+      name: "Saxdor 320 GTO",
       location: "El Gouna, Egypt",
       image: "https://static.wixstatic.com/media/0fb4c8_6cbbd012fc0645009bc4a91a412b293a~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D32.jpg"
     },
     shareFraction: "1/8",
     sharesForSale: 1,
-    originalPrice: 48000,
-    askingPrice: 45000,
+    originalPrice: 67200,
+    askingPrice: 63000,
     priceChange: -6.3,
     usageWeeks: 6,
     seller: {
@@ -56,14 +56,14 @@ const mockShareListings = [
   {
     id: "listing-3",
     yacht: {
-      name: "Saxdor D50 Open",
+      name: "Saxdor 400 GTS",
       location: "El Gouna, Egypt",
       image: "https://static.wixstatic.com/media/0fb4c8_60988eb5cf834fcb876c1d06bd8af594~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D50.jpg"
     },
     shareFraction: "1/7",
     sharesForSale: 2,
-    originalPrice: 150000,
-    askingPrice: 158000,
+    originalPrice: 210000,
+    askingPrice: 221200,
     priceChange: 5.3,
     usageWeeks: 7,
     seller: {
@@ -77,14 +77,14 @@ const mockShareListings = [
   {
     id: "listing-4",
     yacht: {
-      name: "Saxdor D60 Open",
+      name: "Saxdor 340 GTWA",
       location: "El Gouna, Egypt",
       image: "https://static.wixstatic.com/media/5c3629_a8b1aa6ff9244bddaf7383aa45b4afc1~mv2.jpg/v1/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/5c3629_a8b1aa6ff9244bddaf7383aa45b4afc1~mv2.jpg"
     },
     shareFraction: "1/12",
     sharesForSale: 1,
-    originalPrice: 175000,
-    askingPrice: 185000,
+    originalPrice: 245000,
+    askingPrice: 259000,
     priceChange: 5.7,
     usageWeeks: 4,
     seller: {

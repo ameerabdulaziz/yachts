@@ -13,7 +13,7 @@ export default function ReservationDetailScreen() {
     id: id || "booking-1",
     status: "confirmed" as const,
     yacht: {
-      name: "Saxdor D50 Open",
+      name: "Saxdor 400 GTO",
       location: "El Gouna, Egypt",
       image: deAntonioD50
     },

@@ -25,7 +25,7 @@ export default function MyBookingsScreen() {
       startDate: new Date("2025-11-20"),
       endDate: new Date("2025-11-22"),
       guestCount: 8,
-      totalPrice: "4200.00",
+      totalPrice: "€5,500",
       status: "confirmed" as const,
       addOns: { captain: true, catering: true },
       paymentMethod: "fuel-wallet",
@@ -33,9 +33,9 @@ export default function MyBookingsScreen() {
       updatedAt: new Date(),
       yacht: {
         id: "yacht-2",
-        name: "Saxdor D42",
+        name: "Saxdor 400 GTO",
         location: "El Gouna, Egypt",
-        pricePerDay: "2100.00",
+        pricePerDay: "€2,750",
         images: ["https://static.wixstatic.com/media/0fb4c8_008f1545c8764f8789a2b7415ca9dde7~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D42.jpg"]
       }
     },
@@ -46,7 +46,7 @@ export default function MyBookingsScreen() {
       startDate: new Date("2025-12-15"),
       endDate: new Date("2025-12-17"),
       guestCount: 6,
-      totalPrice: "2800.00",
+      totalPrice: "€3,900",
       status: "confirmed" as const,
       addOns: { captain: false, catering: false },
       paymentMethod: "credit-card",
@@ -54,9 +54,9 @@ export default function MyBookingsScreen() {
       updatedAt: new Date(),
       yacht: {
         id: "yacht-3",
-        name: "Saxdor D36",
+        name: "Saxdor 340 GTWA",
         location: "El Gouna, Egypt", 
-        pricePerDay: "1400.00",
+        pricePerDay: "€1,950",
         images: ["https://static.wixstatic.com/media/0fb4c8_fbbb6a2569c747d48881f7ac065b947a~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D36.jpg"]
       }
     },
@@ -67,7 +67,7 @@ export default function MyBookingsScreen() {
       startDate: new Date("2026-01-10"),
       endDate: new Date("2026-01-12"),
       guestCount: 10,
-      totalPrice: "5600.00",
+      totalPrice: "€9,250",
       status: "pending" as const,
       addOns: { captain: true, catering: true },
       paymentMethod: "fuel-wallet",
@@ -75,9 +75,9 @@ export default function MyBookingsScreen() {
       updatedAt: new Date(),
       yacht: {
         id: "yacht-4",
-        name: "Saxdor D60",
+        name: "Saxdor 400 GTS",
         location: "El Gouna, Egypt",
-        pricePerDay: "2800.00",
+        pricePerDay: "€4,625",
         images: ["https://static.wixstatic.com/media/5c3629_a8b1aa6ff9244bddaf7383aa45b4afc1~mv2.jpg/v1/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/5c3629_a8b1aa6ff9244bddaf7383aa45b4afc1~mv2.jpg"]
       }
     }
