@@ -180,7 +180,7 @@ export default function CharterScreen() {
                           <span><Bed className="w-4 h-4 inline mr-1" />{yacht.cabins} cabins</span>
                         </div>
                         <div className="text-right">
-                          <p className="text-2xl font-bold text-gray-900">€{yacht.pricePerDay}</p>
+                          <p className="text-2xl font-bold text-gray-900">{yacht.pricePerDay}</p>
                           <p className="text-sm text-gray-600">per day</p>
                         </div>
                       </div>

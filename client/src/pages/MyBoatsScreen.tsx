@@ -164,7 +164,7 @@ export default function MyBoatsScreen() {
                   <div className="bg-blue-50 rounded-lg p-3 space-y-2">
                     <div className="flex justify-between items-center">
                       <span className="text-sm font-medium text-gray-700">Share Value</span>
-                      <span className="text-sm font-semibold text-blue-600">${boat.shareValue}</span>
+                      <span className="text-sm font-semibold text-blue-600">{boat.shareValue}</span>
                     </div>
                     <div className="flex justify-between items-center">
                       <div className="flex items-center space-x-1">

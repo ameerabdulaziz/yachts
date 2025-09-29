@@ -140,7 +140,7 @@ export default function OwnershipHomeScreen() {
                 <div className="text-center border-l border-blue-200 pl-4">
                   <p className="text-sm text-gray-600 mb-1" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>Share From</p>
                   <p className="text-xl font-bold text-blue-600 whitespace-nowrap" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif' }}>{selectedYacht.sharesFrom}</p>
-                  <p className="text-xs text-gray-500 whitespace-nowrap" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>from €{Math.round(parseFloat(selectedYacht.sharesFrom.replace('€', '').replace('K', '')) * 1000 / 60).toLocaleString()} monthly</p>
+                  <p className="text-xs text-gray-500 whitespace-nowrap" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>from €{Math.round(parseFloat(selectedYacht.sharesFrom.replace('€', '').replace('K', '').replace(',', '')) * 1000 / 60).toLocaleString()} monthly</p>
                 </div>
               </div>
             </div>
@@ -302,13 +302,13 @@ export default function OwnershipHomeScreen() {
                       </div>
                       <div className="text-right flex flex-col">
                         <p className="text-2xl font-bold text-blue-600 whitespace-nowrap" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif' }}>
-                          €{Number(opportunity.sharePrice).toLocaleString()}
+                          {opportunity.sharePrice}
                         </p>
                         <p className="text-sm text-gray-500 whitespace-nowrap" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>
                           per share
                         </p>
                         <p className="text-xs text-blue-600 font-medium whitespace-nowrap" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>
-                          from €{opportunity.monthlyPayment} monthly
+                          from {opportunity.monthlyPayment} monthly
                         </p>
                       </div>
                     </div>
