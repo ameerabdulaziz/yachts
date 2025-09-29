@@ -6,10 +6,10 @@ import deAntonioD36 from "@assets/image_1754582579453.png";
 export const mockYachts: (Yacht & { owner: { name: string; avatar: string; verified: boolean; rating: number } })[] = [
   {
     id: "yacht-1",
-    name: "Saxdor 400 GTO Nordic Pearl",
+    name: "Saxdor 400 GTO",
     description: "The flagship Saxdor 400 GTO with signature 13-foot side terraces and twin-stepped hull. Features premium Finnish engineering with twin outboard configuration and exceptional performance.",
     location: "El Gouna, Egypt",
-    pricePerDay: "2310",
+    pricePerDay: "€2,750",
     capacity: 12,
     cabins: 2,
     length: "40",
@@ -34,10 +34,10 @@ export const mockYachts: (Yacht & { owner: { name: string; avatar: string; verif
   },
   {
     id: "yacht-2",
-    name: "Saxdor 340 GTWA Baltic Explorer",
+    name: "Saxdor 340 GTWA",
     description: "All-weather walkaround with superior performance and innovative design. Features twin Mercury V8 engines with advanced hull technology and spacious deck layout.",
     location: "El Gouna, Egypt",
-    pricePerDay: "1295",
+    pricePerDay: "€1,950",
     capacity: 12,
     cabins: 2,
     length: "34",
@@ -62,10 +62,10 @@ export const mockYachts: (Yacht & { owner: { name: string; avatar: string; verif
   },
   {
     id: "yacht-3",
-    name: "Saxdor 320 GTC Scandinavian Star",
+    name: "Saxdor 320 GTC",
     description: "All-weather cabin cruiser with enclosed hard top and climate control. Features sound-isolated wheelhouse and advanced navigation systems with premium comfort.",
     location: "El Gouna, Egypt",
-    pricePerDay: "1380",
+    pricePerDay: "€2,075",
     capacity: 10,
     cabins: 1,
     length: "32",
@@ -90,10 +90,10 @@ export const mockYachts: (Yacht & { owner: { name: string; avatar: string; verif
   },
   {
     id: "yacht-4",
-    name: "Saxdor 320 GTO Performance",
+    name: "Saxdor 320 GTO",
     description: "Award-winning sportboat with twin Mercury V8 engines reaching 50+ knots. Features convertible cockpit seating and twin-stepped hull for exceptional performance.",
     location: "El Gouna, Egypt",
-    pricePerDay: "1155",
+    pricePerDay: "€1,735",
     capacity: 10,
     cabins: 1,
     length: "32",
@@ -118,10 +118,10 @@ export const mockYachts: (Yacht & { owner: { name: string; avatar: string; verif
   },
   {
     id: "yacht-5",
-    name: "Saxdor 270 GTO Compact",
+    name: "Saxdor 270 GTO",
     description: "Award-winning 27-foot sportboat with twin Mercury V6 engines. Features twin sunbeds and convertible dining, perfect for day cruising with exceptional performance.",
     location: "El Gouna, Egypt",
-    pricePerDay: "760",
+    pricePerDay: "€1,140",
     capacity: 8,
     cabins: 1,
     length: "27",
@@ -149,14 +149,14 @@ export const mockYachts: (Yacht & { owner: { name: string; avatar: string; verif
     name: "Saxdor 400 GTS",
     description: "The ultimate Saxdor flagship with premium configuration and extended side terraces. Features twin Mercury V10 engines with advanced electronics and luxury appointments.",
     location: "El Gouna, Egypt",
-    pricePerDay: "3080",
+    pricePerDay: "€4,625",
     capacity: 12,
     cabins: 2,
     length: "40",
     yearBuilt: 2024,
     images: [
-      "https://saxdoryachts.com/wp-content/uploads/2023/10/400-GTO-Premium-1.jpg",
-      "https://saxdoryachts.com/wp-content/uploads/2023/10/400-GTO-Premium-2.jpg"
+      "https://saxdoryachts.com/wp-content/uploads/2023/10/400-GTS-1.jpg",
+      "https://saxdoryachts.com/wp-content/uploads/2023/10/400-GTS-2.jpg"
     ],
     amenities: ["Twin Mercury 400HP V10", "13-Foot Side Terraces", "Lithium Battery System", "Advanced Navigation Package", "Hardtop with Sunroof", "Dual Swim Platforms", "Premium Audio", "Joystick Control"],
     ownerId: "owner-6",
@@ -172,34 +172,6 @@ export const mockYachts: (Yacht & { owner: { name: string; avatar: string; verif
       rating: 5.0
     }
   },
-  {
-    id: "yacht-7",
-    name: "Saxdor 320 GTO Sport",
-    description: "High-performance sport configuration with enhanced engines and racing setup. Features aggressive styling with premium materials and track-inspired cockpit layout.",
-    location: "El Gouna, Egypt",
-    pricePerDay: "1380",
-    capacity: 10,
-    cabins: 1,
-    length: "32",
-    yearBuilt: 2024,
-    images: [
-      "https://saxdoryachts.com/wp-content/uploads/2023/10/320-GTO-Sport-1.jpg",
-      "https://saxdoryachts.com/wp-content/uploads/2023/10/320-GTO-Sport-2.jpg"
-    ],
-    amenities: ["Enhanced V8 Engines", "Sport Configuration", "Racing Cockpit", "Premium Materials", "Performance Package", "Sport Audio", "Carbon Accents", "Track Setup"],
-    ownerId: "owner-7",
-    isActive: true,
-    rating: "4.8",
-    reviewCount: 28,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    owner: {
-      name: "Lucia Mendoza",
-      avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100",
-      verified: true,
-      rating: 4.9
-    }
-  },
 
 ];
 
@@ -207,7 +179,7 @@ export const mockOwnershipOpportunities: (OwnershipOpportunity & { yacht: Yacht 
   {
     id: "share-saxdor-320-gto",
     yachtId: "yacht-4",
-    sharePrice: "48200",
+    sharePrice: "€48,200",
     shareFraction: "1/5",
     usageDaysPerYear: 73,
     totalShares: 5,
@@ -223,7 +195,7 @@ export const mockOwnershipOpportunities: (OwnershipOpportunity & { yacht: Yacht 
     updatedAt: new Date(),
     yacht: {
       id: "yacht-4",
-      name: "Saxdor 320 GTO Performance",
+      name: "Saxdor 320 GTO",
       description: "Award-winning sportboat with twin Mercury V8 engines reaching 50+ knots. Features convertible cockpit seating and twin-stepped hull for exceptional performance.",
       location: "El Gouna, Egypt",
       pricePerDay: "1155",
@@ -244,7 +216,7 @@ export const mockOwnershipOpportunities: (OwnershipOpportunity & { yacht: Yacht 
   {
     id: "share-saxdor-320-gtc",
     yachtId: "yacht-3",
-    sharePrice: "54600",
+    sharePrice: "€54,600",
     shareFraction: "1/5",
     usageDaysPerYear: 73,
     totalShares: 5,
@@ -260,7 +232,7 @@ export const mockOwnershipOpportunities: (OwnershipOpportunity & { yacht: Yacht 
     updatedAt: new Date(),
     yacht: {
       id: "yacht-3",
-      name: "Saxdor 320 GTC Scandinavian Star",
+      name: "Saxdor 320 GTC",
       description: "All-weather cabin cruiser with enclosed hard top and climate control. Features sound-isolated wheelhouse and advanced navigation systems with premium comfort.",
       location: "El Gouna, Egypt",
       pricePerDay: "1380",
@@ -281,7 +253,7 @@ export const mockOwnershipOpportunities: (OwnershipOpportunity & { yacht: Yacht 
   {
     id: "share-saxdor-340-gtwa",
     yachtId: "yacht-2",
-    sharePrice: "52200",
+    sharePrice: "€52,200",
     shareFraction: "1/5",
     usageDaysPerYear: 73,
     totalShares: 5,
@@ -297,7 +269,7 @@ export const mockOwnershipOpportunities: (OwnershipOpportunity & { yacht: Yacht 
     updatedAt: new Date(),
     yacht: {
       id: "yacht-2",
-      name: "Saxdor 340 GTWA Baltic Explorer",
+      name: "Saxdor 340 GTWA",
       description: "All-weather walkaround with superior performance and innovative design. Features twin Mercury V8 engines with advanced hull technology and spacious deck layout.",
       location: "El Gouna, Egypt",
       pricePerDay: "1295",
@@ -318,7 +290,7 @@ export const mockOwnershipOpportunities: (OwnershipOpportunity & { yacht: Yacht 
   {
     id: "share-saxdor-400-gts",
     yachtId: "yacht-6",
-    sharePrice: "103200",
+    sharePrice: "€103,200",
     shareFraction: "1/5",
     usageDaysPerYear: 73,
     totalShares: 5,
@@ -355,7 +327,7 @@ export const mockOwnershipOpportunities: (OwnershipOpportunity & { yacht: Yacht 
   {
     id: "share-saxdor-400-gto",
     yachtId: "yacht-1",
-    sharePrice: "81200",
+    sharePrice: "€81,200",
     shareFraction: "1/5",
     usageDaysPerYear: 73,
     totalShares: 5,
@@ -371,10 +343,10 @@ export const mockOwnershipOpportunities: (OwnershipOpportunity & { yacht: Yacht 
     updatedAt: new Date(),
     yacht: {
       id: "yacht-1",
-      name: "Saxdor 400 GTO Nordic Pearl",
+      name: "Saxdor 400 GTO",
       description: "The flagship Saxdor 400 GTO with signature 13-foot side terraces and twin-stepped hull. Features premium Finnish engineering with twin outboard configuration and exceptional performance.",
       location: "El Gouna, Egypt",
-      pricePerDay: "2310",
+      pricePerDay: "€2,750",
       capacity: 12,
       cabins: 2,
       length: "40",
@@ -395,7 +367,7 @@ export const mockOwnershipOpportunities: (OwnershipOpportunity & { yacht: Yacht 
   {
     id: "share-saxdor-270-gto",
     yachtId: "yacht-5",
-    sharePrice: "37000",
+    sharePrice: "€37,000",
     shareFraction: "1/5",
     usageDaysPerYear: 73,
     totalShares: 5,
@@ -411,7 +383,7 @@ export const mockOwnershipOpportunities: (OwnershipOpportunity & { yacht: Yacht 
     updatedAt: new Date(),
     yacht: {
       id: "yacht-5",
-      name: "Saxdor 270 GTO Compact",
+      name: "Saxdor 270 GTO",
       description: "Award-winning 27-foot sportboat with twin Mercury V6 engines. Features twin sunbeds and convertible dining, perfect for day cruising with exceptional performance.",
       location: "El Gouna, Egypt",
       pricePerDay: "760",
