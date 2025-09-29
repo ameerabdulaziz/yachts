@@ -27,12 +27,12 @@ export default function OwnershipHomeScreen() {
   const [selectedModel, setSelectedModel] = useState("340 GTWA");
 
   const yachtModels = [
-    { id: "270 GTO", name: "270 GTO", length: "27ft", passengers: 8, price: "$109K", sharesFrom: "$21.8K", image: "https://saxdoryachts.com/wp-content/uploads/2023/10/270-GTO-1.jpg" },
-    { id: "320 GTO", name: "320 GTO", length: "32ft", passengers: 10, price: "$165K", sharesFrom: "$33K", image: "https://saxdoryachts.com/wp-content/uploads/2023/10/320-GTO-1.jpg" },
-    { id: "320 GTC", name: "320 GTC", length: "32ft", passengers: 10, price: "$197K", sharesFrom: "$39.4K", image: "https://saxdoryachts.com/wp-content/uploads/2023/10/320-GTC-1.jpg" },
-    { id: "340 GTWA", name: "340 GTWA", length: "34ft", passengers: 12, price: "$185K", sharesFrom: "$37K", image: "https://saxdoryachts.com/wp-content/uploads/2023/10/340-GTWA-1.jpg" },
-    { id: "400 GTO", name: "400 GTO", length: "40ft", passengers: 12, price: "$330K", sharesFrom: "$66K", image: "https://saxdoryachts.com/wp-content/uploads/2023/10/400-GTO-1.jpg" },
-    { id: "400 GTO Premium", name: "400 GTO Premium", length: "40ft", passengers: 12, price: "$440K", sharesFrom: "$88K", image: "https://saxdoryachts.com/wp-content/uploads/2023/10/400-GTO-Premium-1.jpg" }
+    { id: "270 GTO", name: "270 GTO", length: "27ft", passengers: 8, price: "€185K", sharesFrom: "€37K", image: "https://saxdoryachts.com/wp-content/uploads/2023/10/270-GTO-1.jpg" },
+    { id: "320 GTO", name: "320 GTO", length: "32ft", passengers: 10, price: "€241K", sharesFrom: "€48K", image: "https://saxdoryachts.com/wp-content/uploads/2023/10/320-GTO-1.jpg" },
+    { id: "320 GTC", name: "320 GTC", length: "32ft", passengers: 10, price: "€273K", sharesFrom: "€55K", image: "https://saxdoryachts.com/wp-content/uploads/2023/10/320-GTC-1.jpg" },
+    { id: "340 GTWA", name: "340 GTWA", length: "34ft", passengers: 12, price: "€261K", sharesFrom: "€52K", image: "https://saxdoryachts.com/wp-content/uploads/2023/10/340-GTWA-1.jpg" },
+    { id: "400 GTO", name: "400 GTO", length: "40ft", passengers: 12, price: "€406K", sharesFrom: "€81K", image: "https://saxdoryachts.com/wp-content/uploads/2023/10/400-GTO-1.jpg" },
+    { id: "400 GTS", name: "400 GTS", length: "40ft", passengers: 12, price: "€516K", sharesFrom: "€103K", image: "https://saxdoryachts.com/wp-content/uploads/2023/10/400-GTS-1.jpg" }
   ];
 
   const selectedYacht = yachtModels.find(y => y.id === selectedModel) || yachtModels[3];
