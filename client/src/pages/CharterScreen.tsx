@@ -9,6 +9,7 @@ import BottomNavigation from "@/components/BottomNavigation";
 import { Search, Heart, Star, Users, Bed, Calendar, PieChart, ChevronDown } from "lucide-react";
 import nauttecLogo from "@assets/Nauttec Logo_1754330395988.png";
 import seaBackground from "@assets/image_1754575606863.png";
+import { mockYachts, mockOwnershipOpportunities } from "@/lib/mockData";
 
 export default function CharterScreen() {
   const [location, setLocation] = useState("");
@@ -16,15 +17,11 @@ export default function CharterScreen() {
   const [checkIn, setCheckIn] = useState("");
   const [checkOut, setCheckOut] = useState("");
 
-  // Fetch yachts from Node.js API
-  const { data: yachts = [], isLoading: yachtsLoading } = useQuery({
-    queryKey: ['/api/yachts'],
-  });
-
-  // Fetch ownership opportunities from Node.js API  
-  const { data: ownershipData = [], isLoading: ownershipLoading } = useQuery({
-    queryKey: ['/api/ownership-opportunities'],
-  });
+  // Use mock Saxdor data
+  const yachts = mockYachts;
+  const ownershipData = mockOwnershipOpportunities;
+  const yachtsLoading = false;
+  const ownershipLoading = false;
 
 
 
