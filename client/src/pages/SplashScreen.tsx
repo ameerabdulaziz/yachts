@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useLocation } from "wouter";
 import nauttecLogo from "@assets/Nauttec Logo_1754330395988.png";
-import yachtBackground from "@assets/stock_images/saxdor_400_gto_luxur_c3862d82.jpg";
 import saxdorLogo from "@assets/DE-ANTONIO-YACHTS_LOGO-removebg-preview_1754331163197.png";
 
 export default function SplashScreen() {
@@ -20,7 +19,7 @@ export default function SplashScreen() {
       {/* Background Image */}
       <div className="absolute inset-0">
         <img 
-          src={yachtBackground} 
+          src="https://saxdoryachts.com/wp-content/uploads/2023/12/DJI_0009-Enhanced-NR-2.jpg" 
           alt="Saxdor Yacht" 
           className="w-full h-full object-cover"
         />
