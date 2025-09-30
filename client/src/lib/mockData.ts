@@ -68,8 +68,8 @@ export const mockYachts: (Yacht & { owner: { name: string; avatar: string; verif
     length: "32",
     yearBuilt: 2024,
     images: [
-      "https://saxdoryachts.com/wp-content/uploads/2025/04/DJI_0865.jpeg",
-      "https://saxdoryachts.com/wp-content/uploads/2025/04/4F1A5482.jpeg"
+      "https://saxdoryachts.com/wp-content/uploads/2025/08/DJI_20250408143821_0019_D_ALEXMFUK-Enhanced-NR.jpeg",
+      "https://saxdoryachts.com/wp-content/uploads/2025/08/DJI_20250408140422_0025_D_ALEXMFUK-Enhanced-NR.jpeg"
     ],
     amenities: ["Mercury 300HP Engine", "Sound-Isolated Cabin", "Climate Control", "Joystick Control", "Dual Displays", "Radar & VHF", "Lithium Systems", "Premium Interior"],
     ownerId: "owner-3",
@@ -152,8 +152,8 @@ export const mockYachts: (Yacht & { owner: { name: string; avatar: string; verif
     length: "40",
     yearBuilt: 2024,
     images: [
-      "https://saxdoryachts.com/wp-content/uploads/2023/12/DJI_0009-Enhanced-NR-2.jpg",
-      "https://saxdoryachts.com/wp-content/uploads/2023/12/4F1A1809-Enhanced-NR.jpg"
+      "https://saxdoryachts.com/wp-content/uploads/2025/09/400_gts_gal_2-1920x1080.jpeg",
+      "https://saxdoryachts.com/wp-content/uploads/2025/09/SX_400GTS_4F1A2015.jpeg"
     ],
     amenities: ["Twin Mercury 400HP V10", "13-Foot Side Terraces", "Lithium Battery System", "Advanced Navigation Package", "Hardtop with Sunroof", "Dual Swim Platforms", "Premium Audio", "Joystick Control"],
     ownerId: "owner-6",

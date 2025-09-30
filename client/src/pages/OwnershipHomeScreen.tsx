@@ -27,10 +27,10 @@ export default function OwnershipHomeScreen() {
   const yachtModels = [
     { id: "270 GTO", name: "270 GTO", length: "27ft", passengers: 8, price: "€185K", sharesFrom: "€37K", image: "https://saxdoryachts.com/wp-content/uploads/2024/09/DJI_0911-4-1920x1080.jpg" },
     { id: "320 GTO", name: "320 GTO", length: "32ft", passengers: 10, price: "€241K", sharesFrom: "€48K", image: "https://saxdoryachts.com/wp-content/uploads/2025/04/DJI_0865.jpeg" },
-    { id: "320 GTC", name: "320 GTC", length: "32ft", passengers: 10, price: "€273K", sharesFrom: "€55K", image: "https://saxdoryachts.com/wp-content/uploads/2025/04/DJI_0865.jpeg" },
+    { id: "320 GTC", name: "320 GTC", length: "32ft", passengers: 10, price: "€273K", sharesFrom: "€55K", image: "https://saxdoryachts.com/wp-content/uploads/2025/08/DJI_20250408143821_0019_D_ALEXMFUK-Enhanced-NR.jpeg" },
     { id: "340 GTWA", name: "340 GTWA", length: "34ft", passengers: 12, price: "€261K", sharesFrom: "€52K", image: "https://saxdoryachts.com/wp-content/uploads/2024/09/DJI_0106-1920x1080.jpg" },
     { id: "400 GTO", name: "400 GTO", length: "40ft", passengers: 12, price: "€406K", sharesFrom: "€81K", image: "https://saxdoryachts.com/wp-content/uploads/2023/12/DJI_0009-Enhanced-NR-2.jpg" },
-    { id: "400 GTS", name: "400 GTS", length: "40ft", passengers: 12, price: "€516K", sharesFrom: "€103K", image: "https://saxdoryachts.com/wp-content/uploads/2023/12/DJI_0009-Enhanced-NR-2.jpg" }
+    { id: "400 GTS", name: "400 GTS", length: "40ft", passengers: 12, price: "€516K", sharesFrom: "€103K", image: "https://saxdoryachts.com/wp-content/uploads/2025/09/400_gts_gal_2-1920x1080.jpeg" }
   ];
 
   const selectedYacht = yachtModels.find(y => y.id === selectedModel) || yachtModels[3];
@@ -265,7 +265,7 @@ export default function OwnershipHomeScreen() {
               capacity: 12, 
               expectedROI: "3-5%",
               priority: true, 
-              image: "https://saxdoryachts.com/wp-content/uploads/2023/12/DJI_0009-Enhanced-NR-2.jpg" 
+              image: "https://saxdoryachts.com/wp-content/uploads/2025/09/400_gts_gal_2-1920x1080.jpeg" 
             }
           ].map((opportunity) => (
             <Link key={opportunity.id} href={`/ownership/${opportunity.id}`}>
