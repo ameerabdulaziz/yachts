@@ -47,7 +47,7 @@ export default function YachtOwnershipDetailScreen() {
               size="sm" 
               className="w-10 h-10 rounded-full bg-white/80 backdrop-blur-sm"
               onClick={() => {
-                const shareText = `Check out this amazing yacht ownership opportunity: ${opportunity.yacht.name} - €${Number(opportunity.sharePrice).toLocaleString()} per share!`;
+                const shareText = `Check out this amazing yacht ownership opportunity: ${opportunity.yacht.name} - ${opportunity.sharePrice} per share!`;
                 const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(shareText)}`;
                 window.open(whatsappUrl, '_blank');
               }}
@@ -82,9 +82,9 @@ export default function YachtOwnershipDetailScreen() {
 
           </div>
           <div className="text-right">
-            <p className="text-3xl font-bold text-primary">€{Number(opportunity.sharePrice).toLocaleString()}</p>
+            <p className="text-3xl font-bold text-primary">{opportunity.sharePrice}</p>
             <p className="text-gray-600">per share</p>
-            <p className="text-xs text-blue-600 font-medium">from €{(opportunity.financing as any)?.monthlyPayment ? Number((opportunity.financing as any).monthlyPayment).toLocaleString() : Math.round(Number(opportunity.sharePrice) / 60).toLocaleString()} monthly</p>
+            <p className="text-xs text-blue-600 font-medium">from €{(opportunity.financing as any)?.monthlyPayment || "N/A"}/mo</p>
           </div>
         </div>
 
@@ -188,8 +188,8 @@ export default function YachtOwnershipDetailScreen() {
                   <span className="font-medium text-gray-900">Share Price</span>
                 </div>
                 <div className="text-right">
-                  <span className="text-lg font-bold text-blue-500">€{Number(opportunity.sharePrice).toLocaleString()}</span>
-                  <p className="text-xs text-gray-600">from €{(opportunity.financing as any)?.monthlyPayment ? Number((opportunity.financing as any).monthlyPayment).toLocaleString() : Math.round(Number(opportunity.sharePrice) / 60).toLocaleString()} monthly</p>
+                  <span className="text-lg font-bold text-blue-500">{opportunity.sharePrice}</span>
+                  <p className="text-xs text-gray-600">from €{(opportunity.financing as any)?.monthlyPayment || "N/A"}/mo</p>
                 </div>
               </div>
               

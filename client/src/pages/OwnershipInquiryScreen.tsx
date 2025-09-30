@@ -71,7 +71,7 @@ export default function OwnershipInquiryScreen() {
       email: formData.email,
       phone: formData.phone,
       sharesRequested: formData.sharesRequested,
-      investmentAmount: (Number(opportunity.sharePrice) * formData.sharesRequested).toString(),
+      investmentAmount: opportunity.sharePrice,
       timeframe: formData.timeframe,
       financingNeeded: formData.financingNeeded,
       additionalQuestions: formData.additionalQuestions,
