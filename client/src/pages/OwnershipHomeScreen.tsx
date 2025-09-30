@@ -18,8 +18,10 @@ import {
 } from "lucide-react";
 import nauttecLogo from "@assets/Nauttec Logo_1754330395988.png";
 import seaBackground from "@assets/image_1754575606863.png";
-import deAntonioD50 from "@assets/image_1754579474724.png";
-import deAntonioD36 from "@assets/image_1754582579453.png";
+import saxdor400GTO1 from "@assets/stock_images/saxdor_400_gto_luxur_c3862d82.jpg";
+import saxdor340GTWA1 from "@assets/stock_images/saxdor_340_luxury_ya_b0bb1613.jpg";
+import saxdor320GTC1 from "@assets/stock_images/saxdor_320_modern_sp_81ec5bfa.jpg";
+import saxdor270GTO1 from "@assets/stock_images/saxdor_270_small_lux_f0eb4564.jpg";
 import BottomNavigation from "@/components/BottomNavigation";
 import { enhancedScrollToTop } from "@/utils/scrollToTop";
 
@@ -27,12 +29,12 @@ export default function OwnershipHomeScreen() {
   const [selectedModel, setSelectedModel] = useState("340 GTWA");
 
   const yachtModels = [
-    { id: "270 GTO", name: "270 GTO", length: "27ft", passengers: 8, price: "€185K", sharesFrom: "€37K", image: "https://saxdoryachts.com/wp-content/uploads/2023/10/270-GTO-1.jpg" },
-    { id: "320 GTO", name: "320 GTO", length: "32ft", passengers: 10, price: "€241K", sharesFrom: "€48K", image: "https://saxdoryachts.com/wp-content/uploads/2023/10/320-GTO-1.jpg" },
-    { id: "320 GTC", name: "320 GTC", length: "32ft", passengers: 10, price: "€273K", sharesFrom: "€55K", image: "https://saxdoryachts.com/wp-content/uploads/2023/10/320-GTC-1.jpg" },
-    { id: "340 GTWA", name: "340 GTWA", length: "34ft", passengers: 12, price: "€261K", sharesFrom: "€52K", image: "https://saxdoryachts.com/wp-content/uploads/2023/10/340-GTWA-1.jpg" },
-    { id: "400 GTO", name: "400 GTO", length: "40ft", passengers: 12, price: "€406K", sharesFrom: "€81K", image: "https://saxdoryachts.com/wp-content/uploads/2023/10/400-GTO-1.jpg" },
-    { id: "400 GTS", name: "400 GTS", length: "40ft", passengers: 12, price: "€516K", sharesFrom: "€103K", image: "https://saxdoryachts.com/wp-content/uploads/2023/10/400-GTS-1.jpg" }
+    { id: "270 GTO", name: "270 GTO", length: "27ft", passengers: 8, price: "€185K", sharesFrom: "€37K", image: saxdor270GTO1 },
+    { id: "320 GTO", name: "320 GTO", length: "32ft", passengers: 10, price: "€241K", sharesFrom: "€48K", image: saxdor320GTC1 },
+    { id: "320 GTC", name: "320 GTC", length: "32ft", passengers: 10, price: "€273K", sharesFrom: "€55K", image: saxdor320GTC1 },
+    { id: "340 GTWA", name: "340 GTWA", length: "34ft", passengers: 12, price: "€261K", sharesFrom: "€52K", image: saxdor340GTWA1 },
+    { id: "400 GTO", name: "400 GTO", length: "40ft", passengers: 12, price: "€406K", sharesFrom: "€81K", image: saxdor400GTO1 },
+    { id: "400 GTS", name: "400 GTS", length: "40ft", passengers: 12, price: "€516K", sharesFrom: "€103K", image: saxdor400GTO1 }
   ];
 
   const selectedYacht = yachtModels.find(y => y.id === selectedModel) || yachtModels[3];
@@ -225,7 +227,7 @@ export default function OwnershipHomeScreen() {
               capacity: 10, 
               expectedROI: "6-8%",
               priority: false, 
-              image: "https://static.wixstatic.com/media/0fb4c8_6cbbd012fc0645009bc4a91a412b293a~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D32.jpg" 
+              image: saxdor320GTC1 
             },
             { 
               id: "share-d36", 
@@ -239,7 +241,7 @@ export default function OwnershipHomeScreen() {
               capacity: 12, 
               expectedROI: "5-7%",
               priority: false, 
-              image: deAntonioD36 
+              image: saxdor340GTWA1 
             },
             { 
               id: "share-d50", 
@@ -253,7 +255,7 @@ export default function OwnershipHomeScreen() {
               capacity: 12, 
               expectedROI: "4-6%",
               priority: true, 
-              image: "https://static.wixstatic.com/media/0fb4c8_60988eb5cf834fcb876c1d06bd8af594~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D50.jpg"
+              image: saxdor400GTO1
             },
             { 
               id: "share-d60", 
@@ -267,7 +269,7 @@ export default function OwnershipHomeScreen() {
               capacity: 12, 
               expectedROI: "3-5%",
               priority: true, 
-              image: "https://static.wixstatic.com/media/5c3629_a8b1aa6ff9244bddaf7383aa45b4afc1~mv2.jpg/v1/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/5c3629_a8b1aa6ff9244bddaf7383aa45b4afc1~mv2.jpg" 
+              image: saxdor400GTO1 
             }
           ].map((opportunity) => (
             <Link key={opportunity.id} href={`/ownership/${opportunity.id}`}>

@@ -1,7 +1,12 @@
 import { Yacht, OwnershipOpportunity, Booking, FuelTransaction, Message } from "@shared/schema";
-import deAntonioD50 from "@assets/image_1754579474724.png";
-import deAntonioD50Aerial from "@assets/de antonio D50 (1)_1754331061302.jpg";
-import deAntonioD36 from "@assets/image_1754582579453.png";
+import saxdor400GTO1 from "@assets/stock_images/saxdor_400_gto_luxur_c3862d82.jpg";
+import saxdor400GTO2 from "@assets/stock_images/saxdor_400_gto_luxur_2669bab6.jpg";
+import saxdor340GTWA1 from "@assets/stock_images/saxdor_340_luxury_ya_b0bb1613.jpg";
+import saxdor340GTWA2 from "@assets/stock_images/saxdor_340_luxury_ya_e1036deb.jpg";
+import saxdor320GTC1 from "@assets/stock_images/saxdor_320_modern_sp_81ec5bfa.jpg";
+import saxdor320GTC2 from "@assets/stock_images/saxdor_320_modern_sp_4e1a8368.jpg";
+import saxdor270GTO1 from "@assets/stock_images/saxdor_270_small_lux_f0eb4564.jpg";
+import saxdor270GTO2 from "@assets/stock_images/saxdor_270_small_lux_36b453f8.jpg";
 
 export const mockYachts: (Yacht & { owner: { name: string; avatar: string; verified: boolean; rating: number } })[] = [
   {
@@ -15,8 +20,8 @@ export const mockYachts: (Yacht & { owner: { name: string; avatar: string; verif
     length: "40",
     yearBuilt: 2024,
     images: [
-      "https://saxdoryachts.com/wp-content/uploads/2023/10/400-GTO-1.jpg",
-      "https://saxdoryachts.com/wp-content/uploads/2023/10/400-GTO-2.jpg"
+      saxdor400GTO1,
+      saxdor400GTO2
     ],
     amenities: ["13-Foot Side Terraces", "Twin-Stepped Hull", "Joystick Control", "Premium Audio System", "Advanced Navigation", "Electric Windlass", "LED Lighting", "Freshwater Shower"],
     ownerId: "owner-1",
@@ -43,8 +48,8 @@ export const mockYachts: (Yacht & { owner: { name: string; avatar: string; verif
     length: "34",
     yearBuilt: 2024,
     images: [
-      "https://saxdoryachts.com/wp-content/uploads/2023/10/340-GTWA-1.jpg",
-      "https://saxdoryachts.com/wp-content/uploads/2023/10/340-GTWA-2.jpg"
+      saxdor340GTWA1,
+      saxdor340GTWA2
     ],
     amenities: ["Twin Mercury 300HP V8", "All-Weather Design", "Side Terraces", "Joystick Control", "Premium Interior", "Galley Kitchen", "Sound System", "Navigation Package"],
     ownerId: "owner-2",
@@ -71,8 +76,8 @@ export const mockYachts: (Yacht & { owner: { name: string; avatar: string; verif
     length: "32",
     yearBuilt: 2024,
     images: [
-      "https://saxdoryachts.com/wp-content/uploads/2023/10/320-GTC-1.jpg",
-      "https://saxdoryachts.com/wp-content/uploads/2023/10/320-GTC-2.jpg"
+      saxdor320GTC1,
+      saxdor320GTC2
     ],
     amenities: ["Mercury 300HP Engine", "Sound-Isolated Cabin", "Climate Control", "Joystick Control", "Dual Displays", "Radar & VHF", "Lithium Systems", "Premium Interior"],
     ownerId: "owner-3",
@@ -99,8 +104,8 @@ export const mockYachts: (Yacht & { owner: { name: string; avatar: string; verif
     length: "32",
     yearBuilt: 2024,
     images: [
-      "https://saxdoryachts.com/wp-content/uploads/2023/10/320-GTO-1.jpg",
-      "https://saxdoryachts.com/wp-content/uploads/2023/10/320-GTO-2.jpg"
+      saxdor320GTC1,
+      saxdor320GTC2
     ],
     amenities: ["Twin Mercury 300HP V8", "50+ Knots Top Speed", "Twin-Stepped Hull", "Convertible Seating", "Full Cabin", "Galley Kitchen", "Premium Audio", "Joystick Control"],
     ownerId: "owner-4",
@@ -127,8 +132,8 @@ export const mockYachts: (Yacht & { owner: { name: string; avatar: string; verif
     length: "27",
     yearBuilt: 2024,
     images: [
-      "https://saxdoryachts.com/wp-content/uploads/2023/10/270-GTO-1.jpg",
-      "https://saxdoryachts.com/wp-content/uploads/2023/10/270-GTO-2.jpg"
+      saxdor270GTO1,
+      saxdor270GTO2
     ],
     amenities: ["Twin Mercury 200HP V6", "Award-Winning Design", "Twin Sunbeds", "Convertible Dining", "Vacuum Infusion Hull", "Joystick Control", "Audio System", "Swimming Platform"],
     ownerId: "owner-5",
@@ -155,8 +160,8 @@ export const mockYachts: (Yacht & { owner: { name: string; avatar: string; verif
     length: "40",
     yearBuilt: 2024,
     images: [
-      "https://saxdoryachts.com/wp-content/uploads/2023/10/400-GTS-1.jpg",
-      "https://saxdoryachts.com/wp-content/uploads/2023/10/400-GTS-2.jpg"
+      saxdor400GTO1,
+      saxdor400GTO2
     ],
     amenities: ["Twin Mercury 400HP V10", "13-Foot Side Terraces", "Lithium Battery System", "Advanced Navigation Package", "Hardtop with Sunroof", "Dual Swim Platforms", "Premium Audio", "Joystick Control"],
     ownerId: "owner-6",

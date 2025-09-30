@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useLocation } from "wouter";
 import nauttecLogo from "@assets/Nauttec Logo_1754330395988.png";
-import yachtBackground from "@assets/de antonio D50 (1)_1754331061302.jpg";
-import deAntonioLogo from "@assets/DE-ANTONIO-YACHTS_LOGO-removebg-preview_1754331163197.png";
+import yachtBackground from "@assets/stock_images/saxdor_400_gto_luxur_c3862d82.jpg";
+import saxdorLogo from "@assets/DE-ANTONIO-YACHTS_LOGO-removebg-preview_1754331163197.png";
 
 export default function SplashScreen() {
   const [, setLocation] = useLocation();
@@ -50,7 +50,7 @@ export default function SplashScreen() {
         <div className="text-center pb-8 px-8">
           <div className="w-64 h-14 mx-auto flex items-center justify-center">
             <img 
-              src={deAntonioLogo} 
+              src={saxdorLogo} 
               alt="Saxdor Yachts" 
               className="h-full object-contain drop-shadow-xl"
             />
