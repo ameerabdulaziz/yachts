@@ -258,7 +258,7 @@ export default function CharterScreen() {
                         </div>
                       </div>
                       <div className="text-right">
-                        <p className="text-2xl font-bold text-primary">€{opportunity.sharePrice}</p>
+                        <p className="text-2xl font-bold text-primary">{opportunity.sharePrice}</p>
                         <p className="text-sm text-gray-600">per share</p>
                       </div>
                     </div>
