@@ -25,12 +25,12 @@ export default function OwnershipHomeScreen() {
   const [selectedModel, setSelectedModel] = useState("340 GTWA");
 
   const yachtModels = [
-    { id: "270 GTO", name: "270 GTO", length: "27ft", passengers: 8, price: "€185K", sharesFrom: "€37K", image: "https://saxdoryachts.com/wp-content/uploads/2024/09/DJI_0911-4-1920x1080.jpg" },
-    { id: "320 GTO", name: "320 GTO", length: "32ft", passengers: 10, price: "€241K", sharesFrom: "€48K", image: "https://saxdoryachts.com/wp-content/uploads/2025/04/DJI_0865.jpeg" },
-    { id: "320 GTC", name: "320 GTC", length: "32ft", passengers: 10, price: "€273K", sharesFrom: "€55K", image: "https://saxdoryachts.com/wp-content/uploads/2025/08/DJI_20250408143821_0019_D_ALEXMFUK-Enhanced-NR.jpeg" },
-    { id: "340 GTWA", name: "340 GTWA", length: "34ft", passengers: 12, price: "€261K", sharesFrom: "€52K", image: "https://saxdoryachts.com/wp-content/uploads/2024/09/DJI_0106-1920x1080.jpg" },
-    { id: "400 GTO", name: "400 GTO", length: "40ft", passengers: 12, price: "€406K", sharesFrom: "€81K", image: "https://saxdoryachts.com/wp-content/uploads/2023/12/DJI_0009-Enhanced-NR-2.jpg" },
-    { id: "400 GTS", name: "400 GTS", length: "40ft", passengers: 12, price: "€516K", sharesFrom: "€103K", image: "https://saxdoryachts.com/wp-content/uploads/2025/09/400_gts_gal_2-1920x1080.jpeg" }
+    { id: "270 GTO", name: "270 GTO", length: "27ft", passengers: 8, price: "€205K", sharesFrom: "€41K", image: "https://saxdoryachts.com/wp-content/uploads/2024/09/DJI_0911-4-1920x1080.jpg" },
+    { id: "320 GTO", name: "320 GTO", length: "32ft", passengers: 10, price: "€323K", sharesFrom: "€65K", image: "https://saxdoryachts.com/wp-content/uploads/2025/04/DJI_0865.jpeg" },
+    { id: "320 GTC", name: "320 GTC", length: "32ft", passengers: 10, price: "€339K", sharesFrom: "€68K", image: "https://saxdoryachts.com/wp-content/uploads/2025/08/DJI_20250408143821_0019_D_ALEXMFUK-Enhanced-NR.jpeg" },
+    { id: "340 GTWA", name: "340 GTWA", length: "34ft", passengers: 12, price: "€361K", sharesFrom: "€72K", image: "https://saxdoryachts.com/wp-content/uploads/2024/09/DJI_0106-1920x1080.jpg" },
+    { id: "400 GTO", name: "400 GTO", length: "40ft", passengers: 12, price: "€394K", sharesFrom: "€79K", image: "https://saxdoryachts.com/wp-content/uploads/2023/12/DJI_0009-Enhanced-NR-2.jpg" },
+    { id: "400 GTS", name: "400 GTS", length: "40ft", passengers: 12, price: "€428K", sharesFrom: "€86K", image: "https://saxdoryachts.com/wp-content/uploads/2025/09/400_gts_gal_2-1920x1080.jpeg" }
   ];
 
   const selectedYacht = yachtModels.find(y => y.id === selectedModel) || yachtModels[3];
@@ -217,8 +217,8 @@ export default function OwnershipHomeScreen() {
               location: "El Gouna", 
               availableShares: 3, 
               totalShares: 10, 
-              sharePrice: "€57,680", 
-              monthlyPayment: "€1,001",
+              sharePrice: "€64,600", 
+              monthlyPayment: "€1,126",
               usageDaysPerYear: 48, 
               capacity: 10, 
               expectedROI: "6-8%",
@@ -231,8 +231,8 @@ export default function OwnershipHomeScreen() {
               location: "El Gouna", 
               availableShares: 2, 
               totalShares: 10, 
-              sharePrice: "€79,520", 
-              monthlyPayment: "€1,288",
+              sharePrice: "€72,200", 
+              monthlyPayment: "€1,258",
               usageDaysPerYear: 48, 
               capacity: 12, 
               expectedROI: "5-7%",
@@ -245,8 +245,8 @@ export default function OwnershipHomeScreen() {
               location: "El Gouna", 
               availableShares: 1, 
               totalShares: 10, 
-              sharePrice: "€125,160", 
-              monthlyPayment: "€2,310",
+              sharePrice: "€78,800", 
+              monthlyPayment: "€1,373",
               usageDaysPerYear: 48, 
               capacity: 12, 
               expectedROI: "4-6%",
@@ -259,8 +259,8 @@ export default function OwnershipHomeScreen() {
               location: "El Gouna", 
               availableShares: 2, 
               totalShares: 10, 
-              sharePrice: "€237,020", 
-              monthlyPayment: "€3,192",
+              sharePrice: "€85,600", 
+              monthlyPayment: "€1,492",
               usageDaysPerYear: 48, 
               capacity: 12, 
               expectedROI: "3-5%",
