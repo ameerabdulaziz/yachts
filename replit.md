@@ -1,6 +1,6 @@
 # Overview
 
-Yachtak (operated by Nauttec) is a comprehensive fractional yacht ownership and rental platform. It aims to revolutionize luxury boating access by enabling Visitors, Owners, and Administrators to interact with the De Antonio Yachts range (D23-D60) under various fractional ownership structures. Key capabilities include sophisticated booking rules, fuel wallet management, and peer-to-peer share trading.
+Yachtak (operated by Nauttec) is a comprehensive fractional yacht ownership and rental platform. It aims to revolutionize luxury boating access by enabling Visitors, Owners, and Administrators to interact with the Saxdor Yachts range (270 GTO, 320 GTO, 320 GTC, 340 GTWA, 400 GTO, 400 GTS) under various fractional ownership structures. Key capabilities include sophisticated booking rules, fuel wallet management, and peer-to-peer share trading.
 
 # User Preferences
 
@@ -95,7 +95,7 @@ Located in `django_backend/` directory, this is the main production backend:
 
 ## Database
 
-The PostgreSQL database supports core entities: Users (Visitors, Owners, Administrators), Yachts (De Antonio range with specs, calendars, maintenance), Fractional Ownership (share structures, usage limits, co-owner relations), a Booking Rules Engine (seasonal multipliers, weighted days), Share Trading (right of first refusal, waitlists, peer-to-peer marketplace), and a Fuel Wallet System (prepaid virtual fuel, tracking).
+The PostgreSQL database supports core entities: Users (Visitors, Owners, Administrators), Yachts (Saxdor range with specs, calendars, maintenance), Fractional Ownership (share structures, usage limits, co-owner relations), a Booking Rules Engine (seasonal multipliers, weighted days), Share Trading (right of first refusal, waitlists, peer-to-peer marketplace), and a Fuel Wallet System (prepaid virtual fuel, tracking).
 
 ## Authentication & Authorization
 

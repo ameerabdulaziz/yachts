@@ -122,9 +122,9 @@ export default function YachtDetailsScreen() {
           className="w-full h-80 object-cover"
         />
         <div className="absolute bottom-4 right-4 bg-black/50 text-white px-3 py-1 rounded-full text-sm">
-          {currentImageIndex + 1} / {yacht.images.length}
+          {currentImageIndex + 1} / {yacht.images?.length || 0}
         </div>
-        {yacht.images && yacht.images?.length > 1 && (
+        {yacht.images && yacht.images.length > 1 && (
           <div className="absolute bottom-4 left-4 flex space-x-2">
             {yacht.images?.map((_, index) => (
               <button

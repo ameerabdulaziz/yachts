@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useLocation } from "wouter";
 import nauttecLogo from "@assets/Nauttec Logo_1754330395988.png";
-import saxdorLogo from "@assets/DE-ANTONIO-YACHTS_LOGO-removebg-preview_1754331163197.png";
 
 export default function SplashScreen() {
   const [, setLocation] = useLocation();
@@ -45,14 +44,12 @@ export default function SplashScreen() {
         {/* Spacer to push Saxdor logo to bottom */}
         <div className="flex-1"></div>
         
-        {/* Bottom Section - Saxdor Yachts Logo positioned at very bottom */}
+        {/* Bottom Section - Saxdor Yachts branding */}
         <div className="text-center pb-8 px-8">
-          <div className="w-64 h-14 mx-auto flex items-center justify-center">
-            <img 
-              src={saxdorLogo} 
-              alt="Saxdor Yachts" 
-              className="h-full object-contain drop-shadow-xl"
-            />
+          <div className="flex items-center justify-center">
+            <p className="text-white text-2xl font-bold tracking-wider drop-shadow-2xl" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif', textShadow: '2px 2px 8px rgba(0, 0, 0, 0.7)' }}>
+              SAXDOR YACHTS
+            </p>
           </div>
         </div>
       </div>
