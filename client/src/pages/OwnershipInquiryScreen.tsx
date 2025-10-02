@@ -14,12 +14,19 @@ import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 
+// Helper function to parse currency string to number
+const parseCurrency = (currencyString: string): number => {
+  // Remove € symbol and commas, then parse as float
+  return parseFloat(currencyString.replace(/€|,/g, '').trim());
+};
+
 export default function OwnershipInquiryScreen() {
   const { id } = useParams<{ id: string }>();
   const [, setLocation] = useLocation();
   const { toast } = useToast();
   
   const opportunity = mockOwnershipOpportunities.find(o => o.id === id) || mockOwnershipOpportunities[0];
+  const sharePriceNumeric = parseCurrency(opportunity.sharePrice);
   
   const [formData, setFormData] = useState({
     firstName: "",
@@ -175,7 +182,7 @@ export default function OwnershipInquiryScreen() {
                   <SelectContent>
                     {[...Array(opportunity.availableShares)].map((_, i) => (
                       <SelectItem key={i + 1} value={(i + 1).toString()}>
-                        {i + 1} share{i > 0 ? 's' : ''} - €{((i + 1) * Number(opportunity.sharePrice)).toLocaleString()}
+                        {i + 1} share{i > 0 ? 's' : ''} - €{((i + 1) * sharePriceNumeric).toLocaleString()}
                       </SelectItem>
                     ))}
                   </SelectContent>
@@ -261,7 +268,7 @@ export default function OwnershipInquiryScreen() {
                 <div className="flex items-center justify-between">
                   <span className="text-lg font-bold text-gray-900">Total Investment</span>
                   <span className="text-xl font-bold text-primary">
-                    €{(Number(opportunity.sharePrice) * formData.sharesRequested).toLocaleString()}
+                    €{(sharePriceNumeric * formData.sharesRequested).toLocaleString()}
                   </span>
                 </div>
               </div>
