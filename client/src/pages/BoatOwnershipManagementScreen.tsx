@@ -189,11 +189,11 @@ export default function BoatOwnershipManagementScreen() {
             <div className="space-y-3">
               <div className="flex justify-between">
                 <span className="text-gray-600">Share Value</span>
-                <span className="font-semibold">${boat.shareValue}</span>
+                <span className="font-semibold">{boat.shareValue}</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-600">Monthly Maintenance</span>
-                <span className="font-semibold">${boat.monthlyMaintenance}</span>
+                <span className="font-semibold">{boat.monthlyMaintenance}</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-600">Annual Appreciation</span>
@@ -217,7 +217,7 @@ export default function BoatOwnershipManagementScreen() {
               </div>
               <div className="text-sm text-gray-600 flex justify-between">
                 <span>Price per share:</span>
-                <span className="font-semibold text-gray-900">${boat.sharePrice}</span>
+                <span className="font-semibold text-gray-900">{boat.sharePrice}</span>
               </div>
             </div>
 
