@@ -153,7 +153,7 @@ export default function YachtDetailsScreen() {
             </div>
           </div>
           <div className="text-right">
-            <p className="text-3xl font-bold text-gray-900">€{yacht.pricePerDay}</p>
+            <p className="text-3xl font-bold text-gray-900">{yacht.pricePerDay}</p>
             <p className="text-gray-600">per day</p>
           </div>
         </div>
@@ -345,7 +345,7 @@ export default function YachtDetailsScreen() {
               </div>
             ) : (
               <div>
-                <p className="text-2xl font-bold text-gray-900">€{yacht.pricePerDay}</p>
+                <p className="text-2xl font-bold text-gray-900">{yacht.pricePerDay}</p>
                 <p className="text-gray-600">per day</p>
               </div>
             )}
