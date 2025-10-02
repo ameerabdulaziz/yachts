@@ -9,11 +9,7 @@ import { ArrowLeft, Heart, Share, Star, Users, Bed, Ruler, Calendar, Wifi, Utens
 import { Checkbox } from "@/components/ui/checkbox";
 import { mockYachts } from "@/lib/mockData";
 import BottomNavigation from "@/components/BottomNavigation";
-
-// Helper function to parse currency strings like "€2,750" to numbers
-const parseCurrency = (value: string): number => {
-  return parseFloat(value.replace(/[€,]/g, '').trim());
-};
+import { parseCurrency } from "@/lib/utils";
 
 export default function YachtDetailsScreen() {
   const { id } = useParams<{ id: string }>();

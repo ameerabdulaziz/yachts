@@ -14,6 +14,7 @@ import nauttecLogo from "@assets/Nauttec Logo_1754330395988.png";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
+import { parseCurrency } from "@/lib/utils";
 
 export default function ListShareForSaleScreen() {
   const [, setLocation] = useLocation();
@@ -90,8 +91,8 @@ export default function ListShareForSaleScreen() {
           shareFraction: selectedShare.shareFraction,
           sharesForSale: formData.sharesForSale,
           originalPrice: selectedShare.originalPrice,
-          askingPrice: Number(formData.askingPrice),
-          priceChange: ((Number(formData.askingPrice) - selectedShare.originalPrice) / selectedShare.originalPrice * 100),
+          askingPrice: parseCurrency(formData.askingPrice),
+          priceChange: ((parseCurrency(formData.askingPrice) - selectedShare.originalPrice) / selectedShare.originalPrice * 100),
           usageWeeks: Math.floor(Math.random() * 8) + 4, // Random usage weeks
           seller: {
             name: "You",
@@ -379,14 +380,14 @@ export default function ListShareForSaleScreen() {
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-gray-700">Asking Price</span>
-                  <span className="font-medium">€{Number(formData.askingPrice).toLocaleString()}</span>
+                  <span className="font-medium">€{parseCurrency(formData.askingPrice).toLocaleString()}</span>
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-gray-700">Market Comparison</span>
                   <span className={`font-medium ${
-                    Number(formData.askingPrice) > selectedShare.currentValue ? 'text-red-600' : 'text-green-600'
+                    parseCurrency(formData.askingPrice) > selectedShare.currentValue ? 'text-red-600' : 'text-green-600'
                   }`}>
-                    {((Number(formData.askingPrice) - selectedShare.currentValue) / selectedShare.currentValue * 100).toFixed(1)}% vs market
+                    {((parseCurrency(formData.askingPrice) - selectedShare.currentValue) / selectedShare.currentValue * 100).toFixed(1)}% vs market
                   </span>
                 </div>
               </div>

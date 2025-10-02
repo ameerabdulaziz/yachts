@@ -11,6 +11,7 @@ import { mockYachts } from "@/lib/mockData";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
+import { parseCurrency } from "@/lib/utils";
 
 export default function BookingCheckoutScreen() {
   const { id } = useParams<{ id: string }>();
@@ -33,7 +34,7 @@ export default function BookingCheckoutScreen() {
   const yacht = mockYachts.find(y => y.id === yachtId) || mockYachts[0];
 
   const days = Math.ceil((new Date(endDate).getTime() - new Date(startDate).getTime()) / (1000 * 60 * 60 * 24)) + 1;
-  const basePrice = Number(yacht.pricePerDay) * days;
+  const basePrice = parseCurrency(yacht.pricePerDay) * days;
   const cateringPrice = addCatering ? 200 * days : 0;
   const serviceFee = Math.round((basePrice + cateringPrice) * 0.05);
   const totalPrice = basePrice + cateringPrice + serviceFee;

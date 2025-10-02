@@ -6,6 +6,7 @@ import BottomNavigation from "@/components/BottomNavigation";
 import { ArrowLeft, Calendar, Users, MapPin, Clock, Filter, Search } from "lucide-react";
 import { mockBookings } from "@/lib/mockData";
 import seaBackground from "@assets/image_1754575606863.png";
+import { parseCurrency } from "@/lib/utils";
 
 const statusColors = {
   confirmed: "bg-green-100 text-green-800",
@@ -138,7 +139,7 @@ export default function MyBookingsScreen() {
                 <p className="text-gray-600 text-sm">Upcoming</p>
               </div>
               <div>
-                <p className="text-2xl font-bold text-gray-900">€{bookings.reduce((sum, b) => sum + Number(b.totalPrice), 0).toLocaleString()}</p>
+                <p className="text-2xl font-bold text-gray-900">€{bookings.reduce((sum, b) => sum + parseCurrency(b.totalPrice), 0).toLocaleString()}</p>
                 <p className="text-gray-600 text-sm">Total Spent</p>
               </div>
             </div>
@@ -196,7 +197,7 @@ export default function MyBookingsScreen() {
                         <div className="bg-blue-50 rounded-lg p-3 space-y-2">
                           <div className="flex justify-between items-center">
                             <span className="text-sm font-medium text-gray-700">Total Cost</span>
-                            <span className="text-sm font-semibold text-blue-600">€{Number(booking.totalPrice).toLocaleString()}</span>
+                            <span className="text-sm font-semibold text-blue-600">€{parseCurrency(booking.totalPrice).toLocaleString()}</span>
                           </div>
                           <div className="flex justify-between items-center">
                             <span className="text-sm font-medium text-gray-700">Duration</span>
@@ -270,7 +271,7 @@ export default function MyBookingsScreen() {
                           </div>
                           
                           <div className="flex items-center justify-between">
-                            <span className="text-lg font-bold text-gray-900">€{Number(booking.totalPrice).toLocaleString()}</span>
+                            <span className="text-lg font-bold text-gray-900">€{parseCurrency(booking.totalPrice).toLocaleString()}</span>
                             <Button variant="outline" size="sm">
                               Leave Review
                             </Button>

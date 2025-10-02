@@ -5,6 +5,7 @@ import { CheckCircle, Calendar, Users, MapPin, Phone, Mail, Download, Share } fr
 import { mockYachts } from "@/lib/mockData";
 import BottomNavigation from "@/components/BottomNavigation";
 import seaBackground from "@assets/image_1754575606863.png";
+import { parseCurrency } from "@/lib/utils";
 
 export default function BookingConfirmationScreen() {
   // Parse URL parameters to get booking details
@@ -19,7 +20,7 @@ export default function BookingConfirmationScreen() {
   const yacht = mockYachts.find(y => y.id === yachtId) || mockYachts[0];
   
   // Calculate booking details
-  const formatDate = (dateStr: string) => {
+  const formatDate = (dateStr: string | null) => {
     if (!dateStr) return "October 15, 2025";
     const date = new Date(dateStr);
     return date.toLocaleDateString('en-US', { 
@@ -33,7 +34,7 @@ export default function BookingConfirmationScreen() {
     if (fromMyBoats) return 0; // Owner booking - no cost
     if (!startDate || !endDate) return 2400;
     const days = Math.ceil((new Date(endDate).getTime() - new Date(startDate).getTime()) / (1000 * 60 * 60 * 24)) + 1;
-    const basePrice = Number(yacht.pricePerDay) * days;
+    const basePrice = parseCurrency(yacht.pricePerDay) * days;
     const cateringPrice = catering ? 200 * days : 0;
     const serviceFee = Math.round((basePrice + cateringPrice) * 0.05);
     return basePrice + cateringPrice + serviceFee;

@@ -11,6 +11,7 @@ import { ArrowLeft, Ship, MapPin, Euro, Users, Upload, Plus, X } from "lucide-re
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
+import { parseCurrency } from "@/lib/utils";
 import seaBackground from "@assets/image_1754575606863.png";
 
 export default function AddBoatListingScreen() {
@@ -327,7 +328,7 @@ export default function AddBoatListingScreen() {
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-gray-700">Daily Rate</span>
-                  <span className="font-medium">€{Number(formData.pricePerDay).toLocaleString()}</span>
+                  <span className="font-medium">€{parseCurrency(formData.pricePerDay).toLocaleString()}</span>
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-gray-700">Capacity</span>
