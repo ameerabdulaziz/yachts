@@ -6,7 +6,6 @@ import BottomNavigation from "@/components/BottomNavigation";
 import { ArrowLeft, Calendar, Users, MapPin, Clock, Filter, Search } from "lucide-react";
 import { mockBookings } from "@/lib/mockData";
 import seaBackground from "@assets/image_1754575606863.png";
-import deAntonioD50 from "@assets/image_1754579474724.png";
 
 const statusColors = {
   confirmed: "bg-green-100 text-green-800",
@@ -36,7 +35,7 @@ export default function MyBookingsScreen() {
         name: "Saxdor 400 GTO",
         location: "El Gouna, Egypt",
         pricePerDay: "€2,750",
-        images: ["https://static.wixstatic.com/media/0fb4c8_008f1545c8764f8789a2b7415ca9dde7~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D42.jpg"]
+        images: ["https://saxdoryachts.com/wp-content/uploads/2023/12/DJI_0009-Enhanced-NR-2.jpg"]
       }
     },
     {
@@ -57,7 +56,7 @@ export default function MyBookingsScreen() {
         name: "Saxdor 340 GTWA",
         location: "El Gouna, Egypt", 
         pricePerDay: "€1,950",
-        images: ["https://static.wixstatic.com/media/0fb4c8_fbbb6a2569c747d48881f7ac065b947a~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D36.jpg"]
+        images: ["https://saxdoryachts.com/wp-content/uploads/2024/09/DJI_0106-1920x1080.jpg"]
       }
     },
     {
@@ -78,7 +77,7 @@ export default function MyBookingsScreen() {
         name: "Saxdor 400 GTS",
         location: "El Gouna, Egypt",
         pricePerDay: "€4,625",
-        images: ["https://static.wixstatic.com/media/5c3629_a8b1aa6ff9244bddaf7383aa45b4afc1~mv2.jpg/v1/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/5c3629_a8b1aa6ff9244bddaf7383aa45b4afc1~mv2.jpg"]
+        images: ["https://saxdoryachts.com/wp-content/uploads/2025/09/400_gts_gal_2-1920x1080.jpeg"]
       }
     }
   ];

@@ -11,7 +11,7 @@ const mockShareListings = [
   {
     id: "listing-1",
     boatName: "Saxdor 400 GTO",
-    boatImage: "https://static.wixstatic.com/media/0fb4c8_008f1545c8764f8789a2b7415ca9dde7~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D42.jpg",
+    boatImage: "https://saxdoryachts.com/wp-content/uploads/2023/12/DJI_0009-Enhanced-NR-2.jpg",
     length: "12.64m",
     passengers: 12,
     cabins: 2,
@@ -31,7 +31,7 @@ const mockShareListings = [
   {
     id: "listing-2",
     boatName: "Saxdor 320 GTO",
-    boatImage: "https://static.wixstatic.com/media/0fb4c8_6cbbd012fc0645009bc4a91a412b293a~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D32.jpg",
+    boatImage: "https://saxdoryachts.com/wp-content/uploads/2025/04/DJI_0865.jpeg",
     length: "9.90m",
     passengers: 10,
     cabins: 2,
@@ -52,7 +52,7 @@ const mockShareListings = [
   {
     id: "listing-3",
     boatName: "Saxdor 400 GTS",
-    boatImage: "https://static.wixstatic.com/media/5c3629_a8b1aa6ff9244bddaf7383aa45b4afc1~mv2.jpg/v1/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/5c3629_a8b1aa6ff9244bddaf7383aa45b4afc1~mv2.jpg",
+    boatImage: "https://saxdoryachts.com/wp-content/uploads/2025/09/400_gts_gal_2-1920x1080.jpeg",
     length: "18.50m",
     passengers: 12,
     cabins: 3,
@@ -72,7 +72,7 @@ const mockShareListings = [
   {
     id: "listing-4",
     boatName: "Saxdor 270 GTO",
-    boatImage: "https://static.wixstatic.com/media/0fb4c8_b9744cfa841b4c4388ad78ac9b49bbe7~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D29.jpg",
+    boatImage: "https://saxdoryachts.com/wp-content/uploads/2025/02/270_gto_gal_7-1920x1080.jpeg",
     length: "8.50m",
     passengers: 8,
     cabins: 1,

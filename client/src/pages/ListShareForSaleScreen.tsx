@@ -40,7 +40,7 @@ export default function ListShareForSaleScreen() {
       yacht: { 
         name: "Saxdor 320 GTO", 
         location: "El Gouna, Egypt",
-        image: "https://static.wixstatic.com/media/0fb4c8_6cbbd012fc0645009bc4a91a412b293a~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D32.jpg"
+        image: "https://saxdoryachts.com/wp-content/uploads/2025/04/DJI_0865.jpeg"
       },
       shareFraction: "2/8",
       originalPrice: 67200,
@@ -51,7 +51,7 @@ export default function ListShareForSaleScreen() {
       yacht: { 
         name: "Saxdor 400 GTO", 
         location: "El Gouna, Egypt",
-        image: "https://static.wixstatic.com/media/0fb4c8_60988eb5cf834fcb876c1d06bd8af594~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D50.jpg"
+        image: "https://saxdoryachts.com/wp-content/uploads/2023/12/DJI_0009-Enhanced-NR-2.jpg"
       },
       shareFraction: "2/7",
       originalPrice: 179200,
@@ -62,7 +62,7 @@ export default function ListShareForSaleScreen() {
       yacht: { 
         name: "Saxdor 400 GTS", 
         location: "El Gouna, Egypt",
-        image: "https://static.wixstatic.com/media/0fb4c8_008f1545c8764f8789a2b7415ca9dde7~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D42.jpg"
+        image: "https://saxdoryachts.com/wp-content/uploads/2025/09/400_gts_gal_2-1920x1080.jpeg"
       },
       shareFraction: "1/8",
       originalPrice: 124600,
