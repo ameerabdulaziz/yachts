@@ -10,6 +10,11 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { mockYachts } from "@/lib/mockData";
 import BottomNavigation from "@/components/BottomNavigation";
 
+// Helper function to parse currency strings like "€2,750" to numbers
+const parseCurrency = (value: string): number => {
+  return parseFloat(value.replace(/[€,]/g, '').trim());
+};
+
 export default function YachtDetailsScreen() {
   const { id } = useParams<{ id: string }>();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -336,7 +341,7 @@ export default function YachtDetailsScreen() {
                 <p className="text-2xl font-bold text-gray-900">
                   €{(() => {
                     const days = Math.ceil((selectedEndDate.getTime() - selectedStartDate.getTime()) / (1000 * 60 * 60 * 24)) + 1;
-                    const yachtCost = parseInt(yacht.pricePerDay) * days;
+                    const yachtCost = parseCurrency(yacht.pricePerDay) * days;
                     const cateringCost = includeCatering ? 200 * days : 0;
                     return (yachtCost + cateringCost).toLocaleString();
                   })()}
