@@ -1,0 +1,384 @@
+{
+  "platform": {
+    "name": "Yachtak",
+    "operator": "Nauttec",
+    "description": "Comprehensive fractional yacht ownership and rental platform revolutionizing luxury boating access",
+    "location": "El Gouna, Egypt",
+    "branding": {
+      "primaryColor": "#2563eb",
+      "theme": "Ocean-themed",
+      "fonts": "SF Pro"
+    }
+  },
+  "yachts": [
+    {
+      "id": "yacht-1",
+      "model": "Saxdor 400 GTO",
+      "fullPrice": "€428,000",
+      "description": "The flagship Saxdor 400 GTO with signature 13-foot side terraces and twin-stepped hull. Features premium Finnish engineering with twin outboard configuration and exceptional performance.",
+      "specifications": {
+        "length": "40 feet",
+        "capacity": 12,
+        "cabins": 2,
+        "yearBuilt": 2024,
+        "engineConfig": "Twin Outboard",
+        "topSpeed": "50+ knots"
+      },
+      "pricing": {
+        "dailyRental": "€2,750",
+        "fractionalOwnership": {
+          "shareFraction": "1/5",
+          "sharePrice": "€85,600",
+          "usageDaysPerYear": 73,
+          "totalShares": 5
+        }
+      },
+      "images": [
+        "https://saxdoryachts.com/wp-content/uploads/2023/12/DJI_0009-Enhanced-NR-2.jpg",
+        "https://saxdoryachts.com/wp-content/uploads/2023/12/4F1A1809-Enhanced-NR.jpg"
+      ],
+      "amenities": [
+        "13-Foot Side Terraces",
+        "Twin-Stepped Hull",
+        "Joystick Control",
+        "Premium Audio System",
+        "Advanced Navigation",
+        "Electric Windlass",
+        "LED Lighting",
+        "Freshwater Shower"
+      ]
+    },
+    {
+      "id": "yacht-2",
+      "model": "Saxdor 340 GTWA",
+      "fullPrice": "€339,000",
+      "description": "All-weather walkaround with superior performance and innovative design. Features twin Mercury V8 engines with advanced hull technology and spacious deck layout.",
+      "specifications": {
+        "length": "34 feet",
+        "capacity": 12,
+        "cabins": 2,
+        "yearBuilt": 2024,
+        "engineConfig": "Twin Mercury 300HP V8",
+        "topSpeed": "45+ knots"
+      },
+      "pricing": {
+        "dailyRental": "€1,950",
+        "fractionalOwnership": {
+          "shareFraction": "1/5",
+          "sharePrice": "€67,800",
+          "usageDaysPerYear": 73,
+          "totalShares": 5
+        }
+      },
+      "images": [
+        "https://saxdoryachts.com/wp-content/uploads/2024/09/DJI_0106-1920x1080.jpg",
+        "https://saxdoryachts.com/wp-content/uploads/2024/11/4F1A1175-1.jpg"
+      ],
+      "amenities": [
+        "Twin Mercury 300HP V8",
+        "All-Weather Design",
+        "Side Terraces",
+        "Joystick Control",
+        "Premium Interior",
+        "Galley Kitchen",
+        "Sound System",
+        "Navigation Package"
+      ]
+    },
+    {
+      "id": "yacht-3",
+      "model": "Saxdor 320 GTC",
+      "fullPrice": "€339,000",
+      "description": "All-weather cabin cruiser with enclosed hard top and climate control. Features sound-isolated wheelhouse and advanced navigation systems with premium comfort.",
+      "specifications": {
+        "length": "32 feet",
+        "capacity": 10,
+        "cabins": 1,
+        "yearBuilt": 2024,
+        "engineConfig": "Mercury 300HP Engine",
+        "topSpeed": "40+ knots"
+      },
+      "pricing": {
+        "dailyRental": "€2,075",
+        "fractionalOwnership": {
+          "shareFraction": "1/5",
+          "sharePrice": "€67,800",
+          "usageDaysPerYear": 73,
+          "totalShares": 5
+        }
+      },
+      "images": [
+        "https://saxdoryachts.com/wp-content/uploads/2025/08/DJI_20250408143821_0019_D_ALEXMFUK-Enhanced-NR.jpeg",
+        "https://saxdoryachts.com/wp-content/uploads/2025/08/DJI_20250408140422_0025_D_ALEXMFUK-Enhanced-NR.jpeg"
+      ],
+      "amenities": [
+        "Mercury 300HP Engine",
+        "Sound-Isolated Cabin",
+        "Climate Control",
+        "Joystick Control",
+        "Dual Displays",
+        "Radar & VHF",
+        "Lithium Systems",
+        "Premium Interior"
+      ]
+    },
+    {
+      "id": "yacht-4",
+      "model": "Saxdor 320 GTO",
+      "fullPrice": "€323,000",
+      "description": "Award-winning sportboat with twin Mercury V8 engines reaching 50+ knots. Features convertible cockpit seating and twin-stepped hull for exceptional performance.",
+      "specifications": {
+        "length": "32 feet",
+        "capacity": 10,
+        "cabins": 1,
+        "yearBuilt": 2024,
+        "engineConfig": "Twin Mercury 300HP V8",
+        "topSpeed": "50+ knots"
+      },
+      "pricing": {
+        "dailyRental": "€1,735",
+        "fractionalOwnership": {
+          "shareFraction": "1/5",
+          "sharePrice": "€64,600",
+          "usageDaysPerYear": 73,
+          "totalShares": 5
+        }
+      },
+      "images": [
+        "https://saxdoryachts.com/wp-content/uploads/2025/04/DJI_0865.jpeg",
+        "https://saxdoryachts.com/wp-content/uploads/2025/04/4F1A5482.jpeg"
+      ],
+      "amenities": [
+        "Twin Mercury 300HP V8",
+        "50+ Knots Top Speed",
+        "Twin-Stepped Hull",
+        "Convertible Seating",
+        "Full Cabin",
+        "Galley Kitchen",
+        "Premium Audio",
+        "Joystick Control"
+      ]
+    },
+    {
+      "id": "yacht-5",
+      "model": "Saxdor 270 GTO",
+      "fullPrice": "€205,000",
+      "description": "Award-winning 27-foot sportboat with twin Mercury V6 engines. Features twin sunbeds and convertible dining, perfect for day cruising with exceptional performance.",
+      "specifications": {
+        "length": "27 feet",
+        "capacity": 8,
+        "cabins": 1,
+        "yearBuilt": 2024,
+        "engineConfig": "Twin Mercury 200HP V6",
+        "topSpeed": "45+ knots"
+      },
+      "pricing": {
+        "dailyRental": "€1,140",
+        "fractionalOwnership": {
+          "shareFraction": "1/5",
+          "sharePrice": "€41,000",
+          "usageDaysPerYear": 73,
+          "totalShares": 5
+        }
+      },
+      "images": [
+        "https://saxdoryachts.com/wp-content/uploads/2024/09/DJI_0911-4-1920x1080.jpg",
+        "https://saxdoryachts.com/wp-content/uploads/2024/11/4F1A8596-1920x1080.jpg"
+      ],
+      "amenities": [
+        "Twin Mercury 200HP V6",
+        "Award-Winning Design",
+        "Twin Sunbeds",
+        "Convertible Dining",
+        "Vacuum Infusion Hull",
+        "Joystick Control",
+        "Audio System",
+        "Swimming Platform"
+      ]
+    },
+    {
+      "id": "yacht-6",
+      "model": "Saxdor 400 GTS",
+      "fullPrice": "€462,500",
+      "description": "The ultimate Saxdor flagship with premium configuration and extended side terraces. Features twin Mercury V10 engines with advanced electronics and luxury appointments.",
+      "specifications": {
+        "length": "40 feet",
+        "capacity": 12,
+        "cabins": 2,
+        "yearBuilt": 2024,
+        "engineConfig": "Twin Mercury 400HP V10",
+        "topSpeed": "55+ knots"
+      },
+      "pricing": {
+        "dailyRental": "€4,625",
+        "fractionalOwnership": {
+          "shareFraction": "1/5",
+          "sharePrice": "€92,500",
+          "usageDaysPerYear": 73,
+          "totalShares": 5
+        }
+      },
+      "images": [
+        "https://saxdoryachts.com/wp-content/uploads/2025/09/400_gts_gal_2-1920x1080.jpeg",
+        "https://saxdoryachts.com/wp-content/uploads/2025/09/SX_400GTS_4F1A2015.jpeg"
+      ],
+      "amenities": [
+        "Twin Mercury 400HP V10",
+        "13-Foot Side Terraces",
+        "Lithium Battery System",
+        "Advanced Navigation Package",
+        "Hardtop with Sunroof",
+        "Dual Swim Platforms",
+        "Premium Audio",
+        "Joystick Control"
+      ]
+    }
+  ],
+  "fractionalOwnership": {
+    "model": "1/5 Share Structure",
+    "benefits": [
+      "73 days of usage per year",
+      "Professional maintenance included",
+      "Crew services available",
+      "Fuel wallet system",
+      "Share trading marketplace",
+      "Right of first refusal for co-owners",
+      "Seasonal booking priority"
+    ],
+    "financing": {
+      "available": true,
+      "downPaymentPercent": 25,
+      "termMonths": 60,
+      "example": {
+        "yacht": "Saxdor 320 GTO",
+        "sharePrice": "€64,600",
+        "downPayment": "€16,150",
+        "monthlyPayment": "€1,126"
+      }
+    }
+  },
+  "rentalPricing": {
+    "addOns": {
+      "captain": {
+        "price": "€200/day",
+        "description": "Experienced licensed captain"
+      },
+      "catering": {
+        "price": "€200/day",
+        "description": "Premium onboard catering service"
+      },
+      "fuelPackage": {
+        "price": "€150/day",
+        "description": "All-inclusive fuel package"
+      }
+    },
+    "serviceFee": "5% of total booking",
+    "seasonalMultipliers": {
+      "peak": "1.5x (June-August)",
+      "shoulder": "1.2x (April-May, September-October)",
+      "off": "1.0x (November-March)"
+    }
+  },
+  "features": {
+    "booking": [
+      "Real-time availability calendar",
+      "Instant confirmation",
+      "Flexible cancellation policies",
+      "Multi-day discount pricing",
+      "Add-on services (captain, catering, fuel)"
+    ],
+    "ownership": [
+      "Fractional shares (1/5 model)",
+      "Peer-to-peer share trading",
+      "Usage tracking and analytics",
+      "Co-owner right of first refusal",
+      "Professional yacht management"
+    ],
+    "fuelWallet": [
+      "Prepaid virtual fuel credits",
+      "Auto-topup functionality",
+      "Usage tracking and history",
+      "Credit/debit management",
+      "Owner fuel benefits"
+    ]
+  },
+  "djangoBackend": {
+    "baseUrl": "YOUR_DJANGO_API_URL_HERE",
+    "note": "Update baseUrl with your deployed Django backend URL",
+    "endpoints": {
+      "authentication": [
+        "POST /api/auth/register/",
+        "POST /api/auth/login/",
+        "POST /api/auth/logout/",
+        "GET /api/auth/user/"
+      ],
+      "yachts": [
+        "GET /api/boats/",
+        "GET /api/boats/{id}/",
+        "GET /api/boats/{id}/availability/",
+        "GET /api/boats/{id}/calendar/"
+      ],
+      "bookings": [
+        "GET /api/bookings/",
+        "POST /api/bookings/",
+        "GET /api/bookings/{id}/",
+        "POST /api/bookings/{id}/cancel/"
+      ],
+      "ownership": [
+        "GET /api/ownership/opportunities/",
+        "POST /api/ownership/purchase/",
+        "GET /api/ownership/my-shares/",
+        "POST /api/ownership/list-share/"
+      ],
+      "fuelWallet": [
+        "GET /api/fuel-wallet/balance/",
+        "POST /api/fuel-wallet/topup/",
+        "GET /api/fuel-wallet/transactions/"
+      ]
+    }
+  },
+  "consumerWebsiteRecommendations": {
+    "pages": [
+      "Home/Landing - Showcase luxury yacht experience",
+      "Fleet - Browse all Saxdor models with filtering",
+      "Yacht Details - Individual yacht specifications and booking",
+      "Fractional Ownership - Explain ownership model and benefits",
+      "Booking Flow - Multi-step booking with calendar and add-ons",
+      "About - Company story and mission",
+      "Contact - Inquiry form and location info",
+      "FAQ - Common questions about rentals and ownership"
+    ],
+    "design": [
+      "Ocean-themed color palette (primary: #2563eb)",
+      "High-quality yacht photography from saxdoryachts.com",
+      "Mobile-first responsive design",
+      "Trust signals (verified owners, ratings, reviews)",
+      "Clear call-to-actions for both rental and ownership",
+      "Social proof (testimonials, booking stats)"
+    ],
+    "functionality": [
+      "Interactive yacht search and filtering",
+      "Real-time availability checking",
+      "Booking calculator with pricing preview",
+      "Lead capture forms for ownership inquiries",
+      "WhatsApp integration for quick contact",
+      "Email notifications for bookings"
+    ]
+  },
+  "legalCompliance": {
+    "required": [
+      "Privacy Policy",
+      "Terms of Service",
+      "Cancellation Policy",
+      "Ownership Agreement Templates",
+      "Safety Guidelines",
+      "Insurance Information"
+    ]
+  },
+  "metadata": {
+    "version": "1.0",
+    "lastUpdated": "2025-10-05",
+    "generatedFrom": "Nauttec Yachtak Platform",
+    "usage": "This data package contains all Saxdor yacht specifications, pricing, and platform information for building the Nauttec consumer website (crestasite)"
+  }
+}
