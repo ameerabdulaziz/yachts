@@ -8,6 +8,8 @@ import { mockBookings } from "@/lib/mockData";
 import seaBackground from "@assets/image_1754575606863.png";
 import { parseCurrency } from "@/lib/utils";
 
+const defaultYachtImage = "https://saxdoryachts.com/wp-content/uploads/2023/12/DJI_0009-Enhanced-NR-2.jpg";
+
 const statusColors = {
   confirmed: "bg-green-100 text-green-800",
   pending: "bg-yellow-100 text-yellow-800",
@@ -158,12 +160,12 @@ export default function MyBookingsScreen() {
                   <Card className="overflow-hidden cursor-pointer hover:shadow-lg transition-shadow border border-gray-100">
                     <div className="relative">
                       <img
-                        src={booking.yacht.images?.[0] || deAntonioD50}
+                        src={booking.yacht.images?.[0] || defaultYachtImage}
                         alt={booking.yacht.name}
                         className="w-full h-48 object-cover"
                       />
                       <div className="absolute top-3 right-3">
-                        <Badge className={statusColors[booking.status]}>
+                        <Badge className={statusColors[booking.status as keyof typeof statusColors]}>
                           {booking.status}
                         </Badge>
                       </div>
@@ -205,13 +207,13 @@ export default function MyBookingsScreen() {
                               {Math.ceil((booking.endDate.getTime() - booking.startDate.getTime()) / (1000 * 60 * 60 * 24))} days
                             </span>
                           </div>
-                          {(booking.addOns?.captain || booking.addOns?.catering) && (
+                          {(booking.addOns && typeof booking.addOns === 'object' && ((booking.addOns as any).captain || (booking.addOns as any).catering)) && (
                             <div className="flex justify-between items-center">
                               <span className="text-sm font-medium text-gray-700">Add-ons</span>
                               <span className="text-sm font-semibold text-gray-900">
                                 {[
-                                  booking.addOns?.captain && "Captain",
-                                  booking.addOns?.catering && "Catering"
+                                  (booking.addOns as any).captain && "Captain",
+                                  (booking.addOns as any).catering && "Catering"
                                 ].filter(Boolean).join(", ")}
                               </span>
                             </div>
@@ -244,7 +246,7 @@ export default function MyBookingsScreen() {
                     <CardContent className="p-0">
                       <div className="flex">
                         <img 
-                          src={booking.yacht.images?.[0] || deAntonioD50} 
+                          src={booking.yacht.images?.[0] || defaultYachtImage} 
                           alt={booking.yacht.name}
                           className="w-24 h-24 object-cover rounded-l-2xl"
                         />
