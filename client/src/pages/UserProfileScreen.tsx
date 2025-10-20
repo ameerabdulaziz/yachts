@@ -109,7 +109,8 @@ export default function UserProfileScreen() {
               </Avatar>
               <Button 
                 size="sm"
-                className="absolute -bottom-2 -right-2 w-8 h-8 rounded-full bg-blue-600 text-white hover:bg-blue-700 p-0"
+                className="absolute -bottom-2 -right-2 w-8 h-8 rounded-full bg-saxdor-blue text-white hover:bg-saxdor-blue/90 p-0"
+                data-testid="button-edit-avatar"
               >
                 <Camera className="w-4 h-4" />
               </Button>

@@ -22,7 +22,7 @@ export default function InquiryThankYouScreen() {
           
           <div className="space-y-3">
             <Link href="/ownership-opportunities">
-              <Button className="w-full bg-blue-600 text-white py-3 rounded-xl font-semibold hover:bg-blue-700 transition-colors">
+              <Button className="w-full bg-saxdor-blue text-white py-3 rounded-xl font-semibold hover:bg-saxdor-blue/90 transition-colors" data-testid="button-browse-opportunities">
                 <ArrowRight className="w-4 h-4 mr-2" />
                 Browse More Opportunities
               </Button>
