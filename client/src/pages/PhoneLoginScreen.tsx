@@ -82,7 +82,7 @@ export default function PhoneLoginScreen() {
       <div className="w-full max-w-md space-y-8">
         {/* Logo Section */}
         <div className="text-center">
-          <div className="w-48 h-16 mx-auto mb-8">
+          <div className="w-[230px] h-[77px] mx-auto mb-8">
             <img src={saxdorLogo} alt="Saxdor Logo" className="w-full h-full object-contain" />
           </div>
         </div>

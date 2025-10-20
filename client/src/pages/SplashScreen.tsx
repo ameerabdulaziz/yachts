@@ -32,7 +32,7 @@ export default function SplashScreen() {
         {/* Top Section - Nauttec Logo positioned high up */}
         <div className="pt-16 px-8">
           <div className="text-center">
-            <div className="w-60 h-25 mx-auto mb-8">
+            <div className="w-72 h-[120px] mx-auto mb-8">
               <img src={saxdorLogo} alt="Saxdor Logo" className="w-full h-full object-contain drop-shadow-2xl" />
             </div>
             <div className="mt-6">

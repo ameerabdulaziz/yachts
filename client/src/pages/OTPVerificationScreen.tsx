@@ -102,7 +102,7 @@ export default function OTPVerificationScreen() {
         <div className="space-y-8">
           {/* Saxdor Logo */}
           <div className="flex justify-center">
-            <div className="w-24 h-16">
+            <div className="w-[115px] h-[77px]">
               <img src={saxdorLogo} alt="Saxdor Logo" className="w-full h-full object-contain" />
             </div>
           </div>

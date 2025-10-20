@@ -77,7 +77,7 @@ export default function AccountSetupScreen() {
       <div className="relative z-10 w-full max-w-md">
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
-          <div className="w-20 h-16 mx-auto mb-4 bg-white rounded-2xl flex items-center justify-center p-2">
+          <div className="w-24 h-[77px] mx-auto mb-4 bg-white rounded-2xl flex items-center justify-center p-2">
             <img src={saxdorLogo} alt="Saxdor Logo" className="w-full h-full object-contain" />
           </div>
           <CardTitle className="text-2xl font-bold">Complete Your Profile</CardTitle>
