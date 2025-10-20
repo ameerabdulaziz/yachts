@@ -5,9 +5,37 @@
     "description": "Comprehensive fractional yacht ownership and rental platform revolutionizing luxury boating access",
     "location": "El Gouna, Egypt",
     "branding": {
-      "primaryColor": "#2563eb",
-      "theme": "Ocean-themed",
-      "fonts": "SF Pro"
+      "primaryColor": "#0E2047",
+      "primaryColorName": "Blue Zodiac",
+      "secondaryColor": "#CCCCCC",
+      "secondaryColorName": "Silver",
+      "accentColor": "#000000",
+      "accentColorName": "Black",
+      "theme": "Ocean-themed with Saxdor brand colors",
+      "fonts": {
+        "headline": "tussilago",
+        "body": "Plus Jakarta Sans"
+      },
+      "colorPalette": {
+        "blueZodiac": {
+          "hex": "#0E2047",
+          "rgb": "14, 32, 71",
+          "hsl": "221, 67, 17",
+          "cmyk": "80, 55, 0, 72"
+        },
+        "silver": {
+          "hex": "#CCCCCC",
+          "rgb": "204, 204, 204",
+          "hsl": "0, 0, 80",
+          "cmyk": "0, 0, 0, 20"
+        },
+        "black": {
+          "hex": "#000000",
+          "rgb": "0, 0, 0",
+          "hsl": "0, 0, 0",
+          "cmyk": "0, 0, 0, 100"
+        }
+      }
     }
   },
   "yachts": [

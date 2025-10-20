@@ -6,9 +6,10 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['-apple-system', 'BlinkMacSystemFont', 'SF Pro Display', 'SF Pro Text', 'system-ui', 'sans-serif'],
-        display: ['-apple-system', 'BlinkMacSystemFont', 'SF Pro Display', 'system-ui', 'sans-serif'],
-        text: ['-apple-system', 'BlinkMacSystemFont', 'SF Pro Text', 'system-ui', 'sans-serif'],
+        sans: ['Plus Jakarta Sans', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'sans-serif'],
+        display: ['Tussilago', 'Plus Jakarta Sans', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'sans-serif'],
+        headline: ['Tussilago', 'Plus Jakarta Sans', 'sans-serif'],
+        body: ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -78,6 +79,12 @@ export default {
           green: "var(--ios-green)",
           orange: "var(--ios-orange)",
           yellow: "var(--ios-yellow)",
+        },
+        saxdor: {
+          blue: "var(--saxdor-blue-zodiac)",
+          'blue-zodiac': "var(--saxdor-blue-zodiac)",
+          silver: "var(--saxdor-silver)",
+          black: "var(--saxdor-black)",
         },
       },
       keyframes: {

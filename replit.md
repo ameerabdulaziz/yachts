@@ -107,7 +107,7 @@ The architecture emphasizes type safety across the stack using TypeScript, Zod f
 
 ## UI/UX
 
-The design includes a custom ocean-themed color palette, uses shadcn/ui for consistent components, and is optimized for mobile devices with a focus on intuitive navigation. It incorporates iOS-native styling and SF Pro fonts for an enhanced user experience.
+The design uses Saxdor's official brand colors (Blue Zodiac #0E2047, Silver #CCCCCC, Black #000000) and typography (tussilago for headlines, Plus Jakarta Sans for body text). It features shadcn/ui components with an ocean-themed palette, optimized for mobile devices with a focus on intuitive navigation and modern yacht industry aesthetics.
 
 # External Dependencies
 

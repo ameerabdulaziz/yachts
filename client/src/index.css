@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -40,12 +42,12 @@ html, body {
   --card-foreground: hsl(0, 0%, 0%);
   --border: hsl(240, 6%, 90%); /* iOS separator */
   --input: hsl(210, 17%, 95%); /* iOS systemGray6 */
-  --primary: hsl(211, 100%, 50%); /* iOS systemBlue */
+  --primary: hsl(221, 67%, 17%); /* Saxdor Blue Zodiac #0E2047 */
   --primary-foreground: hsl(0, 0%, 100%);
-  --primary-hover: hsl(211, 100%, 45%);
+  --primary-hover: hsl(221, 67%, 12%);
   --secondary: hsl(210, 17%, 95%); /* iOS systemGray6 */
   --secondary-foreground: hsl(0, 0%, 0%);
-  --accent: hsl(211, 100%, 50%); /* iOS systemBlue */
+  --accent: hsl(221, 67%, 17%); /* Saxdor Blue Zodiac */
   --accent-foreground: hsl(0, 0%, 100%);
   --destructive: hsl(4, 90%, 58%); /* iOS systemRed */
   --destructive-foreground: hsl(0, 0%, 100%);
@@ -65,6 +67,11 @@ html, body {
   /* Ocean gradient colors */
   --ocean-start: hsl(180, 100%, 75%);
   --ocean-end: hsl(195, 85%, 55%);
+  
+  /* Saxdor Brand Colors */
+  --saxdor-blue-zodiac: hsl(221, 67%, 17%); /* #0E2047 */
+  --saxdor-silver: hsl(0, 0%, 80%); /* #CCCCCC */
+  --saxdor-black: hsl(0, 0%, 0%); /* #000000 */
 }
 
 .dark {
@@ -108,7 +115,7 @@ html, body {
   }
 
   body {
-    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', system-ui, sans-serif;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
     @apply antialiased bg-background text-foreground;
     margin: 0;
     padding: 0;
@@ -116,6 +123,11 @@ html, body {
     -webkit-overflow-scrolling: touch;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Tussilago', 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
   }
   
   html {
