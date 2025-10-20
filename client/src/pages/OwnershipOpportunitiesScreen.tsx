@@ -27,7 +27,7 @@ export default function OwnershipOpportunitiesScreen() {
         <header className="relative bg-transparent px-4 py-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <div className="w-20 h-10 flex items-center justify-center">
+              <div className="w-25 h-[50px] flex items-center justify-center">
                 <img src={saxdorLogo} alt="Saxdor Logo" className="w-full h-full object-contain" />
               </div>
             </div>
