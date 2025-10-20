@@ -7,7 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Card, CardContent } from "@/components/ui/card";
 import BottomNavigation from "@/components/BottomNavigation";
 import { Search, Heart, Star, Users, Bed, Calendar, PieChart, ChevronDown } from "lucide-react";
-import nauttecLogo from "@assets/Nauttec Logo_1754330395988.png";
+import saxdorLogo from "@assets/image_1760971559327.png";
 import seaBackground from "@assets/image_1754575606863.png";
 import { mockYachts, mockOwnershipOpportunities } from "@/lib/mockData";
 
@@ -45,7 +45,7 @@ export default function CharterScreen() {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
               <div className="w-20 h-10 flex items-center justify-center">
-                <img src={nauttecLogo} alt="Nauttec Logo" className="w-full h-full object-contain" />
+                <img src={saxdorLogo} alt="Saxdor Logo" className="w-full h-full object-contain" />
               </div>
             </div>
             <div className="flex items-center space-x-3">

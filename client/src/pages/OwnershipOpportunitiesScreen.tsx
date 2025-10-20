@@ -4,7 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import BottomNavigation from "@/components/BottomNavigation";
 import { ArrowLeft, Calendar, MapPin, TrendingUp, Filter, PieChart, Users } from "lucide-react";
 import seaBackground from "@assets/image_1754575606863.png";
-import nauttecLogo from "@assets/Nauttec Logo_1754330395988.png";
+import saxdorLogo from "@assets/image_1760971559327.png";
 import { mockOwnershipOpportunities } from "@/lib/mockData";
 
 export default function OwnershipOpportunitiesScreen() {
@@ -28,7 +28,7 @@ export default function OwnershipOpportunitiesScreen() {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
               <div className="w-20 h-10 flex items-center justify-center">
-                <img src={nauttecLogo} alt="Nauttec Logo" className="w-full h-full object-contain" />
+                <img src={saxdorLogo} alt="Saxdor Logo" className="w-full h-full object-contain" />
               </div>
             </div>
             <div className="flex items-center space-x-3">

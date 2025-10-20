@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useLocation } from "wouter";
-import nauttecLogo from "@assets/Nauttec Logo_1754330395988.png";
+import saxdorLogo from "@assets/image_1760971559327.png";
 
 export default function SplashScreen() {
   const [, setLocation] = useLocation();
@@ -33,7 +33,7 @@ export default function SplashScreen() {
         <div className="pt-16 px-8">
           <div className="text-center">
             <div className="w-48 h-20 mx-auto mb-8">
-              <img src={nauttecLogo} alt="Nauttec Logo" className="w-full h-full object-contain drop-shadow-2xl" />
+              <img src={saxdorLogo} alt="Saxdor Logo" className="w-full h-full object-contain drop-shadow-2xl" />
             </div>
             <div className="mt-6">
               <div className="w-8 h-8 border-4 border-white border-t-transparent rounded-full animate-spin mx-auto"></div>

@@ -10,7 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Checkbox } from "@/components/ui/checkbox";
 import { ArrowLeft, TrendingUp, Euro, Calendar, Info, Upload, AlertCircle } from "lucide-react";
 import seaBackground from "@assets/image_1754575606863.png";
-import nauttecLogo from "@assets/Nauttec Logo_1754330395988.png";
+import saxdorLogo from "@assets/image_1760971559327.png";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
@@ -159,7 +159,7 @@ export default function ListShareForSaleScreen() {
               </Button>
             </Link>
             <div className="w-16 h-8 bg-white rounded-lg flex items-center justify-center p-1">
-              <img src={nauttecLogo} alt="Nauttec Logo" className="w-full h-full object-contain" />
+              <img src={saxdorLogo} alt="Saxdor Logo" className="w-full h-full object-contain" />
             </div>
           </div>
         </div>

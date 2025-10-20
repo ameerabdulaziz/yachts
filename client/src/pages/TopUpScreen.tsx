@@ -6,7 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { ArrowLeft, CreditCard, Plus, Euro, Fuel, CheckCircle, AlertCircle } from "lucide-react";
-import nauttecLogo from "@assets/Nauttec Logo_1754330395988.png";
+import saxdorLogo from "@assets/image_1760971559327.png";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
@@ -115,7 +115,7 @@ export default function TopUpScreen() {
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3">
             <div className="w-20 h-10 flex items-center justify-center">
-              <img src={nauttecLogo} alt="Nauttec Logo" className="w-full h-full object-contain" />
+              <img src={saxdorLogo} alt="Saxdor Logo" className="w-full h-full object-contain" />
             </div>
           </div>
           <div className="flex items-center space-x-3">

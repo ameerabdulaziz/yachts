@@ -5,7 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import BottomNavigation from "@/components/BottomNavigation";
 import deAntonioD50 from "@assets/image_1754579474724.png";
-import nauttecLogo from "@assets/Nauttec Logo_1754330395988.png";
+import saxdorLogo from "@assets/image_1760971559327.png";
 import seaBackground from "@assets/image_1754575606863.png";
 
 // Mock data for owned boats - limiting to 2 boats as requested
@@ -67,7 +67,7 @@ export default function MyBoatsScreen() {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
               <div className="w-20 h-10 flex items-center justify-center">
-                <img src={nauttecLogo} alt="Nauttec Logo" className="w-full h-full object-contain" />
+                <img src={saxdorLogo} alt="Saxdor Logo" className="w-full h-full object-contain" />
               </div>
             </div>
             <div className="flex items-center space-x-3">

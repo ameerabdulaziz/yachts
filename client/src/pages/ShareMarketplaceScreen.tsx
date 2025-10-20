@@ -8,7 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import BottomNavigation from "@/components/BottomNavigation";
 import { ArrowLeft, Search, Filter, TrendingUp, TrendingDown, Calendar, MapPin, Plus } from "lucide-react";
 import seaBackground from "@assets/image_1754575606863.png";
-import nauttecLogo from "@assets/Nauttec Logo_1754330395988.png";
+import saxdorLogo from "@assets/image_1760971559327.png";
 
 const mockShareListings = [
   {
@@ -129,7 +129,7 @@ export default function ShareMarketplaceScreen() {
               </Button>
             </Link>
             <div className="w-16 h-8 bg-white rounded-lg flex items-center justify-center p-1">
-              <img src={nauttecLogo} alt="Nauttec Logo" className="w-full h-full object-contain" />
+              <img src={saxdorLogo} alt="Saxdor Logo" className="w-full h-full object-contain" />
             </div>
           </div>
           <Link href="/list-share-for-sale">

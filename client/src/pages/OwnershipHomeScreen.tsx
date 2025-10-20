@@ -16,7 +16,7 @@ import {
   Clock,
   MapPin
 } from "lucide-react";
-import nauttecLogo from "@assets/Nauttec Logo_1754330395988.png";
+import saxdorLogo from "@assets/image_1760971559327.png";
 import seaBackground from "@assets/image_1754575606863.png";
 import BottomNavigation from "@/components/BottomNavigation";
 import { enhancedScrollToTop } from "@/utils/scrollToTop";
@@ -64,7 +64,7 @@ export default function OwnershipHomeScreen() {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
               <div className="w-20 h-10 flex items-center justify-center">
-                <img src={nauttecLogo} alt="Nauttec Logo" className="w-full h-full object-contain" />
+                <img src={saxdorLogo} alt="Saxdor Logo" className="w-full h-full object-contain" />
               </div>
               <span className="text-xs text-gray-500 hidden">Ownership Home</span>
             </div>
