@@ -47,6 +47,9 @@ import MyBoatsScreen from "@/pages/MyBoatsScreen";
 import BoatOwnershipManagementScreen from "@/pages/BoatOwnershipManagementScreen";
 import BookingCalendarScreen from "@/pages/BookingCalendarScreen";
 import ShareTradingScreen from "@/pages/ShareTradingScreen";
+import OnboardingScreen from "@/pages/OnboardingScreen";
+import AccessModelsScreen from "@/pages/AccessModelsScreen";
+import ModalityDetailScreen from "@/pages/ModalityDetailScreen";
 import RedirectToOwnership from "@/components/RedirectToOwnership";
 import ScrollToTopOnRoute from "@/components/ScrollToTopOnRoute";
 
@@ -131,6 +134,9 @@ function Router() {
         <Route path="/boat-ownership/:id" component={BoatOwnershipManagementScreen} />
         <Route path="/booking-calendar/:id" component={BookingCalendarScreen} />
         <Route path="/share-trading" component={ShareTradingScreen} />
+        <Route path="/onboarding" component={OnboardingScreen} />
+        <Route path="/access-models" component={AccessModelsScreen} />
+        <Route path="/modality/:type" component={ModalityDetailScreen} />
         <Route component={NotFound} />
       </Switch>
     </>
