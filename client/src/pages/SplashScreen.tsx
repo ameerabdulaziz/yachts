@@ -30,9 +30,9 @@ export default function SplashScreen() {
       {/* Content */}
       <div className="relative h-full flex flex-col">
         {/* Top Section - Nauttec Logo positioned high up */}
-        <div className="pt-16 px-8">
+        <div className="pt-[5vh] px-8 mt-[5vh]">
           <div className="text-center">
-            <div className="w-54 h-[90px] mx-auto mb-8">
+            <div className="w-[270px] h-[112px] mx-auto mb-8">
               <img src={deAntonioLogo} alt="De Antonio Logo" className="w-full h-full object-contain drop-shadow-2xl" />
             </div>
             <div className="mt-6">
