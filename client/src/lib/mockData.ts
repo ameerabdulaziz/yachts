@@ -1,4 +1,4 @@
-import { Yacht, OwnershipOpportunity, Booking, FuelTransaction, Message } from "@shared/schema";
+import { Yacht, OwnershipOpportunity, Booking, FuelTransaction, Message, ModalityConfig, FinancingOffer, InsuranceOffer, ModalityType } from "@shared/schema";
 
 export const mockYachts: (Yacht & { owner: { name: string; avatar: string; verified: boolean; rating: number } })[] = [
   {
@@ -455,3 +455,415 @@ export const mockMessages: (Message & { sender: { name: string; avatar: string }
     }
   }
 ];
+
+// ========== NAUTTEC MODALITIES DATA ==========
+
+export type ModalityInfo = {
+  id: string;
+  type: "OWN" | "EARN" | "CO_OWN" | "INVEST";
+  title: string;
+  tagline: string;
+  description: string;
+  forWhom: string;
+  benefits: string[];
+  financingAvailable: boolean;
+  insuranceAvailable: boolean;
+  icon: string;
+};
+
+export const modalityDefinitions: ModalityInfo[] = [
+  {
+    id: "own",
+    type: "OWN",
+    title: "Full Ownership",
+    tagline: "Your yacht, your freedom",
+    description: "Complete ownership of a De Antonio yacht. Full control over usage, customization, and schedule with professional management support.",
+    forWhom: "Lifestyle enthusiasts who want unrestricted access and the pride of full ownership.",
+    benefits: [
+      "100% usage rights anytime",
+      "Full customization options",
+      "Build equity in a premium asset",
+      "Professional management available",
+      "Flexible resale options"
+    ],
+    financingAvailable: true,
+    insuranceAvailable: true,
+    icon: "Anchor"
+  },
+  {
+    id: "earn",
+    type: "EARN",
+    title: "Own & Earn Income",
+    tagline: "Own your yacht, offset your costs",
+    description: "Full or shared ownership with charter income generation. Your yacht works for you when you're not using it, reducing net annual costs significantly.",
+    forWhom: "Smart owners who want lifestyle benefits while generating income to offset ownership costs.",
+    benefits: [
+      "Generate 6-12% annual yield",
+      "Professional charter management",
+      "Reduced net ownership costs",
+      "Priority personal usage",
+      "Tax-efficient structure"
+    ],
+    financingAvailable: true,
+    insuranceAvailable: true,
+    icon: "TrendingUp"
+  },
+  {
+    id: "co-own",
+    type: "CO_OWN",
+    title: "Shared Ownership",
+    tagline: "Luxury yachting for a fraction of the cost",
+    description: "Share ownership with 2-6 co-owners. Get 60-180 usage days per year at a fraction of full ownership cost with transparent scheduling.",
+    forWhom: "Budget-conscious enthusiasts who want yacht access without full ownership commitment.",
+    benefits: [
+      "50-85% cost reduction",
+      "Guaranteed usage days",
+      "Shared maintenance costs",
+      "Exit flexibility via marketplace",
+      "Community of like-minded owners"
+    ],
+    financingAvailable: true,
+    insuranceAvailable: true,
+    icon: "Users"
+  },
+  {
+    id: "invest",
+    type: "INVEST",
+    title: "Pure Investment",
+    tagline: "Yacht returns without the lifestyle",
+    description: "Pure investment in charter yachts for financial returns. Fully managed, passive income from premium yacht charter operations worldwide.",
+    forWhom: "Investors seeking yield-focused opportunities in the luxury yacht market without personal usage requirements.",
+    benefits: [
+      "8-15% projected annual yield",
+      "Fully passive investment",
+      "Global portfolio options",
+      "Professional management",
+      "Quarterly income distributions"
+    ],
+    financingAvailable: true,
+    insuranceAvailable: true,
+    icon: "PieChart"
+  }
+];
+
+// Yacht modality configurations with pricing and yields
+export type YachtModalityConfig = {
+  yachtId: string;
+  yachtName: string;
+  image: string;
+  location: string;
+  purchasePrice: number;
+  modalities: {
+    OWN?: {
+      available: boolean;
+      financing: { monthlyFrom: number; downPayment: number };
+      insurance: { annualFrom: number };
+    };
+    EARN?: {
+      available: boolean;
+      projectedYield: { min: number; base: number; max: number };
+      netAnnualCost: number;
+      charterDaysRequired: number;
+      personalDaysIncluded: number;
+    };
+    CO_OWN?: {
+      available: boolean;
+      shareOptions: { fraction: string; price: number; usageDays: number; monthlyFinancing: number }[];
+    };
+    INVEST?: {
+      available: boolean;
+      minTicket: number;
+      projectedYield: number;
+      riskRating: "low" | "medium" | "high";
+      investorType: "single" | "multi";
+      personalUseDays: number;
+    };
+  };
+};
+
+export const yachtModalityConfigs: YachtModalityConfig[] = [
+  {
+    yachtId: "yacht-1",
+    yachtName: "De Antonio D29",
+    image: "https://static.wixstatic.com/media/0fb4c8_b9744cfa841b4c4388ad78ac9b49bbe7~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D29.jpg",
+    location: "El Gouna, Egypt",
+    purchasePrice: 213750,
+    modalities: {
+      OWN: {
+        available: true,
+        financing: { monthlyFrom: 2850, downPayment: 53438 },
+        insurance: { annualFrom: 4275 }
+      },
+      EARN: {
+        available: true,
+        projectedYield: { min: 6, base: 8, max: 12 },
+        netAnnualCost: 8500,
+        charterDaysRequired: 120,
+        personalDaysIncluded: 60
+      },
+      CO_OWN: {
+        available: true,
+        shareOptions: [
+          { fraction: "1/2", price: 106875, usageDays: 182, monthlyFinancing: 1425 },
+          { fraction: "1/4", price: 53438, usageDays: 91, monthlyFinancing: 713 },
+          { fraction: "1/5", price: 42750, usageDays: 73, monthlyFinancing: 570 }
+        ]
+      },
+      INVEST: {
+        available: true,
+        minTicket: 50000,
+        projectedYield: 9.5,
+        riskRating: "medium",
+        investorType: "multi",
+        personalUseDays: 0
+      }
+    }
+  },
+  {
+    yachtId: "yacht-2",
+    yachtName: "De Antonio D33",
+    image: "https://static.wixstatic.com/media/0fb4c8_6cbbd012fc0645009bc4a91a412b293a~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D32.jpg",
+    location: "El Gouna, Egypt",
+    purchasePrice: 309000,
+    modalities: {
+      OWN: {
+        available: true,
+        financing: { monthlyFrom: 4120, downPayment: 77250 },
+        insurance: { annualFrom: 6180 }
+      },
+      EARN: {
+        available: true,
+        projectedYield: { min: 7, base: 9, max: 13 },
+        netAnnualCost: 12000,
+        charterDaysRequired: 100,
+        personalDaysIncluded: 80
+      },
+      CO_OWN: {
+        available: true,
+        shareOptions: [
+          { fraction: "1/2", price: 154500, usageDays: 182, monthlyFinancing: 2060 },
+          { fraction: "1/4", price: 77250, usageDays: 91, monthlyFinancing: 1030 },
+          { fraction: "1/5", price: 61800, usageDays: 73, monthlyFinancing: 824 }
+        ]
+      },
+      INVEST: {
+        available: true,
+        minTicket: 75000,
+        projectedYield: 10.2,
+        riskRating: "medium",
+        investorType: "multi",
+        personalUseDays: 0
+      }
+    }
+  },
+  {
+    yachtId: "yacht-3",
+    yachtName: "De Antonio D36",
+    image: "https://static.wixstatic.com/media/0fb4c8_fbbb6a2569c747d48881f7ac065b947a~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D36.jpg",
+    location: "El Gouna, Egypt",
+    purchasePrice: 426000,
+    modalities: {
+      OWN: {
+        available: true,
+        financing: { monthlyFrom: 5680, downPayment: 106500 },
+        insurance: { annualFrom: 8520 }
+      },
+      EARN: {
+        available: true,
+        projectedYield: { min: 8, base: 10, max: 14 },
+        netAnnualCost: 15000,
+        charterDaysRequired: 90,
+        personalDaysIncluded: 90
+      },
+      CO_OWN: {
+        available: true,
+        shareOptions: [
+          { fraction: "1/2", price: 213000, usageDays: 182, monthlyFinancing: 2840 },
+          { fraction: "1/4", price: 106500, usageDays: 91, monthlyFinancing: 1420 },
+          { fraction: "1/5", price: 85200, usageDays: 73, monthlyFinancing: 1136 }
+        ]
+      },
+      INVEST: {
+        available: true,
+        minTicket: 100000,
+        projectedYield: 11.5,
+        riskRating: "low",
+        investorType: "multi",
+        personalUseDays: 0
+      }
+    }
+  },
+  {
+    yachtId: "yacht-4",
+    yachtName: "De Antonio D42",
+    image: "https://static.wixstatic.com/media/0fb4c8_008f1545c8764f8789a2b7415ca9dde7~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D42.jpg",
+    location: "El Gouna, Egypt",
+    purchasePrice: 513000,
+    modalities: {
+      OWN: {
+        available: true,
+        financing: { monthlyFrom: 6840, downPayment: 128250 },
+        insurance: { annualFrom: 10260 }
+      },
+      EARN: {
+        available: true,
+        projectedYield: { min: 9, base: 11, max: 15 },
+        netAnnualCost: 18000,
+        charterDaysRequired: 85,
+        personalDaysIncluded: 100
+      },
+      CO_OWN: {
+        available: true,
+        shareOptions: [
+          { fraction: "1/2", price: 256500, usageDays: 182, monthlyFinancing: 3420 },
+          { fraction: "1/4", price: 128250, usageDays: 91, monthlyFinancing: 1710 },
+          { fraction: "1/5", price: 102600, usageDays: 73, monthlyFinancing: 1368 }
+        ]
+      },
+      INVEST: {
+        available: true,
+        minTicket: 125000,
+        projectedYield: 12.8,
+        riskRating: "low",
+        investorType: "multi",
+        personalUseDays: 0
+      }
+    }
+  },
+  {
+    yachtId: "yacht-5",
+    yachtName: "De Antonio D50",
+    image: "https://static.wixstatic.com/media/0fb4c8_60988eb5cf834fcb876c1d06bd8af594~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D50.jpg",
+    location: "El Gouna, Egypt",
+    purchasePrice: 670500,
+    modalities: {
+      OWN: {
+        available: true,
+        financing: { monthlyFrom: 8940, downPayment: 167625 },
+        insurance: { annualFrom: 13410 }
+      },
+      EARN: {
+        available: true,
+        projectedYield: { min: 10, base: 12, max: 16 },
+        netAnnualCost: 22000,
+        charterDaysRequired: 80,
+        personalDaysIncluded: 110
+      },
+      CO_OWN: {
+        available: true,
+        shareOptions: [
+          { fraction: "1/2", price: 335250, usageDays: 182, monthlyFinancing: 4470 },
+          { fraction: "1/4", price: 167625, usageDays: 91, monthlyFinancing: 2235 },
+          { fraction: "1/5", price: 134100, usageDays: 73, monthlyFinancing: 1788 }
+        ]
+      },
+      INVEST: {
+        available: true,
+        minTicket: 150000,
+        projectedYield: 13.5,
+        riskRating: "low",
+        investorType: "single",
+        personalUseDays: 14
+      }
+    }
+  },
+  {
+    yachtId: "yacht-6",
+    yachtName: "De Antonio D60",
+    image: "https://static.wixstatic.com/media/5c3629_a8b1aa6ff9244bddaf7383aa45b4afc1~mv2.jpg/v1/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/5c3629_a8b1aa6ff9244bddaf7383aa45b4afc1~mv2.jpg",
+    location: "El Gouna, Egypt",
+    purchasePrice: 1269750,
+    modalities: {
+      OWN: {
+        available: true,
+        financing: { monthlyFrom: 16930, downPayment: 317438 },
+        insurance: { annualFrom: 25395 }
+      },
+      EARN: {
+        available: true,
+        projectedYield: { min: 11, base: 14, max: 18 },
+        netAnnualCost: 35000,
+        charterDaysRequired: 70,
+        personalDaysIncluded: 120
+      },
+      CO_OWN: {
+        available: true,
+        shareOptions: [
+          { fraction: "1/2", price: 634875, usageDays: 182, monthlyFinancing: 8465 },
+          { fraction: "1/4", price: 317438, usageDays: 91, monthlyFinancing: 4233 },
+          { fraction: "1/5", price: 253950, usageDays: 73, monthlyFinancing: 3386 }
+        ]
+      },
+      INVEST: {
+        available: true,
+        minTicket: 250000,
+        projectedYield: 15.2,
+        riskRating: "low",
+        investorType: "single",
+        personalUseDays: 21
+      }
+    }
+  }
+];
+
+// Segmentation helper function
+export function getRecommendedModality(answers: {
+  goals: string[];
+  budgetMax: number;
+  usageVsYield: string;
+  geoPreference: string;
+}): { primary: "OWN" | "EARN" | "CO_OWN" | "INVEST"; confidence: number; alternatives: { modality: string; score: number }[] } {
+  const scores = {
+    OWN: 0,
+    EARN: 0,
+    CO_OWN: 0,
+    INVEST: 0
+  };
+
+  // Goal-based scoring
+  if (answers.goals.includes("own_boat")) scores.OWN += 30;
+  if (answers.goals.includes("reduce_costs")) { scores.EARN += 20; scores.CO_OWN += 25; }
+  if (answers.goals.includes("share_ownership")) scores.CO_OWN += 35;
+  if (answers.goals.includes("financial_investment")) scores.INVEST += 40;
+
+  // Usage vs yield scoring
+  switch (answers.usageVsYield) {
+    case "lifestyle": scores.OWN += 25; scores.CO_OWN += 15; break;
+    case "lifestyle_plus_income": scores.EARN += 30; scores.CO_OWN += 10; break;
+    case "mostly_income": scores.EARN += 25; scores.INVEST += 20; break;
+    case "pure_investment": scores.INVEST += 35; break;
+  }
+
+  // Budget-based scoring (lower budget favors CO_OWN)
+  if (answers.budgetMax < 100000) {
+    scores.CO_OWN += 20;
+    scores.INVEST += 10;
+  } else if (answers.budgetMax < 300000) {
+    scores.CO_OWN += 10;
+    scores.EARN += 10;
+  } else {
+    scores.OWN += 15;
+    scores.EARN += 10;
+  }
+
+  // Geography preference scoring
+  if (answers.geoPreference === "anywhere") {
+    scores.INVEST += 25;
+  } else if (answers.geoPreference === "region") {
+    scores.INVEST += 10;
+  }
+
+  // Find primary modality
+  const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+  const maxScore = sorted[0][1];
+  const totalScore = Object.values(scores).reduce((a, b) => a + b, 0);
+
+  return {
+    primary: sorted[0][0] as "OWN" | "EARN" | "CO_OWN" | "INVEST",
+    confidence: Math.round((maxScore / totalScore) * 100),
+    alternatives: sorted.slice(1).map(([modality, score]) => ({
+      modality,
+      score: Math.round((score / totalScore) * 100)
+    }))
+  };
+}
