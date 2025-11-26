@@ -8,6 +8,21 @@ Preferred communication style: Simple, everyday language.
 
 # Recent Changes
 
+## Nauttec Modalities System Implementation (November 26, 2025)
+- **CREATED**: Complete four-way access model system (OWN, EARN, CO-OWN, INVEST)
+- **IMPLEMENTED**: OnboardingScreen with user needs assessment flow (goals, budget, usage vs yield preferences)
+- **BUILT**: AccessModelsScreen displaying all four modality cards with entry points
+- **DESIGNED**: ModalityDetailScreen with unified tabs for Yachts, Benefits, and Details
+- **UPDATED**: mockData.ts with modality configurations for all six De Antonio yachts (D29, D33, D36, D42, D50, D60)
+- **INTEGRATED**: Entry point from OwnershipHomeScreen with gradient CTA card
+- **ROUTES**: /onboarding, /access-models, /modality/:type (own, earn, co-own, invest)
+- **MODALITIES**:
+  - OWN: Full ownership with financing options and management services
+  - EARN: Charter-based ownership with 6-18% projected yields
+  - CO-OWN: Fractional ownership with 1/5 share structure and 73 days/year usage
+  - INVEST: Pure investment focus with 8-15% projected yields
+- **STATUS**: Production-ready modality system with complete navigation flow
+
 ## Complete Flutter App with 2024 Riverpod Patterns (September 2, 2025)
 - **FIXED**: Complete iOS project structure with all required xcodeproj files, pbxproj, and configurations
 - **CREATED**: All missing iOS/Android native files and proper platform setup for deployment
