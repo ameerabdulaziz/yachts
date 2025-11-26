@@ -13,7 +13,7 @@ export default function ReservationDetailScreen() {
     id: id || "booking-1",
     status: "confirmed" as const,
     yacht: {
-      name: "De Antonio D50 Open",
+      name: "De Antonio D50",
       location: "El Gouna, Egypt",
       image: deAntonioD50
     },

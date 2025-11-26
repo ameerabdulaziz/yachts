@@ -8,34 +8,34 @@ import deAntonioD50 from "@assets/image_1754579474724.png";
 import deAntonioLogo from "@assets/DE-ANTONIO-YACHTS_LOGO-removebg-preview_1754331163197.png";
 import seaBackground from "@assets/image_1754575606863.png";
 
-// Mock data for owned boats - limiting to 2 boats as requested
+// Mock data for owned boats - De Antonio yacht range
 const mockOwnedBoats = [
   {
     id: "yacht-4",
-    name: "De Antonio D34 Open",
-    image: "https://images.boatsgroup.com/images/1/13/61/de-antonio-yachts-d34-open-9091361-20240109094358-0.jpg",
+    name: "De Antonio D33",
+    image: "https://static.wixstatic.com/media/0fb4c8_6cbbd012fc0645009bc4a91a412b293a~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D32.jpg",
     location: "El Gouna, Egypt",
-    length: "34",
-    capacity: 11,
+    length: "33",
+    capacity: 10,
     yearBuilt: 2024,
-    sharesFractionOwned: "2/5",
-    sharesPercentage: 40,
-    shareValue: "€67,960",
-    remainingDays: 42,
-    remainingEngineHours: 38
+    sharesFractionOwned: "1/5",
+    sharesPercentage: 20,
+    shareValue: "€61,800",
+    remainingDays: 58,
+    remainingEngineHours: 45
   },
   {
     id: "yacht-1",
-    name: "De Antonio D50 Open",
-    image: "https://images.boatsgroup.com/images/1/51/79/de-antonio-yachts-d50-open-9275179-20240619063113-0.jpg",
+    name: "De Antonio D42",
+    image: "https://static.wixstatic.com/media/0fb4c8_008f1545c8764f8789a2b7415ca9dde7~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D42.jpg",
     location: "El Gouna, Egypt",
-    length: "50",
+    length: "42",
     capacity: 12,
     yearBuilt: 2024,
-    sharesFractionOwned: "2/5",
-    sharesPercentage: 40,
-    shareValue: "€487,600",
-    remainingDays: 35,
+    sharesFractionOwned: "1/5",
+    sharesPercentage: 20,
+    shareValue: "€102,600",
+    remainingDays: 52,
     remainingEngineHours: 42
   }
 ];

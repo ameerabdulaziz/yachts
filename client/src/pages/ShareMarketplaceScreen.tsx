@@ -10,20 +10,21 @@ import { ArrowLeft, Search, Filter, TrendingUp, TrendingDown, Calendar, MapPin, 
 import seaBackground from "@assets/image_1754575606863.png";
 import deAntonioLogo from "@assets/DE-ANTONIO-YACHTS_LOGO-removebg-preview_1754331163197.png";
 
+// De Antonio Yachts share listings - D29, D33, D36, D42, D50, D60 range
 const mockShareListings = [
   {
     id: "listing-1",
     yacht: {
-      name: "De Antonio D50 Open",
+      name: "De Antonio D50",
       location: "El Gouna, Egypt",
-      image: "https://images.boatsgroup.com/images/1/51/79/de-antonio-yachts-d50-open-9275179-20240619063113-0.jpg"
+      image: "https://static.wixstatic.com/media/0fb4c8_60988eb5cf834fcb876c1d06bd8af594~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D50.jpg"
     },
-    shareFraction: "1/8",
+    shareFraction: "1/5",
     sharesForSale: 1,
-    originalPrice: 124600,
-    askingPrice: 133000,
-    priceChange: 6.7,
-    usageWeeks: 6,
+    originalPrice: 134100,
+    askingPrice: 142000,
+    priceChange: 5.9,
+    usageWeeks: 10,
     seller: {
       name: "Sarah M.",
       rating: 4.9,
@@ -35,16 +36,16 @@ const mockShareListings = [
   {
     id: "listing-2",
     yacht: {
-      name: "De Antonio D34 Open",
+      name: "De Antonio D36",
       location: "El Gouna, Egypt",
-      image: "https://images.boatsgroup.com/images/1/13/61/de-antonio-yachts-d34-open-9091361-20240109094358-0.jpg"
+      image: "https://static.wixstatic.com/media/0fb4c8_fbbb6a2569c747d48881f7ac065b947a~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D36.jpg"
     },
-    shareFraction: "1/8",
+    shareFraction: "1/5",
     sharesForSale: 1,
-    originalPrice: 67200,
-    askingPrice: 63000,
+    originalPrice: 85200,
+    askingPrice: 79800,
     priceChange: -6.3,
-    usageWeeks: 6,
+    usageWeeks: 10,
     seller: {
       name: "Michael R.",
       rating: 4.7,
@@ -56,16 +57,16 @@ const mockShareListings = [
   {
     id: "listing-3",
     yacht: {
-      name: "De Antonio D50 Coupe",
+      name: "De Antonio D60",
       location: "El Gouna, Egypt",
-      image: "https://images.boatsgroup.com/images/1/75/30/de-antonio-yachts-d50-coupe-9177530-20240404054946-0.jpg"
+      image: "https://static.wixstatic.com/media/5c3629_a8b1aa6ff9244bddaf7383aa45b4afc1~mv2.jpg/v1/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/5c3629_a8b1aa6ff9244bddaf7383aa45b4afc1~mv2.jpg"
     },
-    shareFraction: "1/7",
-    sharesForSale: 2,
-    originalPrice: 210000,
-    askingPrice: 221200,
+    shareFraction: "1/5",
+    sharesForSale: 1,
+    originalPrice: 253950,
+    askingPrice: 267400,
     priceChange: 5.3,
-    usageWeeks: 7,
+    usageWeeks: 10,
     seller: {
       name: "James K.",
       rating: 4.8,
@@ -77,16 +78,16 @@ const mockShareListings = [
   {
     id: "listing-4",
     yacht: {
-      name: "De Antonio D42 Open",
+      name: "De Antonio D42",
       location: "El Gouna, Egypt",
-      image: "https://images.boatsgroup.com/images/1/17/29/de-antonio-yachts-d42-9141729-20240221104818-0.jpg"
+      image: "https://static.wixstatic.com/media/0fb4c8_008f1545c8764f8789a2b7415ca9dde7~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D42.jpg"
     },
-    shareFraction: "1/12",
+    shareFraction: "1/5",
     sharesForSale: 1,
-    originalPrice: 245000,
-    askingPrice: 259000,
+    originalPrice: 102600,
+    askingPrice: 108500,
     priceChange: 5.7,
-    usageWeeks: 4,
+    usageWeeks: 10,
     seller: {
       name: "Anna P.",
       rating: 5.0,

@@ -18,7 +18,7 @@ export default function SplashScreen() {
       {/* Background Image */}
       <div className="absolute inset-0">
         <img 
-          src="https://images.boatsgroup.com/images/1/51/79/de-antonio-yachts-d50-open-9275179-20240619063113-0.jpg" 
+          src="https://static.wixstatic.com/media/0fb4c8_60988eb5cf834fcb876c1d06bd8af594~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D50.jpg" 
           alt="De Antonio Yacht" 
           className="w-full h-full object-cover"
         />

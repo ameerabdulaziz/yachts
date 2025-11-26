@@ -3,47 +3,45 @@ import { Yacht, OwnershipOpportunity, Booking, FuelTransaction, Message } from "
 export const mockYachts: (Yacht & { owner: { name: string; avatar: string; verified: boolean; rating: number } })[] = [
   {
     id: "yacht-1",
-    name: "De Antonio D50 Open",
-    description: "The flagship De Antonio D50 Open with signature hidden outboard engines and expansive sundeck. Features Barcelona-engineered design with exceptional performance and luxury appointments.",
+    name: "De Antonio D29",
+    description: "The D29 is a 29-foot walk-around boat with hidden outboard engines, dual panoramic screens, and a forward cabin with double bed and full bathroom. Available in hardtop and softop versions.",
     location: "El Gouna, Egypt",
-    pricePerDay: "€4,500",
-    capacity: 12,
-    cabins: 2,
-    length: "50",
+    pricePerDay: "€1,425",
+    capacity: 10,
+    cabins: 1,
+    length: "29",
     yearBuilt: 2024,
     images: [
-      "https://images.boatsgroup.com/images/1/51/79/de-antonio-yachts-d50-open-9275179-20240619063113-0.jpg",
-      "https://images.boatsgroup.com/images/1/51/79/de-antonio-yachts-d50-open-9275179-20240619063114-1.jpg"
+      "https://static.wixstatic.com/media/0fb4c8_b9744cfa841b4c4388ad78ac9b49bbe7~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D29.jpg"
     ],
-    amenities: ["Hidden Outboard Engines", "Spacious Sundeck", "Walk-Around Deck", "Premium Audio System", "Advanced Navigation", "Electric Windlass", "LED Lighting", "Freshwater Shower"],
+    amenities: ["Hidden Outboard Engines", "Walk-Around Deck", "Dual Panoramic Screens", "Forward Cabin", "Full Bathroom", "300-400HP Engine", "360L Fuel Tank", "88L Water Tank"],
     ownerId: "owner-1",
     isActive: true,
-    rating: "4.9",
+    rating: "4.8",
     reviewCount: 127,
     createdAt: new Date(),
     updatedAt: new Date(),
     owner: {
       name: "Marc Fernandez",
       avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100",
-      verified: false,
+      verified: true,
       rating: 5.0
     }
   },
   {
     id: "yacht-2",
-    name: "De Antonio D42 Open",
-    description: "Award-winning mid-range sport yacht with superior performance and innovative Barcelona design. Features hidden outboards with advanced hull technology and spacious deck layout.",
+    name: "De Antonio D33",
+    description: "The D33 is a compact design boat with V-shaped hull and all the comforts. Features a spacious walk-around deck, galley, 2 cabins and separate bathroom with 50 knots top speed.",
     location: "El Gouna, Egypt",
-    pricePerDay: "€2,800",
-    capacity: 12,
+    pricePerDay: "€2,060",
+    capacity: 10,
     cabins: 2,
-    length: "42",
+    length: "33",
     yearBuilt: 2024,
     images: [
-      "https://images.boatsgroup.com/images/1/17/29/de-antonio-yachts-d42-9141729-20240221104818-0.jpg",
-      "https://images.boatsgroup.com/images/1/17/29/de-antonio-yachts-d42-9141729-20240221104820-2.jpg"
+      "https://static.wixstatic.com/media/0fb4c8_6cbbd012fc0645009bc4a91a412b293a~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D32.jpg"
     ],
-    amenities: ["Triple Outboard Engines", "Hidden Engine Design", "Walk-Around Deck", "Joystick Control", "Premium Interior", "Galley Kitchen", "Sound System", "Navigation Package"],
+    amenities: ["V-Shaped Hull", "Walk-Around Deck", "2 Cabins", "Separate Bathroom", "400-600HP Engine", "585L Fuel Tank", "100L Water Tank", "50 Knots Max Speed"],
     ownerId: "owner-2",
     isActive: true,
     rating: "4.8",
@@ -59,22 +57,21 @@ export const mockYachts: (Yacht & { owner: { name: string; avatar: string; verif
   },
   {
     id: "yacht-3",
-    name: "De Antonio D34 Cruiser",
-    description: "Versatile cabin cruiser with 2 guest cabins and full bathroom. Features CE Class B certification for offshore cruising with premium comfort and Barcelona craftsmanship.",
+    name: "De Antonio D36",
+    description: "Award-winning Best European Powerboat of the Year 2023. The D36 exudes design and originality with unique deck solutions, exceptional interior space and powerful engine for a singular experience.",
     location: "El Gouna, Egypt",
-    pricePerDay: "€1,800",
-    capacity: 11,
+    pricePerDay: "€2,840",
+    capacity: 12,
     cabins: 2,
-    length: "34",
+    length: "36",
     yearBuilt: 2024,
     images: [
-      "https://images.boatsgroup.com/images/1/85/3/de-antonio-yachts-d34-cruiser-9068503-20231212093632-0.jpg",
-      "https://images.boatsgroup.com/images/1/85/3/de-antonio-yachts-d34-cruiser-9068503-20231212093634-2.jpg"
+      "https://static.wixstatic.com/media/0fb4c8_fbbb6a2569c747d48881f7ac065b947a~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D36.jpg"
     ],
-    amenities: ["Twin Outboard Engines", "2 Guest Cabins", "Full Bathroom", "Joystick Control", "Dual Displays", "Radar & VHF", "Hidden Engines", "Premium Interior"],
+    amenities: ["Award-Winning Design", "2 Cabins", "1 Bathroom", "600-800HP Engine", "850L Fuel Tank", "150L Water Tank", "27 Knots Cruise", "45 Knots Max Speed"],
     ownerId: "owner-3",
     isActive: true,
-    rating: "4.7",
+    rating: "4.9",
     reviewCount: 156,
     createdAt: new Date(),
     updatedAt: new Date(),
@@ -87,22 +84,21 @@ export const mockYachts: (Yacht & { owner: { name: string; avatar: string; verif
   },
   {
     id: "yacht-4",
-    name: "De Antonio D34 Open",
-    description: "Award-winning center console with hidden outboard configuration reaching 43 knots. Features walk-around deck and spacious sundeck for exceptional day cruising.",
+    name: "De Antonio D42",
+    description: "Over 12 metres of space with 3 powerful outboard engines. Features very spacious deck with three spaces, exterior galley and large sundeck at the stern for exceptional day cruising and overnight stays.",
     location: "El Gouna, Egypt",
-    pricePerDay: "€1,650",
-    capacity: 11,
-    cabins: 1,
-    length: "34",
+    pricePerDay: "€3,420",
+    capacity: 12,
+    cabins: 2,
+    length: "42",
     yearBuilt: 2024,
     images: [
-      "https://images.boatsgroup.com/images/1/13/61/de-antonio-yachts-d34-open-9091361-20240109094358-0.jpg",
-      "https://images.boatsgroup.com/images/1/13/61/de-antonio-yachts-d34-open-9091361-20240109094400-2.jpg"
+      "https://static.wixstatic.com/media/0fb4c8_008f1545c8764f8789a2b7415ca9dde7~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D42.jpg"
     ],
-    amenities: ["Twin Outboard Engines", "43 Knots Top Speed", "Hidden Engine Design", "Walk-Around Deck", "Full Cabin", "Galley Kitchen", "Premium Audio", "Joystick Control"],
+    amenities: ["Triple Outboard Engines", "Exterior Galley", "Large Sundeck", "2 Cabins", "1 Bathroom", "900-1200HP Engine", "1300L Fuel Tank", "46 Knots Max Speed"],
     ownerId: "owner-4",
     isActive: true,
-    rating: "4.6",
+    rating: "4.9",
     reviewCount: 72,
     createdAt: new Date(),
     updatedAt: new Date(),
@@ -115,22 +111,21 @@ export const mockYachts: (Yacht & { owner: { name: string; avatar: string; verif
   },
   {
     id: "yacht-5",
-    name: "De Antonio D28 Open",
-    description: "Award-winning 28-foot sportboat with imposing black console and hidden outboards. Features capacity for 10 guests with exceptional Barcelona design and 40 knot performance.",
+    name: "De Antonio D50",
+    description: "Extraordinary 50-foot yacht capable of 50 knots with unequalled comfort in all spaces. Choose from 2 or 3 cabins, 1 or 2 bathrooms, and 2 to 4 engines for the perfect configuration.",
     location: "El Gouna, Egypt",
-    pricePerDay: "€950",
-    capacity: 10,
-    cabins: 1,
-    length: "28",
+    pricePerDay: "€4,470",
+    capacity: 12,
+    cabins: 3,
+    length: "50",
     yearBuilt: 2024,
     images: [
-      "https://images.boatsgroup.com/images/1/63/84/de-antonio-yachts-d28-open-9226384-20240502160147-0.jpg",
-      "https://images.boatsgroup.com/images/1/63/84/de-antonio-yachts-d28-open-9226384-20240502160149-2.jpg"
+      "https://static.wixstatic.com/media/0fb4c8_60988eb5cf834fcb876c1d06bd8af594~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D50.jpg"
     ],
-    amenities: ["Twin Outboard Engines", "40 Knots Top Speed", "Black Console Design", "Walk-Around Deck", "Full Bathroom", "V-Shaped Hull", "Audio System", "Swimming Platform"],
+    amenities: ["2-3 Cabins", "1-2 Bathrooms", "2-4 Engine Options", "1200-1600HP Power", "1500L Fuel Tank", "340L Water Tank", "30 Knots Cruise", "50 Knots Max Speed"],
     ownerId: "owner-5",
     isActive: true,
-    rating: "4.5",
+    rating: "4.7",
     reviewCount: 43,
     createdAt: new Date(),
     updatedAt: new Date(),
@@ -143,19 +138,18 @@ export const mockYachts: (Yacht & { owner: { name: string; avatar: string; verif
   },
   {
     id: "yacht-6",
-    name: "De Antonio D50 Coupe",
-    description: "The ultimate De Antonio flagship with premium enclosed coupe configuration. Features powerful triple outboard engines with advanced electronics and luxury appointments.",
+    name: "De Antonio D60",
+    description: "The flagship D60 masterpiece. Balanced, avant-garde, elegant and timeless design offering a unique sailing experience with extraordinary performance, hidden jacuzzi and smart technology.",
     location: "El Gouna, Egypt",
-    pricePerDay: "€5,200",
+    pricePerDay: "€8,465",
     capacity: 12,
-    cabins: 2,
-    length: "50",
+    cabins: 3,
+    length: "60",
     yearBuilt: 2024,
     images: [
-      "https://images.boatsgroup.com/images/1/75/30/de-antonio-yachts-d50-coupe-9177530-20240404054946-0.jpg",
-      "https://images.boatsgroup.com/images/1/75/30/de-antonio-yachts-d50-coupe-9177530-20240404054948-2.jpg"
+      "https://static.wixstatic.com/media/5c3629_a8b1aa6ff9244bddaf7383aa45b4afc1~mv2.jpg/v1/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/5c3629_a8b1aa6ff9244bddaf7383aa45b4afc1~mv2.jpg"
     ],
-    amenities: ["Triple Outboard Engines", "Enclosed Coupe Design", "Air Conditioning", "Advanced Navigation Package", "Hardtop with Sunroof", "Dual Swim Platforms", "Premium Audio", "Joystick Control"],
+    amenities: ["2-3 Cabins", "2 Bathrooms", "Hidden Jacuzzi", "Aft Tender Garage", "2400HP Max Power", "30 Knots Cruise", "46 Knots Max Speed", "Smart Technology"],
     ownerId: "owner-6",
     isActive: true,
     rating: "4.9",
@@ -168,15 +162,14 @@ export const mockYachts: (Yacht & { owner: { name: string; avatar: string; verif
       verified: true,
       rating: 5.0
     }
-  },
-
+  }
 ];
 
 export const mockOwnershipOpportunities: (OwnershipOpportunity & { yacht: Yacht })[] = [
   {
-    id: "share-deantonio-d34-open",
-    yachtId: "yacht-4",
-    sharePrice: "€33,980",
+    id: "share-deantonio-d29",
+    yachtId: "yacht-1",
+    sharePrice: "€42,750",
     shareFraction: "1/5",
     usageDaysPerYear: 73,
     totalShares: 5,
@@ -186,34 +179,34 @@ export const mockOwnershipOpportunities: (OwnershipOpportunity & { yacht: Yacht 
       available: true,
       downPaymentPercent: 25,
       termMonths: 60,
-      monthlyPayment: "592"
+      monthlyPayment: "745"
     },
     createdAt: new Date(),
     updatedAt: new Date(),
     yacht: {
-      id: "yacht-4",
-      name: "De Antonio D34 Open",
-      description: "Award-winning center console with hidden outboard configuration reaching 43 knots. Features walk-around deck and spacious sundeck for exceptional day cruising.",
+      id: "yacht-1",
+      name: "De Antonio D29",
+      description: "The D29 is a 29-foot walk-around boat with hidden outboard engines, dual panoramic screens, and a forward cabin with double bed and full bathroom.",
       location: "El Gouna, Egypt",
-      pricePerDay: "1650",
-      capacity: 11,
+      pricePerDay: "1425",
+      capacity: 10,
       cabins: 1,
-      length: "34",
+      length: "29",
       yearBuilt: 2024,
-      images: ["https://images.boatsgroup.com/images/1/13/61/de-antonio-yachts-d34-open-9091361-20240109094358-0.jpg"],
-      amenities: ["Twin Outboard Engines", "43 Knots Top Speed", "Hidden Engine Design", "Walk-Around Deck", "Full Cabin", "Galley Kitchen", "Premium Audio", "Joystick Control"],
-      ownerId: "owner-4",
+      images: ["https://static.wixstatic.com/media/0fb4c8_b9744cfa841b4c4388ad78ac9b49bbe7~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D29.jpg"],
+      amenities: ["Hidden Outboard Engines", "Walk-Around Deck", "Dual Panoramic Screens", "Forward Cabin", "Full Bathroom"],
+      ownerId: "owner-1",
       isActive: true,
-      rating: "4.6",
-      reviewCount: 72,
+      rating: "4.8",
+      reviewCount: 127,
       createdAt: new Date(),
       updatedAt: new Date()
     }
   },
   {
-    id: "share-deantonio-d34-cruiser",
-    yachtId: "yacht-3",
-    sharePrice: "€35,980",
+    id: "share-deantonio-d33",
+    yachtId: "yacht-2",
+    sharePrice: "€61,800",
     shareFraction: "1/5",
     usageDaysPerYear: 73,
     totalShares: 5,
@@ -223,59 +216,22 @@ export const mockOwnershipOpportunities: (OwnershipOpportunity & { yacht: Yacht 
       available: true,
       downPaymentPercent: 25,
       termMonths: 60,
-      monthlyPayment: "627"
-    },
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    yacht: {
-      id: "yacht-3",
-      name: "De Antonio D34 Cruiser",
-      description: "Versatile cabin cruiser with 2 guest cabins and full bathroom. Features CE Class B certification for offshore cruising with premium comfort and Barcelona craftsmanship.",
-      location: "El Gouna, Egypt",
-      pricePerDay: "1800",
-      capacity: 11,
-      cabins: 2,
-      length: "34",
-      yearBuilt: 2024,
-      images: ["https://images.boatsgroup.com/images/1/85/3/de-antonio-yachts-d34-cruiser-9068503-20231212093632-0.jpg"],
-      amenities: ["Twin Outboard Engines", "2 Guest Cabins", "Full Bathroom", "Joystick Control", "Dual Displays", "Radar & VHF", "Hidden Engines", "Premium Interior"],
-      ownerId: "owner-3",
-      isActive: true,
-      rating: "4.7",
-      reviewCount: 156,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }
-  },
-  {
-    id: "share-deantonio-d42",
-    yachtId: "yacht-2",
-    sharePrice: "€107,000",
-    shareFraction: "1/5",
-    usageDaysPerYear: 73,
-    totalShares: 5,
-    availableShares: 1,
-    isActive: true,
-    financing: {
-      available: true,
-      downPaymentPercent: 25,
-      termMonths: 60,
-      monthlyPayment: "1,864"
+      monthlyPayment: "1,077"
     },
     createdAt: new Date(),
     updatedAt: new Date(),
     yacht: {
       id: "yacht-2",
-      name: "De Antonio D42 Open",
-      description: "Award-winning mid-range sport yacht with superior performance and innovative Barcelona design. Features hidden outboards with advanced hull technology and spacious deck layout.",
+      name: "De Antonio D33",
+      description: "The D33 is a compact design boat with V-shaped hull and all the comforts. Features a spacious walk-around deck, galley, 2 cabins and separate bathroom.",
       location: "El Gouna, Egypt",
-      pricePerDay: "2800",
-      capacity: 12,
+      pricePerDay: "2060",
+      capacity: 10,
       cabins: 2,
-      length: "42",
+      length: "33",
       yearBuilt: 2024,
-      images: ["https://images.boatsgroup.com/images/1/17/29/de-antonio-yachts-d42-9141729-20240221104818-0.jpg"],
-      amenities: ["Triple Outboard Engines", "Hidden Engine Design", "Walk-Around Deck", "Joystick Control", "Premium Interior", "Galley Kitchen", "Sound System", "Navigation Package"],
+      images: ["https://static.wixstatic.com/media/0fb4c8_6cbbd012fc0645009bc4a91a412b293a~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D32.jpg"],
+      amenities: ["V-Shaped Hull", "Walk-Around Deck", "2 Cabins", "Separate Bathroom", "50 Knots Max Speed"],
       ownerId: "owner-2",
       isActive: true,
       rating: "4.8",
@@ -285,86 +241,9 @@ export const mockOwnershipOpportunities: (OwnershipOpportunity & { yacht: Yacht 
     }
   },
   {
-    id: "share-deantonio-d50-coupe",
-    yachtId: "yacht-6",
-    sharePrice: "€243,800",
-    shareFraction: "1/5",
-    usageDaysPerYear: 73,
-    totalShares: 5,
-    availableShares: 3,
-    isActive: true,
-    financing: {
-      available: true,
-      downPaymentPercent: 25,
-      termMonths: 60,
-      monthlyPayment: "4,248"
-    },
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    yacht: {
-      id: "yacht-6",
-      name: "De Antonio D50 Coupe",
-      description: "The ultimate De Antonio flagship with premium enclosed coupe configuration. Features powerful triple outboard engines with advanced electronics and luxury appointments.",
-      location: "El Gouna, Egypt",
-      pricePerDay: "5200",
-      capacity: 12,
-      cabins: 2,
-      length: "50",
-      yearBuilt: 2024,
-      images: ["https://images.boatsgroup.com/images/1/75/30/de-antonio-yachts-d50-coupe-9177530-20240404054946-0.jpg"],
-      amenities: ["Triple Outboard Engines", "Enclosed Coupe Design", "Air Conditioning", "Advanced Navigation Package", "Hardtop with Sunroof", "Dual Swim Platforms", "Premium Audio", "Joystick Control"],
-      ownerId: "owner-6",
-      isActive: true,
-      rating: "4.9",
-      reviewCount: 56,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }
-  },
-  {
-    id: "share-deantonio-d50-open",
-    yachtId: "yacht-1",
-    sharePrice: "€243,800",
-    shareFraction: "1/5",
-    usageDaysPerYear: 73,
-    totalShares: 5,
-    availableShares: 2,
-    isActive: true,
-    financing: {
-      available: true,
-      downPaymentPercent: 25,
-      termMonths: 60,
-      monthlyPayment: "4,248"
-    },
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    yacht: {
-      id: "yacht-1",
-      name: "De Antonio D50 Open",
-      description: "The flagship De Antonio D50 Open with signature hidden outboard engines and expansive sundeck. Features Barcelona-engineered design with exceptional performance and luxury appointments.",
-      location: "El Gouna, Egypt",
-      pricePerDay: "4500",
-      capacity: 12,
-      cabins: 2,
-      length: "50",
-      yearBuilt: 2024,
-      images: [
-        "https://images.boatsgroup.com/images/1/51/79/de-antonio-yachts-d50-open-9275179-20240619063113-0.jpg",
-        "https://images.boatsgroup.com/images/1/51/79/de-antonio-yachts-d50-open-9275179-20240619063114-1.jpg"
-      ],
-      amenities: ["Hidden Outboard Engines", "Spacious Sundeck", "Walk-Around Deck", "Premium Audio System", "Advanced Navigation", "Electric Windlass", "LED Lighting", "Freshwater Shower"],
-      ownerId: "owner-1",
-      isActive: true,
-      rating: "4.8",
-      reviewCount: 34,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }
-  },
-  {
-    id: "share-deantonio-d28",
-    yachtId: "yacht-5",
-    sharePrice: "€40,740",
+    id: "share-deantonio-d36",
+    yachtId: "yacht-3",
+    sharePrice: "€85,200",
     shareFraction: "1/5",
     usageDaysPerYear: 73,
     totalShares: 5,
@@ -374,26 +253,137 @@ export const mockOwnershipOpportunities: (OwnershipOpportunity & { yacht: Yacht 
       available: true,
       downPaymentPercent: 25,
       termMonths: 60,
-      monthlyPayment: "710"
+      monthlyPayment: "1,485"
+    },
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    yacht: {
+      id: "yacht-3",
+      name: "De Antonio D36",
+      description: "Award-winning Best European Powerboat of the Year 2023. The D36 exudes design and originality with unique deck solutions.",
+      location: "El Gouna, Egypt",
+      pricePerDay: "2840",
+      capacity: 12,
+      cabins: 2,
+      length: "36",
+      yearBuilt: 2024,
+      images: ["https://static.wixstatic.com/media/0fb4c8_fbbb6a2569c747d48881f7ac065b947a~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D36.jpg"],
+      amenities: ["Award-Winning Design", "2 Cabins", "1 Bathroom", "600-800HP Engine", "45 Knots Max Speed"],
+      ownerId: "owner-3",
+      isActive: true,
+      rating: "4.9",
+      reviewCount: 156,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }
+  },
+  {
+    id: "share-deantonio-d42",
+    yachtId: "yacht-4",
+    sharePrice: "€102,600",
+    shareFraction: "1/5",
+    usageDaysPerYear: 73,
+    totalShares: 5,
+    availableShares: 2,
+    isActive: true,
+    financing: {
+      available: true,
+      downPaymentPercent: 25,
+      termMonths: 60,
+      monthlyPayment: "1,788"
+    },
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    yacht: {
+      id: "yacht-4",
+      name: "De Antonio D42",
+      description: "Over 12 metres of space with 3 powerful outboard engines. Features very spacious deck with three spaces, exterior galley and large sundeck.",
+      location: "El Gouna, Egypt",
+      pricePerDay: "3420",
+      capacity: 12,
+      cabins: 2,
+      length: "42",
+      yearBuilt: 2024,
+      images: ["https://static.wixstatic.com/media/0fb4c8_008f1545c8764f8789a2b7415ca9dde7~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D42.jpg"],
+      amenities: ["Triple Outboard Engines", "Exterior Galley", "Large Sundeck", "2 Cabins", "46 Knots Max Speed"],
+      ownerId: "owner-4",
+      isActive: true,
+      rating: "4.9",
+      reviewCount: 72,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }
+  },
+  {
+    id: "share-deantonio-d50",
+    yachtId: "yacht-5",
+    sharePrice: "€134,100",
+    shareFraction: "1/5",
+    usageDaysPerYear: 73,
+    totalShares: 5,
+    availableShares: 3,
+    isActive: true,
+    financing: {
+      available: true,
+      downPaymentPercent: 25,
+      termMonths: 60,
+      monthlyPayment: "2,337"
     },
     createdAt: new Date(),
     updatedAt: new Date(),
     yacht: {
       id: "yacht-5",
-      name: "De Antonio D28 Open",
-      description: "Award-winning 28-foot sportboat with imposing black console and hidden outboards. Features capacity for 10 guests with exceptional Barcelona design and 40 knot performance.",
+      name: "De Antonio D50",
+      description: "Extraordinary 50-foot yacht capable of 50 knots with unequalled comfort in all spaces.",
       location: "El Gouna, Egypt",
-      pricePerDay: "950",
-      capacity: 10,
-      cabins: 1,
-      length: "28",
+      pricePerDay: "4470",
+      capacity: 12,
+      cabins: 3,
+      length: "50",
       yearBuilt: 2024,
-      images: ["https://images.boatsgroup.com/images/1/63/84/de-antonio-yachts-d28-open-9226384-20240502160147-0.jpg"],
-      amenities: ["Twin Outboard Engines", "40 Knots Top Speed", "Black Console Design", "Walk-Around Deck", "Full Bathroom", "V-Shaped Hull", "Audio System", "Swimming Platform"],
+      images: ["https://static.wixstatic.com/media/0fb4c8_60988eb5cf834fcb876c1d06bd8af594~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D50.jpg"],
+      amenities: ["2-3 Cabins", "1-2 Bathrooms", "1200-1600HP Power", "50 Knots Max Speed"],
       ownerId: "owner-5",
       isActive: true,
       rating: "4.7",
-      reviewCount: 28,
+      reviewCount: 43,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }
+  },
+  {
+    id: "share-deantonio-d60",
+    yachtId: "yacht-6",
+    sharePrice: "€253,950",
+    shareFraction: "1/5",
+    usageDaysPerYear: 73,
+    totalShares: 5,
+    availableShares: 1,
+    isActive: true,
+    financing: {
+      available: true,
+      downPaymentPercent: 25,
+      termMonths: 60,
+      monthlyPayment: "4,426"
+    },
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    yacht: {
+      id: "yacht-6",
+      name: "De Antonio D60",
+      description: "The flagship D60 masterpiece with extraordinary performance, hidden jacuzzi and smart technology.",
+      location: "El Gouna, Egypt",
+      pricePerDay: "8465",
+      capacity: 12,
+      cabins: 3,
+      length: "60",
+      yearBuilt: 2024,
+      images: ["https://static.wixstatic.com/media/5c3629_a8b1aa6ff9244bddaf7383aa45b4afc1~mv2.jpg/v1/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/5c3629_a8b1aa6ff9244bddaf7383aa45b4afc1~mv2.jpg"],
+      amenities: ["2-3 Cabins", "2 Bathrooms", "Hidden Jacuzzi", "2400HP Max Power", "46 Knots Max Speed"],
+      ownerId: "owner-6",
+      isActive: true,
+      rating: "4.9",
+      reviewCount: 12,
       createdAt: new Date(),
       updatedAt: new Date()
     }
@@ -403,18 +393,18 @@ export const mockOwnershipOpportunities: (OwnershipOpportunity & { yacht: Yacht 
 export const mockBookings: (Booking & { yacht: Yacht })[] = [
   {
     id: "booking-1",
-    yachtId: "yacht-1",
+    yachtId: "yacht-4",
     userId: "user-1",
     startDate: new Date("2025-10-16"),
     endDate: new Date("2025-10-19"),
     guestCount: 6,
-    totalPrice: "13500",
+    totalPrice: "10260",
     status: "confirmed",
     addOns: { captain: true, catering: false },
     paymentMethod: "credit-card",
     createdAt: new Date(),
     updatedAt: new Date(),
-    yacht: mockYachts[0]
+    yacht: mockYachts[3]
   }
 ];
 
@@ -433,7 +423,7 @@ export const mockFuelTransactions: FuelTransaction[] = [
     userId: "user-1",
     amount: "-150",
     type: "booking",
-    description: "Fuel costs for De Antonio D50 Open booking",
+    description: "Fuel costs for De Antonio D42 booking",
     bookingId: "booking-1",
     createdAt: new Date()
   }
@@ -442,26 +432,26 @@ export const mockFuelTransactions: FuelTransaction[] = [
 export const mockMessages: (Message & { sender: { name: string; avatar: string } })[] = [
   {
     id: "message-1",
-    senderId: "owner-1",
+    senderId: "owner-4",
     recipientId: "user-1",
-    content: "Thank you for booking the De Antonio D50 Open! Our Barcelona-engineered yacht with signature hidden outboards and expansive sundeck will provide an unforgettable experience. Looking forward to hosting you.",
+    content: "Thank you for booking the De Antonio D42! This Barcelona-engineered yacht with triple outboard engines and spacious sundeck will provide an unforgettable experience. Looking forward to hosting you.",
     isRead: false,
     createdAt: new Date(),
     sender: {
-      name: "Marc Fernandez",
-      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100"
+      name: "Carlos Mendez",
+      avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100"
     }
   },
   {
     id: "message-2",
-    senderId: "owner-2",
+    senderId: "owner-6",
     recipientId: "user-1",
-    content: "Welcome to the De Antonio D42 experience! This award-winning sport yacht features triple outboard engines with innovative hidden engine design for the ultimate performance. Can't wait to show you the Barcelona craftsmanship!",
+    content: "Welcome to the De Antonio D60 experience! This flagship yacht features extraordinary 2400HP power with hidden jacuzzi and smart technology. Can't wait to show you the Barcelona craftsmanship!",
     isRead: false,
     createdAt: new Date("2025-10-20"),
     sender: {
-      name: "Sofia Martinez",
-      avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b0ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100"
+      name: "Alessandro Rossi",
+      avatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100"
     }
   }
 ];

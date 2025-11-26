@@ -22,15 +22,15 @@ import BottomNavigation from "@/components/BottomNavigation";
 import { enhancedScrollToTop } from "@/utils/scrollToTop";
 
 export default function OwnershipHomeScreen() {
-  const [selectedModel, setSelectedModel] = useState("D42 Open");
+  const [selectedModel, setSelectedModel] = useState("D42");
 
   const yachtModels = [
-    { id: "D28 Open", name: "D28 Open", length: "28ft", passengers: 10, price: "€203K", sharesFrom: "€41K", image: "https://images.boatsgroup.com/images/1/63/84/de-antonio-yachts-d28-open-9226384-20240502160147-0.jpg" },
-    { id: "D34 Open", name: "D34 Open", length: "34ft", passengers: 11, price: "€170K", sharesFrom: "€34K", image: "https://images.boatsgroup.com/images/1/13/61/de-antonio-yachts-d34-open-9091361-20240109094358-0.jpg" },
-    { id: "D34 Cruiser", name: "D34 Cruiser", length: "34ft", passengers: 11, price: "€180K", sharesFrom: "€36K", image: "https://images.boatsgroup.com/images/1/85/3/de-antonio-yachts-d34-cruiser-9068503-20231212093632-0.jpg" },
-    { id: "D42 Open", name: "D42 Open", length: "42ft", passengers: 12, price: "€535K", sharesFrom: "€107K", image: "https://images.boatsgroup.com/images/1/17/29/de-antonio-yachts-d42-9141729-20240221104818-0.jpg" },
-    { id: "D50 Open", name: "D50 Open", length: "50ft", passengers: 12, price: "€1,219K", sharesFrom: "€244K", image: "https://images.boatsgroup.com/images/1/51/79/de-antonio-yachts-d50-open-9275179-20240619063113-0.jpg" },
-    { id: "D50 Coupe", name: "D50 Coupe", length: "50ft", passengers: 12, price: "€1,300K", sharesFrom: "€260K", image: "https://images.boatsgroup.com/images/1/75/30/de-antonio-yachts-d50-coupe-9177530-20240404054946-0.jpg" }
+    { id: "D29", name: "D29", length: "29ft", passengers: 10, price: "€214K", sharesFrom: "€43K", image: "https://static.wixstatic.com/media/0fb4c8_b9744cfa841b4c4388ad78ac9b49bbe7~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D29.jpg" },
+    { id: "D33", name: "D33", length: "33ft", passengers: 10, price: "€309K", sharesFrom: "€62K", image: "https://static.wixstatic.com/media/0fb4c8_6cbbd012fc0645009bc4a91a412b293a~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D32.jpg" },
+    { id: "D36", name: "D36", length: "36ft", passengers: 12, price: "€426K", sharesFrom: "€85K", image: "https://static.wixstatic.com/media/0fb4c8_fbbb6a2569c747d48881f7ac065b947a~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D36.jpg" },
+    { id: "D42", name: "D42", length: "42ft", passengers: 12, price: "€513K", sharesFrom: "€103K", image: "https://static.wixstatic.com/media/0fb4c8_008f1545c8764f8789a2b7415ca9dde7~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D42.jpg" },
+    { id: "D50", name: "D50", length: "50ft", passengers: 12, price: "€671K", sharesFrom: "€134K", image: "https://static.wixstatic.com/media/0fb4c8_60988eb5cf834fcb876c1d06bd8af594~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D50.jpg" },
+    { id: "D60", name: "D60", length: "60ft", passengers: 12, price: "€1,270K", sharesFrom: "€254K", image: "https://static.wixstatic.com/media/5c3629_a8b1aa6ff9244bddaf7383aa45b4afc1~mv2.jpg/v1/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/5c3629_a8b1aa6ff9244bddaf7383aa45b4afc1~mv2.jpg" }
   ];
 
   const selectedYacht = yachtModels.find(y => y.id === selectedModel) || yachtModels[3];
@@ -211,60 +211,60 @@ export default function OwnershipHomeScreen() {
         <div className="space-y-4">
           {[
             { 
-              id: "share-saxdor-320-gto", 
-              model: "320 GTO", 
+              id: "share-deantonio-d33", 
+              model: "D33", 
               location: "El Gouna", 
-              availableShares: 2, 
+              availableShares: 3, 
               totalShares: 5, 
-              sharePrice: "€64,600", 
-              monthlyPayment: "€1,126",
+              sharePrice: "€61,800", 
+              monthlyPayment: "€1,077",
               usageDaysPerYear: 73, 
               capacity: 10, 
               expectedROI: "6-8%",
               priority: false, 
-              image: "https://images.boatsgroup.com/images/1/13/61/de-antonio-yachts-d34-open-9091361-20240109094358-0.jpg" 
+              image: "https://static.wixstatic.com/media/0fb4c8_6cbbd012fc0645009bc4a91a412b293a~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D32.jpg" 
             },
             { 
-              id: "share-saxdor-340-gtwa", 
-              model: "340 GTWA", 
+              id: "share-deantonio-d42", 
+              model: "D42", 
               location: "El Gouna", 
-              availableShares: 1, 
+              availableShares: 2, 
               totalShares: 5, 
-              sharePrice: "€72,200", 
-              monthlyPayment: "€1,258",
+              sharePrice: "€102,600", 
+              monthlyPayment: "€1,788",
               usageDaysPerYear: 73, 
               capacity: 12, 
               expectedROI: "5-7%",
               priority: false, 
-              image: "https://images.boatsgroup.com/images/1/17/29/de-antonio-yachts-d42-9141729-20240221104818-0.jpg" 
+              image: "https://static.wixstatic.com/media/0fb4c8_008f1545c8764f8789a2b7415ca9dde7~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D42.jpg" 
             },
             { 
-              id: "share-saxdor-400-gto", 
-              model: "400 GTO", 
+              id: "share-deantonio-d50", 
+              model: "D50", 
               location: "El Gouna", 
-              availableShares: 2, 
+              availableShares: 3, 
               totalShares: 5, 
-              sharePrice: "€78,800", 
-              monthlyPayment: "€1,373",
+              sharePrice: "€134,100", 
+              monthlyPayment: "€2,337",
               usageDaysPerYear: 73, 
               capacity: 12, 
               expectedROI: "4-6%",
               priority: true, 
-              image: "https://images.boatsgroup.com/images/1/51/79/de-antonio-yachts-d50-open-9275179-20240619063113-0.jpg"
+              image: "https://static.wixstatic.com/media/0fb4c8_60988eb5cf834fcb876c1d06bd8af594~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D50.jpg"
             },
             { 
-              id: "share-saxdor-400-gts", 
-              model: "400 GTS", 
+              id: "share-deantonio-d60", 
+              model: "D60", 
               location: "El Gouna", 
-              availableShares: 3, 
+              availableShares: 1, 
               totalShares: 5, 
-              sharePrice: "€85,600", 
-              monthlyPayment: "€1,492",
+              sharePrice: "€253,950", 
+              monthlyPayment: "€4,426",
               usageDaysPerYear: 73, 
               capacity: 12, 
               expectedROI: "3-5%",
               priority: true, 
-              image: "https://images.boatsgroup.com/images/1/75/30/de-antonio-yachts-d50-coupe-9177530-20240404054946-0.jpg" 
+              image: "https://static.wixstatic.com/media/5c3629_a8b1aa6ff9244bddaf7383aa45b4afc1~mv2.jpg/v1/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/5c3629_a8b1aa6ff9244bddaf7383aa45b4afc1~mv2.jpg" 
             }
           ].map((opportunity) => (
             <Link key={opportunity.id} href={`/ownership/${opportunity.id}`}>

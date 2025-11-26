@@ -34,40 +34,40 @@ export default function ListShareForSaleScreen() {
     agreeToTerms: false
   });
 
-  // Mock user's yacht shares
+  // De Antonio yacht shares - D29, D33, D36, D42, D50, D60 range
   const userShares = [
     {
       id: "share-1",
       yacht: { 
-        name: "De Antonio D34 Open", 
+        name: "De Antonio D33", 
         location: "El Gouna, Egypt",
-        image: "https://images.boatsgroup.com/images/1/13/61/de-antonio-yachts-d34-open-9091361-20240109094358-0.jpg"
+        image: "https://static.wixstatic.com/media/0fb4c8_6cbbd012fc0645009bc4a91a412b293a~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D32.jpg"
       },
-      shareFraction: "2/8",
-      originalPrice: 67200,
-      currentValue: 71400
+      shareFraction: "1/5",
+      originalPrice: 61800,
+      currentValue: 65600
     },
     {
       id: "share-2",
       yacht: { 
-        name: "De Antonio D50 Open", 
+        name: "De Antonio D42", 
         location: "El Gouna, Egypt",
-        image: "https://images.boatsgroup.com/images/1/51/79/de-antonio-yachts-d50-open-9275179-20240619063113-0.jpg"
+        image: "https://static.wixstatic.com/media/0fb4c8_008f1545c8764f8789a2b7415ca9dde7~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D42.jpg"
       },
-      shareFraction: "2/7",
-      originalPrice: 179200,
-      currentValue: 189000
+      shareFraction: "1/5",
+      originalPrice: 102600,
+      currentValue: 108500
     },
     {
       id: "share-3",
       yacht: { 
-        name: "De Antonio D50 Coupe", 
+        name: "De Antonio D60", 
         location: "El Gouna, Egypt",
-        image: "https://images.boatsgroup.com/images/1/75/30/de-antonio-yachts-d50-coupe-9177530-20240404054946-0.jpg"
+        image: "https://static.wixstatic.com/media/5c3629_a8b1aa6ff9244bddaf7383aa45b4afc1~mv2.jpg/v1/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/5c3629_a8b1aa6ff9244bddaf7383aa45b4afc1~mv2.jpg"
       },
-      shareFraction: "1/8",
-      originalPrice: 124600,
-      currentValue: 131600
+      shareFraction: "1/5",
+      originalPrice: 253950,
+      currentValue: 268000
     }
   ];
 
