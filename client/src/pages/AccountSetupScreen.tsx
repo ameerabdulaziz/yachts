@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { User, Ship, Anchor } from "lucide-react";
-import saxdorLogo from "@assets/image_1760971559327.png";
+import deAntonioLogo from "@assets/DE-ANTONIO-YACHTS_LOGO-removebg-preview_1754331163197.png";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
@@ -78,7 +78,7 @@ export default function AccountSetupScreen() {
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
           <div className="w-24 h-[77px] mx-auto mb-4 bg-white rounded-2xl flex items-center justify-center p-2">
-            <img src={saxdorLogo} alt="Saxdor Logo" className="w-full h-full object-contain" />
+            <img src={deAntonioLogo} alt="De Antonio Logo" className="w-full h-full object-contain" />
           </div>
           <CardTitle className="text-2xl font-bold">Complete Your Profile</CardTitle>
           <p className="text-gray-600">Tell us a bit about yourself</p>

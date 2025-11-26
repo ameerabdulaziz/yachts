@@ -7,7 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Card, CardContent } from "@/components/ui/card";
 import BottomNavigation from "@/components/BottomNavigation";
 import { Search, Heart, Star, Users, Bed, Calendar, PieChart, ChevronDown } from "lucide-react";
-import saxdorLogo from "@assets/image_1760971559327.png";
+import deAntonioLogo from "@assets/DE-ANTONIO-YACHTS_LOGO-removebg-preview_1754331163197.png";
 import seaBackground from "@assets/image_1754575606863.png";
 import { mockYachts, mockOwnershipOpportunities } from "@/lib/mockData";
 
@@ -17,7 +17,7 @@ export default function CharterScreen() {
   const [checkIn, setCheckIn] = useState("");
   const [checkOut, setCheckOut] = useState("");
 
-  // Use mock Saxdor data
+  // Use mock De Antonio data
   const yachts = mockYachts;
   const ownershipData = mockOwnershipOpportunities;
   const yachtsLoading = false;
@@ -45,7 +45,7 @@ export default function CharterScreen() {
           <div className="flex items-center justify-between">
             <div className="flex items-center">
               <div className="w-30 h-[60px] flex items-start justify-start">
-                <img src={saxdorLogo} alt="Saxdor Logo" className="w-full h-full object-contain object-left" />
+                <img src={deAntonioLogo} alt="De Antonio Logo" className="w-full h-full object-contain object-left" />
               </div>
             </div>
             <div className="flex items-center space-x-3">

@@ -4,7 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import BottomNavigation from "@/components/BottomNavigation";
 import { ArrowLeft, Calendar, MapPin, TrendingUp, Filter, PieChart, Users } from "lucide-react";
 import seaBackground from "@assets/image_1754575606863.png";
-import saxdorLogo from "@assets/image_1760971559327.png";
+import deAntonioLogo from "@assets/DE-ANTONIO-YACHTS_LOGO-removebg-preview_1754331163197.png";
 import { mockOwnershipOpportunities } from "@/lib/mockData";
 
 export default function OwnershipOpportunitiesScreen() {
@@ -28,7 +28,7 @@ export default function OwnershipOpportunitiesScreen() {
           <div className="flex items-center justify-between">
             <div className="flex items-center">
               <div className="w-30 h-[60px] flex items-start justify-start">
-                <img src={saxdorLogo} alt="Saxdor Logo" className="w-full h-full object-contain object-left" />
+                <img src={deAntonioLogo} alt="De Antonio Logo" className="w-full h-full object-contain object-left" />
               </div>
             </div>
             <div className="flex items-center space-x-3">

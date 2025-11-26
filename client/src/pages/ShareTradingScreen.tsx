@@ -6,12 +6,12 @@ import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import BottomNavigation from "@/components/BottomNavigation";
 
-// Authentic Saxdor Yachts share listings
+// Authentic De Antonio Yachts share listings
 const mockShareListings = [
   {
     id: "listing-1",
-    boatName: "Saxdor 400 GTO",
-    boatImage: "https://saxdoryachts.com/wp-content/uploads/2023/12/DJI_0009-Enhanced-NR-2.jpg",
+    boatName: "De Antonio D50 Open",
+    boatImage: "https://images.boatsgroup.com/images/1/51/79/de-antonio-yachts-d50-open-9275179-20240619063113-0.jpg",
     length: "12.64m",
     passengers: 12,
     cabins: 2,
@@ -30,8 +30,8 @@ const mockShareListings = [
   },
   {
     id: "listing-2",
-    boatName: "Saxdor 320 GTO",
-    boatImage: "https://saxdoryachts.com/wp-content/uploads/2025/04/DJI_0865.jpeg",
+    boatName: "De Antonio D34 Open",
+    boatImage: "https://images.boatsgroup.com/images/1/13/61/de-antonio-yachts-d34-open-9091361-20240109094358-0.jpg",
     length: "9.90m",
     passengers: 10,
     cabins: 2,
@@ -51,8 +51,8 @@ const mockShareListings = [
   },
   {
     id: "listing-3",
-    boatName: "Saxdor 400 GTS",
-    boatImage: "https://saxdoryachts.com/wp-content/uploads/2025/09/400_gts_gal_2-1920x1080.jpeg",
+    boatName: "De Antonio D50 Coupe",
+    boatImage: "https://images.boatsgroup.com/images/1/75/30/de-antonio-yachts-d50-coupe-9177530-20240404054946-0.jpg",
     length: "18.50m",
     passengers: 12,
     cabins: 3,
@@ -71,8 +71,8 @@ const mockShareListings = [
   },
   {
     id: "listing-4",
-    boatName: "Saxdor 270 GTO",
-    boatImage: "https://saxdoryachts.com/wp-content/uploads/2025/02/270_gto_gal_7-1920x1080.jpeg",
+    boatName: "De Antonio D28 Open",
+    boatImage: "https://images.boatsgroup.com/images/1/63/84/de-antonio-yachts-d28-open-9226384-20240502160147-0.jpg",
     length: "8.50m",
     passengers: 8,
     cabins: 1,

@@ -1,6 +1,6 @@
 # Overview
 
-Yachtak (operated by Nauttec) is a comprehensive fractional yacht ownership and rental platform. It aims to revolutionize luxury boating access by enabling Visitors, Owners, and Administrators to interact with the Saxdor Yachts range (270 GTO, 320 GTO, 320 GTC, 340 GTWA, 400 GTO, 400 GTS) under various fractional ownership structures. Key capabilities include sophisticated booking rules, fuel wallet management, and peer-to-peer share trading.
+Yachtak (operated by Nauttec) is a comprehensive fractional yacht ownership and rental platform. It aims to revolutionize luxury boating access by enabling Visitors, Owners, and Administrators to interact with the De Antonio Yachts range (D28 Open, D34 Open, D34 Cruiser, D42 Open, D50 Open, D50 Coupe) under various fractional ownership structures. Key capabilities include sophisticated booking rules, fuel wallet management, and peer-to-peer share trading.
 
 # User Preferences
 
@@ -95,7 +95,7 @@ Located in `django_backend/` directory, this is the main production backend:
 
 ## Database
 
-The PostgreSQL database supports core entities: Users (Visitors, Owners, Administrators), Yachts (Saxdor range with specs, calendars, maintenance), Fractional Ownership (share structures, usage limits, co-owner relations), a Booking Rules Engine (seasonal multipliers, weighted days), Share Trading (right of first refusal, waitlists, peer-to-peer marketplace), and a Fuel Wallet System (prepaid virtual fuel, tracking).
+The PostgreSQL database supports core entities: Users (Visitors, Owners, Administrators), Yachts (De Antonio range with specs, calendars, maintenance), Fractional Ownership (share structures, usage limits, co-owner relations), a Booking Rules Engine (seasonal multipliers, weighted days), Share Trading (right of first refusal, waitlists, peer-to-peer marketplace), and a Fuel Wallet System (prepaid virtual fuel, tracking).
 
 ## Authentication & Authorization
 
@@ -107,7 +107,7 @@ The architecture emphasizes type safety across the stack using TypeScript, Zod f
 
 ## UI/UX
 
-The design uses Saxdor's official brand colors (Blue Zodiac #0E2047, Silver #CCCCCC, Black #000000) and typography (tussilago for headlines, Plus Jakarta Sans for body text). It features shadcn/ui components with an ocean-themed palette, optimized for mobile devices with a focus on intuitive navigation and modern yacht industry aesthetics.
+The design uses De Antonio's brand colors (Blue Zodiac #0E2047, Silver #CCCCCC, Black #000000) and typography (Plus Jakarta Sans for body text). It features shadcn/ui components with an ocean-themed palette, optimized for mobile devices with a focus on intuitive navigation and modern yacht industry aesthetics. De Antonio Yachts is a Barcelona-based luxury yacht manufacturer known for hidden outboard engines, walk-around decks, and distinctive V-shaped hulls.
 
 # External Dependencies
 

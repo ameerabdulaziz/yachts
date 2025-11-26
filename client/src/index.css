@@ -42,12 +42,12 @@ html, body {
   --card-foreground: hsl(0, 0%, 0%);
   --border: hsl(240, 6%, 90%); /* iOS separator */
   --input: hsl(210, 17%, 95%); /* iOS systemGray6 */
-  --primary: hsl(221, 67%, 17%); /* Saxdor Blue Zodiac #0E2047 */
+  --primary: hsl(221, 67%, 17%); /* De Antonio Blue Zodiac #0E2047 */
   --primary-foreground: hsl(0, 0%, 100%);
   --primary-hover: hsl(221, 67%, 12%);
   --secondary: hsl(210, 17%, 95%); /* iOS systemGray6 */
   --secondary-foreground: hsl(0, 0%, 0%);
-  --accent: hsl(221, 67%, 17%); /* Saxdor Blue Zodiac */
+  --accent: hsl(221, 67%, 17%); /* De Antonio Blue Zodiac */
   --accent-foreground: hsl(0, 0%, 100%);
   --destructive: hsl(4, 90%, 58%); /* iOS systemRed */
   --destructive-foreground: hsl(0, 0%, 100%);
@@ -68,10 +68,10 @@ html, body {
   --ocean-start: hsl(180, 100%, 75%);
   --ocean-end: hsl(195, 85%, 55%);
   
-  /* Saxdor Brand Colors */
-  --saxdor-blue-zodiac: hsl(221, 67%, 17%); /* #0E2047 */
-  --saxdor-silver: hsl(0, 0%, 80%); /* #CCCCCC */
-  --saxdor-black: hsl(0, 0%, 0%); /* #000000 */
+  /* De Antonio Brand Colors */
+  --deantonio-blue-zodiac: hsl(221, 67%, 17%); /* #0E2047 */
+  --deantonio-silver: hsl(0, 0%, 80%); /* #CCCCCC */
+  --deantonio-black: hsl(0, 0%, 0%); /* #000000 */
 }
 
 .dark {

@@ -10,8 +10,8 @@ import BottomNavigation from "@/components/BottomNavigation";
 const mockBoatOwnership = {
   "yacht-1": {
     id: "yacht-1",
-    name: "Saxdor 400 GTO",
-    image: "https://saxdoryachts.com/wp-content/uploads/2023/12/DJI_0009-Enhanced-NR-2.jpg",
+    name: "De Antonio D50 Open",
+    image: "https://images.boatsgroup.com/images/1/51/79/de-antonio-yachts-d50-open-9275179-20240619063113-0.jpg",
     location: "El Gouna, Egypt",
     length: "50",
     capacity: 12,
@@ -34,8 +34,8 @@ const mockBoatOwnership = {
   },
   "yacht-4": {
     id: "yacht-4",
-    name: "Saxdor 320 GTO",
-    image: "https://saxdoryachts.com/wp-content/uploads/2025/04/DJI_0865.jpeg",
+    name: "De Antonio D34 Open",
+    image: "https://images.boatsgroup.com/images/1/13/61/de-antonio-yachts-d34-open-9091361-20240109094358-0.jpg",
     location: "El Gouna, Egypt",
     length: "32",
     capacity: 10,
@@ -58,8 +58,8 @@ const mockBoatOwnership = {
   },
   "yacht-6": {
     id: "yacht-6", 
-    name: "Saxdor 400 GTS",
-    image: "https://saxdoryachts.com/wp-content/uploads/2025/09/400_gts_gal_2-1920x1080.jpeg",
+    name: "De Antonio D50 Coupe",
+    image: "https://images.boatsgroup.com/images/1/75/30/de-antonio-yachts-d50-coupe-9177530-20240404054946-0.jpg",
     location: "El Gouna, Egypt",
     length: "60",
     capacity: 12,

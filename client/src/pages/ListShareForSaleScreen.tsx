@@ -10,7 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Checkbox } from "@/components/ui/checkbox";
 import { ArrowLeft, TrendingUp, Euro, Calendar, Info, Upload, AlertCircle } from "lucide-react";
 import seaBackground from "@assets/image_1754575606863.png";
-import saxdorLogo from "@assets/image_1760971559327.png";
+import deAntonioLogo from "@assets/DE-ANTONIO-YACHTS_LOGO-removebg-preview_1754331163197.png";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
@@ -39,9 +39,9 @@ export default function ListShareForSaleScreen() {
     {
       id: "share-1",
       yacht: { 
-        name: "Saxdor 320 GTO", 
+        name: "De Antonio D34 Open", 
         location: "El Gouna, Egypt",
-        image: "https://saxdoryachts.com/wp-content/uploads/2025/04/DJI_0865.jpeg"
+        image: "https://images.boatsgroup.com/images/1/13/61/de-antonio-yachts-d34-open-9091361-20240109094358-0.jpg"
       },
       shareFraction: "2/8",
       originalPrice: 67200,
@@ -50,9 +50,9 @@ export default function ListShareForSaleScreen() {
     {
       id: "share-2",
       yacht: { 
-        name: "Saxdor 400 GTO", 
+        name: "De Antonio D50 Open", 
         location: "El Gouna, Egypt",
-        image: "https://saxdoryachts.com/wp-content/uploads/2023/12/DJI_0009-Enhanced-NR-2.jpg"
+        image: "https://images.boatsgroup.com/images/1/51/79/de-antonio-yachts-d50-open-9275179-20240619063113-0.jpg"
       },
       shareFraction: "2/7",
       originalPrice: 179200,
@@ -61,9 +61,9 @@ export default function ListShareForSaleScreen() {
     {
       id: "share-3",
       yacht: { 
-        name: "Saxdor 400 GTS", 
+        name: "De Antonio D50 Coupe", 
         location: "El Gouna, Egypt",
-        image: "https://saxdoryachts.com/wp-content/uploads/2025/09/400_gts_gal_2-1920x1080.jpeg"
+        image: "https://images.boatsgroup.com/images/1/75/30/de-antonio-yachts-d50-coupe-9177530-20240404054946-0.jpg"
       },
       shareFraction: "1/8",
       originalPrice: 124600,
@@ -159,7 +159,7 @@ export default function ListShareForSaleScreen() {
               </Button>
             </Link>
             <div className="w-[77px] h-[38px] bg-white rounded-lg flex items-center justify-start p-1">
-              <img src={saxdorLogo} alt="Saxdor Logo" className="w-full h-full object-contain object-left" />
+              <img src={deAntonioLogo} alt="De Antonio Logo" className="w-full h-full object-contain object-left" />
             </div>
           </div>
         </div>

@@ -6,7 +6,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import saxdorLogo from "@assets/image_1760971559327.png";
+import deAntonioLogo from "@assets/DE-ANTONIO-YACHTS_LOGO-removebg-preview_1754331163197.png";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
@@ -83,7 +83,7 @@ export default function PhoneLoginScreen() {
         {/* Logo Section */}
         <div className="text-center">
           <div className="w-[230px] h-[77px] mx-auto mb-8">
-            <img src={saxdorLogo} alt="Saxdor Logo" className="w-full h-full object-contain" />
+            <img src={deAntonioLogo} alt="De Antonio Logo" className="w-full h-full object-contain" />
           </div>
         </div>
 

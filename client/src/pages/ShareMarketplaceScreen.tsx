@@ -8,15 +8,15 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import BottomNavigation from "@/components/BottomNavigation";
 import { ArrowLeft, Search, Filter, TrendingUp, TrendingDown, Calendar, MapPin, Plus } from "lucide-react";
 import seaBackground from "@assets/image_1754575606863.png";
-import saxdorLogo from "@assets/image_1760971559327.png";
+import deAntonioLogo from "@assets/DE-ANTONIO-YACHTS_LOGO-removebg-preview_1754331163197.png";
 
 const mockShareListings = [
   {
     id: "listing-1",
     yacht: {
-      name: "Saxdor 400 GTO",
+      name: "De Antonio D50 Open",
       location: "El Gouna, Egypt",
-      image: "https://saxdoryachts.com/wp-content/uploads/2023/12/DJI_0009-Enhanced-NR-2.jpg"
+      image: "https://images.boatsgroup.com/images/1/51/79/de-antonio-yachts-d50-open-9275179-20240619063113-0.jpg"
     },
     shareFraction: "1/8",
     sharesForSale: 1,
@@ -35,9 +35,9 @@ const mockShareListings = [
   {
     id: "listing-2",
     yacht: {
-      name: "Saxdor 320 GTO",
+      name: "De Antonio D34 Open",
       location: "El Gouna, Egypt",
-      image: "https://saxdoryachts.com/wp-content/uploads/2025/04/DJI_0865.jpeg"
+      image: "https://images.boatsgroup.com/images/1/13/61/de-antonio-yachts-d34-open-9091361-20240109094358-0.jpg"
     },
     shareFraction: "1/8",
     sharesForSale: 1,
@@ -56,9 +56,9 @@ const mockShareListings = [
   {
     id: "listing-3",
     yacht: {
-      name: "Saxdor 400 GTS",
+      name: "De Antonio D50 Coupe",
       location: "El Gouna, Egypt",
-      image: "https://saxdoryachts.com/wp-content/uploads/2025/09/400_gts_gal_2-1920x1080.jpeg"
+      image: "https://images.boatsgroup.com/images/1/75/30/de-antonio-yachts-d50-coupe-9177530-20240404054946-0.jpg"
     },
     shareFraction: "1/7",
     sharesForSale: 2,
@@ -77,9 +77,9 @@ const mockShareListings = [
   {
     id: "listing-4",
     yacht: {
-      name: "Saxdor 340 GTWA",
+      name: "De Antonio D42 Open",
       location: "El Gouna, Egypt",
-      image: "https://saxdoryachts.com/wp-content/uploads/2024/09/DJI_0106-1920x1080.jpg"
+      image: "https://images.boatsgroup.com/images/1/17/29/de-antonio-yachts-d42-9141729-20240221104818-0.jpg"
     },
     shareFraction: "1/12",
     sharesForSale: 1,
@@ -129,7 +129,7 @@ export default function ShareMarketplaceScreen() {
               </Button>
             </Link>
             <div className="w-[77px] h-[38px] bg-white rounded-lg flex items-center justify-start p-1">
-              <img src={saxdorLogo} alt="Saxdor Logo" className="w-full h-full object-contain object-left" />
+              <img src={deAntonioLogo} alt="De Antonio Logo" className="w-full h-full object-contain object-left" />
             </div>
           </div>
           <Link href="/list-share-for-sale">
@@ -157,7 +157,7 @@ export default function ShareMarketplaceScreen() {
         <div className="relative z-10">
           <div className="bg-white rounded-2xl p-6 text-center shadow-lg">
             <TrendingUp className="w-16 h-16 mx-auto mb-4 text-primary" />
-            <h2 className="text-2xl font-bold mb-2 text-gray-900">Saxdor Share Marketplace</h2>
+            <h2 className="text-2xl font-bold mb-2 text-gray-900">De Antonio Share Marketplace</h2>
             <p className="text-gray-600">Buy and sell ownership shares with other yacht investors</p>
           </div>
         </div>

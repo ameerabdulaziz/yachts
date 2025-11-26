@@ -5,36 +5,36 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import BottomNavigation from "@/components/BottomNavigation";
 import deAntonioD50 from "@assets/image_1754579474724.png";
-import saxdorLogo from "@assets/image_1760971559327.png";
+import deAntonioLogo from "@assets/DE-ANTONIO-YACHTS_LOGO-removebg-preview_1754331163197.png";
 import seaBackground from "@assets/image_1754575606863.png";
 
 // Mock data for owned boats - limiting to 2 boats as requested
 const mockOwnedBoats = [
   {
     id: "yacht-4",
-    name: "Saxdor 320 GTO",
-    image: "https://saxdoryachts.com/wp-content/uploads/2025/04/DJI_0865.jpeg",
+    name: "De Antonio D34 Open",
+    image: "https://images.boatsgroup.com/images/1/13/61/de-antonio-yachts-d34-open-9091361-20240109094358-0.jpg",
     location: "El Gouna, Egypt",
-    length: "32",
-    capacity: 10,
+    length: "34",
+    capacity: 11,
     yearBuilt: 2024,
     sharesFractionOwned: "2/5",
     sharesPercentage: 40,
-    shareValue: "€129,200",
+    shareValue: "€67,960",
     remainingDays: 42,
     remainingEngineHours: 38
   },
   {
     id: "yacht-1",
-    name: "Saxdor 400 GTO",
-    image: "https://saxdoryachts.com/wp-content/uploads/2023/12/DJI_0009-Enhanced-NR-2.jpg",
+    name: "De Antonio D50 Open",
+    image: "https://images.boatsgroup.com/images/1/51/79/de-antonio-yachts-d50-open-9275179-20240619063113-0.jpg",
     location: "El Gouna, Egypt",
-    length: "40",
+    length: "50",
     capacity: 12,
     yearBuilt: 2024,
     sharesFractionOwned: "2/5",
     sharesPercentage: 40,
-    shareValue: "€157,600",
+    shareValue: "€487,600",
     remainingDays: 35,
     remainingEngineHours: 42
   }
@@ -67,7 +67,7 @@ export default function MyBoatsScreen() {
           <div className="flex items-center justify-between">
             <div className="flex items-center">
               <div className="w-30 h-[60px] flex items-start justify-start">
-                <img src={saxdorLogo} alt="Saxdor Logo" className="w-full h-full object-contain object-left" />
+                <img src={deAntonioLogo} alt="De Antonio Logo" className="w-full h-full object-contain object-left" />
               </div>
             </div>
             <div className="flex items-center space-x-3">

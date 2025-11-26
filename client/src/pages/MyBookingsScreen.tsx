@@ -8,7 +8,7 @@ import { mockBookings } from "@/lib/mockData";
 import seaBackground from "@assets/image_1754575606863.png";
 import { parseCurrency } from "@/lib/utils";
 
-const defaultYachtImage = "https://saxdoryachts.com/wp-content/uploads/2023/12/DJI_0009-Enhanced-NR-2.jpg";
+const defaultYachtImage = "https://images.boatsgroup.com/images/1/51/79/de-antonio-yachts-d50-open-9275179-20240619063113-0.jpg";
 
 const statusColors = {
   confirmed: "bg-green-100 text-green-800",
@@ -35,10 +35,10 @@ export default function MyBookingsScreen() {
       updatedAt: new Date(),
       yacht: {
         id: "yacht-2",
-        name: "Saxdor 400 GTO",
+        name: "De Antonio D50 Open",
         location: "El Gouna, Egypt",
         pricePerDay: "€2,750",
-        images: ["https://saxdoryachts.com/wp-content/uploads/2023/12/DJI_0009-Enhanced-NR-2.jpg"]
+        images: ["https://images.boatsgroup.com/images/1/51/79/de-antonio-yachts-d50-open-9275179-20240619063113-0.jpg"]
       }
     },
     {
@@ -56,10 +56,10 @@ export default function MyBookingsScreen() {
       updatedAt: new Date(),
       yacht: {
         id: "yacht-3",
-        name: "Saxdor 340 GTWA",
+        name: "De Antonio D42 Open",
         location: "El Gouna, Egypt", 
         pricePerDay: "€1,950",
-        images: ["https://saxdoryachts.com/wp-content/uploads/2024/09/DJI_0106-1920x1080.jpg"]
+        images: ["https://images.boatsgroup.com/images/1/17/29/de-antonio-yachts-d42-9141729-20240221104818-0.jpg"]
       }
     },
     {
@@ -77,10 +77,10 @@ export default function MyBookingsScreen() {
       updatedAt: new Date(),
       yacht: {
         id: "yacht-4",
-        name: "Saxdor 400 GTS",
+        name: "De Antonio D50 Coupe",
         location: "El Gouna, Egypt",
         pricePerDay: "€4,625",
-        images: ["https://saxdoryachts.com/wp-content/uploads/2025/09/400_gts_gal_2-1920x1080.jpeg"]
+        images: ["https://images.boatsgroup.com/images/1/75/30/de-antonio-yachts-d50-coupe-9177530-20240404054946-0.jpg"]
       }
     }
   ];

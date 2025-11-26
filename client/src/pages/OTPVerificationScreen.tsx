@@ -3,7 +3,7 @@ import { useLocation, Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ArrowLeft, RotateCcw } from "lucide-react";
-import saxdorLogo from "@assets/image_1760971559327.png";
+import deAntonioLogo from "@assets/DE-ANTONIO-YACHTS_LOGO-removebg-preview_1754331163197.png";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
@@ -100,10 +100,10 @@ export default function OTPVerificationScreen() {
 
         {/* Content */}
         <div className="space-y-8">
-          {/* Saxdor Logo */}
+          {/* De Antonio Logo */}
           <div className="flex justify-center">
             <div className="w-[115px] h-[77px]">
-              <img src={saxdorLogo} alt="Saxdor Logo" className="w-full h-full object-contain" />
+              <img src={deAntonioLogo} alt="De Antonio Logo" className="w-full h-full object-contain" />
             </div>
           </div>
 

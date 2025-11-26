@@ -16,21 +16,21 @@ import {
   Clock,
   MapPin
 } from "lucide-react";
-import saxdorLogo from "@assets/image_1760971559327.png";
+import deAntonioLogo from "@assets/DE-ANTONIO-YACHTS_LOGO-removebg-preview_1754331163197.png";
 import seaBackground from "@assets/image_1754575606863.png";
 import BottomNavigation from "@/components/BottomNavigation";
 import { enhancedScrollToTop } from "@/utils/scrollToTop";
 
 export default function OwnershipHomeScreen() {
-  const [selectedModel, setSelectedModel] = useState("340 GTWA");
+  const [selectedModel, setSelectedModel] = useState("D42 Open");
 
   const yachtModels = [
-    { id: "270 GTO", name: "270 GTO", length: "27ft", passengers: 8, price: "€205K", sharesFrom: "€41K", image: "https://saxdoryachts.com/wp-content/uploads/2024/09/DJI_0911-4-1920x1080.jpg" },
-    { id: "320 GTO", name: "320 GTO", length: "32ft", passengers: 10, price: "€323K", sharesFrom: "€65K", image: "https://saxdoryachts.com/wp-content/uploads/2025/04/DJI_0865.jpeg" },
-    { id: "320 GTC", name: "320 GTC", length: "32ft", passengers: 10, price: "€339K", sharesFrom: "€68K", image: "https://saxdoryachts.com/wp-content/uploads/2025/08/DJI_20250408143821_0019_D_ALEXMFUK-Enhanced-NR.jpeg" },
-    { id: "340 GTWA", name: "340 GTWA", length: "34ft", passengers: 12, price: "€361K", sharesFrom: "€72K", image: "https://saxdoryachts.com/wp-content/uploads/2024/09/DJI_0106-1920x1080.jpg" },
-    { id: "400 GTO", name: "400 GTO", length: "40ft", passengers: 12, price: "€394K", sharesFrom: "€79K", image: "https://saxdoryachts.com/wp-content/uploads/2023/12/DJI_0009-Enhanced-NR-2.jpg" },
-    { id: "400 GTS", name: "400 GTS", length: "40ft", passengers: 12, price: "€428K", sharesFrom: "€86K", image: "https://saxdoryachts.com/wp-content/uploads/2025/09/400_gts_gal_2-1920x1080.jpeg" }
+    { id: "D28 Open", name: "D28 Open", length: "28ft", passengers: 10, price: "€203K", sharesFrom: "€41K", image: "https://images.boatsgroup.com/images/1/63/84/de-antonio-yachts-d28-open-9226384-20240502160147-0.jpg" },
+    { id: "D34 Open", name: "D34 Open", length: "34ft", passengers: 11, price: "€170K", sharesFrom: "€34K", image: "https://images.boatsgroup.com/images/1/13/61/de-antonio-yachts-d34-open-9091361-20240109094358-0.jpg" },
+    { id: "D34 Cruiser", name: "D34 Cruiser", length: "34ft", passengers: 11, price: "€180K", sharesFrom: "€36K", image: "https://images.boatsgroup.com/images/1/85/3/de-antonio-yachts-d34-cruiser-9068503-20231212093632-0.jpg" },
+    { id: "D42 Open", name: "D42 Open", length: "42ft", passengers: 12, price: "€535K", sharesFrom: "€107K", image: "https://images.boatsgroup.com/images/1/17/29/de-antonio-yachts-d42-9141729-20240221104818-0.jpg" },
+    { id: "D50 Open", name: "D50 Open", length: "50ft", passengers: 12, price: "€1,219K", sharesFrom: "€244K", image: "https://images.boatsgroup.com/images/1/51/79/de-antonio-yachts-d50-open-9275179-20240619063113-0.jpg" },
+    { id: "D50 Coupe", name: "D50 Coupe", length: "50ft", passengers: 12, price: "€1,300K", sharesFrom: "€260K", image: "https://images.boatsgroup.com/images/1/75/30/de-antonio-yachts-d50-coupe-9177530-20240404054946-0.jpg" }
   ];
 
   const selectedYacht = yachtModels.find(y => y.id === selectedModel) || yachtModels[3];
@@ -64,7 +64,7 @@ export default function OwnershipHomeScreen() {
           <div className="flex items-center justify-between">
             <div className="flex items-center">
               <div className="w-30 h-[60px] flex items-start justify-start">
-                <img src={saxdorLogo} alt="Saxdor Logo" className="w-full h-full object-contain object-left" />
+                <img src={deAntonioLogo} alt="De Antonio Logo" className="w-full h-full object-contain object-left" />
               </div>
             </div>
             <div className="flex items-center space-x-3">
@@ -92,13 +92,13 @@ export default function OwnershipHomeScreen() {
             <div className="mb-4">
               <img 
                 src={selectedYacht.image} 
-                alt={`Saxdor ${selectedYacht.name}`}
+                alt={`De Antonio ${selectedYacht.name}`}
                 className="w-full h-48 object-cover rounded-xl"
               />
             </div>
             
             <div className="text-center mb-4">
-              <h3 className="text-xl font-bold text-gray-900 mb-2" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif' }}>Saxdor {selectedYacht.name}</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-2" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif' }}>De Antonio {selectedYacht.name}</h3>
               <div className="flex items-center justify-center space-x-4 text-sm text-gray-600 mb-4" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>
                 <span>{selectedYacht.length}</span>
                 <span>•</span>
@@ -222,7 +222,7 @@ export default function OwnershipHomeScreen() {
               capacity: 10, 
               expectedROI: "6-8%",
               priority: false, 
-              image: "https://saxdoryachts.com/wp-content/uploads/2025/04/DJI_0865.jpeg" 
+              image: "https://images.boatsgroup.com/images/1/13/61/de-antonio-yachts-d34-open-9091361-20240109094358-0.jpg" 
             },
             { 
               id: "share-saxdor-340-gtwa", 
@@ -236,7 +236,7 @@ export default function OwnershipHomeScreen() {
               capacity: 12, 
               expectedROI: "5-7%",
               priority: false, 
-              image: "https://saxdoryachts.com/wp-content/uploads/2024/09/DJI_0106-1920x1080.jpg" 
+              image: "https://images.boatsgroup.com/images/1/17/29/de-antonio-yachts-d42-9141729-20240221104818-0.jpg" 
             },
             { 
               id: "share-saxdor-400-gto", 
@@ -250,7 +250,7 @@ export default function OwnershipHomeScreen() {
               capacity: 12, 
               expectedROI: "4-6%",
               priority: true, 
-              image: "https://saxdoryachts.com/wp-content/uploads/2023/12/DJI_0009-Enhanced-NR-2.jpg"
+              image: "https://images.boatsgroup.com/images/1/51/79/de-antonio-yachts-d50-open-9275179-20240619063113-0.jpg"
             },
             { 
               id: "share-saxdor-400-gts", 
@@ -264,7 +264,7 @@ export default function OwnershipHomeScreen() {
               capacity: 12, 
               expectedROI: "3-5%",
               priority: true, 
-              image: "https://saxdoryachts.com/wp-content/uploads/2025/09/400_gts_gal_2-1920x1080.jpeg" 
+              image: "https://images.boatsgroup.com/images/1/75/30/de-antonio-yachts-d50-coupe-9177530-20240404054946-0.jpg" 
             }
           ].map((opportunity) => (
             <Link key={opportunity.id} href={`/ownership/${opportunity.id}`}>
@@ -276,7 +276,7 @@ export default function OwnershipHomeScreen() {
                   <div className="relative">
                     <img 
                       src={opportunity.image} 
-                      alt={`Saxdor ${opportunity.model}`}
+                      alt={`De Antonio ${opportunity.model}`}
                       className="w-full h-48 object-cover"
                     />
                     <div className="absolute top-3 left-3 bg-white/90 p-2 rounded-full">
@@ -291,7 +291,7 @@ export default function OwnershipHomeScreen() {
                     <div className="flex items-start justify-between mb-3">
                       <div>
                         <h3 className="text-xl font-bold text-gray-900" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif' }}>
-                          Saxdor {opportunity.model}
+                          De Antonio {opportunity.model}
                         </h3>
                         <p className="text-gray-600" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>
                           {opportunity.location}
