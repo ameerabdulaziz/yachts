@@ -26,6 +26,11 @@ Preferred communication style: Simple, everyday language.
   - isFirstTimeUser() detection for personalized routing
   - Modality selection persisted for tailored content
   - Returning users directed to /home
+- **INVEST TAB**: Dedicated investment section in bottom navigation with tiered investment flow
+  - Three investment tiers: Starter (€25K-100K, 6-8%), Growth (€100K-500K, 10-14%), Premium (€500K-2M, 12-18%)
+  - Interactive investment calculator with projected returns
+  - Risk-based yacht portfolio display
+  - Investment application and advisor scheduling flows
 - **STATUS**: Production-ready modality system with complete navigation flow
 
 ## Complete Flutter App with 2024 Riverpod Patterns (September 2, 2025)
