@@ -14,7 +14,9 @@ import {
   Euro,
   Star,
   Clock,
-  MapPin
+  MapPin,
+  PieChart,
+  Compass
 } from "lucide-react";
 import deAntonioLogo from "@assets/DE-ANTONIO-YACHTS_LOGO-removebg-preview_1754331163197.png";
 import seaBackground from "@assets/image_1754575606863.png";
@@ -169,6 +171,52 @@ export default function OwnershipHomeScreen() {
         </div>
         </section>
       </div>
+
+      {/* Access Models Entry Point */}
+      <section className="px-4 py-6">
+        <Card className="overflow-hidden border-0 shadow-lg">
+          <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-6 text-white">
+            <div className="flex items-center justify-between">
+              <div className="flex-1">
+                <h3 className="text-lg font-bold mb-1" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif' }}>
+                  Not Sure Which Model is Right for You?
+                </h3>
+                <p className="text-blue-100 text-sm mb-4" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>
+                  Discover four ways to access luxury yachting - from full ownership to pure investment
+                </p>
+                <div className="flex gap-2 flex-wrap mb-4">
+                  <Badge className="bg-white/20 text-white border-0">
+                    <Anchor className="w-3 h-3 mr-1" />
+                    OWN
+                  </Badge>
+                  <Badge className="bg-white/20 text-white border-0">
+                    <TrendingUp className="w-3 h-3 mr-1" />
+                    EARN
+                  </Badge>
+                  <Badge className="bg-white/20 text-white border-0">
+                    <Users className="w-3 h-3 mr-1" />
+                    CO-OWN
+                  </Badge>
+                  <Badge className="bg-white/20 text-white border-0">
+                    <PieChart className="w-3 h-3 mr-1" />
+                    INVEST
+                  </Badge>
+                </div>
+                <Link href="/access-models">
+                  <Button 
+                    className="bg-white text-blue-600 hover:bg-blue-50 font-semibold"
+                    onClick={enhancedScrollToTop}
+                    data-testid="button-explore-access-models"
+                  >
+                    <Compass className="w-4 h-4 mr-2" />
+                    Explore Access Models
+                  </Button>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </Card>
+      </section>
 
       {/* Ownership Benefits */}
       <section className="px-4 py-6">

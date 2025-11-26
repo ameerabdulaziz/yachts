@@ -66,7 +66,7 @@ export default function ModalityDetailScreen() {
       <Card 
         key={yacht.yachtId}
         className="overflow-hidden cursor-pointer hover:shadow-lg transition-all"
-        onClick={() => setLocation(`/modality/${params?.type}/${yacht.yachtId}`)}
+        onClick={() => setLocation(`/ownership/${yacht.yachtId}`)}
         data-testid={`card-yacht-${yacht.yachtId}`}
       >
         <div className="relative h-40">
