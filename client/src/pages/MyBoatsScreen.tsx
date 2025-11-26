@@ -34,7 +34,7 @@ const mockOwnedBoats = [
     yearBuilt: 2024,
     sharesFractionOwned: "1/5",
     sharesPercentage: 20,
-    shareValue: "€102,600",
+    shareValue: "€130,000",
     remainingDays: 52,
     remainingEngineHours: 42
   }

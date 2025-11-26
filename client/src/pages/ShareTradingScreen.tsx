@@ -17,7 +17,7 @@ const mockShareListings = [
     cabins: 2,
     power: "1200HP",
     shareFraction: "1/5",
-    sharePrice: "€102,600",
+    sharePrice: "€130,000",
     location: "El Gouna, Egypt",
     availableShares: 2,
     usageDaysPerYear: 73,

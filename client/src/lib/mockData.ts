@@ -280,7 +280,7 @@ export const mockOwnershipOpportunities: (OwnershipOpportunity & { yacht: Yacht 
   {
     id: "share-deantonio-d42",
     yachtId: "yacht-4",
-    sharePrice: "€102,600",
+    sharePrice: "€130,000",
     shareFraction: "1/5",
     usageDaysPerYear: 73,
     totalShares: 5,
@@ -290,7 +290,7 @@ export const mockOwnershipOpportunities: (OwnershipOpportunity & { yacht: Yacht 
       available: true,
       downPaymentPercent: 25,
       termMonths: 60,
-      monthlyPayment: "1,788"
+      monthlyPayment: "2,267"
     },
     createdAt: new Date(),
     updatedAt: new Date(),
@@ -317,7 +317,7 @@ export const mockOwnershipOpportunities: (OwnershipOpportunity & { yacht: Yacht 
   {
     id: "share-deantonio-d50",
     yachtId: "yacht-5",
-    sharePrice: "€134,100",
+    sharePrice: "€190,000",
     shareFraction: "1/5",
     usageDaysPerYear: 73,
     totalShares: 5,
@@ -327,7 +327,7 @@ export const mockOwnershipOpportunities: (OwnershipOpportunity & { yacht: Yacht 
       available: true,
       downPaymentPercent: 25,
       termMonths: 60,
-      monthlyPayment: "2,337"
+      monthlyPayment: "3,313"
     },
     createdAt: new Date(),
     updatedAt: new Date(),
@@ -698,12 +698,12 @@ export const yachtModalityConfigs: YachtModalityConfig[] = [
     yachtName: "De Antonio D42",
     image: "https://static.wixstatic.com/media/0fb4c8_008f1545c8764f8789a2b7415ca9dde7~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D42.jpg",
     location: "El Gouna, Egypt",
-    purchasePrice: 513000,
+    purchasePrice: 650000,
     modalities: {
       OWN: {
         available: true,
-        financing: { monthlyFrom: 6840, downPayment: 128250 },
-        insurance: { annualFrom: 10260 }
+        financing: { monthlyFrom: 8667, downPayment: 162500 },
+        insurance: { annualFrom: 13000 }
       },
       EARN: {
         available: true,
@@ -715,14 +715,14 @@ export const yachtModalityConfigs: YachtModalityConfig[] = [
       CO_OWN: {
         available: true,
         shareOptions: [
-          { fraction: "1/2", price: 256500, usageDays: 182, monthlyFinancing: 3420 },
-          { fraction: "1/4", price: 128250, usageDays: 91, monthlyFinancing: 1710 },
-          { fraction: "1/5", price: 102600, usageDays: 73, monthlyFinancing: 1368 }
+          { fraction: "1/2", price: 325000, usageDays: 182, monthlyFinancing: 4333 },
+          { fraction: "1/4", price: 162500, usageDays: 91, monthlyFinancing: 2167 },
+          { fraction: "1/5", price: 130000, usageDays: 73, monthlyFinancing: 1733 }
         ]
       },
       INVEST: {
         available: true,
-        minTicket: 125000,
+        minTicket: 130000,
         projectedYield: 12.8,
         riskRating: "low",
         investorType: "multi",
@@ -735,12 +735,12 @@ export const yachtModalityConfigs: YachtModalityConfig[] = [
     yachtName: "De Antonio D50",
     image: "https://static.wixstatic.com/media/0fb4c8_60988eb5cf834fcb876c1d06bd8af594~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D50.jpg",
     location: "El Gouna, Egypt",
-    purchasePrice: 670500,
+    purchasePrice: 950000,
     modalities: {
       OWN: {
         available: true,
-        financing: { monthlyFrom: 8940, downPayment: 167625 },
-        insurance: { annualFrom: 13410 }
+        financing: { monthlyFrom: 12667, downPayment: 237500 },
+        insurance: { annualFrom: 19000 }
       },
       EARN: {
         available: true,
@@ -752,14 +752,14 @@ export const yachtModalityConfigs: YachtModalityConfig[] = [
       CO_OWN: {
         available: true,
         shareOptions: [
-          { fraction: "1/2", price: 335250, usageDays: 182, monthlyFinancing: 4470 },
-          { fraction: "1/4", price: 167625, usageDays: 91, monthlyFinancing: 2235 },
-          { fraction: "1/5", price: 134100, usageDays: 73, monthlyFinancing: 1788 }
+          { fraction: "1/2", price: 475000, usageDays: 182, monthlyFinancing: 6333 },
+          { fraction: "1/4", price: 237500, usageDays: 91, monthlyFinancing: 3167 },
+          { fraction: "1/5", price: 190000, usageDays: 73, monthlyFinancing: 2533 }
         ]
       },
       INVEST: {
         available: true,
-        minTicket: 150000,
+        minTicket: 190000,
         projectedYield: 13.5,
         riskRating: "low",
         investorType: "single",
