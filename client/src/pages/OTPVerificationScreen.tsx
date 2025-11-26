@@ -102,7 +102,7 @@ export default function OTPVerificationScreen() {
         <div className="space-y-8">
           {/* De Antonio Logo */}
           <div className="flex justify-center">
-            <div className="w-[58px] h-[38px]">
+            <div className="w-[87px] h-[57px]">
               <img src={deAntonioLogo} alt="De Antonio Logo" className="w-full h-full object-contain" />
             </div>
           </div>
