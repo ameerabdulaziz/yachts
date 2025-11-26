@@ -27,7 +27,7 @@ export default function OwnershipOpportunitiesScreen() {
         <header className="relative bg-transparent px-4 py-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center">
-              <div className="w-30 h-[60px] flex items-start justify-start">
+              <div className="w-[60px] h-[30px] flex items-start justify-start">
                 <img src={deAntonioLogo} alt="De Antonio Logo" className="w-full h-full object-contain object-left" />
               </div>
             </div>

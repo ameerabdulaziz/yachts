@@ -129,7 +129,7 @@ export default function ShareMarketplaceScreen() {
                 <ArrowLeft className="w-5 h-5 text-gray-600" />
               </Button>
             </Link>
-            <div className="w-[77px] h-[38px] bg-white rounded-lg flex items-center justify-start p-1">
+            <div className="w-[38px] h-[19px] bg-white rounded-lg flex items-center justify-start p-1">
               <img src={deAntonioLogo} alt="De Antonio Logo" className="w-full h-full object-contain object-left" />
             </div>
           </div>
