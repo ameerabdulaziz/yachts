@@ -7,6 +7,7 @@ import { Switch } from "@/components/ui/switch";
 import { Progress } from "@/components/ui/progress";
 import { ArrowLeft, ArrowRight, Anchor, TrendingUp, Users, PieChart, MapPin, Calendar, Wallet, CheckCircle2 } from "lucide-react";
 import { getRecommendedModality, modalityDefinitions } from "@/lib/mockData";
+import { setOnboardingComplete, setSelectedModality, ModalityType } from "@/lib/userPreferences";
 import deAntonioLogo from "@assets/DE-ANTONIO-YACHTS_LOGO-removebg-preview_1754331163197.png";
 
 type OnboardingStep = "welcome" | "goals" | "budget" | "usage" | "geography" | "result";
@@ -58,11 +59,17 @@ export default function OnboardingScreen() {
   };
 
   const handleComplete = () => {
-    localStorage.setItem("userOnboardingCompleted", "true");
-    localStorage.setItem("userSegment", JSON.stringify({
-      primary: recommendation?.primary,
-      answers
-    }));
+    // Save onboarding completion with answers
+    setOnboardingComplete({
+      goals: answers.goals,
+      budgetMax: answers.budgetMax,
+      usageVsYield: answers.usageVsYield,
+      geoPreference: answers.geoPreference
+    });
+    // Also save the recommended modality
+    if (recommendation?.primary) {
+      setSelectedModality(recommendation.primary as ModalityType);
+    }
     setLocation("/access-models");
   };
 

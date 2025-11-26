@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import BottomNavigation from "@/components/BottomNavigation";
 import { Anchor, TrendingUp, Users, PieChart, ArrowRight, CreditCard, Shield, ChevronRight } from "lucide-react";
 import { modalityDefinitions } from "@/lib/mockData";
+import { setSelectedModality, ModalityType } from "@/lib/userPreferences";
 import seaBackground from "@assets/image_1754575606863.png";
 import deAntonioLogo from "@assets/DE-ANTONIO-YACHTS_LOGO-removebg-preview_1754331163197.png";
 
@@ -40,6 +41,12 @@ const getModalityRoute = (type: string) => {
 
 export default function AccessModelsScreen() {
   const [, setLocation] = useLocation();
+
+  const handleModalitySelect = (modalityType: string) => {
+    // Save the user's modality choice
+    setSelectedModality(modalityType as ModalityType);
+    setLocation(getModalityRoute(modalityType));
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 pb-24">
@@ -100,7 +107,7 @@ export default function AccessModelsScreen() {
             <Card 
               key={modality.id}
               className="overflow-hidden cursor-pointer hover:shadow-lg transition-all border-0 shadow-md"
-              onClick={() => setLocation(getModalityRoute(modality.type))}
+              onClick={() => handleModalitySelect(modality.type)}
               data-testid={`card-modality-${modality.type.toLowerCase()}`}
             >
               <CardContent className="p-0">
