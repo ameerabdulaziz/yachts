@@ -10,7 +10,7 @@ import { ArrowLeft, Search, Filter, TrendingUp, TrendingDown, Calendar, MapPin, 
 import seaBackground from "@assets/image_1754575606863.png";
 import deAntonioLogo from "@assets/DE-ANTONIO-YACHTS_LOGO-removebg-preview_1754331163197.png";
 
-// De Antonio Yachts share listings - D29, D33, D36, D42, D50, D60 range
+// De Antonio Yachts share listings - D29, D32, D36, D42, D50, D60 range
 const mockShareListings = [
   {
     id: "listing-1",

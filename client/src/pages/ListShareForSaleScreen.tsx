@@ -34,12 +34,12 @@ export default function ListShareForSaleScreen() {
     agreeToTerms: false
   });
 
-  // De Antonio yacht shares - D29, D33, D36, D42, D50, D60 range
+  // De Antonio yacht shares - D29, D32, D36, D42, D50, D60 range
   const userShares = [
     {
       id: "share-1",
       yacht: { 
-        name: "De Antonio D33", 
+        name: "De Antonio D32", 
         location: "El Gouna, Egypt",
         image: "https://static.wixstatic.com/media/0fb4c8_6cbbd012fc0645009bc4a91a412b293a~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D32.jpg"
       },
@@ -66,8 +66,8 @@ export default function ListShareForSaleScreen() {
         image: "https://static.wixstatic.com/media/5c3629_a8b1aa6ff9244bddaf7383aa45b4afc1~mv2.jpg/v1/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/5c3629_a8b1aa6ff9244bddaf7383aa45b4afc1~mv2.jpg"
       },
       shareFraction: "1/5",
-      originalPrice: 253950,
-      currentValue: 268000
+      originalPrice: 400000,
+      currentValue: 420000
     }
   ];
 

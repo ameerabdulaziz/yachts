@@ -13,7 +13,7 @@ Preferred communication style: Simple, everyday language.
 - **IMPLEMENTED**: OnboardingScreen with user needs assessment flow (goals, budget, usage vs yield preferences)
 - **BUILT**: AccessModelsScreen displaying all four modality cards with entry points
 - **DESIGNED**: ModalityDetailScreen with unified tabs for Yachts, Benefits, and Details
-- **UPDATED**: mockData.ts with modality configurations for all six De Antonio yachts (D29, D33, D36, D42, D50, D60)
+- **UPDATED**: mockData.ts with modality configurations for all six De Antonio yachts (D29, D32, D36, D42, D50, D60)
 - **INTEGRATED**: Entry point from OwnershipHomeScreen with gradient CTA card
 - **ROUTES**: /onboarding, /access-models, /modality/:type (own, earn, co-own, invest)
 - **MODALITIES**:

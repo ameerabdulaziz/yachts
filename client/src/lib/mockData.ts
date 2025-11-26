@@ -30,8 +30,8 @@ export const mockYachts: (Yacht & { owner: { name: string; avatar: string; verif
   },
   {
     id: "yacht-2",
-    name: "De Antonio D33",
-    description: "The D33 is a compact design boat with V-shaped hull and all the comforts. Features a spacious walk-around deck, galley, 2 cabins and separate bathroom with 50 knots top speed.",
+    name: "De Antonio D32",
+    description: "The D32 is a compact design boat with V-shaped hull and all the comforts. Features a spacious walk-around deck, galley, 2 cabins and separate bathroom with 50 knots top speed.",
     location: "El Gouna, Egypt",
     pricePerDay: "€2,060",
     capacity: 10,
@@ -204,7 +204,7 @@ export const mockOwnershipOpportunities: (OwnershipOpportunity & { yacht: Yacht 
     }
   },
   {
-    id: "share-deantonio-d33",
+    id: "share-deantonio-d32",
     yachtId: "yacht-2",
     sharePrice: "€61,800",
     shareFraction: "1/5",
@@ -222,8 +222,8 @@ export const mockOwnershipOpportunities: (OwnershipOpportunity & { yacht: Yacht 
     updatedAt: new Date(),
     yacht: {
       id: "yacht-2",
-      name: "De Antonio D33",
-      description: "The D33 is a compact design boat with V-shaped hull and all the comforts. Features a spacious walk-around deck, galley, 2 cabins and separate bathroom.",
+      name: "De Antonio D32",
+      description: "The D32 is a compact design boat with V-shaped hull and all the comforts. Features a spacious walk-around deck, galley, 2 cabins and separate bathroom.",
       location: "El Gouna, Egypt",
       pricePerDay: "2060",
       capacity: 10,
@@ -354,7 +354,7 @@ export const mockOwnershipOpportunities: (OwnershipOpportunity & { yacht: Yacht 
   {
     id: "share-deantonio-d60",
     yachtId: "yacht-6",
-    sharePrice: "€253,950",
+    sharePrice: "€400,000",
     shareFraction: "1/5",
     usageDaysPerYear: 73,
     totalShares: 5,
@@ -364,7 +364,7 @@ export const mockOwnershipOpportunities: (OwnershipOpportunity & { yacht: Yacht 
       available: true,
       downPaymentPercent: 25,
       termMonths: 60,
-      monthlyPayment: "4,426"
+      monthlyPayment: "6,970"
     },
     createdAt: new Date(),
     updatedAt: new Date(),
@@ -621,7 +621,7 @@ export const yachtModalityConfigs: YachtModalityConfig[] = [
   },
   {
     yachtId: "yacht-2",
-    yachtName: "De Antonio D33",
+    yachtName: "De Antonio D32",
     image: "https://static.wixstatic.com/media/0fb4c8_6cbbd012fc0645009bc4a91a412b293a~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D32.jpg",
     location: "El Gouna, Egypt",
     purchasePrice: 309000,
@@ -772,31 +772,31 @@ export const yachtModalityConfigs: YachtModalityConfig[] = [
     yachtName: "De Antonio D60",
     image: "https://static.wixstatic.com/media/5c3629_a8b1aa6ff9244bddaf7383aa45b4afc1~mv2.jpg/v1/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/5c3629_a8b1aa6ff9244bddaf7383aa45b4afc1~mv2.jpg",
     location: "El Gouna, Egypt",
-    purchasePrice: 1269750,
+    purchasePrice: 2000000,
     modalities: {
       OWN: {
         available: true,
-        financing: { monthlyFrom: 16930, downPayment: 317438 },
-        insurance: { annualFrom: 25395 }
+        financing: { monthlyFrom: 26667, downPayment: 500000 },
+        insurance: { annualFrom: 40000 }
       },
       EARN: {
         available: true,
         projectedYield: { min: 11, base: 14, max: 18 },
-        netAnnualCost: 35000,
+        netAnnualCost: 45000,
         charterDaysRequired: 70,
         personalDaysIncluded: 120
       },
       CO_OWN: {
         available: true,
         shareOptions: [
-          { fraction: "1/2", price: 634875, usageDays: 182, monthlyFinancing: 8465 },
-          { fraction: "1/4", price: 317438, usageDays: 91, monthlyFinancing: 4233 },
-          { fraction: "1/5", price: 253950, usageDays: 73, monthlyFinancing: 3386 }
+          { fraction: "1/2", price: 1000000, usageDays: 182, monthlyFinancing: 13333 },
+          { fraction: "1/4", price: 500000, usageDays: 91, monthlyFinancing: 6667 },
+          { fraction: "1/5", price: 400000, usageDays: 73, monthlyFinancing: 5333 }
         ]
       },
       INVEST: {
         available: true,
-        minTicket: 250000,
+        minTicket: 400000,
         projectedYield: 15.2,
         riskRating: "low",
         investorType: "single",

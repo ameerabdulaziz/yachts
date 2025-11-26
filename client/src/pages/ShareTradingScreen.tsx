@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import BottomNavigation from "@/components/BottomNavigation";
 
-// De Antonio Yachts share listings - D29, D33, D36, D42, D50, D60 range
+// De Antonio Yachts share listings - D29, D32, D36, D42, D50, D60 range
 const mockShareListings = [
   {
     id: "listing-1",
@@ -30,7 +30,7 @@ const mockShareListings = [
   },
   {
     id: "listing-2",
-    boatName: "De Antonio D33",
+    boatName: "De Antonio D32",
     boatImage: "https://static.wixstatic.com/media/0fb4c8_6cbbd012fc0645009bc4a91a412b293a~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D32.jpg",
     length: "9.9m",
     passengers: 10,
@@ -58,7 +58,7 @@ const mockShareListings = [
     cabins: 3,
     power: "2400HP",
     shareFraction: "1/5",
-    sharePrice: "€253,950",
+    sharePrice: "€400,000",
     location: "El Gouna, Egypt",
     availableShares: 1,
     usageDaysPerYear: 73,

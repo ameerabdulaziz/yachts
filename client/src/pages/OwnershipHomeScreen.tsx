@@ -28,11 +28,11 @@ export default function OwnershipHomeScreen() {
 
   const yachtModels = [
     { id: "D29", name: "D29", length: "29ft", passengers: 10, price: "€214K", sharesFrom: "€43K", image: "https://static.wixstatic.com/media/0fb4c8_b9744cfa841b4c4388ad78ac9b49bbe7~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D29.jpg" },
-    { id: "D33", name: "D33", length: "33ft", passengers: 10, price: "€309K", sharesFrom: "€62K", image: "https://static.wixstatic.com/media/0fb4c8_6cbbd012fc0645009bc4a91a412b293a~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D32.jpg" },
+    { id: "D32", name: "D32", length: "32ft", passengers: 10, price: "€309K", sharesFrom: "€62K", image: "https://static.wixstatic.com/media/0fb4c8_6cbbd012fc0645009bc4a91a412b293a~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D32.jpg" },
     { id: "D36", name: "D36", length: "36ft", passengers: 12, price: "€426K", sharesFrom: "€85K", image: "https://static.wixstatic.com/media/0fb4c8_fbbb6a2569c747d48881f7ac065b947a~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D36.jpg" },
     { id: "D42", name: "D42", length: "42ft", passengers: 12, price: "€513K", sharesFrom: "€103K", image: "https://static.wixstatic.com/media/0fb4c8_008f1545c8764f8789a2b7415ca9dde7~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D42.jpg" },
     { id: "D50", name: "D50", length: "50ft", passengers: 12, price: "€671K", sharesFrom: "€134K", image: "https://static.wixstatic.com/media/0fb4c8_60988eb5cf834fcb876c1d06bd8af594~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D50.jpg" },
-    { id: "D60", name: "D60", length: "60ft", passengers: 12, price: "€1,270K", sharesFrom: "€254K", image: "https://static.wixstatic.com/media/5c3629_a8b1aa6ff9244bddaf7383aa45b4afc1~mv2.jpg/v1/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/5c3629_a8b1aa6ff9244bddaf7383aa45b4afc1~mv2.jpg" }
+    { id: "D60", name: "D60", length: "60ft", passengers: 12, price: "€2,000K", sharesFrom: "€400K", image: "https://static.wixstatic.com/media/5c3629_a8b1aa6ff9244bddaf7383aa45b4afc1~mv2.jpg/v1/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/5c3629_a8b1aa6ff9244bddaf7383aa45b4afc1~mv2.jpg" }
   ];
 
   const selectedYacht = yachtModels.find(y => y.id === selectedModel) || yachtModels[3];
@@ -259,8 +259,8 @@ export default function OwnershipHomeScreen() {
         <div className="space-y-4">
           {[
             { 
-              id: "share-deantonio-d33", 
-              model: "D33", 
+              id: "share-deantonio-d32", 
+              model: "D32", 
               location: "El Gouna", 
               availableShares: 3, 
               totalShares: 5, 
@@ -306,8 +306,8 @@ export default function OwnershipHomeScreen() {
               location: "El Gouna", 
               availableShares: 1, 
               totalShares: 5, 
-              sharePrice: "€253,950", 
-              monthlyPayment: "€4,426",
+              sharePrice: "€400,000", 
+              monthlyPayment: "€6,970",
               usageDaysPerYear: 73, 
               capacity: 12, 
               expectedROI: "3-5%",
