@@ -50,6 +50,7 @@ import ShareTradingScreen from "@/pages/ShareTradingScreen";
 import OnboardingScreen from "@/pages/OnboardingScreen";
 import AccessModelsScreen from "@/pages/AccessModelsScreen";
 import ModalityDetailScreen from "@/pages/ModalityDetailScreen";
+import InvestScreen from "@/pages/InvestScreen";
 import RedirectToOwnership from "@/components/RedirectToOwnership";
 import ScrollToTopOnRoute from "@/components/ScrollToTopOnRoute";
 
@@ -137,6 +138,7 @@ function Router() {
         <Route path="/onboarding" component={OnboardingScreen} />
         <Route path="/access-models" component={AccessModelsScreen} />
         <Route path="/modality/:type" component={ModalityDetailScreen} />
+        <Route path="/invest" component={InvestScreen} />
         <Route component={NotFound} />
       </Switch>
     </>
