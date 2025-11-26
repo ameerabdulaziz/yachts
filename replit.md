@@ -21,6 +21,11 @@ Preferred communication style: Simple, everyday language.
   - EARN: Charter-based ownership with 6-18% projected yields
   - CO-OWN: Fractional ownership with 1/5 share structure and 73 days/year usage
   - INVEST: Pure investment focus with 8-15% projected yields
+- **FIRST-RUN UX**: New users are directed to /access-models as landing page to optimize experience
+  - localStorage-backed user preferences via userPreferences.ts
+  - isFirstTimeUser() detection for personalized routing
+  - Modality selection persisted for tailored content
+  - Returning users directed to /home
 - **STATUS**: Production-ready modality system with complete navigation flow
 
 ## Complete Flutter App with 2024 Riverpod Patterns (September 2, 2025)
