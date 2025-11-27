@@ -336,7 +336,7 @@ export default function InvestScreen() {
         {selectedTier ? (
           renderInvestmentFlow()
         ) : (
-          <Tabs defaultValue="options" className="w-full">
+          <Tabs defaultValue="portfolio" className="w-full">
             <TabsList className="grid w-full grid-cols-2 mb-4">
               <TabsTrigger value="options" data-testid="tab-options">Investment Options</TabsTrigger>
               <TabsTrigger value="portfolio" data-testid="tab-portfolio">Available Yachts</TabsTrigger>
