@@ -9,6 +9,7 @@ import { ArrowLeft, ArrowRight, Anchor, TrendingUp, Users, PieChart, MapPin, Cal
 import { getRecommendedModality, modalityDefinitions } from "@/lib/mockData";
 import { setOnboardingComplete, setSelectedModality, ModalityType } from "@/lib/userPreferences";
 import deAntonioLogo from "@assets/DE-ANTONIO-YACHTS_LOGO-removebg-preview_1754331163197.png";
+import seaBackground from "@assets/image_1754575606863.png";
 
 type OnboardingStep = "welcome" | "goals" | "budget" | "usage" | "geography" | "result";
 
@@ -88,7 +89,18 @@ export default function OnboardingScreen() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-cyan-50">
+    <div className="min-h-screen relative">
+      <div className="fixed inset-0 z-0">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `url(${seaBackground})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          opacity: 0.9
+        }} />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/60 via-blue-100/40 to-blue-200/50" />
+      </div>
+      
+      <div className="relative z-10">
       {step !== "welcome" && step !== "result" && (
         <div className="sticky top-0 bg-white/80 backdrop-blur-sm border-b border-gray-100 px-4 py-3 z-10">
           <div className="flex items-center justify-between mb-2">
@@ -450,6 +462,7 @@ export default function OnboardingScreen() {
             </button>
           </div>
         )}
+      </div>
       </div>
     </div>
   );

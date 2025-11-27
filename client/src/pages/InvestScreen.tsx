@@ -99,12 +99,23 @@ const formatCurrency = (amount: number) => {
   return new Intl.NumberFormat('en-EU', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(amount);
 };
 
+type SortOption = "yield" | "ticket";
+
 export default function InvestScreen() {
   const [, setLocation] = useLocation();
   const [selectedTier, setSelectedTier] = useState<InvestmentTier | null>(null);
   const [investmentAmount, setInvestmentAmount] = useState<number>(100000);
+  const [sortBy, setSortBy] = useState<SortOption>("yield");
 
-  const investYachts = yachtModalityConfigs.filter(y => y.modalities.INVEST?.available);
+  const investYachts = yachtModalityConfigs
+    .filter(y => y.modalities.INVEST?.available)
+    .sort((a, b) => {
+      if (sortBy === "yield") {
+        return (b.modalities.INVEST?.projectedYield || 0) - (a.modalities.INVEST?.projectedYield || 0);
+      } else {
+        return (a.modalities.INVEST?.minTicket || 0) - (b.modalities.INVEST?.minTicket || 0);
+      }
+    });
   
   const totalPortfolioValue = investYachts.reduce((sum, y) => sum + y.purchasePrice, 0);
   const avgYield = investYachts.length > 0 
@@ -277,14 +288,14 @@ export default function InvestScreen() {
   return (
     <div className="min-h-screen bg-gray-50 pb-24">
       <div className="relative">
-        <div className="absolute inset-0 bg-gradient-ocean" style={{ height: '240px' }}>
+        <div className="absolute inset-0 bg-gradient-ocean" style={{ height: '310px' }}>
           <div className="absolute inset-0" style={{
             backgroundImage: `url(${seaBackground})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             opacity: 0.9
           }} />
-          <div className="absolute inset-0 bg-gradient-to-b from-amber-900/30 via-amber-800/20 to-amber-700/30" />
+          <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-blue-200/20 to-blue-500/30" />
         </div>
 
         <header className="relative bg-transparent px-4 py-3">
@@ -426,7 +437,36 @@ export default function InvestScreen() {
             </TabsContent>
 
             <TabsContent value="portfolio" className="space-y-4">
-              <h2 className="text-lg font-semibold text-gray-900">Available for Investment</h2>
+              <div className="flex items-center justify-between mb-2">
+                <h2 className="text-lg font-semibold text-gray-900">Available for Investment</h2>
+                <div className="flex items-center gap-2">
+                  <span className="text-xs text-gray-500">Sort:</span>
+                  <div className="flex rounded-lg border border-gray-200 overflow-hidden">
+                    <button
+                      onClick={() => setSortBy("yield")}
+                      className={`px-3 py-1.5 text-xs font-medium transition-colors ${
+                        sortBy === "yield" 
+                          ? "bg-green-600 text-white" 
+                          : "bg-white text-gray-600 hover:bg-gray-50"
+                      }`}
+                      data-testid="button-sort-yield"
+                    >
+                      Highest Yield
+                    </button>
+                    <button
+                      onClick={() => setSortBy("ticket")}
+                      className={`px-3 py-1.5 text-xs font-medium transition-colors ${
+                        sortBy === "ticket" 
+                          ? "bg-green-600 text-white" 
+                          : "bg-white text-gray-600 hover:bg-gray-50"
+                      }`}
+                      data-testid="button-sort-ticket"
+                    >
+                      Min. Ticket
+                    </button>
+                  </div>
+                </div>
+              </div>
               
               {investYachts.map((yacht) => (
                 <Card 
@@ -442,7 +482,7 @@ export default function InvestScreen() {
                       className="w-full h-full object-cover"
                     />
                     <div className="absolute top-2 right-2">
-                      <Badge className="bg-amber-500 text-white">
+                      <Badge className="bg-green-600 text-white">
                         {yacht.modalities.INVEST?.projectedYield}% Yield
                       </Badge>
                     </div>
@@ -452,20 +492,10 @@ export default function InvestScreen() {
                     </div>
                   </div>
                   <CardContent className="p-4">
-                    <div className="grid grid-cols-3 gap-3 text-center">
+                    <div className="grid grid-cols-2 gap-3 text-center">
                       <div>
                         <p className="text-xs text-gray-500">Min. Investment</p>
                         <p className="font-semibold text-sm">{formatCurrency(yacht.modalities.INVEST?.minTicket || 0)}</p>
-                      </div>
-                      <div>
-                        <p className="text-xs text-gray-500">Risk Level</p>
-                        <Badge variant="secondary" className={`text-xs capitalize ${
-                          yacht.modalities.INVEST?.riskRating === "low" ? "bg-green-100 text-green-700" :
-                          yacht.modalities.INVEST?.riskRating === "medium" ? "bg-yellow-100 text-yellow-700" :
-                          "bg-red-100 text-red-700"
-                        }`}>
-                          {yacht.modalities.INVEST?.riskRating}
-                        </Badge>
                       </div>
                       <div>
                         <p className="text-xs text-gray-500">Purchase Price</p>
