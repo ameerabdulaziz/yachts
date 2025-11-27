@@ -336,8 +336,14 @@ export default function InvestScreen() {
         {selectedTier ? (
           renderInvestmentFlow()
         ) : (
-          <div className="space-y-6">
-            <div className="grid grid-cols-3 gap-3">
+          <Tabs defaultValue="options" className="w-full">
+            <TabsList className="grid w-full grid-cols-2 mb-4">
+              <TabsTrigger value="options" data-testid="tab-options">Investment Options</TabsTrigger>
+              <TabsTrigger value="portfolio" data-testid="tab-portfolio">Available Yachts</TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="options" className="space-y-4">
+              <div className="grid grid-cols-3 gap-3 mb-6">
                 <Card className="border-0 shadow-sm bg-gradient-to-br from-emerald-50 to-emerald-100">
                   <CardContent className="p-3 text-center">
                     <p className="text-xs text-emerald-700 mb-1">Fleet Value</p>
@@ -428,9 +434,11 @@ export default function InvestScreen() {
                   </div>
                 </CardContent>
               </Card>
+            </TabsContent>
 
-              <div className="flex items-center justify-between mt-8 mb-4">
-                <h2 className="text-lg font-semibold text-gray-900">Available Yachts</h2>
+            <TabsContent value="portfolio" className="space-y-4">
+              <div className="flex items-center justify-between mb-2">
+                <h2 className="text-lg font-semibold text-gray-900">Available for Investment</h2>
                 <div className="flex items-center gap-2">
                   <span className="text-xs text-gray-500">Sort:</span>
                   <div className="flex rounded-lg border border-gray-200 overflow-hidden">
@@ -504,7 +512,8 @@ export default function InvestScreen() {
                   </CardContent>
                 </Card>
               ))}
-          </div>
+            </TabsContent>
+          </Tabs>
         )}
       </div>
 
