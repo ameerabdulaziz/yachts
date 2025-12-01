@@ -409,25 +409,33 @@ function UsersSection({ currentUser }: { currentUser: AdminUser }) {
         )}
       </div>
 
-      <div className="space-y-3">
-        {users.map((user) => (
-          <Card key={user.id} className="bg-white" data-testid={`user-row-${user.id}`}>
-            <CardContent className="p-4">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                <div>
-                  <p className="font-medium text-gray-900">{user.firstName} {user.lastName}</p>
-                  <p className="text-sm text-gray-500">@{user.username} • {user.email}</p>
-                </div>
-                <div className="flex items-center gap-2">
+      <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+        <table className="w-full">
+          <thead className="bg-gray-50 border-b border-gray-200">
+            <tr>
+              <th className="text-left p-4 font-medium text-gray-600">Name</th>
+              <th className="text-left p-4 font-medium text-gray-600 hidden sm:table-cell">Username</th>
+              <th className="text-left p-4 font-medium text-gray-600 hidden md:table-cell">Email</th>
+              <th className="text-left p-4 font-medium text-gray-600">Role</th>
+              <th className="text-left p-4 font-medium text-gray-600">Status</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-gray-100">
+            {users.map((user) => (
+              <tr key={user.id} className="hover:bg-gray-50" data-testid={`user-row-${user.id}`}>
+                <td className="p-4 font-medium text-gray-900">{user.firstName} {user.lastName}</td>
+                <td className="p-4 text-gray-500 hidden sm:table-cell">@{user.username}</td>
+                <td className="p-4 text-gray-500 hidden md:table-cell">{user.email}</td>
+                <td className="p-4"><Badge variant="outline">{getRoleLabel(user.role)}</Badge></td>
+                <td className="p-4">
                   <Badge className={user.isActive ? "bg-green-100 text-green-700" : "bg-gray-100 text-gray-600"}>
                     {user.isActive ? "Active" : "Inactive"}
                   </Badge>
-                  <Badge variant="outline">{getRoleLabel(user.role)}</Badge>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );
@@ -555,32 +563,46 @@ function DealersSection() {
       </div>
 
       {dealers.length === 0 ? (
-        <Card className="bg-white">
-          <CardContent className="py-12 text-center text-gray-500">
-            <Building2 className="w-12 h-12 mx-auto mb-4 text-gray-300" />
-            <p>No dealers yet. Click "Add Dealer" to create one.</p>
-          </CardContent>
-        </Card>
+        <div className="bg-white rounded-lg border border-gray-200 p-12 text-center text-gray-500">
+          <Building2 className="w-12 h-12 mx-auto mb-4 text-gray-300" />
+          <p>No dealers yet. Click "Add Dealer" to create one.</p>
+        </div>
       ) : (
-        <div className="grid lg:grid-cols-2 gap-4">
-          {dealers.map((dealer) => (
-            <Card key={dealer.id} className="bg-white" data-testid={`dealer-card-${dealer.id}`}>
-              <CardContent className="p-4">
-                <div className="flex items-start justify-between mb-2">
-                  <h3 className="font-semibold text-gray-900">{dealer.name}</h3>
-                  <Badge className={dealer.isActive ? "bg-green-100 text-green-700" : "bg-gray-100 text-gray-600"}>
-                    {dealer.isActive ? "Active" : "Inactive"}
-                  </Badge>
-                </div>
-                <div className="text-sm text-gray-600 space-y-1">
-                  <p className="flex items-center gap-1"><MapPin className="w-3 h-3" />{dealer.city}, {dealer.country} • {dealer.region}</p>
-                  <p>{dealer.contactName}</p>
-                  <p>{dealer.email}</p>
-                  <p>{dealer.phone}</p>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
+        <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+          <table className="w-full">
+            <thead className="bg-gray-50 border-b border-gray-200">
+              <tr>
+                <th className="text-left p-4 font-medium text-gray-600">Dealer</th>
+                <th className="text-left p-4 font-medium text-gray-600 hidden sm:table-cell">Contact</th>
+                <th className="text-left p-4 font-medium text-gray-600 hidden md:table-cell">Location</th>
+                <th className="text-left p-4 font-medium text-gray-600 hidden lg:table-cell">Region</th>
+                <th className="text-left p-4 font-medium text-gray-600">Status</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-gray-100">
+              {dealers.map((dealer) => (
+                <tr key={dealer.id} className="hover:bg-gray-50" data-testid={`dealer-row-${dealer.id}`}>
+                  <td className="p-4">
+                    <p className="font-semibold text-gray-900">{dealer.name}</p>
+                    <p className="text-sm text-gray-500 sm:hidden">{dealer.contactName}</p>
+                  </td>
+                  <td className="p-4 hidden sm:table-cell">
+                    <p className="text-gray-900">{dealer.contactName}</p>
+                    <p className="text-sm text-gray-500">{dealer.email}</p>
+                  </td>
+                  <td className="p-4 hidden md:table-cell">
+                    <p className="text-gray-700">{dealer.city}, {dealer.country}</p>
+                  </td>
+                  <td className="p-4 hidden lg:table-cell text-gray-600">{dealer.region}</td>
+                  <td className="p-4">
+                    <Badge className={dealer.isActive ? "bg-green-100 text-green-700" : "bg-gray-100 text-gray-600"}>
+                      {dealer.isActive ? "Active" : "Inactive"}
+                    </Badge>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       )}
     </div>
@@ -728,26 +750,48 @@ function FleetSection() {
         </Dialog>
       </div>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {models.map((model) => (
-          <Card key={model.id} className="bg-white overflow-hidden" data-testid={`fleet-model-${model.id}`}>
-            {model.images?.[0] ? (
-              <img src={model.images[0]} alt={model.displayName} className="w-full h-32 lg:h-40 object-cover" />
-            ) : (
-              <div className="w-full h-32 lg:h-40 bg-gray-100 flex items-center justify-center">
-                <Ship className="w-10 h-10 text-gray-300" />
-              </div>
-            )}
-            <CardContent className="p-4">
-              <h3 className="font-semibold text-gray-900">{model.displayName}</h3>
-              <div className="text-sm text-gray-500 mt-1 space-y-0.5">
-                <p>{model.lengthMeters}m × {model.beamMeters}m • {model.maxCapacity} pax</p>
-                <p>{model.cabins} cabin{model.cabins !== 1 ? "s" : ""} • {model.engines}</p>
-              </div>
-              <p className="text-lg font-bold text-blue-600 mt-2">€{Number(model.basePrice).toLocaleString()}</p>
-            </CardContent>
-          </Card>
-        ))}
+      <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+        <table className="w-full">
+          <thead className="bg-gray-50 border-b border-gray-200">
+            <tr>
+              <th className="text-left p-4 font-medium text-gray-600 w-24">Image</th>
+              <th className="text-left p-4 font-medium text-gray-600">Model</th>
+              <th className="text-left p-4 font-medium text-gray-600 hidden md:table-cell">Specs</th>
+              <th className="text-left p-4 font-medium text-gray-600 hidden lg:table-cell">Engines</th>
+              <th className="text-right p-4 font-medium text-gray-600">Price</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-gray-100">
+            {models.map((model) => (
+              <tr key={model.id} className="hover:bg-gray-50" data-testid={`fleet-model-${model.id}`}>
+                <td className="p-4">
+                  {model.images?.[0] ? (
+                    <img src={model.images[0]} alt={model.displayName} className="w-20 h-14 object-cover rounded" />
+                  ) : (
+                    <div className="w-20 h-14 bg-gray-100 rounded flex items-center justify-center">
+                      <Ship className="w-6 h-6 text-gray-300" />
+                    </div>
+                  )}
+                </td>
+                <td className="p-4">
+                  <p className="font-semibold text-gray-900">{model.displayName}</p>
+                  <p className="text-sm text-gray-500">{model.modelName}</p>
+                </td>
+                <td className="p-4 hidden md:table-cell">
+                  <p className="text-sm text-gray-700">{model.lengthMeters}m × {model.beamMeters}m</p>
+                  <p className="text-sm text-gray-500">{model.maxCapacity} pax • {model.cabins} cabin{model.cabins !== 1 ? "s" : ""}</p>
+                </td>
+                <td className="p-4 hidden lg:table-cell">
+                  <p className="text-sm text-gray-700">{model.engines}</p>
+                  <p className="text-sm text-gray-500">{model.maxSpeed}</p>
+                </td>
+                <td className="p-4 text-right">
+                  <p className="text-lg font-bold text-blue-600">€{Number(model.basePrice).toLocaleString()}</p>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );
