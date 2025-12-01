@@ -9,6 +9,7 @@ import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import { Strategy as FacebookStrategy } from "passport-facebook";
 import session from "express-session";
 import { insertUserSchema, insertYachtSchema, insertBookingSchema, insertOwnershipOpportunitySchema, insertSharePurchaseSchema, insertShareListingSchema, insertMessageSchema, insertFuelTransactionSchema } from "@shared/schema";
+import { registerAdminRoutes } from "./adminRoutes";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Configure session middleware
@@ -400,6 +401,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get('/download', (_req, res) => {
     res.sendFile(path.resolve('download-page.html'));
   });
+
+  // Register admin routes
+  await registerAdminRoutes(app);
 
   const httpServer = createServer(app);
   return httpServer;

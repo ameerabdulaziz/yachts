@@ -7,6 +7,12 @@ import {
   shareListings,
   messages,
   fuelTransactions,
+  adminUsers,
+  dealers,
+  fleetModels,
+  dealerBoats,
+  boatCalendar,
+  inquiries,
   type User,
   type InsertUser,
   type Yacht,
@@ -23,9 +29,21 @@ import {
   type InsertMessage,
   type FuelTransaction,
   type InsertFuelTransaction,
+  type AdminUser,
+  type InsertAdminUser,
+  type Dealer,
+  type InsertDealer,
+  type FleetModel,
+  type InsertFleetModel,
+  type DealerBoat,
+  type InsertDealerBoat,
+  type BoatCalendar,
+  type InsertBoatCalendar,
+  type Inquiry,
+  type InsertInquiry,
 } from "@shared/schema";
 import { db } from "./db";
-import { eq, desc } from "drizzle-orm";
+import { eq, desc, and, gte, lte } from "drizzle-orm";
 
 export interface IStorage {
   // User operations
@@ -66,6 +84,43 @@ export interface IStorage {
   // Fuel wallet operations
   createFuelTransaction(transaction: InsertFuelTransaction): Promise<FuelTransaction>;
   getUserFuelTransactions(userId: string): Promise<FuelTransaction[]>;
+
+  // Admin user operations
+  getAdminUserByUsername(username: string): Promise<AdminUser | undefined>;
+  getAdminUserById(id: string): Promise<AdminUser | undefined>;
+  getAllAdminUsers(): Promise<AdminUser[]>;
+  createAdminUser(user: InsertAdminUser): Promise<AdminUser>;
+  updateAdminUser(id: string, user: Partial<InsertAdminUser>): Promise<AdminUser>;
+
+  // Dealer operations
+  getAllDealers(): Promise<Dealer[]>;
+  getDealer(id: string): Promise<Dealer | undefined>;
+  createDealer(dealer: InsertDealer): Promise<Dealer>;
+  updateDealer(id: string, dealer: Partial<InsertDealer>): Promise<Dealer>;
+
+  // Fleet model operations
+  getAllFleetModels(): Promise<FleetModel[]>;
+  getFleetModel(id: string): Promise<FleetModel | undefined>;
+  createFleetModel(model: InsertFleetModel): Promise<FleetModel>;
+  updateFleetModel(id: string, model: Partial<InsertFleetModel>): Promise<FleetModel>;
+
+  // Dealer boat operations
+  getDealerBoats(dealerId: string): Promise<DealerBoat[]>;
+  getAllDealerBoats(): Promise<DealerBoat[]>;
+  getDealerBoat(id: string): Promise<DealerBoat | undefined>;
+  createDealerBoat(boat: InsertDealerBoat): Promise<DealerBoat>;
+  updateDealerBoat(id: string, boat: Partial<InsertDealerBoat>): Promise<DealerBoat>;
+
+  // Calendar operations
+  getBoatCalendar(boatId: string, startDate: Date, endDate: Date): Promise<BoatCalendar[]>;
+  upsertCalendarEntry(entry: InsertBoatCalendar): Promise<BoatCalendar>;
+
+  // Inquiry operations
+  getDealerInquiries(dealerId: string): Promise<Inquiry[]>;
+  getAllInquiries(): Promise<Inquiry[]>;
+  getInquiry(id: string): Promise<Inquiry | undefined>;
+  createInquiry(inquiry: InsertInquiry): Promise<Inquiry>;
+  updateInquiry(id: string, inquiry: Partial<InsertInquiry>): Promise<Inquiry>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -253,6 +308,186 @@ export class DatabaseStorage implements IStorage {
       .from(fuelTransactions)
       .where(eq(fuelTransactions.userId, userId))
       .orderBy(desc(fuelTransactions.createdAt));
+  }
+
+  // Admin user operations
+  async getAdminUserByUsername(username: string): Promise<AdminUser | undefined> {
+    const [user] = await db.select().from(adminUsers).where(eq(adminUsers.username, username));
+    return user;
+  }
+
+  async getAdminUserById(id: string): Promise<AdminUser | undefined> {
+    const [user] = await db.select().from(adminUsers).where(eq(adminUsers.id, id));
+    return user;
+  }
+
+  async getAllAdminUsers(): Promise<AdminUser[]> {
+    return await db.select().from(adminUsers).orderBy(desc(adminUsers.createdAt));
+  }
+
+  async createAdminUser(userData: InsertAdminUser): Promise<AdminUser> {
+    const [user] = await db.insert(adminUsers).values(userData).returning();
+    return user;
+  }
+
+  async updateAdminUser(id: string, userData: Partial<InsertAdminUser>): Promise<AdminUser> {
+    const [user] = await db
+      .update(adminUsers)
+      .set({ ...userData, updatedAt: new Date() })
+      .where(eq(adminUsers.id, id))
+      .returning();
+    return user;
+  }
+
+  // Dealer operations
+  async getAllDealers(): Promise<Dealer[]> {
+    return await db.select().from(dealers).where(eq(dealers.isActive, true)).orderBy(desc(dealers.createdAt));
+  }
+
+  async getDealer(id: string): Promise<Dealer | undefined> {
+    const [dealer] = await db.select().from(dealers).where(eq(dealers.id, id));
+    return dealer;
+  }
+
+  async createDealer(dealerData: InsertDealer): Promise<Dealer> {
+    const [dealer] = await db.insert(dealers).values(dealerData).returning();
+    return dealer;
+  }
+
+  async updateDealer(id: string, dealerData: Partial<InsertDealer>): Promise<Dealer> {
+    const [dealer] = await db
+      .update(dealers)
+      .set({ ...dealerData, updatedAt: new Date() })
+      .where(eq(dealers.id, id))
+      .returning();
+    return dealer;
+  }
+
+  // Fleet model operations
+  async getAllFleetModels(): Promise<FleetModel[]> {
+    return await db.select().from(fleetModels).where(eq(fleetModels.isActive, true)).orderBy(fleetModels.sortOrder);
+  }
+
+  async getFleetModel(id: string): Promise<FleetModel | undefined> {
+    const [model] = await db.select().from(fleetModels).where(eq(fleetModels.id, id));
+    return model;
+  }
+
+  async createFleetModel(modelData: InsertFleetModel): Promise<FleetModel> {
+    const [model] = await db.insert(fleetModels).values(modelData).returning();
+    return model;
+  }
+
+  async updateFleetModel(id: string, modelData: Partial<InsertFleetModel>): Promise<FleetModel> {
+    const [model] = await db
+      .update(fleetModels)
+      .set({ ...modelData, updatedAt: new Date() })
+      .where(eq(fleetModels.id, id))
+      .returning();
+    return model;
+  }
+
+  // Dealer boat operations
+  async getDealerBoats(dealerId: string): Promise<DealerBoat[]> {
+    return await db
+      .select()
+      .from(dealerBoats)
+      .where(and(eq(dealerBoats.dealerId, dealerId), eq(dealerBoats.isActive, true)))
+      .orderBy(desc(dealerBoats.createdAt));
+  }
+
+  async getAllDealerBoats(): Promise<DealerBoat[]> {
+    return await db.select().from(dealerBoats).where(eq(dealerBoats.isActive, true)).orderBy(desc(dealerBoats.createdAt));
+  }
+
+  async getDealerBoat(id: string): Promise<DealerBoat | undefined> {
+    const [boat] = await db.select().from(dealerBoats).where(eq(dealerBoats.id, id));
+    return boat;
+  }
+
+  async createDealerBoat(boatData: InsertDealerBoat): Promise<DealerBoat> {
+    // Auto-calculate fraction price
+    const fractions = boatData.numberOfFractions ?? 5;
+    const fractionPrice = Number(boatData.totalPrice) / fractions;
+    const [boat] = await db
+      .insert(dealerBoats)
+      .values({ ...boatData, numberOfFractions: fractions, fractionPrice: fractionPrice.toString(), availableShares: fractions })
+      .returning();
+    return boat;
+  }
+
+  async updateDealerBoat(id: string, boatData: Partial<InsertDealerBoat>): Promise<DealerBoat> {
+    // Recalculate fraction price if total price or number of fractions changed
+    let updateData: any = { ...boatData, updatedAt: new Date() };
+    if (boatData.totalPrice || boatData.numberOfFractions) {
+      const existingBoat = await this.getDealerBoat(id);
+      if (existingBoat) {
+        const totalPrice = boatData.totalPrice ? Number(boatData.totalPrice) : Number(existingBoat.totalPrice);
+        const fractions = boatData.numberOfFractions ?? existingBoat.numberOfFractions;
+        updateData.fractionPrice = (totalPrice / fractions).toString();
+      }
+    }
+    const [boat] = await db.update(dealerBoats).set(updateData).where(eq(dealerBoats.id, id)).returning();
+    return boat;
+  }
+
+  // Calendar operations
+  async getBoatCalendar(boatId: string, startDate: Date, endDate: Date): Promise<BoatCalendar[]> {
+    return await db
+      .select()
+      .from(boatCalendar)
+      .where(
+        and(
+          eq(boatCalendar.dealerBoatId, boatId),
+          gte(boatCalendar.date, startDate),
+          lte(boatCalendar.date, endDate)
+        )
+      )
+      .orderBy(boatCalendar.date);
+  }
+
+  async upsertCalendarEntry(entryData: InsertBoatCalendar): Promise<BoatCalendar> {
+    const [entry] = await db
+      .insert(boatCalendar)
+      .values(entryData)
+      .onConflictDoUpdate({
+        target: [boatCalendar.dealerBoatId, boatCalendar.date],
+        set: { status: entryData.status, dailyRate: entryData.dailyRate, notes: entryData.notes, updatedAt: new Date() },
+      })
+      .returning();
+    return entry;
+  }
+
+  // Inquiry operations
+  async getDealerInquiries(dealerId: string): Promise<Inquiry[]> {
+    return await db
+      .select()
+      .from(inquiries)
+      .where(eq(inquiries.dealerId, dealerId))
+      .orderBy(desc(inquiries.createdAt));
+  }
+
+  async getAllInquiries(): Promise<Inquiry[]> {
+    return await db.select().from(inquiries).orderBy(desc(inquiries.createdAt));
+  }
+
+  async getInquiry(id: string): Promise<Inquiry | undefined> {
+    const [inquiry] = await db.select().from(inquiries).where(eq(inquiries.id, id));
+    return inquiry;
+  }
+
+  async createInquiry(inquiryData: InsertInquiry): Promise<Inquiry> {
+    const [inquiry] = await db.insert(inquiries).values(inquiryData).returning();
+    return inquiry;
+  }
+
+  async updateInquiry(id: string, inquiryData: Partial<InsertInquiry>): Promise<Inquiry> {
+    const [inquiry] = await db
+      .update(inquiries)
+      .set({ ...inquiryData, updatedAt: new Date() })
+      .where(eq(inquiries.id, id))
+      .returning();
+    return inquiry;
   }
 }
 

@@ -386,3 +386,252 @@ export type ModalityRecommendation = {
   confidence: number;
   alternatives: { modality: ModalityTypeEnum; score: number }[];
 };
+
+// ========== ADMIN TOOL SYSTEM ==========
+
+// Admin user roles
+export const AdminRole = {
+  SUPER_ADMIN: "super_admin", // De Antonio admin
+  STAFF: "staff", // De Antonio staff
+  DEALER: "dealer", // Dealer account
+} as const;
+export type AdminRoleEnum = (typeof AdminRole)[keyof typeof AdminRole];
+
+// Admin users table - for De Antonio admins, staff, and dealers
+export const adminUsers = pgTable("admin_users", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  username: varchar("username", { length: 100 }).notNull().unique(),
+  email: varchar("email", { length: 255 }),
+  passwordHash: varchar("password_hash", { length: 255 }).notNull(),
+  firstName: varchar("first_name", { length: 100 }),
+  lastName: varchar("last_name", { length: 100 }),
+  role: varchar("role", { length: 20 }).notNull().default("staff"), // super_admin, staff, dealer
+  dealerId: varchar("dealer_id"), // Only for dealer role
+  isActive: boolean("is_active").default(true),
+  lastLoginAt: timestamp("last_login_at"),
+  createdBy: varchar("created_by"), // Admin who created this user
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+// Dealers table - Dealer organizations
+export const dealers = pgTable("dealers", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  name: varchar("name", { length: 255 }).notNull(),
+  companyName: varchar("company_name", { length: 255 }),
+  email: varchar("email", { length: 255 }),
+  phone: varchar("phone", { length: 50 }),
+  address: text("address"),
+  city: varchar("city", { length: 100 }),
+  country: varchar("country", { length: 100 }),
+  website: varchar("website", { length: 255 }),
+  logoUrl: varchar("logo_url", { length: 500 }),
+  isActive: boolean("is_active").default(true),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+// Fleet models table - De Antonio yacht models (base fleet)
+export const fleetModels = pgTable("fleet_models", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  modelName: varchar("model_name", { length: 100 }).notNull(), // D29, D32, D36, D42, D50, D60
+  displayName: varchar("display_name", { length: 255 }).notNull(),
+  description: text("description"),
+  lengthMeters: decimal("length_meters", { precision: 5, scale: 2 }),
+  beamMeters: decimal("beam_meters", { precision: 5, scale: 2 }),
+  draftMeters: decimal("draft_meters", { precision: 5, scale: 2 }),
+  displacement: decimal("displacement", { precision: 10, scale: 2 }),
+  fuelCapacity: integer("fuel_capacity"), // liters
+  waterCapacity: integer("water_capacity"), // liters
+  maxCapacity: integer("max_capacity"), // passengers
+  cabins: integer("cabins"),
+  berths: integer("berths"),
+  engines: varchar("engines", { length: 255 }),
+  maxSpeed: decimal("max_speed", { precision: 5, scale: 2 }), // knots
+  cruisingSpeed: decimal("cruising_speed", { precision: 5, scale: 2 }), // knots
+  range: integer("range"), // nautical miles
+  features: text("features").array(),
+  images: text("images").array(),
+  basePrice: decimal("base_price", { precision: 12, scale: 2 }), // Reference price
+  isActive: boolean("is_active").default(true),
+  sortOrder: integer("sort_order").default(0),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+// Sale type enum
+export const SaleType = {
+  SALE_ONLY: "sale_only",
+  SALE_AND_CHARTER: "sale_and_charter",
+} as const;
+export type SaleTypeEnum = (typeof SaleType)[keyof typeof SaleType];
+
+// Dealer boats table - Boats added by dealers
+export const dealerBoats = pgTable("dealer_boats", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  dealerId: varchar("dealer_id").references(() => dealers.id).notNull(),
+  fleetModelId: varchar("fleet_model_id").references(() => fleetModels.id).notNull(),
+  boatName: varchar("boat_name", { length: 255 }),
+  hullNumber: varchar("hull_number", { length: 100 }),
+  yearBuilt: integer("year_built"),
+  location: varchar("location", { length: 255 }),
+  marina: varchar("marina", { length: 255 }),
+  // Pricing
+  totalPrice: decimal("total_price", { precision: 12, scale: 2 }).notNull(),
+  numberOfFractions: integer("number_of_fractions").notNull().default(5), // How many shares
+  fractionPrice: decimal("fraction_price", { precision: 12, scale: 2 }), // Auto-calculated
+  // Sale type
+  saleType: varchar("sale_type", { length: 30 }).notNull().default("sale_only"), // sale_only, sale_and_charter
+  // Usage details per share
+  annualUsageDays: integer("annual_usage_days"), // Per share
+  engineHoursPerShare: integer("engine_hours_per_share"), // Per share per year
+  // Charter rate (for sale_and_charter)
+  dailyCharterRate: decimal("daily_charter_rate", { precision: 10, scale: 2 }),
+  // Condition and extras
+  condition: varchar("condition", { length: 50 }), // new, like_new, excellent, good
+  extras: text("extras").array(),
+  images: text("images").array(),
+  description: text("description"),
+  // Status
+  status: varchar("status", { length: 30 }).default("active"), // active, sold, reserved, inactive
+  isActive: boolean("is_active").default(true),
+  availableShares: integer("available_shares"), // Remaining shares for sale
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+// Calendar status enum
+export const CalendarStatus = {
+  AVAILABLE: "available",
+  BOOKED: "booked",
+  BLOCKED: "blocked",
+  MAINTENANCE: "maintenance",
+} as const;
+export type CalendarStatusEnum = (typeof CalendarStatus)[keyof typeof CalendarStatus];
+
+// Boat calendar table - Charter availability
+export const boatCalendar = pgTable("boat_calendar", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  dealerBoatId: varchar("dealer_boat_id").references(() => dealerBoats.id).notNull(),
+  date: timestamp("date").notNull(),
+  status: varchar("status", { length: 30 }).notNull().default("available"), // available, booked, blocked, maintenance
+  dailyRate: decimal("daily_rate", { precision: 10, scale: 2 }), // Override rate for this date
+  bookingId: varchar("booking_id"), // Reference to booking if booked
+  notes: text("notes"),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+// Inquiry type enum
+export const InquiryType = {
+  PURCHASE: "purchase",
+  CHARTER: "charter",
+  OWNERSHIP: "ownership", // Fractional ownership
+  GENERAL: "general",
+} as const;
+export type InquiryTypeEnum = (typeof InquiryType)[keyof typeof InquiryType];
+
+// Inquiry status enum
+export const InquiryStatus = {
+  NEW: "new",
+  CONTACTED: "contacted",
+  IN_PROGRESS: "in_progress",
+  QUALIFIED: "qualified",
+  CLOSED_WON: "closed_won",
+  CLOSED_LOST: "closed_lost",
+} as const;
+export type InquiryStatusEnum = (typeof InquiryStatus)[keyof typeof InquiryStatus];
+
+// Inquiries table - Customer inquiries
+export const inquiries = pgTable("inquiries", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  dealerId: varchar("dealer_id").references(() => dealers.id),
+  dealerBoatId: varchar("dealer_boat_id").references(() => dealerBoats.id),
+  fleetModelId: varchar("fleet_model_id").references(() => fleetModels.id),
+  inquiryType: varchar("inquiry_type", { length: 30 }).notNull(), // purchase, charter, ownership, general
+  status: varchar("status", { length: 30 }).default("new"), // new, contacted, in_progress, qualified, closed_won, closed_lost
+  // Customer details
+  customerFirstName: varchar("customer_first_name", { length: 100 }).notNull(),
+  customerLastName: varchar("customer_last_name", { length: 100 }).notNull(),
+  customerEmail: varchar("customer_email", { length: 255 }).notNull(),
+  customerPhone: varchar("customer_phone", { length: 50 }),
+  customerCountry: varchar("customer_country", { length: 100 }),
+  // Inquiry details
+  preferredContactMethod: varchar("preferred_contact_method", { length: 30 }), // email, phone, whatsapp
+  budget: decimal("budget", { precision: 12, scale: 2 }),
+  desiredStartDate: timestamp("desired_start_date"),
+  desiredEndDate: timestamp("desired_end_date"),
+  numberOfGuests: integer("number_of_guests"),
+  message: text("message"),
+  // For charter inquiries
+  charterDays: integer("charter_days"),
+  // For purchase/ownership inquiries
+  interestedInFinancing: boolean("interested_in_financing"),
+  desiredFractions: integer("desired_fractions"),
+  // Internal notes
+  internalNotes: text("internal_notes"),
+  assignedTo: varchar("assigned_to").references(() => adminUsers.id),
+  // Source tracking
+  source: varchar("source", { length: 100 }), // website, phone, referral, etc.
+  utmSource: varchar("utm_source", { length: 100 }),
+  utmMedium: varchar("utm_medium", { length: 100 }),
+  utmCampaign: varchar("utm_campaign", { length: 100 }),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+// Relations for admin tables
+export const adminUsersRelations = relations(adminUsers, ({ one }) => ({
+  dealer: one(dealers, { fields: [adminUsers.dealerId], references: [dealers.id] }),
+}));
+
+export const dealersRelations = relations(dealers, ({ many }) => ({
+  adminUsers: many(adminUsers),
+  dealerBoats: many(dealerBoats),
+  inquiries: many(inquiries),
+}));
+
+export const fleetModelsRelations = relations(fleetModels, ({ many }) => ({
+  dealerBoats: many(dealerBoats),
+  inquiries: many(inquiries),
+}));
+
+export const dealerBoatsRelations = relations(dealerBoats, ({ one, many }) => ({
+  dealer: one(dealers, { fields: [dealerBoats.dealerId], references: [dealers.id] }),
+  fleetModel: one(fleetModels, { fields: [dealerBoats.fleetModelId], references: [fleetModels.id] }),
+  calendar: many(boatCalendar),
+  inquiries: many(inquiries),
+}));
+
+export const boatCalendarRelations = relations(boatCalendar, ({ one }) => ({
+  dealerBoat: one(dealerBoats, { fields: [boatCalendar.dealerBoatId], references: [dealerBoats.id] }),
+}));
+
+export const inquiriesRelations = relations(inquiries, ({ one }) => ({
+  dealer: one(dealers, { fields: [inquiries.dealerId], references: [dealers.id] }),
+  dealerBoat: one(dealerBoats, { fields: [inquiries.dealerBoatId], references: [dealerBoats.id] }),
+  fleetModel: one(fleetModels, { fields: [inquiries.fleetModelId], references: [fleetModels.id] }),
+  assignedUser: one(adminUsers, { fields: [inquiries.assignedTo], references: [adminUsers.id] }),
+}));
+
+// Insert schemas for admin tables
+export const insertAdminUserSchema = createInsertSchema(adminUsers).omit({ id: true, createdAt: true, updatedAt: true });
+export const insertDealerSchema = createInsertSchema(dealers).omit({ id: true, createdAt: true, updatedAt: true });
+export const insertFleetModelSchema = createInsertSchema(fleetModels).omit({ id: true, createdAt: true, updatedAt: true });
+export const insertDealerBoatSchema = createInsertSchema(dealerBoats).omit({ id: true, createdAt: true, updatedAt: true });
+export const insertBoatCalendarSchema = createInsertSchema(boatCalendar).omit({ id: true, createdAt: true, updatedAt: true });
+export const insertInquirySchema = createInsertSchema(inquiries).omit({ id: true, createdAt: true, updatedAt: true });
+
+// Types for admin tables
+export type AdminUser = typeof adminUsers.$inferSelect;
+export type InsertAdminUser = z.infer<typeof insertAdminUserSchema>;
+export type Dealer = typeof dealers.$inferSelect;
+export type InsertDealer = z.infer<typeof insertDealerSchema>;
+export type FleetModel = typeof fleetModels.$inferSelect;
+export type InsertFleetModel = z.infer<typeof insertFleetModelSchema>;
+export type DealerBoat = typeof dealerBoats.$inferSelect;
+export type InsertDealerBoat = z.infer<typeof insertDealerBoatSchema>;
+export type BoatCalendar = typeof boatCalendar.$inferSelect;
+export type InsertBoatCalendar = z.infer<typeof insertBoatCalendarSchema>;
+export type Inquiry = typeof inquiries.$inferSelect;
+export type InsertInquiry = z.infer<typeof insertInquirySchema>;
