@@ -53,7 +53,7 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <div className="min-h-screen relative flex items-center justify-center p-4">
+    <div className="min-h-screen relative flex items-center justify-center p-4" style={{ minWidth: '1024px' }}>
       {/* Ocean Background */}
       <div className="absolute inset-0">
         <div 

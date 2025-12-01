@@ -148,9 +148,9 @@ export default function AdminDashboard() {
       ];
 
   return (
-    <div className="min-h-screen bg-gray-100 flex">
+    <div className="min-h-screen bg-gray-100 flex" style={{ minWidth: '1024px' }}>
       {/* Sidebar */}
-      <aside className="w-64 bg-white border-r border-gray-200 flex flex-col">
+      <aside className="w-64 bg-white border-r border-gray-200 flex flex-col flex-shrink-0">
         {/* Logo */}
         <div className="p-6 border-b border-gray-200">
           <img src={deAntonioLogo} alt="De Antonio Yachts" className="h-10 w-auto" />
