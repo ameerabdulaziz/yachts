@@ -10,10 +10,11 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, Dialog
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { useToast } from "@/hooks/use-toast";
 import { 
   Anchor, Users, Ship, Building2, MessageSquare, LogOut, 
-  Plus, Loader2, MapPin
+  Plus, Loader2, MapPin, Settings, LayoutDashboard
 } from "lucide-react";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 import deAntonioLogo from "@assets/DE-ANTONIO-YACHTS_LOGO-removebg-preview_1754331163197.png";
@@ -126,7 +127,7 @@ export default function AdminDashboard() {
 
   if (!currentUser) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="min-h-screen flex items-center justify-center bg-gray-100">
         <Loader2 className="w-8 h-8 animate-spin text-blue-600" />
       </div>
     );
@@ -135,101 +136,85 @@ export default function AdminDashboard() {
   const isDealer = currentUser.role === "dealer";
   const isAdmin = currentUser.role === "super_admin" || currentUser.role === "staff";
 
+  const navItems = isAdmin
+    ? [
+        { id: "fleet", label: "Fleet Models", icon: Ship },
+        { id: "dealers", label: "Dealers", icon: Building2 },
+        { id: "users", label: "Users", icon: Users },
+      ]
+    : [
+        { id: "boats", label: "My Boats", icon: Anchor },
+        { id: "inquiries", label: "Inquiries", icon: MessageSquare },
+      ];
+
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white border-b border-gray-100 px-4 py-3 sticky top-0 z-50">
-        <div className="flex items-center justify-between max-w-6xl mx-auto">
-          <div className="flex items-center gap-3">
-            <img src={deAntonioLogo} alt="De Antonio" className="h-8 w-auto" />
-            <span className="text-sm font-semibold text-gray-900 hidden sm:block">Admin</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="flex items-center gap-1.5">
-              <span className="text-xs text-gray-600">{currentUser.firstName}</span>
-              <Badge variant="outline" className="text-[10px] px-1.5 py-0">{getRoleLabel(currentUser.role)}</Badge>
-              {currentUser.isActive && <Badge className="text-[10px] px-1.5 py-0 bg-green-500">Active</Badge>}
+    <div className="min-h-screen bg-gray-100 flex">
+      {/* Sidebar */}
+      <aside className="w-64 bg-white border-r border-gray-200 flex flex-col">
+        {/* Logo */}
+        <div className="p-6 border-b border-gray-200">
+          <img src={deAntonioLogo} alt="De Antonio Yachts" className="h-10 w-auto" />
+          <p className="text-xs text-gray-500 mt-2">Admin Portal</p>
+        </div>
+
+        {/* Navigation */}
+        <nav className="flex-1 p-4">
+          <ul className="space-y-1">
+            {navItems.map((item) => (
+              <li key={item.id}>
+                <button
+                  onClick={() => setActiveTab(item.id)}
+                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-colors ${
+                    activeTab === item.id
+                      ? "bg-blue-50 text-blue-700 font-medium"
+                      : "text-gray-600 hover:bg-gray-50"
+                  }`}
+                  data-testid={`nav-${item.id}`}
+                >
+                  <item.icon className="w-5 h-5" />
+                  {item.label}
+                </button>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        {/* User Info */}
+        <div className="p-4 border-t border-gray-200">
+          <div className="flex items-center gap-3 mb-3">
+            <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
+              <span className="text-blue-700 font-semibold">
+                {currentUser.firstName[0]}{currentUser.lastName[0]}
+              </span>
             </div>
-            <Button 
-              variant="ghost" 
-              size="sm" 
-              onClick={handleLogout} 
-              data-testid="button-logout"
-              className="text-gray-500 h-8 w-8 p-0"
-            >
-              <LogOut className="w-4 h-4" />
-            </Button>
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-medium text-gray-900 truncate">
+                {currentUser.firstName} {currentUser.lastName}
+              </p>
+              <p className="text-xs text-gray-500">{getRoleLabel(currentUser.role)}</p>
+            </div>
           </div>
+          <Button 
+            variant="outline" 
+            size="sm" 
+            onClick={handleLogout}
+            className="w-full"
+            data-testid="button-logout"
+          >
+            <LogOut className="w-4 h-4 mr-2" /> Sign Out
+          </Button>
         </div>
-      </header>
+      </aside>
 
-      <main className="max-w-6xl mx-auto px-4 py-6">
-        {/* Tab Navigation */}
-        <div className="flex gap-2 overflow-x-auto pb-4 mb-6">
-          {/* De Antonio Staff tabs */}
-          {isAdmin && (
-            <>
-              <Button
-                variant={activeTab === "fleet" ? "default" : "outline"}
-                size="sm"
-                onClick={() => setActiveTab("fleet")}
-                className={activeTab === "fleet" ? "bg-blue-600 text-white" : ""}
-                data-testid="tab-fleet"
-              >
-                <Ship className="w-4 h-4 mr-2" /> Fleet
-              </Button>
-              <Button
-                variant={activeTab === "dealers" ? "default" : "outline"}
-                size="sm"
-                onClick={() => setActiveTab("dealers")}
-                className={activeTab === "dealers" ? "bg-blue-600 text-white" : ""}
-                data-testid="tab-dealers"
-              >
-                <Building2 className="w-4 h-4 mr-2" /> Dealers
-              </Button>
-              <Button
-                variant={activeTab === "users" ? "default" : "outline"}
-                size="sm"
-                onClick={() => setActiveTab("users")}
-                className={activeTab === "users" ? "bg-blue-600 text-white" : ""}
-                data-testid="tab-users"
-              >
-                <Users className="w-4 h-4 mr-2" /> Users
-              </Button>
-            </>
-          )}
-          
-          {/* Dealer tabs */}
-          {isDealer && (
-            <>
-              <Button
-                variant={activeTab === "boats" ? "default" : "outline"}
-                size="sm"
-                onClick={() => setActiveTab("boats")}
-                className={activeTab === "boats" ? "bg-blue-600 text-white" : ""}
-                data-testid="tab-boats"
-              >
-                <Anchor className="w-4 h-4 mr-2" /> My Boats
-              </Button>
-              <Button
-                variant={activeTab === "inquiries" ? "default" : "outline"}
-                size="sm"
-                onClick={() => setActiveTab("inquiries")}
-                className={activeTab === "inquiries" ? "bg-blue-600 text-white" : ""}
-                data-testid="tab-inquiries"
-              >
-                <MessageSquare className="w-4 h-4 mr-2" /> Inquiries
-              </Button>
-            </>
-          )}
+      {/* Main Content */}
+      <main className="flex-1 overflow-auto">
+        <div className="p-8">
+          {isAdmin && activeTab === "fleet" && <FleetSection />}
+          {isAdmin && activeTab === "dealers" && <DealersSection />}
+          {isAdmin && activeTab === "users" && <UsersSection currentUser={currentUser} />}
+          {isDealer && activeTab === "boats" && <BoatsSection currentUser={currentUser} />}
+          {isDealer && activeTab === "inquiries" && <InquiriesSection currentUser={currentUser} />}
         </div>
-
-        {/* Tab Content */}
-        {isAdmin && activeTab === "fleet" && <FleetSection />}
-        {isAdmin && activeTab === "dealers" && <DealersSection />}
-        {isAdmin && activeTab === "users" && <UsersSection currentUser={currentUser} />}
-        {isDealer && activeTab === "boats" && <BoatsSection currentUser={currentUser} />}
-        {isDealer && activeTab === "inquiries" && <InquiriesSection currentUser={currentUser} />}
       </main>
     </div>
   );
@@ -284,13 +269,16 @@ function UsersSection({ currentUser }: { currentUser: AdminUser }) {
   };
 
   if (isLoading) {
-    return <div className="flex justify-center py-8"><Loader2 className="w-8 h-8 animate-spin text-blue-600" /></div>;
+    return <div className="flex justify-center py-12"><Loader2 className="w-8 h-8 animate-spin text-blue-600" /></div>;
   }
 
   return (
-    <div className="space-y-4">
-      <div className="flex items-center justify-between">
-        <h2 className="text-xl font-bold text-gray-900">Admin Users</h2>
+    <div>
+      <div className="flex items-center justify-between mb-6">
+        <div>
+          <h1 className="text-2xl font-bold text-gray-900">Admin Users</h1>
+          <p className="text-gray-500">Manage admin accounts and permissions</p>
+        </div>
         {currentUser.role === "super_admin" && (
           <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
             <DialogTrigger asChild>
@@ -303,7 +291,7 @@ function UsersSection({ currentUser }: { currentUser: AdminUser }) {
                 <DialogTitle>Create New User</DialogTitle>
               </DialogHeader>
               <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-2 gap-4">
                   <div>
                     <Label>First Name</Label>
                     <Input value={formData.firstName} onChange={(e) => setFormData({ ...formData, firstName: e.target.value })} required data-testid="input-first-name" />
@@ -360,24 +348,36 @@ function UsersSection({ currentUser }: { currentUser: AdminUser }) {
         )}
       </div>
 
-      <div className="space-y-3">
-        {users.map((user) => (
-          <Card key={user.id} className="bg-white" data-testid={`user-row-${user.id}`}>
-            <CardContent className="p-4">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="font-medium text-gray-900">{user.firstName} {user.lastName}</p>
-                  <p className="text-sm text-gray-500">@{user.username} • {user.email}</p>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Badge variant={user.isActive ? "default" : "secondary"} className="text-xs">{user.isActive ? "Active" : "Inactive"}</Badge>
-                  <Badge variant="outline" className="text-xs">{getRoleLabel(user.role)}</Badge>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
+      <Card>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Name</TableHead>
+              <TableHead>Username</TableHead>
+              <TableHead>Email</TableHead>
+              <TableHead>Role</TableHead>
+              <TableHead>Status</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {users.map((user) => (
+              <TableRow key={user.id} data-testid={`user-row-${user.id}`}>
+                <TableCell className="font-medium">{user.firstName} {user.lastName}</TableCell>
+                <TableCell className="text-gray-500">@{user.username}</TableCell>
+                <TableCell>{user.email}</TableCell>
+                <TableCell>
+                  <Badge variant="outline">{getRoleLabel(user.role)}</Badge>
+                </TableCell>
+                <TableCell>
+                  <Badge className={user.isActive ? "bg-green-100 text-green-700" : "bg-gray-100 text-gray-600"}>
+                    {user.isActive ? "Active" : "Inactive"}
+                  </Badge>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </Card>
     </div>
   );
 }
@@ -424,13 +424,16 @@ function DealersSection() {
   };
 
   if (isLoading) {
-    return <div className="flex justify-center py-8"><Loader2 className="w-8 h-8 animate-spin text-blue-600" /></div>;
+    return <div className="flex justify-center py-12"><Loader2 className="w-8 h-8 animate-spin text-blue-600" /></div>;
   }
 
   return (
-    <div className="space-y-4">
-      <div className="flex items-center justify-between">
-        <h2 className="text-xl font-bold text-gray-900">Authorized Dealers</h2>
+    <div>
+      <div className="flex items-center justify-between mb-6">
+        <div>
+          <h1 className="text-2xl font-bold text-gray-900">Authorized Dealers</h1>
+          <p className="text-gray-500">Manage De Antonio dealer network</p>
+        </div>
         <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
           <DialogTrigger asChild>
             <Button className="bg-blue-600 hover:bg-blue-700" data-testid="button-add-dealer">
@@ -442,7 +445,7 @@ function DealersSection() {
               <DialogTitle>Create New Dealer</DialogTitle>
             </DialogHeader>
             <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-2 gap-4">
                 <div>
                   <Label>Dealer Name</Label>
                   <Input value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} required data-testid="input-dealer-name" />
@@ -452,7 +455,7 @@ function DealersSection() {
                   <Input value={formData.contactName} onChange={(e) => setFormData({ ...formData, contactName: e.target.value })} required data-testid="input-contact-name" />
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-2 gap-4">
                 <div>
                   <Label>Email</Label>
                   <Input type="email" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} required data-testid="input-dealer-email" />
@@ -466,7 +469,7 @@ function DealersSection() {
                 <Label>Address</Label>
                 <Input value={formData.address} onChange={(e) => setFormData({ ...formData, address: e.target.value })} data-testid="input-address" />
               </div>
-              <div className="grid grid-cols-3 gap-3">
+              <div className="grid grid-cols-3 gap-4">
                 <div>
                   <Label>City</Label>
                   <Input value={formData.city} onChange={(e) => setFormData({ ...formData, city: e.target.value })} required data-testid="input-city" />
@@ -501,31 +504,45 @@ function DealersSection() {
       </div>
 
       {dealers.length === 0 ? (
-        <Card className="bg-white">
-          <CardContent className="p-8 text-center text-gray-500">
-            <Building2 className="w-12 h-12 mx-auto mb-3 text-gray-300" />
-            <p>No dealers yet. Click "Add Dealer" to create one.</p>
+        <Card>
+          <CardContent className="py-16 text-center text-gray-500">
+            <Building2 className="w-16 h-16 mx-auto mb-4 text-gray-300" />
+            <p className="text-lg">No dealers yet</p>
+            <p className="text-sm">Click "Add Dealer" to create your first dealer</p>
           </CardContent>
         </Card>
       ) : (
-        <div className="grid md:grid-cols-2 gap-4">
-          {dealers.map((dealer) => (
-            <Card key={dealer.id} className="bg-white" data-testid={`dealer-card-${dealer.id}`}>
-              <CardContent className="p-4">
-                <div className="flex items-start justify-between mb-2">
-                  <h3 className="font-semibold text-gray-900">{dealer.name}</h3>
-                  <Badge variant={dealer.isActive ? "default" : "secondary"} className="text-xs">{dealer.isActive ? "Active" : "Inactive"}</Badge>
-                </div>
-                <div className="text-sm text-gray-600 space-y-1">
-                  <p><MapPin className="w-3 h-3 inline mr-1" />{dealer.city}, {dealer.country}</p>
-                  <p>{dealer.contactName}</p>
-                  <p>{dealer.email}</p>
-                  <p>{dealer.phone}</p>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+        <Card>
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Dealer Name</TableHead>
+                <TableHead>Contact</TableHead>
+                <TableHead>Location</TableHead>
+                <TableHead>Region</TableHead>
+                <TableHead>Status</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {dealers.map((dealer) => (
+                <TableRow key={dealer.id} data-testid={`dealer-row-${dealer.id}`}>
+                  <TableCell className="font-medium">{dealer.name}</TableCell>
+                  <TableCell>
+                    <div>{dealer.contactName}</div>
+                    <div className="text-sm text-gray-500">{dealer.email}</div>
+                  </TableCell>
+                  <TableCell>{dealer.city}, {dealer.country}</TableCell>
+                  <TableCell>{dealer.region}</TableCell>
+                  <TableCell>
+                    <Badge className={dealer.isActive ? "bg-green-100 text-green-700" : "bg-gray-100 text-gray-600"}>
+                      {dealer.isActive ? "Active" : "Inactive"}
+                    </Badge>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </Card>
       )}
     </div>
   );
@@ -580,15 +597,15 @@ function FleetSection() {
   };
 
   if (isLoading) {
-    return <div className="flex justify-center py-8"><Loader2 className="w-8 h-8 animate-spin text-blue-600" /></div>;
+    return <div className="flex justify-center py-12"><Loader2 className="w-8 h-8 animate-spin text-blue-600" /></div>;
   }
 
   return (
-    <div className="space-y-4">
-      <div className="flex items-center justify-between">
+    <div>
+      <div className="flex items-center justify-between mb-6">
         <div>
-          <h2 className="text-xl font-bold text-gray-900">De Antonio Fleet</h2>
-          <p className="text-sm text-gray-600">Official yacht models with base pricing</p>
+          <h1 className="text-2xl font-bold text-gray-900">De Antonio Fleet</h1>
+          <p className="text-gray-500">Official yacht models with base pricing</p>
         </div>
         <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
           <DialogTrigger asChild>
@@ -596,12 +613,12 @@ function FleetSection() {
               <Plus className="w-4 h-4 mr-2" /> Add Yacht
             </Button>
           </DialogTrigger>
-          <DialogContent className="max-w-lg max-h-[90vh] overflow-y-auto">
+          <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
             <DialogHeader>
               <DialogTitle>Add New Yacht to Fleet</DialogTitle>
             </DialogHeader>
             <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-2 gap-4">
                 <div>
                   <Label>Model Name</Label>
                   <Input value={formData.modelName} onChange={(e) => setFormData({ ...formData, modelName: e.target.value })} placeholder="D42" required data-testid="input-model-name" />
@@ -614,23 +631,20 @@ function FleetSection() {
               
               <div>
                 <Label>Description</Label>
-                <Textarea value={formData.description} onChange={(e) => setFormData({ ...formData, description: e.target.value })} placeholder="Luxury yacht with..." data-testid="input-description" />
+                <Textarea value={formData.description} onChange={(e) => setFormData({ ...formData, description: e.target.value })} placeholder="Luxury yacht with..." rows={3} data-testid="input-description" />
               </div>
               
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-4 gap-4">
                 <div>
-                  <Label>Length (meters)</Label>
+                  <Label>Length (m)</Label>
                   <Input type="number" step="0.1" value={formData.lengthMeters} onChange={(e) => setFormData({ ...formData, lengthMeters: e.target.value })} placeholder="12.8" required data-testid="input-length" />
                 </div>
                 <div>
-                  <Label>Beam (meters)</Label>
+                  <Label>Beam (m)</Label>
                   <Input type="number" step="0.1" value={formData.beamMeters} onChange={(e) => setFormData({ ...formData, beamMeters: e.target.value })} placeholder="3.9" required data-testid="input-beam" />
                 </div>
-              </div>
-              
-              <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <Label>Max Passengers</Label>
+                  <Label>Passengers</Label>
                   <Input type="number" value={formData.maxCapacity} onChange={(e) => setFormData({ ...formData, maxCapacity: parseInt(e.target.value) || 0 })} required data-testid="input-capacity" />
                 </div>
                 <div>
@@ -639,7 +653,7 @@ function FleetSection() {
                 </div>
               </div>
               
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-3 gap-4">
                 <div>
                   <Label>Engines</Label>
                   <Input value={formData.engines} onChange={(e) => setFormData({ ...formData, engines: e.target.value })} placeholder="2x Mercury 450hp" data-testid="input-engines" />
@@ -648,11 +662,10 @@ function FleetSection() {
                   <Label>Max Speed</Label>
                   <Input value={formData.maxSpeed} onChange={(e) => setFormData({ ...formData, maxSpeed: e.target.value })} placeholder="45 knots" data-testid="input-speed" />
                 </div>
-              </div>
-              
-              <div>
-                <Label>Base Price (€)</Label>
-                <Input type="number" value={formData.basePrice} onChange={(e) => setFormData({ ...formData, basePrice: e.target.value })} placeholder="650000" required data-testid="input-base-price" />
+                <div>
+                  <Label>Base Price (€)</Label>
+                  <Input type="number" value={formData.basePrice} onChange={(e) => setFormData({ ...formData, basePrice: e.target.value })} placeholder="650000" required data-testid="input-base-price" />
+                </div>
               </div>
               
               <div>
@@ -672,23 +685,53 @@ function FleetSection() {
         </Dialog>
       </div>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {models.map((model) => (
-          <Card key={model.id} className="bg-white overflow-hidden" data-testid={`fleet-model-${model.id}`}>
-            {model.images?.[0] && (
-              <img src={model.images[0]} alt={model.displayName} className="w-full h-40 object-cover" />
-            )}
-            <CardContent className="p-4">
-              <h3 className="font-semibold text-gray-900 mb-1">{model.displayName}</h3>
-              <div className="text-sm text-gray-600 space-y-1 mb-3">
-                <p>{model.lengthMeters}m • {model.maxCapacity} passengers</p>
-                <p>{model.cabins} cabin{model.cabins !== 1 ? "s" : ""} • {model.engines}</p>
-              </div>
-              <p className="text-xl font-bold text-blue-600">€{Number(model.basePrice).toLocaleString()}</p>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
+      <Card>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="w-20">Image</TableHead>
+              <TableHead>Model</TableHead>
+              <TableHead>Specifications</TableHead>
+              <TableHead>Engines</TableHead>
+              <TableHead className="text-right">Base Price</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {models.map((model) => (
+              <TableRow key={model.id} data-testid={`fleet-model-${model.id}`}>
+                <TableCell>
+                  {model.images?.[0] ? (
+                    <img src={model.images[0]} alt={model.displayName} className="w-20 h-14 object-cover rounded" />
+                  ) : (
+                    <div className="w-20 h-14 bg-gray-100 rounded flex items-center justify-center">
+                      <Ship className="w-6 h-6 text-gray-400" />
+                    </div>
+                  )}
+                </TableCell>
+                <TableCell>
+                  <div className="font-medium">{model.displayName}</div>
+                  <div className="text-sm text-gray-500">{model.modelName}</div>
+                </TableCell>
+                <TableCell>
+                  <div className="text-sm">
+                    {model.lengthMeters}m × {model.beamMeters}m
+                  </div>
+                  <div className="text-sm text-gray-500">
+                    {model.maxCapacity} pax • {model.cabins} cabin{model.cabins !== 1 ? "s" : ""}
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className="text-sm">{model.engines}</div>
+                  <div className="text-sm text-gray-500">{model.maxSpeed}</div>
+                </TableCell>
+                <TableCell className="text-right">
+                  <span className="text-lg font-bold text-blue-600">€{Number(model.basePrice).toLocaleString()}</span>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </Card>
     </div>
   );
 }
@@ -756,15 +799,15 @@ function BoatsSection({ currentUser }: { currentUser: AdminUser }) {
   const getModelName = (modelId: string) => fleetModels.find(m => m.id === modelId)?.displayName || "Unknown";
 
   if (isLoading) {
-    return <div className="flex justify-center py-8"><Loader2 className="w-8 h-8 animate-spin text-blue-600" /></div>;
+    return <div className="flex justify-center py-12"><Loader2 className="w-8 h-8 animate-spin text-blue-600" /></div>;
   }
 
   return (
-    <div className="space-y-4">
-      <div className="flex items-center justify-between">
+    <div>
+      <div className="flex items-center justify-between mb-6">
         <div>
-          <h2 className="text-xl font-bold text-gray-900">My Boats</h2>
-          <p className="text-sm text-gray-600">Manage your inventory with automatic fraction pricing</p>
+          <h1 className="text-2xl font-bold text-gray-900">My Boats</h1>
+          <p className="text-gray-500">Manage your boat inventory with automatic fraction pricing</p>
         </div>
         <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
           <DialogTrigger asChild>
@@ -794,7 +837,7 @@ function BoatsSection({ currentUser }: { currentUser: AdminUser }) {
                 <Input value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} placeholder="e.g. De Antonio D42 - 2024" required data-testid="input-boat-name" />
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-2 gap-4">
                 <div>
                   <Label>Total Price (€)</Label>
                   <Input type="number" value={formData.totalPrice} onChange={(e) => setFormData({ ...formData, totalPrice: e.target.value })} required data-testid="input-total-price" />
@@ -812,13 +855,13 @@ function BoatsSection({ currentUser }: { currentUser: AdminUser }) {
                 </div>
               </div>
 
-              <div className="bg-blue-50 border border-blue-100 rounded-xl p-4">
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
                 <p className="text-sm text-gray-600 mb-1">Calculated Fraction Price</p>
                 <p className="text-2xl font-bold text-blue-600">€{calculatedFractionPrice.toLocaleString()}</p>
                 <p className="text-xs text-gray-500">€{Number(formData.totalPrice || 0).toLocaleString()} ÷ {formData.numberOfFractions} fractions</p>
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-2 gap-4">
                 <div>
                   <Label>Location</Label>
                   <Input value={formData.location} onChange={(e) => setFormData({ ...formData, location: e.target.value })} placeholder="Mediterranean" data-testid="input-location" />
@@ -829,7 +872,7 @@ function BoatsSection({ currentUser }: { currentUser: AdminUser }) {
                 </div>
               </div>
 
-              <div className="flex items-center gap-6">
+              <div className="flex items-center gap-8">
                 <div className="flex items-center gap-2">
                   <Switch checked={formData.availableForSale} onCheckedChange={(c) => setFormData({ ...formData, availableForSale: c })} data-testid="switch-for-sale" />
                   <Label>For Sale</Label>
@@ -860,42 +903,68 @@ function BoatsSection({ currentUser }: { currentUser: AdminUser }) {
       </div>
 
       {boats.length === 0 ? (
-        <Card className="bg-white">
-          <CardContent className="p-8 text-center text-gray-500">
-            <Ship className="w-12 h-12 mx-auto mb-3 text-gray-300" />
-            <p>No boats yet. Click "Add Boat" to create one.</p>
+        <Card>
+          <CardContent className="py-16 text-center text-gray-500">
+            <Ship className="w-16 h-16 mx-auto mb-4 text-gray-300" />
+            <p className="text-lg">No boats yet</p>
+            <p className="text-sm">Click "Add Boat" to add your first boat</p>
           </CardContent>
         </Card>
       ) : (
-        <div className="space-y-3">
-          {boats.map((boat) => {
-            const model = fleetModels.find(m => m.id === boat.fleetModelId);
-            return (
-              <Card key={boat.id} className="bg-white" data-testid={`boat-row-${boat.id}`}>
-                <CardContent className="p-4">
-                  <div className="flex items-center gap-4">
-                    {model?.images?.[0] && (
-                      <img src={model.images[0]} alt={boat.name} className="w-24 h-16 object-cover rounded-lg" />
-                    )}
-                    <div className="flex-1">
-                      <h3 className="font-semibold text-gray-900">{boat.name}</h3>
-                      <p className="text-sm text-gray-500">{getModelName(boat.fleetModelId)}</p>
-                      <p className="text-xs text-gray-500"><MapPin className="w-3 h-3 inline mr-1" />{boat.location} • {boat.homePort}</p>
-                    </div>
-                    <div className="text-right">
-                      <p className="text-lg font-bold text-blue-600">€{Number(boat.totalPrice).toLocaleString()}</p>
-                      <p className="text-sm text-gray-500">{boat.numberOfFractions} fractions @ €{Number(boat.fractionPrice).toLocaleString()}</p>
-                      <div className="flex gap-1 mt-1 justify-end">
-                        {boat.availableForSale && <Badge className="bg-green-100 text-green-700 text-xs">Sale</Badge>}
-                        {boat.availableForCharter && <Badge className="bg-blue-100 text-blue-700 text-xs">Charter</Badge>}
+        <Card>
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead className="w-24">Image</TableHead>
+                <TableHead>Boat Name</TableHead>
+                <TableHead>Model</TableHead>
+                <TableHead>Location</TableHead>
+                <TableHead>Fractions</TableHead>
+                <TableHead className="text-right">Price</TableHead>
+                <TableHead>Status</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {boats.map((boat) => {
+                const model = fleetModels.find(m => m.id === boat.fleetModelId);
+                return (
+                  <TableRow key={boat.id} data-testid={`boat-row-${boat.id}`}>
+                    <TableCell>
+                      {model?.images?.[0] ? (
+                        <img src={model.images[0]} alt={boat.name} className="w-24 h-16 object-cover rounded" />
+                      ) : (
+                        <div className="w-24 h-16 bg-gray-100 rounded flex items-center justify-center">
+                          <Anchor className="w-6 h-6 text-gray-400" />
+                        </div>
+                      )}
+                    </TableCell>
+                    <TableCell className="font-medium">{boat.name}</TableCell>
+                    <TableCell className="text-gray-500">{getModelName(boat.fleetModelId)}</TableCell>
+                    <TableCell>
+                      <div className="flex items-center gap-1">
+                        <MapPin className="w-3 h-3 text-gray-400" />
+                        {boat.location} • {boat.homePort}
                       </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            );
-          })}
-        </div>
+                    </TableCell>
+                    <TableCell>
+                      <div>{boat.numberOfFractions} shares</div>
+                      <div className="text-sm text-gray-500">€{Number(boat.fractionPrice).toLocaleString()} each</div>
+                    </TableCell>
+                    <TableCell className="text-right">
+                      <span className="text-lg font-bold text-blue-600">€{Number(boat.totalPrice).toLocaleString()}</span>
+                    </TableCell>
+                    <TableCell>
+                      <div className="flex gap-1">
+                        {boat.availableForSale && <Badge className="bg-green-100 text-green-700">Sale</Badge>}
+                        {boat.availableForCharter && <Badge className="bg-blue-100 text-blue-700">Charter</Badge>}
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
+        </Card>
       )}
     </div>
   );
@@ -920,7 +989,7 @@ function InquiriesSection({ currentUser }: { currentUser: AdminUser }) {
   });
 
   if (isLoading) {
-    return <div className="flex justify-center py-8"><Loader2 className="w-8 h-8 animate-spin text-blue-600" /></div>;
+    return <div className="flex justify-center py-12"><Loader2 className="w-8 h-8 animate-spin text-blue-600" /></div>;
   }
 
   const getStatusColor = (status: string) => {
@@ -928,51 +997,74 @@ function InquiriesSection({ currentUser }: { currentUser: AdminUser }) {
       case "new": return "bg-red-100 text-red-700";
       case "contacted": return "bg-yellow-100 text-yellow-700";
       case "qualified": return "bg-green-100 text-green-700";
-      case "closed": return "bg-gray-100 text-gray-700";
-      default: return "bg-gray-100 text-gray-700";
+      case "closed": return "bg-gray-100 text-gray-600";
+      default: return "bg-gray-100 text-gray-600";
     }
   };
 
   return (
-    <div className="space-y-4">
-      <h2 className="text-xl font-bold text-gray-900">Customer Inquiries</h2>
-      <p className="text-sm text-gray-600">Manage purchase and charter inquiries</p>
+    <div>
+      <div className="mb-6">
+        <h1 className="text-2xl font-bold text-gray-900">Customer Inquiries</h1>
+        <p className="text-gray-500">Manage purchase and charter inquiries</p>
+      </div>
 
       {inquiries.length === 0 ? (
-        <Card className="bg-white">
-          <CardContent className="p-8 text-center text-gray-500">
-            <MessageSquare className="w-12 h-12 mx-auto mb-3 text-gray-300" />
-            <p>No inquiries yet.</p>
+        <Card>
+          <CardContent className="py-16 text-center text-gray-500">
+            <MessageSquare className="w-16 h-16 mx-auto mb-4 text-gray-300" />
+            <p className="text-lg">No inquiries yet</p>
+            <p className="text-sm">Customer inquiries will appear here</p>
           </CardContent>
         </Card>
       ) : (
-        <div className="space-y-3">
-          {inquiries.map((inquiry) => (
-            <Card key={inquiry.id} className="bg-white" data-testid={`inquiry-${inquiry.id}`}>
-              <CardContent className="p-4">
-                <div className="flex items-start justify-between mb-2">
-                  <div className="flex items-center gap-2">
-                    <Badge className={getStatusColor(inquiry.status)}>{inquiry.status}</Badge>
+        <Card>
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Customer</TableHead>
+                <TableHead>Contact</TableHead>
+                <TableHead>Type</TableHead>
+                <TableHead>Message</TableHead>
+                <TableHead>Date</TableHead>
+                <TableHead>Status</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {inquiries.map((inquiry) => (
+                <TableRow key={inquiry.id} data-testid={`inquiry-${inquiry.id}`}>
+                  <TableCell className="font-medium">{inquiry.customerName}</TableCell>
+                  <TableCell>
+                    <div>{inquiry.customerEmail}</div>
+                    <div className="text-sm text-gray-500">{inquiry.customerPhone}</div>
+                  </TableCell>
+                  <TableCell>
                     <Badge variant="outline">{inquiry.inquiryType}</Badge>
-                  </div>
-                  <Select value={inquiry.status} onValueChange={(s) => updateMutation.mutate({ id: inquiry.id, status: s })}>
-                    <SelectTrigger className="w-28" data-testid={`select-inquiry-status-${inquiry.id}`}><SelectValue /></SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="new">New</SelectItem>
-                      <SelectItem value="contacted">Contacted</SelectItem>
-                      <SelectItem value="qualified">Qualified</SelectItem>
-                      <SelectItem value="closed">Closed</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-                <p className="font-medium text-gray-900">{inquiry.customerName}</p>
-                <p className="text-sm text-gray-500">{inquiry.customerEmail} • {inquiry.customerPhone}</p>
-                <p className="mt-2 text-sm text-gray-700">{inquiry.message}</p>
-                <p className="text-xs text-gray-400 mt-2">{new Date(inquiry.createdAt).toLocaleDateString()}</p>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+                  </TableCell>
+                  <TableCell className="max-w-xs">
+                    <p className="truncate text-sm">{inquiry.message}</p>
+                  </TableCell>
+                  <TableCell className="text-gray-500">
+                    {new Date(inquiry.createdAt).toLocaleDateString()}
+                  </TableCell>
+                  <TableCell>
+                    <Select value={inquiry.status} onValueChange={(s) => updateMutation.mutate({ id: inquiry.id, status: s })}>
+                      <SelectTrigger className="w-32" data-testid={`select-inquiry-status-${inquiry.id}`}>
+                        <Badge className={getStatusColor(inquiry.status)}>{inquiry.status}</Badge>
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="new">New</SelectItem>
+                        <SelectItem value="contacted">Contacted</SelectItem>
+                        <SelectItem value="qualified">Qualified</SelectItem>
+                        <SelectItem value="closed">Closed</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </Card>
       )}
     </div>
   );
