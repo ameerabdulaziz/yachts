@@ -219,8 +219,8 @@ export async function registerAdminRoutes(app: Express) {
 
   // ========== FLEET MODEL ROUTES ==========
 
-  // Get all fleet models
-  app.get("/api/admin/fleet-models", async (req, res) => {
+  // Get all fleet models (requires authentication)
+  app.get("/api/admin/fleet-models", adminAuthMiddleware, async (req, res) => {
     try {
       const models = await storage.getAllFleetModels();
       res.json(models);
@@ -229,8 +229,8 @@ export async function registerAdminRoutes(app: Express) {
     }
   });
 
-  // Get single fleet model
-  app.get("/api/admin/fleet-models/:id", async (req, res) => {
+  // Get single fleet model (requires authentication)
+  app.get("/api/admin/fleet-models/:id", adminAuthMiddleware, async (req, res) => {
     try {
       const model = await storage.getFleetModel(req.params.id);
       if (!model) {

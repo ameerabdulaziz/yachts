@@ -8,6 +8,24 @@ Preferred communication style: Simple, everyday language.
 
 # Recent Changes
 
+## De Antonio Admin Tool Implementation (December 1, 2025)
+- **CREATED**: Complete admin tool for De Antonio staff and dealers
+- **DATABASE**: New tables for admin_users, dealers, fleet_models, dealer_boats, boat_calendar, inquiries
+- **AUTHENTICATION**: Username/password login with bcrypt password hashing, session-based auth
+- **ROLES**: Three-tier role system (super_admin, staff, dealer) with appropriate access controls
+- **FLEET MANAGEMENT**: Pre-seeded De Antonio yacht models (D29, D32, D36, D42, D50, D60) with accurate pricing:
+  - D29: €213,750 | D32: €309,000 | D36: €426,000
+  - D42: €650,000 | D50: €950,000 | D60: €2,000,000
+- **DEALER MANAGEMENT**: Create and manage authorized De Antonio dealers with regional assignments
+- **BOAT MANAGEMENT**: Dealers can add boats from official fleet, set prices and fractions
+- **FRACTION CALCULATOR**: Auto-calculates fraction price = total price / number of fractions
+- **CHARTER CALENDAR**: Manage boat availability and seasonal charter rates
+- **INQUIRIES**: Track and manage purchase and charter inquiries with status workflow
+- **ROUTES**: /admin (login), /admin/dashboard (main dashboard with tabs)
+- **DEFAULT CREDENTIALS**: admin / admin123 (super_admin role)
+- **SECURITY**: All admin endpoints protected with authentication middleware
+- **STATUS**: Production-ready admin tool with complete CRUD operations
+
 ## Nauttec Modalities System Implementation (November 26, 2025)
 - **CREATED**: Complete four-way access model system (OWN, EARN, CO-OWN, INVEST)
 - **IMPLEMENTED**: OnboardingScreen with user needs assessment flow (goals, budget, usage vs yield preferences)
