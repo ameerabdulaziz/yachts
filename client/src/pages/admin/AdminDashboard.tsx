@@ -12,7 +12,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { 
   Anchor, Users, Ship, Building2, MessageSquare, LogOut, 
-  Plus, Loader2, MapPin, Menu, X, Euro, Gauge, ChevronRight
+  Plus, Loader2, MapPin, ExternalLink, Gauge
 } from "lucide-react";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 import deAntonioLogo from "@assets/DE-ANTONIO-YACHTS_LOGO-removebg-preview_1754331163197.png";
@@ -101,7 +101,6 @@ export default function AdminDashboard() {
   const { toast } = useToast();
   const [currentUser, setCurrentUser] = useState<AdminUser | null>(null);
   const [activeTab, setActiveTab] = useState("fleet");
-  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
     const stored = localStorage.getItem("adminUser");
@@ -124,14 +123,9 @@ export default function AdminDashboard() {
     setLocation("/admin");
   };
 
-  const handleTabChange = (tabId: string) => {
-    setActiveTab(tabId);
-    setSidebarOpen(false);
-  };
-
   if (!currentUser) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#0E2047]">
+      <div style={{ minWidth: 1280, minHeight: '100vh', background: '#0E2047', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <Loader2 className="w-10 h-10 animate-spin text-white" />
       </div>
     );
@@ -143,98 +137,108 @@ export default function AdminDashboard() {
   const navItems = isAdmin
     ? [
         { id: "fleet", label: "Fleet Models", icon: Ship },
-        { id: "dealers", label: "Dealers", icon: Building2 },
-        { id: "users", label: "Users", icon: Users },
+        { id: "dealers", label: "Dealer Network", icon: Building2 },
+        { id: "users", label: "Admin Users", icon: Users },
       ]
     : [
-        { id: "boats", label: "My Boats", icon: Anchor },
+        { id: "boats", label: "Boat Inventory", icon: Anchor },
         { id: "inquiries", label: "Inquiries", icon: MessageSquare },
       ];
 
-  const currentNavItem = navItems.find(item => item.id === activeTab);
-
   return (
-    <div className="min-h-screen bg-slate-50">
-      {/* Mobile/Tablet Header */}
-      <header className="sticky top-0 z-40 bg-[#0E2047] text-white px-4 h-14 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <button 
-            onClick={() => setSidebarOpen(!sidebarOpen)} 
-            className="p-2 -ml-2 hover:bg-white/10 rounded-lg transition-colors"
-            data-testid="button-menu"
-          >
-            {sidebarOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-          </button>
-          <img src={deAntonioLogo} alt="De Antonio" className="h-6 brightness-0 invert" />
+    <div style={{ minWidth: 1280, minHeight: '100vh', display: 'flex', background: '#f1f5f9' }}>
+      {/* Fixed Sidebar - Always Visible */}
+      <aside style={{ width: 256, flexShrink: 0, background: 'linear-gradient(180deg, #0E2047 0%, #1e3a5f 100%)', display: 'flex', flexDirection: 'column' }}>
+        {/* Logo */}
+        <div style={{ padding: 24, borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
+          <img src={deAntonioLogo} alt="De Antonio Yachts" style={{ height: 32, filter: 'brightness(0) invert(1)' }} />
+          <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: 11, marginTop: 8, fontWeight: 600, letterSpacing: 1, textTransform: 'uppercase' }}>Admin Portal</p>
         </div>
-        <div className="flex items-center gap-2">
-          <Badge className="bg-green-500/20 text-green-300 border-0 text-xs">
-            <span className="w-1.5 h-1.5 rounded-full bg-green-400 mr-1" />Online
-          </Badge>
-        </div>
-      </header>
 
-      {/* Sidebar Overlay */}
-      {sidebarOpen && (
-        <div 
-          className="fixed inset-0 z-30 bg-black/50" 
-          onClick={() => setSidebarOpen(false)}
-        />
-      )}
-
-      {/* Sidebar */}
-      <aside className={`fixed top-14 left-0 z-30 w-64 h-[calc(100vh-3.5rem)] bg-[#0E2047] transform transition-transform duration-200 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
-        <nav className="p-3">
-          <ul className="space-y-1">
-            {navItems.map((item) => (
-              <li key={item.id}>
-                <button
-                  onClick={() => handleTabChange(item.id)}
-                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-colors ${
-                    activeTab === item.id
-                      ? "bg-white/15 text-white"
-                      : "text-white/70 hover:bg-white/10 hover:text-white"
-                  }`}
-                  data-testid={`nav-${item.id}`}
-                >
-                  <item.icon className="w-5 h-5" />
-                  <span className="font-medium">{item.label}</span>
-                </button>
-              </li>
-            ))}
-          </ul>
+        {/* Navigation */}
+        <nav style={{ flex: 1, padding: 16 }}>
+          {navItems.map((item) => {
+            const Icon = item.icon;
+            const isActive = activeTab === item.id;
+            return (
+              <button
+                key={item.id}
+                onClick={() => setActiveTab(item.id)}
+                data-testid={`nav-${item.id}`}
+                style={{
+                  width: '100%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 12,
+                  padding: '12px 16px',
+                  marginBottom: 4,
+                  borderRadius: 8,
+                  border: 'none',
+                  cursor: 'pointer',
+                  textAlign: 'left',
+                  fontSize: 14,
+                  fontWeight: 500,
+                  transition: 'all 0.15s',
+                  background: isActive ? 'rgba(255,255,255,0.15)' : 'transparent',
+                  color: isActive ? '#fff' : 'rgba(255,255,255,0.7)',
+                }}
+              >
+                <Icon style={{ width: 20, height: 20 }} />
+                {item.label}
+              </button>
+            );
+          })}
         </nav>
 
         {/* User Profile */}
-        <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-white/10">
-          <div className="flex items-center gap-3 mb-3">
-            <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center font-bold text-white">
+        <div style={{ padding: 20, borderTop: '1px solid rgba(255,255,255,0.1)' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
+            <div style={{ width: 40, height: 40, borderRadius: 20, background: 'rgba(255,255,255,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 700, fontSize: 14 }}>
               {currentUser.firstName[0]}{currentUser.lastName[0]}
             </div>
-            <div className="flex-1 min-w-0">
-              <p className="text-white font-medium truncate">{currentUser.firstName} {currentUser.lastName}</p>
-              <p className="text-white/50 text-sm">{getRoleLabel(currentUser.role)}</p>
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <p style={{ color: '#fff', fontWeight: 600, fontSize: 14, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                {currentUser.firstName} {currentUser.lastName}
+              </p>
+              <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: 12 }}>{getRoleLabel(currentUser.role)}</p>
             </div>
           </div>
           <Button 
             variant="ghost" 
-            size="sm" 
             onClick={handleLogout} 
-            className="w-full text-white/70 hover:text-white hover:bg-white/10 justify-start"
             data-testid="button-logout"
+            style={{ width: '100%', justifyContent: 'flex-start', color: 'rgba(255,255,255,0.7)' }}
           >
-            <LogOut className="w-4 h-4 mr-2" /> Sign Out
+            <LogOut style={{ width: 16, height: 16, marginRight: 8 }} /> Sign Out
           </Button>
         </div>
       </aside>
 
-      {/* Main Content */}
-      <main className="p-4">
-        {isAdmin && activeTab === "fleet" && <FleetSection />}
-        {isAdmin && activeTab === "dealers" && <DealersSection />}
-        {isAdmin && activeTab === "users" && <UsersSection currentUser={currentUser} />}
-        {isDealer && activeTab === "boats" && <BoatsSection currentUser={currentUser} />}
-        {isDealer && activeTab === "inquiries" && <InquiriesSection currentUser={currentUser} />}
+      {/* Main Content Area */}
+      <main style={{ flex: 1, display: 'flex', flexDirection: 'column', minWidth: 0 }}>
+        {/* Top Header Bar */}
+        <header style={{ height: 64, background: '#fff', borderBottom: '1px solid #e2e8f0', padding: '0 32px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexShrink: 0 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+            <span style={{ color: '#94a3b8', fontSize: 14 }}>Admin</span>
+            <span style={{ color: '#cbd5e1' }}>/</span>
+            <span style={{ color: '#1e293b', fontSize: 14, fontWeight: 600 }}>{navItems.find(n => n.id === activeTab)?.label}</span>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+            <Badge style={{ background: 'rgba(34,197,94,0.1)', color: '#16a34a', border: 'none', display: 'flex', alignItems: 'center', gap: 6 }}>
+              <span style={{ width: 6, height: 6, borderRadius: 3, background: '#22c55e' }} />
+              System Online
+            </Badge>
+          </div>
+        </header>
+
+        {/* Content */}
+        <div style={{ flex: 1, padding: 32, overflowY: 'auto' }}>
+          {isAdmin && activeTab === "fleet" && <FleetSection />}
+          {isAdmin && activeTab === "dealers" && <DealersSection />}
+          {isAdmin && activeTab === "users" && <UsersSection currentUser={currentUser} />}
+          {isDealer && activeTab === "boats" && <BoatsSection currentUser={currentUser} />}
+          {isDealer && activeTab === "inquiries" && <InquiriesSection currentUser={currentUser} />}
+        </div>
       </main>
     </div>
   );
@@ -242,22 +246,12 @@ export default function AdminDashboard() {
 
 function SectionHeader({ title, subtitle, action }: { title: string; subtitle: string; action?: React.ReactNode }) {
   return (
-    <div className="mb-4">
-      <div className="flex items-start justify-between gap-3">
-        <div className="min-w-0">
-          <h1 className="text-xl font-bold text-gray-900">{title}</h1>
-          <p className="text-sm text-gray-500 mt-0.5">{subtitle}</p>
-        </div>
-        {action}
+    <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 24 }}>
+      <div>
+        <h1 style={{ fontSize: 28, fontWeight: 700, color: '#0f172a', margin: 0, letterSpacing: -0.5 }}>{title}</h1>
+        <p style={{ fontSize: 14, color: '#64748b', marginTop: 4 }}>{subtitle}</p>
       </div>
-    </div>
-  );
-}
-
-function DataCard({ children, className = "" }: { children: React.ReactNode; className?: string }) {
-  return (
-    <div className={`bg-white rounded-xl border border-gray-200 shadow-sm p-4 ${className}`}>
-      {children}
+      {action}
     </div>
   );
 }
@@ -291,49 +285,50 @@ function UsersSection({ currentUser }: { currentUser: AdminUser }) {
     createMutation.mutate(data);
   };
 
-  if (isLoading) return <div className="flex justify-center py-12"><Loader2 className="w-8 h-8 animate-spin text-[#0E2047]" /></div>;
+  if (isLoading) return <div style={{ display: 'flex', justifyContent: 'center', padding: 80 }}><Loader2 className="w-8 h-8 animate-spin" style={{ color: '#0E2047' }} /></div>;
 
   return (
     <div>
       <SectionHeader 
         title="Admin Users" 
-        subtitle="Manage accounts"
+        subtitle="Manage administrator accounts and access permissions"
         action={currentUser.role === "super_admin" && (
           <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
             <DialogTrigger asChild>
-              <Button size="sm" className="bg-[#0E2047] hover:bg-[#1a365d]" data-testid="button-add-user">
-                <Plus className="w-4 h-4 mr-1" /> Add
+              <Button style={{ background: '#0E2047' }} data-testid="button-add-user">
+                <Plus style={{ width: 16, height: 16, marginRight: 8 }} /> Add User
               </Button>
             </DialogTrigger>
-            <DialogContent className="max-w-sm mx-4">
+            <DialogContent>
               <DialogHeader>
-                <DialogTitle>Create User</DialogTitle>
-                <DialogDescription>Add a new administrator</DialogDescription>
+                <DialogTitle>Create New User</DialogTitle>
+                <DialogDescription>Add a new administrator to the system</DialogDescription>
               </DialogHeader>
-              <form onSubmit={handleSubmit} className="space-y-3 pt-2">
-                <div className="grid grid-cols-2 gap-2">
-                  <div><Label className="text-xs text-gray-500">First Name</Label><Input value={formData.firstName} onChange={(e) => setFormData({ ...formData, firstName: e.target.value })} className="mt-1" required data-testid="input-first-name" /></div>
-                  <div><Label className="text-xs text-gray-500">Last Name</Label><Input value={formData.lastName} onChange={(e) => setFormData({ ...formData, lastName: e.target.value })} className="mt-1" required data-testid="input-last-name" /></div>
+              <form onSubmit={handleSubmit} className="space-y-4 pt-4">
+                <div className="grid grid-cols-2 gap-4">
+                  <div><Label>First Name</Label><Input value={formData.firstName} onChange={(e) => setFormData({ ...formData, firstName: e.target.value })} className="mt-1" required data-testid="input-first-name" /></div>
+                  <div><Label>Last Name</Label><Input value={formData.lastName} onChange={(e) => setFormData({ ...formData, lastName: e.target.value })} className="mt-1" required data-testid="input-last-name" /></div>
                 </div>
-                <div><Label className="text-xs text-gray-500">Username</Label><Input value={formData.username} onChange={(e) => setFormData({ ...formData, username: e.target.value })} className="mt-1" required data-testid="input-form-username" /></div>
-                <div><Label className="text-xs text-gray-500">Email</Label><Input type="email" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} className="mt-1" required data-testid="input-email" /></div>
-                <div><Label className="text-xs text-gray-500">Password</Label><Input type="password" value={formData.password} onChange={(e) => setFormData({ ...formData, password: e.target.value })} className="mt-1" required data-testid="input-form-password" /></div>
-                <div><Label className="text-xs text-gray-500">Role</Label>
+                <div><Label>Username</Label><Input value={formData.username} onChange={(e) => setFormData({ ...formData, username: e.target.value })} className="mt-1" required data-testid="input-form-username" /></div>
+                <div><Label>Email</Label><Input type="email" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} className="mt-1" required data-testid="input-email" /></div>
+                <div><Label>Password</Label><Input type="password" value={formData.password} onChange={(e) => setFormData({ ...formData, password: e.target.value })} className="mt-1" required data-testid="input-form-password" /></div>
+                <div><Label>Role</Label>
                   <Select value={formData.role} onValueChange={(v) => setFormData({ ...formData, role: v })}>
                     <SelectTrigger className="mt-1" data-testid="select-role"><SelectValue /></SelectTrigger>
                     <SelectContent><SelectItem value="super_admin">Super Admin</SelectItem><SelectItem value="staff">Staff</SelectItem><SelectItem value="dealer">Dealer</SelectItem></SelectContent>
                   </Select>
                 </div>
                 {formData.role === "dealer" && (
-                  <div><Label className="text-xs text-gray-500">Dealer</Label>
+                  <div><Label>Dealer</Label>
                     <Select value={formData.dealerId} onValueChange={(v) => setFormData({ ...formData, dealerId: v })}>
                       <SelectTrigger className="mt-1" data-testid="select-dealer"><SelectValue placeholder="Select dealer" /></SelectTrigger>
                       <SelectContent>{dealers.map((d) => <SelectItem key={d.id} value={d.id}>{d.name}</SelectItem>)}</SelectContent>
                     </Select>
                   </div>
                 )}
-                <DialogFooter className="pt-2">
-                  <Button type="submit" className="w-full bg-[#0E2047] hover:bg-[#1a365d]" disabled={createMutation.isPending} data-testid="button-submit-user">
+                <DialogFooter className="pt-4">
+                  <DialogClose asChild><Button type="button" variant="outline">Cancel</Button></DialogClose>
+                  <Button type="submit" style={{ background: '#0E2047' }} disabled={createMutation.isPending} data-testid="button-submit-user">
                     {createMutation.isPending && <Loader2 className="w-4 h-4 mr-2 animate-spin" />} Create User
                   </Button>
                 </DialogFooter>
@@ -343,28 +338,33 @@ function UsersSection({ currentUser }: { currentUser: AdminUser }) {
         )}
       />
 
-      <div className="space-y-3">
-        {users.map((user) => (
-          <DataCard key={user.id}>
-            <div className="flex items-center justify-between" data-testid={`user-row-${user.id}`}>
-              <div className="flex items-center gap-3 min-w-0">
-                <div className="w-10 h-10 rounded-full bg-[#0E2047]/10 flex items-center justify-center font-bold text-[#0E2047] flex-shrink-0">
-                  {user.firstName[0]}{user.lastName[0]}
-                </div>
-                <div className="min-w-0">
-                  <p className="font-semibold text-gray-900 truncate">{user.firstName} {user.lastName}</p>
-                  <p className="text-sm text-gray-500 truncate">@{user.username}</p>
-                </div>
-              </div>
-              <div className="flex flex-col items-end gap-1 flex-shrink-0">
-                <Badge className={user.isActive ? "bg-green-100 text-green-700 border-0" : "bg-gray-100 text-gray-600 border-0"}>
-                  {user.isActive ? "Active" : "Inactive"}
-                </Badge>
-                <Badge variant="outline" className="text-xs">{getRoleLabel(user.role)}</Badge>
-              </div>
-            </div>
-          </DataCard>
-        ))}
+      <div style={{ background: '#fff', borderRadius: 12, border: '1px solid #e2e8f0', overflow: 'hidden' }}>
+        <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+          <thead>
+            <tr style={{ background: '#f8fafc' }}>
+              <th style={{ textAlign: 'left', padding: '14px 20px', fontSize: 12, fontWeight: 600, color: '#64748b', textTransform: 'uppercase', letterSpacing: 0.5 }}>Name</th>
+              <th style={{ textAlign: 'left', padding: '14px 20px', fontSize: 12, fontWeight: 600, color: '#64748b', textTransform: 'uppercase', letterSpacing: 0.5 }}>Username</th>
+              <th style={{ textAlign: 'left', padding: '14px 20px', fontSize: 12, fontWeight: 600, color: '#64748b', textTransform: 'uppercase', letterSpacing: 0.5 }}>Email</th>
+              <th style={{ textAlign: 'left', padding: '14px 20px', fontSize: 12, fontWeight: 600, color: '#64748b', textTransform: 'uppercase', letterSpacing: 0.5 }}>Role</th>
+              <th style={{ textAlign: 'left', padding: '14px 20px', fontSize: 12, fontWeight: 600, color: '#64748b', textTransform: 'uppercase', letterSpacing: 0.5, width: 100 }}>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {users.map((user, i) => (
+              <tr key={user.id} style={{ background: i % 2 === 1 ? '#f8fafc' : '#fff', borderTop: '1px solid #f1f5f9' }} data-testid={`user-row-${user.id}`}>
+                <td style={{ padding: '16px 20px', fontWeight: 600, color: '#0f172a' }}>{user.firstName} {user.lastName}</td>
+                <td style={{ padding: '16px 20px', color: '#64748b' }}>@{user.username}</td>
+                <td style={{ padding: '16px 20px', color: '#64748b' }}>{user.email}</td>
+                <td style={{ padding: '16px 20px' }}><Badge variant="outline">{getRoleLabel(user.role)}</Badge></td>
+                <td style={{ padding: '16px 20px' }}>
+                  <Badge style={{ background: user.isActive ? '#dcfce7' : '#f1f5f9', color: user.isActive ? '#16a34a' : '#64748b', border: 'none' }}>
+                    {user.isActive ? "Active" : "Inactive"}
+                  </Badge>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );
@@ -389,44 +389,48 @@ function DealersSection() {
     onError: (error: Error) => { toast({ title: "Failed to create dealer", description: error.message, variant: "destructive" }); },
   });
 
-  if (isLoading) return <div className="flex justify-center py-12"><Loader2 className="w-8 h-8 animate-spin text-[#0E2047]" /></div>;
+  if (isLoading) return <div style={{ display: 'flex', justifyContent: 'center', padding: 80 }}><Loader2 className="w-8 h-8 animate-spin" style={{ color: '#0E2047' }} /></div>;
 
   return (
     <div>
       <SectionHeader 
-        title="Dealers" 
-        subtitle="Authorized network"
+        title="Dealer Network" 
+        subtitle="Manage authorized De Antonio yacht dealers worldwide"
         action={
           <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
             <DialogTrigger asChild>
-              <Button size="sm" className="bg-[#0E2047] hover:bg-[#1a365d]" data-testid="button-add-dealer">
-                <Plus className="w-4 h-4 mr-1" /> Add
+              <Button style={{ background: '#0E2047' }} data-testid="button-add-dealer">
+                <Plus style={{ width: 16, height: 16, marginRight: 8 }} /> Add Dealer
               </Button>
             </DialogTrigger>
-            <DialogContent className="max-w-sm mx-4">
+            <DialogContent>
               <DialogHeader>
-                <DialogTitle>Add Dealer</DialogTitle>
-                <DialogDescription>Register authorized dealer</DialogDescription>
+                <DialogTitle>Add New Dealer</DialogTitle>
+                <DialogDescription>Register an authorized De Antonio dealer</DialogDescription>
               </DialogHeader>
-              <form onSubmit={(e) => { e.preventDefault(); createMutation.mutate(formData); }} className="space-y-3 pt-2">
-                <div><Label className="text-xs text-gray-500">Dealer Name</Label><Input value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} className="mt-1" required data-testid="input-dealer-name" /></div>
-                <div><Label className="text-xs text-gray-500">Contact Person</Label><Input value={formData.contactName} onChange={(e) => setFormData({ ...formData, contactName: e.target.value })} className="mt-1" required data-testid="input-contact-name" /></div>
-                <div className="grid grid-cols-2 gap-2">
-                  <div><Label className="text-xs text-gray-500">Email</Label><Input type="email" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} className="mt-1" required data-testid="input-dealer-email" /></div>
-                  <div><Label className="text-xs text-gray-500">Phone</Label><Input value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} className="mt-1" required data-testid="input-dealer-phone" /></div>
+              <form onSubmit={(e) => { e.preventDefault(); createMutation.mutate(formData); }} className="space-y-4 pt-4">
+                <div className="grid grid-cols-2 gap-4">
+                  <div><Label>Dealer Name</Label><Input value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} className="mt-1" required data-testid="input-dealer-name" /></div>
+                  <div><Label>Contact Person</Label><Input value={formData.contactName} onChange={(e) => setFormData({ ...formData, contactName: e.target.value })} className="mt-1" required data-testid="input-contact-name" /></div>
                 </div>
-                <div className="grid grid-cols-2 gap-2">
-                  <div><Label className="text-xs text-gray-500">City</Label><Input value={formData.city} onChange={(e) => setFormData({ ...formData, city: e.target.value })} className="mt-1" required data-testid="input-city" /></div>
-                  <div><Label className="text-xs text-gray-500">Country</Label><Input value={formData.country} onChange={(e) => setFormData({ ...formData, country: e.target.value })} className="mt-1" required data-testid="input-country" /></div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div><Label>Email</Label><Input type="email" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} className="mt-1" required data-testid="input-dealer-email" /></div>
+                  <div><Label>Phone</Label><Input value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} className="mt-1" required data-testid="input-dealer-phone" /></div>
                 </div>
-                <div><Label className="text-xs text-gray-500">Region</Label>
-                  <Select value={formData.region} onValueChange={(v) => setFormData({ ...formData, region: v })}>
-                    <SelectTrigger className="mt-1" data-testid="select-region"><SelectValue /></SelectTrigger>
-                    <SelectContent><SelectItem value="Europe">Europe</SelectItem><SelectItem value="Americas">Americas</SelectItem><SelectItem value="Asia Pacific">Asia Pacific</SelectItem><SelectItem value="Middle East">Middle East</SelectItem></SelectContent>
-                  </Select>
+                <div><Label>Address</Label><Input value={formData.address} onChange={(e) => setFormData({ ...formData, address: e.target.value })} className="mt-1" data-testid="input-address" /></div>
+                <div className="grid grid-cols-3 gap-4">
+                  <div><Label>City</Label><Input value={formData.city} onChange={(e) => setFormData({ ...formData, city: e.target.value })} className="mt-1" required data-testid="input-city" /></div>
+                  <div><Label>Country</Label><Input value={formData.country} onChange={(e) => setFormData({ ...formData, country: e.target.value })} className="mt-1" required data-testid="input-country" /></div>
+                  <div><Label>Region</Label>
+                    <Select value={formData.region} onValueChange={(v) => setFormData({ ...formData, region: v })}>
+                      <SelectTrigger className="mt-1" data-testid="select-region"><SelectValue /></SelectTrigger>
+                      <SelectContent><SelectItem value="Europe">Europe</SelectItem><SelectItem value="Americas">Americas</SelectItem><SelectItem value="Asia Pacific">Asia Pacific</SelectItem><SelectItem value="Middle East">Middle East</SelectItem></SelectContent>
+                    </Select>
+                  </div>
                 </div>
-                <DialogFooter className="pt-2">
-                  <Button type="submit" className="w-full bg-[#0E2047] hover:bg-[#1a365d]" disabled={createMutation.isPending} data-testid="button-submit-dealer">
+                <DialogFooter className="pt-4">
+                  <DialogClose asChild><Button type="button" variant="outline">Cancel</Button></DialogClose>
+                  <Button type="submit" style={{ background: '#0E2047' }} disabled={createMutation.isPending} data-testid="button-submit-dealer">
                     {createMutation.isPending && <Loader2 className="w-4 h-4 mr-2 animate-spin" />} Create Dealer
                   </Button>
                 </DialogFooter>
@@ -437,32 +441,44 @@ function DealersSection() {
       />
 
       {dealers.length === 0 ? (
-        <DataCard className="py-12 text-center">
-          <Building2 className="w-12 h-12 mx-auto mb-3 text-gray-300" />
-          <p className="font-medium text-gray-600">No dealers yet</p>
-          <p className="text-sm text-gray-400">Click "Add" to register one</p>
-        </DataCard>
+        <div style={{ background: '#fff', borderRadius: 12, border: '1px solid #e2e8f0', padding: 80, textAlign: 'center' }}>
+          <Building2 style={{ width: 48, height: 48, margin: '0 auto 16px', color: '#cbd5e1' }} />
+          <p style={{ fontSize: 16, fontWeight: 600, color: '#475569' }}>No dealers registered</p>
+          <p style={{ fontSize: 14, color: '#94a3b8', marginTop: 4 }}>Click "Add Dealer" to register your first dealer</p>
+        </div>
       ) : (
-        <div className="space-y-3">
-          {dealers.map((dealer) => (
-            <DataCard key={dealer.id}>
-              <div className="flex items-start justify-between gap-3" data-testid={`dealer-row-${dealer.id}`}>
-                <div className="min-w-0">
-                  <p className="font-semibold text-gray-900">{dealer.name}</p>
-                  <p className="text-sm text-gray-500">{dealer.contactName}</p>
-                  <div className="flex items-center gap-1 mt-1 text-sm text-gray-400">
-                    <MapPin className="w-3 h-3" />{dealer.city}, {dealer.country}
-                  </div>
-                </div>
-                <div className="flex flex-col items-end gap-1 flex-shrink-0">
-                  <Badge className={dealer.isActive ? "bg-green-100 text-green-700 border-0" : "bg-gray-100 text-gray-600 border-0"}>
-                    {dealer.isActive ? "Active" : "Inactive"}
-                  </Badge>
-                  <Badge variant="outline" className="text-xs">{dealer.region}</Badge>
-                </div>
-              </div>
-            </DataCard>
-          ))}
+        <div style={{ background: '#fff', borderRadius: 12, border: '1px solid #e2e8f0', overflow: 'hidden' }}>
+          <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+            <thead>
+              <tr style={{ background: '#f8fafc' }}>
+                <th style={{ textAlign: 'left', padding: '14px 20px', fontSize: 12, fontWeight: 600, color: '#64748b', textTransform: 'uppercase', letterSpacing: 0.5 }}>Dealer</th>
+                <th style={{ textAlign: 'left', padding: '14px 20px', fontSize: 12, fontWeight: 600, color: '#64748b', textTransform: 'uppercase', letterSpacing: 0.5 }}>Contact</th>
+                <th style={{ textAlign: 'left', padding: '14px 20px', fontSize: 12, fontWeight: 600, color: '#64748b', textTransform: 'uppercase', letterSpacing: 0.5 }}>Location</th>
+                <th style={{ textAlign: 'left', padding: '14px 20px', fontSize: 12, fontWeight: 600, color: '#64748b', textTransform: 'uppercase', letterSpacing: 0.5 }}>Region</th>
+                <th style={{ textAlign: 'left', padding: '14px 20px', fontSize: 12, fontWeight: 600, color: '#64748b', textTransform: 'uppercase', letterSpacing: 0.5, width: 100 }}>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {dealers.map((dealer, i) => (
+                <tr key={dealer.id} style={{ background: i % 2 === 1 ? '#f8fafc' : '#fff', borderTop: '1px solid #f1f5f9' }} data-testid={`dealer-row-${dealer.id}`}>
+                  <td style={{ padding: '16px 20px' }}>
+                    <p style={{ fontWeight: 600, color: '#0f172a', margin: 0 }}>{dealer.name}</p>
+                  </td>
+                  <td style={{ padding: '16px 20px' }}>
+                    <p style={{ color: '#0f172a', margin: 0 }}>{dealer.contactName}</p>
+                    <p style={{ color: '#64748b', fontSize: 13, margin: 0 }}>{dealer.email}</p>
+                  </td>
+                  <td style={{ padding: '16px 20px', color: '#475569' }}>{dealer.city}, {dealer.country}</td>
+                  <td style={{ padding: '16px 20px' }}><Badge variant="outline">{dealer.region}</Badge></td>
+                  <td style={{ padding: '16px 20px' }}>
+                    <Badge style={{ background: dealer.isActive ? '#dcfce7' : '#f1f5f9', color: dealer.isActive ? '#16a34a' : '#64748b', border: 'none' }}>
+                      {dealer.isActive ? "Active" : "Inactive"}
+                    </Badge>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       )}
     </div>
@@ -488,45 +504,46 @@ function FleetSection() {
     onError: (error: Error) => { toast({ title: "Failed to add yacht", description: error.message, variant: "destructive" }); },
   });
 
-  if (isLoading) return <div className="flex justify-center py-12"><Loader2 className="w-8 h-8 animate-spin text-[#0E2047]" /></div>;
+  if (isLoading) return <div style={{ display: 'flex', justifyContent: 'center', padding: 80 }}><Loader2 className="w-8 h-8 animate-spin" style={{ color: '#0E2047' }} /></div>;
 
   return (
     <div>
       <SectionHeader 
         title="Fleet Models" 
-        subtitle="Official De Antonio lineup"
+        subtitle="Official De Antonio yacht lineup with specifications and pricing"
         action={
           <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
             <DialogTrigger asChild>
-              <Button size="sm" className="bg-[#0E2047] hover:bg-[#1a365d]" data-testid="button-add-fleet-model">
-                <Plus className="w-4 h-4 mr-1" /> Add
+              <Button style={{ background: '#0E2047' }} data-testid="button-add-fleet-model">
+                <Plus style={{ width: 16, height: 16, marginRight: 8 }} /> Add Yacht
               </Button>
             </DialogTrigger>
-            <DialogContent className="max-w-sm mx-4">
+            <DialogContent className="max-w-xl">
               <DialogHeader>
-                <DialogTitle>Add Yacht</DialogTitle>
-                <DialogDescription>New fleet model</DialogDescription>
+                <DialogTitle>Add New Yacht to Fleet</DialogTitle>
+                <DialogDescription>Register a new De Antonio yacht model</DialogDescription>
               </DialogHeader>
-              <form onSubmit={(e) => { e.preventDefault(); createMutation.mutate({ ...formData, images: formData.images.filter(img => img.trim()) }); }} className="space-y-3 pt-2 max-h-[60vh] overflow-y-auto">
-                <div className="grid grid-cols-2 gap-2">
-                  <div><Label className="text-xs text-gray-500">Model Code</Label><Input value={formData.modelName} onChange={(e) => setFormData({ ...formData, modelName: e.target.value })} placeholder="D42" className="mt-1" required data-testid="input-model-name" /></div>
-                  <div><Label className="text-xs text-gray-500">Display Name</Label><Input value={formData.displayName} onChange={(e) => setFormData({ ...formData, displayName: e.target.value })} placeholder="De Antonio D42" className="mt-1" required data-testid="input-display-name" /></div>
+              <form onSubmit={(e) => { e.preventDefault(); createMutation.mutate({ ...formData, images: formData.images.filter(img => img.trim()) }); }} className="space-y-4 pt-4">
+                <div className="grid grid-cols-2 gap-4">
+                  <div><Label>Model Code</Label><Input value={formData.modelName} onChange={(e) => setFormData({ ...formData, modelName: e.target.value })} placeholder="D42" className="mt-1" required data-testid="input-model-name" /></div>
+                  <div><Label>Display Name</Label><Input value={formData.displayName} onChange={(e) => setFormData({ ...formData, displayName: e.target.value })} placeholder="De Antonio D42" className="mt-1" required data-testid="input-display-name" /></div>
                 </div>
-                <div className="grid grid-cols-2 gap-2">
-                  <div><Label className="text-xs text-gray-500">Length (m)</Label><Input type="number" step="0.1" value={formData.lengthMeters} onChange={(e) => setFormData({ ...formData, lengthMeters: e.target.value })} className="mt-1" required data-testid="input-length" /></div>
-                  <div><Label className="text-xs text-gray-500">Beam (m)</Label><Input type="number" step="0.1" value={formData.beamMeters} onChange={(e) => setFormData({ ...formData, beamMeters: e.target.value })} className="mt-1" required data-testid="input-beam" /></div>
+                <div><Label>Description</Label><Textarea value={formData.description} onChange={(e) => setFormData({ ...formData, description: e.target.value })} rows={2} className="mt-1" data-testid="input-description" /></div>
+                <div className="grid grid-cols-4 gap-4">
+                  <div><Label>Length (m)</Label><Input type="number" step="0.1" value={formData.lengthMeters} onChange={(e) => setFormData({ ...formData, lengthMeters: e.target.value })} className="mt-1" required data-testid="input-length" /></div>
+                  <div><Label>Beam (m)</Label><Input type="number" step="0.1" value={formData.beamMeters} onChange={(e) => setFormData({ ...formData, beamMeters: e.target.value })} className="mt-1" required data-testid="input-beam" /></div>
+                  <div><Label>Passengers</Label><Input type="number" value={formData.maxCapacity} onChange={(e) => setFormData({ ...formData, maxCapacity: parseInt(e.target.value) || 0 })} className="mt-1" required data-testid="input-capacity" /></div>
+                  <div><Label>Cabins</Label><Input type="number" value={formData.cabins} onChange={(e) => setFormData({ ...formData, cabins: parseInt(e.target.value) || 0 })} className="mt-1" required data-testid="input-cabins" /></div>
                 </div>
-                <div className="grid grid-cols-2 gap-2">
-                  <div><Label className="text-xs text-gray-500">Passengers</Label><Input type="number" value={formData.maxCapacity} onChange={(e) => setFormData({ ...formData, maxCapacity: parseInt(e.target.value) || 0 })} className="mt-1" required data-testid="input-capacity" /></div>
-                  <div><Label className="text-xs text-gray-500">Cabins</Label><Input type="number" value={formData.cabins} onChange={(e) => setFormData({ ...formData, cabins: parseInt(e.target.value) || 0 })} className="mt-1" required data-testid="input-cabins" /></div>
+                <div className="grid grid-cols-3 gap-4">
+                  <div><Label>Engines</Label><Input value={formData.engines} onChange={(e) => setFormData({ ...formData, engines: e.target.value })} placeholder="2x Mercury 450hp" className="mt-1" data-testid="input-engines" /></div>
+                  <div><Label>Max Speed</Label><Input value={formData.maxSpeed} onChange={(e) => setFormData({ ...formData, maxSpeed: e.target.value })} placeholder="45 knots" className="mt-1" data-testid="input-speed" /></div>
+                  <div><Label>Base Price (€)</Label><Input type="number" value={formData.basePrice} onChange={(e) => setFormData({ ...formData, basePrice: e.target.value })} className="mt-1" required data-testid="input-base-price" /></div>
                 </div>
-                <div><Label className="text-xs text-gray-500">Engines</Label><Input value={formData.engines} onChange={(e) => setFormData({ ...formData, engines: e.target.value })} placeholder="2x Mercury 450hp" className="mt-1" data-testid="input-engines" /></div>
-                <div className="grid grid-cols-2 gap-2">
-                  <div><Label className="text-xs text-gray-500">Max Speed</Label><Input value={formData.maxSpeed} onChange={(e) => setFormData({ ...formData, maxSpeed: e.target.value })} placeholder="45 knots" className="mt-1" data-testid="input-speed" /></div>
-                  <div><Label className="text-xs text-gray-500">Price (€)</Label><Input type="number" value={formData.basePrice} onChange={(e) => setFormData({ ...formData, basePrice: e.target.value })} className="mt-1" required data-testid="input-base-price" /></div>
-                </div>
-                <DialogFooter className="pt-2">
-                  <Button type="submit" className="w-full bg-[#0E2047] hover:bg-[#1a365d]" disabled={createMutation.isPending} data-testid="button-submit-fleet-model">
+                <div><Label>Image URL</Label><Input value={formData.images[0]} onChange={(e) => setFormData({ ...formData, images: [e.target.value] })} placeholder="https://..." className="mt-1" data-testid="input-image-url" /></div>
+                <DialogFooter className="pt-4">
+                  <DialogClose asChild><Button type="button" variant="outline">Cancel</Button></DialogClose>
+                  <Button type="submit" style={{ background: '#0E2047' }} disabled={createMutation.isPending} data-testid="button-submit-fleet-model">
                     {createMutation.isPending && <Loader2 className="w-4 h-4 mr-2 animate-spin" />} Add to Fleet
                   </Button>
                 </DialogFooter>
@@ -536,36 +553,50 @@ function FleetSection() {
         }
       />
 
-      <div className="space-y-3">
-        {models.map((model) => (
-          <DataCard key={model.id}>
-            <div className="flex gap-3" data-testid={`fleet-model-${model.id}`}>
-              {model.images?.[0] ? (
-                <img src={model.images[0]} alt={model.displayName} className="w-24 h-16 object-cover rounded-lg flex-shrink-0" />
-              ) : (
-                <div className="w-24 h-16 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <Ship className="w-6 h-6 text-gray-400" />
-                </div>
-              )}
-              <div className="flex-1 min-w-0">
-                <div className="flex items-start justify-between gap-2">
-                  <div className="min-w-0">
-                    <p className="font-bold text-gray-900 truncate">{model.displayName}</p>
-                    <p className="text-xs text-gray-500">{model.modelName}</p>
-                  </div>
-                  <p className="text-lg font-bold text-[#0E2047] flex-shrink-0">€{Number(model.basePrice).toLocaleString()}</p>
-                </div>
-                <div className="flex flex-wrap gap-2 mt-2 text-xs text-gray-500">
-                  <span>{model.lengthMeters}m</span>
-                  <span>•</span>
-                  <span>{model.maxCapacity} pax</span>
-                  <span>•</span>
-                  <span>{model.cabins} cabin{Number(model.cabins) !== 1 ? 's' : ''}</span>
-                </div>
-              </div>
-            </div>
-          </DataCard>
-        ))}
+      <div style={{ background: '#fff', borderRadius: 12, border: '1px solid #e2e8f0', overflow: 'hidden' }}>
+        <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+          <thead>
+            <tr style={{ background: '#f8fafc' }}>
+              <th style={{ textAlign: 'left', padding: '14px 20px', fontSize: 12, fontWeight: 600, color: '#64748b', textTransform: 'uppercase', letterSpacing: 0.5, width: 100 }}>Image</th>
+              <th style={{ textAlign: 'left', padding: '14px 20px', fontSize: 12, fontWeight: 600, color: '#64748b', textTransform: 'uppercase', letterSpacing: 0.5 }}>Model</th>
+              <th style={{ textAlign: 'left', padding: '14px 20px', fontSize: 12, fontWeight: 600, color: '#64748b', textTransform: 'uppercase', letterSpacing: 0.5 }}>Specifications</th>
+              <th style={{ textAlign: 'left', padding: '14px 20px', fontSize: 12, fontWeight: 600, color: '#64748b', textTransform: 'uppercase', letterSpacing: 0.5 }}>Performance</th>
+              <th style={{ textAlign: 'right', padding: '14px 20px', fontSize: 12, fontWeight: 600, color: '#64748b', textTransform: 'uppercase', letterSpacing: 0.5, width: 140 }}>Base Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            {models.map((model, i) => (
+              <tr key={model.id} style={{ background: i % 2 === 1 ? '#f8fafc' : '#fff', borderTop: '1px solid #f1f5f9' }} data-testid={`fleet-model-${model.id}`}>
+                <td style={{ padding: '16px 20px' }}>
+                  {model.images?.[0] ? (
+                    <img src={model.images[0]} alt={model.displayName} style={{ width: 80, height: 56, objectFit: 'cover', borderRadius: 8 }} />
+                  ) : (
+                    <div style={{ width: 80, height: 56, background: '#f1f5f9', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <Ship style={{ width: 24, height: 24, color: '#94a3b8' }} />
+                    </div>
+                  )}
+                </td>
+                <td style={{ padding: '16px 20px' }}>
+                  <p style={{ fontWeight: 700, color: '#0f172a', fontSize: 16, margin: 0 }}>{model.displayName}</p>
+                  <p style={{ color: '#64748b', fontSize: 13, margin: 0 }}>{model.modelName}</p>
+                </td>
+                <td style={{ padding: '16px 20px' }}>
+                  <p style={{ color: '#0f172a', margin: 0 }}>{model.lengthMeters}m × {model.beamMeters}m</p>
+                  <p style={{ color: '#64748b', fontSize: 13, margin: 0 }}>{model.maxCapacity} passengers • {model.cabins} cabin{Number(model.cabins) !== 1 ? 's' : ''}</p>
+                </td>
+                <td style={{ padding: '16px 20px' }}>
+                  <p style={{ color: '#0f172a', margin: 0 }}>{model.engines}</p>
+                  <p style={{ color: '#64748b', fontSize: 13, margin: 0, display: 'flex', alignItems: 'center', gap: 4 }}>
+                    <Gauge style={{ width: 12, height: 12 }} /> {model.maxSpeed}
+                  </p>
+                </td>
+                <td style={{ padding: '16px 20px', textAlign: 'right' }}>
+                  <p style={{ fontWeight: 700, color: '#0E2047', fontSize: 18, margin: 0 }}>€{Number(model.basePrice).toLocaleString()}</p>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );
@@ -599,56 +630,58 @@ function BoatsSection({ currentUser }: { currentUser: AdminUser }) {
   const calculatedFractionPrice = formData.totalPrice && formData.numberOfFractions ? (Number(formData.totalPrice) / formData.numberOfFractions) : 0;
   const getModelName = (modelId: string) => fleetModels.find(m => m.id === modelId)?.displayName || "Unknown";
 
-  if (isLoading) return <div className="flex justify-center py-12"><Loader2 className="w-8 h-8 animate-spin text-[#0E2047]" /></div>;
+  if (isLoading) return <div style={{ display: 'flex', justifyContent: 'center', padding: 80 }}><Loader2 className="w-8 h-8 animate-spin" style={{ color: '#0E2047' }} /></div>;
 
   return (
     <div>
       <SectionHeader 
-        title="My Boats" 
-        subtitle="Inventory management"
+        title="Boat Inventory" 
+        subtitle="Manage your boats available for sale and charter"
         action={
           <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
             <DialogTrigger asChild>
-              <Button size="sm" className="bg-[#0E2047] hover:bg-[#1a365d]" data-testid="button-add-boat">
-                <Plus className="w-4 h-4 mr-1" /> Add
+              <Button style={{ background: '#0E2047' }} data-testid="button-add-boat">
+                <Plus style={{ width: 16, height: 16, marginRight: 8 }} /> Add Boat
               </Button>
             </DialogTrigger>
-            <DialogContent className="max-w-sm mx-4">
+            <DialogContent>
               <DialogHeader>
-                <DialogTitle>Add Boat</DialogTitle>
-                <DialogDescription>Add to your inventory</DialogDescription>
+                <DialogTitle>Add New Boat</DialogTitle>
+                <DialogDescription>Add a boat to your inventory</DialogDescription>
               </DialogHeader>
-              <form onSubmit={(e) => { e.preventDefault(); createMutation.mutate(formData); }} className="space-y-3 pt-2 max-h-[60vh] overflow-y-auto">
-                <div><Label className="text-xs text-gray-500">Fleet Model</Label>
+              <form onSubmit={(e) => { e.preventDefault(); createMutation.mutate(formData); }} className="space-y-4 pt-4">
+                <div><Label>Fleet Model</Label>
                   <Select value={formData.fleetModelId} onValueChange={handleModelChange}>
-                    <SelectTrigger className="mt-1" data-testid="select-fleet-model"><SelectValue placeholder="Select model" /></SelectTrigger>
-                    <SelectContent>{fleetModels.map((m) => <SelectItem key={m.id} value={m.id}>{m.displayName}</SelectItem>)}</SelectContent>
+                    <SelectTrigger className="mt-1" data-testid="select-fleet-model"><SelectValue placeholder="Select a model" /></SelectTrigger>
+                    <SelectContent>{fleetModels.map((m) => <SelectItem key={m.id} value={m.id}>{m.displayName} — €{Number(m.basePrice).toLocaleString()}</SelectItem>)}</SelectContent>
                   </Select>
                 </div>
-                <div><Label className="text-xs text-gray-500">Boat Name</Label><Input value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} className="mt-1" required data-testid="input-boat-name" /></div>
-                <div className="grid grid-cols-2 gap-2">
-                  <div><Label className="text-xs text-gray-500">Price (€)</Label><Input type="number" value={formData.totalPrice} onChange={(e) => setFormData({ ...formData, totalPrice: e.target.value })} className="mt-1" required data-testid="input-total-price" /></div>
-                  <div><Label className="text-xs text-gray-500">Fractions</Label>
+                <div><Label>Boat Name</Label><Input value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} className="mt-1" required data-testid="input-boat-name" /></div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div><Label>Total Price (€)</Label><Input type="number" value={formData.totalPrice} onChange={(e) => setFormData({ ...formData, totalPrice: e.target.value })} className="mt-1" required data-testid="input-total-price" /></div>
+                  <div><Label>Number of Fractions</Label>
                     <Select value={formData.numberOfFractions.toString()} onValueChange={(v) => setFormData({ ...formData, numberOfFractions: parseInt(v) })}>
                       <SelectTrigger className="mt-1" data-testid="select-fractions"><SelectValue /></SelectTrigger>
-                      <SelectContent>{[2, 3, 4, 5, 6, 8, 10].map((n) => <SelectItem key={n} value={n.toString()}>1/{n}</SelectItem>)}</SelectContent>
+                      <SelectContent>{[2, 3, 4, 5, 6, 8, 10].map((n) => <SelectItem key={n} value={n.toString()}>1/{n} share</SelectItem>)}</SelectContent>
                     </Select>
                   </div>
                 </div>
-                <div className="bg-[#0E2047] rounded-lg p-3 text-white">
-                  <p className="text-xs text-white/70">Fraction Price</p>
-                  <p className="text-2xl font-bold">€{calculatedFractionPrice.toLocaleString()}</p>
+                <div style={{ background: 'linear-gradient(135deg, #0E2047 0%, #1e3a5f 100%)', borderRadius: 12, padding: 20 }}>
+                  <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: 12, fontWeight: 600, textTransform: 'uppercase', letterSpacing: 0.5, margin: 0 }}>Calculated Fraction Price</p>
+                  <p style={{ color: '#fff', fontSize: 32, fontWeight: 700, margin: '8px 0 0' }}>€{calculatedFractionPrice.toLocaleString()}</p>
                 </div>
-                <div className="grid grid-cols-2 gap-2">
-                  <div><Label className="text-xs text-gray-500">Location</Label><Input value={formData.location} onChange={(e) => setFormData({ ...formData, location: e.target.value })} className="mt-1" data-testid="input-location" /></div>
-                  <div><Label className="text-xs text-gray-500">Home Port</Label><Input value={formData.homePort} onChange={(e) => setFormData({ ...formData, homePort: e.target.value })} className="mt-1" data-testid="input-home-port" /></div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div><Label>Location</Label><Input value={formData.location} onChange={(e) => setFormData({ ...formData, location: e.target.value })} className="mt-1" data-testid="input-location" /></div>
+                  <div><Label>Home Port</Label><Input value={formData.homePort} onChange={(e) => setFormData({ ...formData, homePort: e.target.value })} className="mt-1" data-testid="input-home-port" /></div>
                 </div>
-                <div className="flex gap-4 py-1">
-                  <label className="flex items-center gap-2"><Switch checked={formData.availableForSale} onCheckedChange={(c) => setFormData({ ...formData, availableForSale: c })} data-testid="switch-for-sale" /><span className="text-sm">Sale</span></label>
-                  <label className="flex items-center gap-2"><Switch checked={formData.availableForCharter} onCheckedChange={(c) => setFormData({ ...formData, availableForCharter: c })} data-testid="switch-for-charter" /><span className="text-sm">Charter</span></label>
+                <div className="flex items-center gap-8 py-2">
+                  <label className="flex items-center gap-2 cursor-pointer"><Switch checked={formData.availableForSale} onCheckedChange={(c) => setFormData({ ...formData, availableForSale: c })} data-testid="switch-for-sale" /><span>For Sale</span></label>
+                  <label className="flex items-center gap-2 cursor-pointer"><Switch checked={formData.availableForCharter} onCheckedChange={(c) => setFormData({ ...formData, availableForCharter: c })} data-testid="switch-for-charter" /><span>For Charter</span></label>
                 </div>
-                <DialogFooter className="pt-2">
-                  <Button type="submit" className="w-full bg-[#0E2047] hover:bg-[#1a365d]" disabled={createMutation.isPending} data-testid="button-submit-boat">
+                {formData.availableForCharter && <div><Label>Daily Charter Rate (€)</Label><Input type="number" value={formData.charterDailyRate} onChange={(e) => setFormData({ ...formData, charterDailyRate: e.target.value })} className="mt-1" data-testid="input-charter-rate" /></div>}
+                <DialogFooter className="pt-4">
+                  <DialogClose asChild><Button type="button" variant="outline">Cancel</Button></DialogClose>
+                  <Button type="submit" style={{ background: '#0E2047' }} disabled={createMutation.isPending} data-testid="button-submit-boat">
                     {createMutation.isPending && <Loader2 className="w-4 h-4 mr-2 animate-spin" />} Add Boat
                   </Button>
                 </DialogFooter>
@@ -659,45 +692,64 @@ function BoatsSection({ currentUser }: { currentUser: AdminUser }) {
       />
 
       {boats.length === 0 ? (
-        <DataCard className="py-12 text-center">
-          <Anchor className="w-12 h-12 mx-auto mb-3 text-gray-300" />
-          <p className="font-medium text-gray-600">No boats yet</p>
-          <p className="text-sm text-gray-400">Click "Add" to add your first boat</p>
-        </DataCard>
+        <div style={{ background: '#fff', borderRadius: 12, border: '1px solid #e2e8f0', padding: 80, textAlign: 'center' }}>
+          <Anchor style={{ width: 48, height: 48, margin: '0 auto 16px', color: '#cbd5e1' }} />
+          <p style={{ fontSize: 16, fontWeight: 600, color: '#475569' }}>No boats in inventory</p>
+          <p style={{ fontSize: 14, color: '#94a3b8', marginTop: 4 }}>Click "Add Boat" to add your first boat</p>
+        </div>
       ) : (
-        <div className="space-y-3">
-          {boats.map((boat) => {
-            const model = fleetModels.find(m => m.id === boat.fleetModelId);
-            return (
-              <DataCard key={boat.id}>
-                <div className="flex gap-3" data-testid={`boat-row-${boat.id}`}>
-                  {model?.images?.[0] ? (
-                    <img src={model.images[0]} alt={boat.name} className="w-20 h-14 object-cover rounded-lg flex-shrink-0" />
-                  ) : (
-                    <div className="w-20 h-14 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <Anchor className="w-5 h-5 text-gray-400" />
-                    </div>
-                  )}
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-start justify-between gap-2">
-                      <div className="min-w-0">
-                        <p className="font-bold text-gray-900 truncate">{boat.name}</p>
-                        <p className="text-xs text-gray-500">{getModelName(boat.fleetModelId)}</p>
+        <div style={{ background: '#fff', borderRadius: 12, border: '1px solid #e2e8f0', overflow: 'hidden' }}>
+          <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+            <thead>
+              <tr style={{ background: '#f8fafc' }}>
+                <th style={{ textAlign: 'left', padding: '14px 20px', fontSize: 12, fontWeight: 600, color: '#64748b', textTransform: 'uppercase', letterSpacing: 0.5, width: 100 }}>Image</th>
+                <th style={{ textAlign: 'left', padding: '14px 20px', fontSize: 12, fontWeight: 600, color: '#64748b', textTransform: 'uppercase', letterSpacing: 0.5 }}>Boat</th>
+                <th style={{ textAlign: 'left', padding: '14px 20px', fontSize: 12, fontWeight: 600, color: '#64748b', textTransform: 'uppercase', letterSpacing: 0.5 }}>Location</th>
+                <th style={{ textAlign: 'left', padding: '14px 20px', fontSize: 12, fontWeight: 600, color: '#64748b', textTransform: 'uppercase', letterSpacing: 0.5 }}>Fractions</th>
+                <th style={{ textAlign: 'right', padding: '14px 20px', fontSize: 12, fontWeight: 600, color: '#64748b', textTransform: 'uppercase', letterSpacing: 0.5 }}>Price</th>
+                <th style={{ textAlign: 'left', padding: '14px 20px', fontSize: 12, fontWeight: 600, color: '#64748b', textTransform: 'uppercase', letterSpacing: 0.5 }}>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {boats.map((boat, i) => {
+                const model = fleetModels.find(m => m.id === boat.fleetModelId);
+                return (
+                  <tr key={boat.id} style={{ background: i % 2 === 1 ? '#f8fafc' : '#fff', borderTop: '1px solid #f1f5f9' }} data-testid={`boat-row-${boat.id}`}>
+                    <td style={{ padding: '16px 20px' }}>
+                      {model?.images?.[0] ? (
+                        <img src={model.images[0]} alt={boat.name} style={{ width: 80, height: 56, objectFit: 'cover', borderRadius: 8 }} />
+                      ) : (
+                        <div style={{ width: 80, height: 56, background: '#f1f5f9', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                          <Anchor style={{ width: 24, height: 24, color: '#94a3b8' }} />
+                        </div>
+                      )}
+                    </td>
+                    <td style={{ padding: '16px 20px' }}>
+                      <p style={{ fontWeight: 700, color: '#0f172a', margin: 0 }}>{boat.name}</p>
+                      <p style={{ color: '#64748b', fontSize: 13, margin: 0 }}>{getModelName(boat.fleetModelId)}</p>
+                    </td>
+                    <td style={{ padding: '16px 20px' }}>
+                      <p style={{ color: '#0f172a', margin: 0, display: 'flex', alignItems: 'center', gap: 4 }}><MapPin style={{ width: 14, height: 14, color: '#94a3b8' }} /> {boat.location || 'N/A'}</p>
+                      <p style={{ color: '#64748b', fontSize: 13, margin: 0 }}>{boat.homePort}</p>
+                    </td>
+                    <td style={{ padding: '16px 20px' }}>
+                      <p style={{ fontWeight: 600, color: '#0f172a', margin: 0 }}>{boat.numberOfFractions} shares</p>
+                      <p style={{ color: '#64748b', fontSize: 13, margin: 0 }}>€{Number(boat.fractionPrice).toLocaleString()} each</p>
+                    </td>
+                    <td style={{ padding: '16px 20px', textAlign: 'right' }}>
+                      <p style={{ fontWeight: 700, color: '#0E2047', fontSize: 18, margin: 0 }}>€{Number(boat.totalPrice).toLocaleString()}</p>
+                    </td>
+                    <td style={{ padding: '16px 20px' }}>
+                      <div style={{ display: 'flex', gap: 4 }}>
+                        {boat.availableForSale && <Badge style={{ background: '#dcfce7', color: '#16a34a', border: 'none' }}>Sale</Badge>}
+                        {boat.availableForCharter && <Badge style={{ background: '#dbeafe', color: '#2563eb', border: 'none' }}>Charter</Badge>}
                       </div>
-                      <p className="text-lg font-bold text-[#0E2047] flex-shrink-0">€{Number(boat.totalPrice).toLocaleString()}</p>
-                    </div>
-                    <div className="flex items-center gap-2 mt-2">
-                      <span className="text-xs text-gray-500">{boat.numberOfFractions} shares @ €{Number(boat.fractionPrice).toLocaleString()}</span>
-                      <div className="flex gap-1 ml-auto">
-                        {boat.availableForSale && <Badge className="bg-green-100 text-green-700 border-0 text-xs">Sale</Badge>}
-                        {boat.availableForCharter && <Badge className="bg-blue-100 text-blue-700 border-0 text-xs">Charter</Badge>}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </DataCard>
-            );
-          })}
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
         </div>
       )}
     </div>
@@ -715,51 +767,65 @@ function InquiriesSection({ currentUser }: { currentUser: AdminUser }) {
   });
 
   const getStatusColor = (status: string) => {
-    switch (status) { case "new": return "bg-red-100 text-red-700"; case "contacted": return "bg-yellow-100 text-yellow-700"; case "qualified": return "bg-green-100 text-green-700"; default: return "bg-gray-100 text-gray-600"; }
+    switch (status) { case "new": return { bg: '#fee2e2', color: '#dc2626' }; case "contacted": return { bg: '#fef3c7', color: '#d97706' }; case "qualified": return { bg: '#dcfce7', color: '#16a34a' }; default: return { bg: '#f1f5f9', color: '#64748b' }; }
   };
 
-  if (isLoading) return <div className="flex justify-center py-12"><Loader2 className="w-8 h-8 animate-spin text-[#0E2047]" /></div>;
+  if (isLoading) return <div style={{ display: 'flex', justifyContent: 'center', padding: 80 }}><Loader2 className="w-8 h-8 animate-spin" style={{ color: '#0E2047' }} /></div>;
 
   return (
     <div>
-      <SectionHeader title="Inquiries" subtitle="Customer requests" />
+      <SectionHeader title="Customer Inquiries" subtitle="Manage and respond to purchase and charter inquiries" />
 
       {inquiries.length === 0 ? (
-        <DataCard className="py-12 text-center">
-          <MessageSquare className="w-12 h-12 mx-auto mb-3 text-gray-300" />
-          <p className="font-medium text-gray-600">No inquiries yet</p>
-          <p className="text-sm text-gray-400">Inquiries will appear here</p>
-        </DataCard>
+        <div style={{ background: '#fff', borderRadius: 12, border: '1px solid #e2e8f0', padding: 80, textAlign: 'center' }}>
+          <MessageSquare style={{ width: 48, height: 48, margin: '0 auto 16px', color: '#cbd5e1' }} />
+          <p style={{ fontSize: 16, fontWeight: 600, color: '#475569' }}>No inquiries yet</p>
+          <p style={{ fontSize: 14, color: '#94a3b8', marginTop: 4 }}>Customer inquiries will appear here</p>
+        </div>
       ) : (
-        <div className="space-y-3">
-          {inquiries.map((inquiry) => (
-            <DataCard key={inquiry.id}>
-              <div data-testid={`inquiry-${inquiry.id}`}>
-                <div className="flex items-start justify-between gap-2 mb-2">
-                  <div className="min-w-0">
-                    <p className="font-semibold text-gray-900">{inquiry.customerName}</p>
-                    <p className="text-sm text-gray-500 truncate">{inquiry.customerEmail}</p>
-                  </div>
-                  <Select value={inquiry.status} onValueChange={(s) => updateMutation.mutate({ id: inquiry.id, status: s })}>
-                    <SelectTrigger className="w-28 h-8" data-testid={`select-inquiry-status-${inquiry.id}`}>
-                      <Badge className={`${getStatusColor(inquiry.status)} border-0`}>{inquiry.status}</Badge>
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="new">New</SelectItem>
-                      <SelectItem value="contacted">Contacted</SelectItem>
-                      <SelectItem value="qualified">Qualified</SelectItem>
-                      <SelectItem value="closed">Closed</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-                <p className="text-sm text-gray-600 line-clamp-2">{inquiry.message}</p>
-                <div className="flex items-center justify-between mt-2 text-xs text-gray-400">
-                  <Badge variant="outline">{inquiry.inquiryType}</Badge>
-                  <span>{new Date(inquiry.createdAt).toLocaleDateString()}</span>
-                </div>
-              </div>
-            </DataCard>
-          ))}
+        <div style={{ background: '#fff', borderRadius: 12, border: '1px solid #e2e8f0', overflow: 'hidden' }}>
+          <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+            <thead>
+              <tr style={{ background: '#f8fafc' }}>
+                <th style={{ textAlign: 'left', padding: '14px 20px', fontSize: 12, fontWeight: 600, color: '#64748b', textTransform: 'uppercase', letterSpacing: 0.5 }}>Customer</th>
+                <th style={{ textAlign: 'left', padding: '14px 20px', fontSize: 12, fontWeight: 600, color: '#64748b', textTransform: 'uppercase', letterSpacing: 0.5 }}>Contact</th>
+                <th style={{ textAlign: 'left', padding: '14px 20px', fontSize: 12, fontWeight: 600, color: '#64748b', textTransform: 'uppercase', letterSpacing: 0.5 }}>Type</th>
+                <th style={{ textAlign: 'left', padding: '14px 20px', fontSize: 12, fontWeight: 600, color: '#64748b', textTransform: 'uppercase', letterSpacing: 0.5 }}>Message</th>
+                <th style={{ textAlign: 'left', padding: '14px 20px', fontSize: 12, fontWeight: 600, color: '#64748b', textTransform: 'uppercase', letterSpacing: 0.5 }}>Date</th>
+                <th style={{ textAlign: 'left', padding: '14px 20px', fontSize: 12, fontWeight: 600, color: '#64748b', textTransform: 'uppercase', letterSpacing: 0.5 }}>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {inquiries.map((inquiry, i) => {
+                const statusColors = getStatusColor(inquiry.status);
+                return (
+                  <tr key={inquiry.id} style={{ background: i % 2 === 1 ? '#f8fafc' : '#fff', borderTop: '1px solid #f1f5f9' }} data-testid={`inquiry-${inquiry.id}`}>
+                    <td style={{ padding: '16px 20px', fontWeight: 600, color: '#0f172a' }}>{inquiry.customerName}</td>
+                    <td style={{ padding: '16px 20px' }}>
+                      <p style={{ color: '#0f172a', margin: 0 }}>{inquiry.customerEmail}</p>
+                      <p style={{ color: '#64748b', fontSize: 13, margin: 0 }}>{inquiry.customerPhone}</p>
+                    </td>
+                    <td style={{ padding: '16px 20px' }}><Badge variant="outline">{inquiry.inquiryType}</Badge></td>
+                    <td style={{ padding: '16px 20px', color: '#475569', maxWidth: 300, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{inquiry.message}</td>
+                    <td style={{ padding: '16px 20px', color: '#64748b', fontSize: 13 }}>{new Date(inquiry.createdAt).toLocaleDateString()}</td>
+                    <td style={{ padding: '16px 20px' }}>
+                      <Select value={inquiry.status} onValueChange={(s) => updateMutation.mutate({ id: inquiry.id, status: s })}>
+                        <SelectTrigger style={{ width: 120 }} data-testid={`select-inquiry-status-${inquiry.id}`}>
+                          <Badge style={{ background: statusColors.bg, color: statusColors.color, border: 'none' }}>{inquiry.status}</Badge>
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="new">New</SelectItem>
+                          <SelectItem value="contacted">Contacted</SelectItem>
+                          <SelectItem value="qualified">Qualified</SelectItem>
+                          <SelectItem value="closed">Closed</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
         </div>
       )}
     </div>
