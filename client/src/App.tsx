@@ -54,6 +54,10 @@ import InvestScreen from "@/pages/InvestScreen";
 import RedirectToOwnership from "@/components/RedirectToOwnership";
 import ScrollToTopOnRoute from "@/components/ScrollToTopOnRoute";
 
+// Admin pages
+import AdminLoginPage from "@/pages/admin/AdminLoginPage";
+import AdminDashboard from "@/pages/admin/AdminDashboard";
+
 function Router() {
   // Force scroll to top on any route change
   const [location] = useLocation();
@@ -139,6 +143,11 @@ function Router() {
         <Route path="/access-models" component={AccessModelsScreen} />
         <Route path="/modality/:type" component={ModalityDetailScreen} />
         <Route path="/invest" component={InvestScreen} />
+        
+        {/* Admin routes */}
+        <Route path="/admin" component={AdminLoginPage} />
+        <Route path="/admin/dashboard" component={AdminDashboard} />
+        
         <Route component={NotFound} />
       </Switch>
     </>
