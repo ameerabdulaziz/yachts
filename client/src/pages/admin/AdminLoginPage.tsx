@@ -9,7 +9,6 @@ import { useToast } from "@/hooks/use-toast";
 import { Loader2 } from "lucide-react";
 import { apiRequest } from "@/lib/queryClient";
 import deAntonioLogo from "@assets/DE-ANTONIO-YACHTS_LOGO-removebg-preview_1754331163197.png";
-import seaBackground from "@assets/image_1754575606863.png";
 
 export default function AdminLoginPage() {
   const [, setLocation] = useLocation();
@@ -53,21 +52,8 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <div className="min-h-screen relative flex items-center justify-center p-4" style={{ minWidth: '1024px' }}>
-      {/* Ocean Background */}
-      <div className="absolute inset-0">
-        <div 
-          className="absolute inset-0" 
-          style={{
-            backgroundImage: `url(${seaBackground})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-          }} 
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-white/60 via-blue-100/40 to-blue-200/60" />
-      </div>
-
-      <Card className="relative w-full max-w-md bg-white/95 backdrop-blur-sm shadow-xl" data-testid="admin-login-card">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 flex items-center justify-center p-4">
+      <Card className="w-full max-w-md bg-white shadow-2xl" data-testid="admin-login-card">
         <CardHeader className="text-center pb-2">
           <div className="mx-auto mb-4">
             <img src={deAntonioLogo} alt="De Antonio Yachts" className="h-12 w-auto mx-auto" />
@@ -125,7 +111,7 @@ export default function AdminLoginPage() {
           </form>
           <div className="mt-6 pt-4 border-t border-gray-100">
             <p className="text-center text-sm text-gray-500">
-              Default credentials for testing:
+              Default credentials:
             </p>
             <p className="text-center text-sm font-medium text-gray-700 mt-1">
               admin / admin123

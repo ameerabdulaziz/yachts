@@ -10,11 +10,10 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, Dialog
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { useToast } from "@/hooks/use-toast";
 import { 
   Anchor, Users, Ship, Building2, MessageSquare, LogOut, 
-  Plus, Loader2, MapPin, Settings, LayoutDashboard
+  Plus, Loader2, MapPin, Menu, X
 } from "lucide-react";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 import deAntonioLogo from "@assets/DE-ANTONIO-YACHTS_LOGO-removebg-preview_1754331163197.png";
@@ -103,6 +102,7 @@ export default function AdminDashboard() {
   const { toast } = useToast();
   const [currentUser, setCurrentUser] = useState<AdminUser | null>(null);
   const [activeTab, setActiveTab] = useState("fleet");
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
     const stored = localStorage.getItem("adminUser");
@@ -123,6 +123,11 @@ export default function AdminDashboard() {
     } catch (e) {}
     localStorage.removeItem("adminUser");
     setLocation("/admin");
+  };
+
+  const handleTabChange = (tab: string) => {
+    setActiveTab(tab);
+    setSidebarOpen(false);
   };
 
   if (!currentUser) {
@@ -148,74 +153,130 @@ export default function AdminDashboard() {
       ];
 
   return (
-    <div className="min-h-screen bg-gray-100 flex" style={{ minWidth: '1024px' }}>
-      {/* Sidebar */}
-      <aside className="w-64 bg-white border-r border-gray-200 flex flex-col flex-shrink-0">
-        {/* Logo */}
-        <div className="p-6 border-b border-gray-200">
-          <img src={deAntonioLogo} alt="De Antonio Yachts" className="h-10 w-auto" />
-          <p className="text-xs text-gray-500 mt-2">Admin Portal</p>
+    <div className="min-h-screen bg-gray-100">
+      {/* Mobile Header */}
+      <header className="lg:hidden bg-white border-b border-gray-200 px-4 py-3 flex items-center justify-between sticky top-0 z-50">
+        <div className="flex items-center gap-3">
+          <button onClick={() => setSidebarOpen(true)} className="p-2 -ml-2" data-testid="button-menu">
+            <Menu className="w-5 h-5 text-gray-600" />
+          </button>
+          <img src={deAntonioLogo} alt="De Antonio" className="h-6 w-auto" />
         </div>
+        <div className="flex items-center gap-2">
+          <Badge variant="outline" className="text-xs">{getRoleLabel(currentUser.role)}</Badge>
+        </div>
+      </header>
 
-        {/* Navigation */}
-        <nav className="flex-1 p-4">
-          <ul className="space-y-1">
-            {navItems.map((item) => (
-              <li key={item.id}>
-                <button
-                  onClick={() => setActiveTab(item.id)}
-                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-colors ${
-                    activeTab === item.id
-                      ? "bg-blue-50 text-blue-700 font-medium"
-                      : "text-gray-600 hover:bg-gray-50"
-                  }`}
-                  data-testid={`nav-${item.id}`}
-                >
-                  <item.icon className="w-5 h-5" />
-                  {item.label}
-                </button>
-              </li>
-            ))}
-          </ul>
-        </nav>
+      {/* Mobile Sidebar Overlay */}
+      {sidebarOpen && (
+        <div className="lg:hidden fixed inset-0 z-50">
+          <div className="absolute inset-0 bg-black/50" onClick={() => setSidebarOpen(false)} />
+          <aside className="absolute left-0 top-0 bottom-0 w-64 bg-white flex flex-col">
+            <div className="p-4 border-b border-gray-200 flex items-center justify-between">
+              <img src={deAntonioLogo} alt="De Antonio Yachts" className="h-8 w-auto" />
+              <button onClick={() => setSidebarOpen(false)} className="p-1">
+                <X className="w-5 h-5 text-gray-500" />
+              </button>
+            </div>
+            <nav className="flex-1 p-4">
+              <ul className="space-y-1">
+                {navItems.map((item) => (
+                  <li key={item.id}>
+                    <button
+                      onClick={() => handleTabChange(item.id)}
+                      className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left ${
+                        activeTab === item.id
+                          ? "bg-blue-50 text-blue-700 font-medium"
+                          : "text-gray-600"
+                      }`}
+                    >
+                      <item.icon className="w-5 h-5" />
+                      {item.label}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+            <div className="p-4 border-t border-gray-200">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
+                  <span className="text-blue-700 font-semibold text-sm">
+                    {currentUser.firstName[0]}{currentUser.lastName[0]}
+                  </span>
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-medium text-gray-900 truncate">
+                    {currentUser.firstName} {currentUser.lastName}
+                  </p>
+                  <p className="text-xs text-gray-500">{getRoleLabel(currentUser.role)}</p>
+                </div>
+              </div>
+              <Button variant="outline" size="sm" onClick={handleLogout} className="w-full" data-testid="button-logout-mobile">
+                <LogOut className="w-4 h-4 mr-2" /> Sign Out
+              </Button>
+            </div>
+          </aside>
+        </div>
+      )}
 
-        {/* User Info */}
-        <div className="p-4 border-t border-gray-200">
-          <div className="flex items-center gap-3 mb-3">
-            <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
-              <span className="text-blue-700 font-semibold">
-                {currentUser.firstName[0]}{currentUser.lastName[0]}
-              </span>
-            </div>
-            <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-gray-900 truncate">
-                {currentUser.firstName} {currentUser.lastName}
-              </p>
-              <p className="text-xs text-gray-500">{getRoleLabel(currentUser.role)}</p>
-            </div>
+      <div className="lg:flex">
+        {/* Desktop Sidebar */}
+        <aside className="hidden lg:flex w-64 bg-white border-r border-gray-200 flex-col fixed left-0 top-0 bottom-0">
+          <div className="p-6 border-b border-gray-200">
+            <img src={deAntonioLogo} alt="De Antonio Yachts" className="h-10 w-auto" />
+            <p className="text-xs text-gray-500 mt-2">Admin Portal</p>
           </div>
-          <Button 
-            variant="outline" 
-            size="sm" 
-            onClick={handleLogout}
-            className="w-full"
-            data-testid="button-logout"
-          >
-            <LogOut className="w-4 h-4 mr-2" /> Sign Out
-          </Button>
-        </div>
-      </aside>
+          <nav className="flex-1 p-4">
+            <ul className="space-y-1">
+              {navItems.map((item) => (
+                <li key={item.id}>
+                  <button
+                    onClick={() => setActiveTab(item.id)}
+                    className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-colors ${
+                      activeTab === item.id
+                        ? "bg-blue-50 text-blue-700 font-medium"
+                        : "text-gray-600 hover:bg-gray-50"
+                    }`}
+                    data-testid={`nav-${item.id}`}
+                  >
+                    <item.icon className="w-5 h-5" />
+                    {item.label}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <div className="p-4 border-t border-gray-200">
+            <div className="flex items-center gap-3 mb-3">
+              <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
+                <span className="text-blue-700 font-semibold">
+                  {currentUser.firstName[0]}{currentUser.lastName[0]}
+                </span>
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-medium text-gray-900 truncate">
+                  {currentUser.firstName} {currentUser.lastName}
+                </p>
+                <p className="text-xs text-gray-500">{getRoleLabel(currentUser.role)}</p>
+              </div>
+            </div>
+            <Button variant="outline" size="sm" onClick={handleLogout} className="w-full" data-testid="button-logout">
+              <LogOut className="w-4 h-4 mr-2" /> Sign Out
+            </Button>
+          </div>
+        </aside>
 
-      {/* Main Content */}
-      <main className="flex-1 overflow-auto">
-        <div className="p-8">
-          {isAdmin && activeTab === "fleet" && <FleetSection />}
-          {isAdmin && activeTab === "dealers" && <DealersSection />}
-          {isAdmin && activeTab === "users" && <UsersSection currentUser={currentUser} />}
-          {isDealer && activeTab === "boats" && <BoatsSection currentUser={currentUser} />}
-          {isDealer && activeTab === "inquiries" && <InquiriesSection currentUser={currentUser} />}
-        </div>
-      </main>
+        {/* Main Content */}
+        <main className="flex-1 lg:ml-64">
+          <div className="p-4 lg:p-8">
+            {isAdmin && activeTab === "fleet" && <FleetSection />}
+            {isAdmin && activeTab === "dealers" && <DealersSection />}
+            {isAdmin && activeTab === "users" && <UsersSection currentUser={currentUser} />}
+            {isDealer && activeTab === "boats" && <BoatsSection currentUser={currentUser} />}
+            {isDealer && activeTab === "inquiries" && <InquiriesSection currentUser={currentUser} />}
+          </div>
+        </main>
+      </div>
     </div>
   );
 }
@@ -274,10 +335,10 @@ function UsersSection({ currentUser }: { currentUser: AdminUser }) {
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Admin Users</h1>
-          <p className="text-gray-500">Manage admin accounts and permissions</p>
+          <h1 className="text-xl lg:text-2xl font-bold text-gray-900">Admin Users</h1>
+          <p className="text-sm text-gray-500">Manage admin accounts</p>
         </div>
         {currentUser.role === "super_admin" && (
           <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
@@ -286,7 +347,7 @@ function UsersSection({ currentUser }: { currentUser: AdminUser }) {
                 <Plus className="w-4 h-4 mr-2" /> Add User
               </Button>
             </DialogTrigger>
-            <DialogContent className="max-w-md">
+            <DialogContent className="max-w-md max-h-[90vh] overflow-y-auto">
               <DialogHeader>
                 <DialogTitle>Create New User</DialogTitle>
               </DialogHeader>
@@ -335,11 +396,11 @@ function UsersSection({ currentUser }: { currentUser: AdminUser }) {
                     </Select>
                   </div>
                 )}
-                <DialogFooter>
+                <DialogFooter className="gap-2">
                   <DialogClose asChild><Button type="button" variant="outline">Cancel</Button></DialogClose>
                   <Button type="submit" className="bg-blue-600 hover:bg-blue-700" disabled={createMutation.isPending} data-testid="button-submit-user">
                     {createMutation.isPending && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
-                    Create User
+                    Create
                   </Button>
                 </DialogFooter>
               </form>
@@ -348,36 +409,26 @@ function UsersSection({ currentUser }: { currentUser: AdminUser }) {
         )}
       </div>
 
-      <Card>
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>Name</TableHead>
-              <TableHead>Username</TableHead>
-              <TableHead>Email</TableHead>
-              <TableHead>Role</TableHead>
-              <TableHead>Status</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {users.map((user) => (
-              <TableRow key={user.id} data-testid={`user-row-${user.id}`}>
-                <TableCell className="font-medium">{user.firstName} {user.lastName}</TableCell>
-                <TableCell className="text-gray-500">@{user.username}</TableCell>
-                <TableCell>{user.email}</TableCell>
-                <TableCell>
-                  <Badge variant="outline">{getRoleLabel(user.role)}</Badge>
-                </TableCell>
-                <TableCell>
+      <div className="space-y-3">
+        {users.map((user) => (
+          <Card key={user.id} className="bg-white" data-testid={`user-row-${user.id}`}>
+            <CardContent className="p-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                <div>
+                  <p className="font-medium text-gray-900">{user.firstName} {user.lastName}</p>
+                  <p className="text-sm text-gray-500">@{user.username} • {user.email}</p>
+                </div>
+                <div className="flex items-center gap-2">
                   <Badge className={user.isActive ? "bg-green-100 text-green-700" : "bg-gray-100 text-gray-600"}>
                     {user.isActive ? "Active" : "Inactive"}
                   </Badge>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </Card>
+                  <Badge variant="outline">{getRoleLabel(user.role)}</Badge>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
     </div>
   );
 }
@@ -429,10 +480,10 @@ function DealersSection() {
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Authorized Dealers</h1>
-          <p className="text-gray-500">Manage De Antonio dealer network</p>
+          <h1 className="text-xl lg:text-2xl font-bold text-gray-900">Authorized Dealers</h1>
+          <p className="text-sm text-gray-500">Manage dealer network</p>
         </div>
         <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
           <DialogTrigger asChild>
@@ -440,7 +491,7 @@ function DealersSection() {
               <Plus className="w-4 h-4 mr-2" /> Add Dealer
             </Button>
           </DialogTrigger>
-          <DialogContent className="max-w-lg">
+          <DialogContent className="max-w-lg max-h-[90vh] overflow-y-auto">
             <DialogHeader>
               <DialogTitle>Create New Dealer</DialogTitle>
             </DialogHeader>
@@ -491,11 +542,11 @@ function DealersSection() {
                   </Select>
                 </div>
               </div>
-              <DialogFooter>
+              <DialogFooter className="gap-2">
                 <DialogClose asChild><Button type="button" variant="outline">Cancel</Button></DialogClose>
                 <Button type="submit" className="bg-blue-600 hover:bg-blue-700" disabled={createMutation.isPending} data-testid="button-submit-dealer">
                   {createMutation.isPending && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
-                  Create Dealer
+                  Create
                 </Button>
               </DialogFooter>
             </form>
@@ -504,45 +555,33 @@ function DealersSection() {
       </div>
 
       {dealers.length === 0 ? (
-        <Card>
-          <CardContent className="py-16 text-center text-gray-500">
-            <Building2 className="w-16 h-16 mx-auto mb-4 text-gray-300" />
-            <p className="text-lg">No dealers yet</p>
-            <p className="text-sm">Click "Add Dealer" to create your first dealer</p>
+        <Card className="bg-white">
+          <CardContent className="py-12 text-center text-gray-500">
+            <Building2 className="w-12 h-12 mx-auto mb-4 text-gray-300" />
+            <p>No dealers yet. Click "Add Dealer" to create one.</p>
           </CardContent>
         </Card>
       ) : (
-        <Card>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Dealer Name</TableHead>
-                <TableHead>Contact</TableHead>
-                <TableHead>Location</TableHead>
-                <TableHead>Region</TableHead>
-                <TableHead>Status</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {dealers.map((dealer) => (
-                <TableRow key={dealer.id} data-testid={`dealer-row-${dealer.id}`}>
-                  <TableCell className="font-medium">{dealer.name}</TableCell>
-                  <TableCell>
-                    <div>{dealer.contactName}</div>
-                    <div className="text-sm text-gray-500">{dealer.email}</div>
-                  </TableCell>
-                  <TableCell>{dealer.city}, {dealer.country}</TableCell>
-                  <TableCell>{dealer.region}</TableCell>
-                  <TableCell>
-                    <Badge className={dealer.isActive ? "bg-green-100 text-green-700" : "bg-gray-100 text-gray-600"}>
-                      {dealer.isActive ? "Active" : "Inactive"}
-                    </Badge>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </Card>
+        <div className="grid lg:grid-cols-2 gap-4">
+          {dealers.map((dealer) => (
+            <Card key={dealer.id} className="bg-white" data-testid={`dealer-card-${dealer.id}`}>
+              <CardContent className="p-4">
+                <div className="flex items-start justify-between mb-2">
+                  <h3 className="font-semibold text-gray-900">{dealer.name}</h3>
+                  <Badge className={dealer.isActive ? "bg-green-100 text-green-700" : "bg-gray-100 text-gray-600"}>
+                    {dealer.isActive ? "Active" : "Inactive"}
+                  </Badge>
+                </div>
+                <div className="text-sm text-gray-600 space-y-1">
+                  <p className="flex items-center gap-1"><MapPin className="w-3 h-3" />{dealer.city}, {dealer.country} • {dealer.region}</p>
+                  <p>{dealer.contactName}</p>
+                  <p>{dealer.email}</p>
+                  <p>{dealer.phone}</p>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
       )}
     </div>
   );
@@ -602,10 +641,10 @@ function FleetSection() {
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">De Antonio Fleet</h1>
-          <p className="text-gray-500">Official yacht models with base pricing</p>
+          <h1 className="text-xl lg:text-2xl font-bold text-gray-900">De Antonio Fleet</h1>
+          <p className="text-sm text-gray-500">Official yacht models</p>
         </div>
         <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
           <DialogTrigger asChild>
@@ -613,7 +652,7 @@ function FleetSection() {
               <Plus className="w-4 h-4 mr-2" /> Add Yacht
             </Button>
           </DialogTrigger>
-          <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+          <DialogContent className="max-w-lg max-h-[90vh] overflow-y-auto">
             <DialogHeader>
               <DialogTitle>Add New Yacht to Fleet</DialogTitle>
             </DialogHeader>
@@ -631,10 +670,10 @@ function FleetSection() {
               
               <div>
                 <Label>Description</Label>
-                <Textarea value={formData.description} onChange={(e) => setFormData({ ...formData, description: e.target.value })} placeholder="Luxury yacht with..." rows={3} data-testid="input-description" />
+                <Textarea value={formData.description} onChange={(e) => setFormData({ ...formData, description: e.target.value })} placeholder="Luxury yacht with..." rows={2} data-testid="input-description" />
               </div>
               
-              <div className="grid grid-cols-4 gap-4">
+              <div className="grid grid-cols-2 gap-4">
                 <div>
                   <Label>Length (m)</Label>
                   <Input type="number" step="0.1" value={formData.lengthMeters} onChange={(e) => setFormData({ ...formData, lengthMeters: e.target.value })} placeholder="12.8" required data-testid="input-length" />
@@ -643,6 +682,9 @@ function FleetSection() {
                   <Label>Beam (m)</Label>
                   <Input type="number" step="0.1" value={formData.beamMeters} onChange={(e) => setFormData({ ...formData, beamMeters: e.target.value })} placeholder="3.9" required data-testid="input-beam" />
                 </div>
+              </div>
+              
+              <div className="grid grid-cols-2 gap-4">
                 <div>
                   <Label>Passengers</Label>
                   <Input type="number" value={formData.maxCapacity} onChange={(e) => setFormData({ ...formData, maxCapacity: parseInt(e.target.value) || 0 })} required data-testid="input-capacity" />
@@ -653,7 +695,7 @@ function FleetSection() {
                 </div>
               </div>
               
-              <div className="grid grid-cols-3 gap-4">
+              <div className="grid grid-cols-2 gap-4">
                 <div>
                   <Label>Engines</Label>
                   <Input value={formData.engines} onChange={(e) => setFormData({ ...formData, engines: e.target.value })} placeholder="2x Mercury 450hp" data-testid="input-engines" />
@@ -662,10 +704,11 @@ function FleetSection() {
                   <Label>Max Speed</Label>
                   <Input value={formData.maxSpeed} onChange={(e) => setFormData({ ...formData, maxSpeed: e.target.value })} placeholder="45 knots" data-testid="input-speed" />
                 </div>
-                <div>
-                  <Label>Base Price (€)</Label>
-                  <Input type="number" value={formData.basePrice} onChange={(e) => setFormData({ ...formData, basePrice: e.target.value })} placeholder="650000" required data-testid="input-base-price" />
-                </div>
+              </div>
+              
+              <div>
+                <Label>Base Price (€)</Label>
+                <Input type="number" value={formData.basePrice} onChange={(e) => setFormData({ ...formData, basePrice: e.target.value })} placeholder="650000" required data-testid="input-base-price" />
               </div>
               
               <div>
@@ -673,7 +716,7 @@ function FleetSection() {
                 <Input value={formData.images[0]} onChange={(e) => setFormData({ ...formData, images: [e.target.value] })} placeholder="https://..." data-testid="input-image-url" />
               </div>
               
-              <DialogFooter>
+              <DialogFooter className="gap-2">
                 <DialogClose asChild><Button type="button" variant="outline">Cancel</Button></DialogClose>
                 <Button type="submit" className="bg-blue-600 hover:bg-blue-700" disabled={createMutation.isPending} data-testid="button-submit-fleet-model">
                   {createMutation.isPending && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
@@ -685,53 +728,27 @@ function FleetSection() {
         </Dialog>
       </div>
 
-      <Card>
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead className="w-20">Image</TableHead>
-              <TableHead>Model</TableHead>
-              <TableHead>Specifications</TableHead>
-              <TableHead>Engines</TableHead>
-              <TableHead className="text-right">Base Price</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {models.map((model) => (
-              <TableRow key={model.id} data-testid={`fleet-model-${model.id}`}>
-                <TableCell>
-                  {model.images?.[0] ? (
-                    <img src={model.images[0]} alt={model.displayName} className="w-20 h-14 object-cover rounded" />
-                  ) : (
-                    <div className="w-20 h-14 bg-gray-100 rounded flex items-center justify-center">
-                      <Ship className="w-6 h-6 text-gray-400" />
-                    </div>
-                  )}
-                </TableCell>
-                <TableCell>
-                  <div className="font-medium">{model.displayName}</div>
-                  <div className="text-sm text-gray-500">{model.modelName}</div>
-                </TableCell>
-                <TableCell>
-                  <div className="text-sm">
-                    {model.lengthMeters}m × {model.beamMeters}m
-                  </div>
-                  <div className="text-sm text-gray-500">
-                    {model.maxCapacity} pax • {model.cabins} cabin{model.cabins !== 1 ? "s" : ""}
-                  </div>
-                </TableCell>
-                <TableCell>
-                  <div className="text-sm">{model.engines}</div>
-                  <div className="text-sm text-gray-500">{model.maxSpeed}</div>
-                </TableCell>
-                <TableCell className="text-right">
-                  <span className="text-lg font-bold text-blue-600">€{Number(model.basePrice).toLocaleString()}</span>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </Card>
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {models.map((model) => (
+          <Card key={model.id} className="bg-white overflow-hidden" data-testid={`fleet-model-${model.id}`}>
+            {model.images?.[0] ? (
+              <img src={model.images[0]} alt={model.displayName} className="w-full h-32 lg:h-40 object-cover" />
+            ) : (
+              <div className="w-full h-32 lg:h-40 bg-gray-100 flex items-center justify-center">
+                <Ship className="w-10 h-10 text-gray-300" />
+              </div>
+            )}
+            <CardContent className="p-4">
+              <h3 className="font-semibold text-gray-900">{model.displayName}</h3>
+              <div className="text-sm text-gray-500 mt-1 space-y-0.5">
+                <p>{model.lengthMeters}m × {model.beamMeters}m • {model.maxCapacity} pax</p>
+                <p>{model.cabins} cabin{model.cabins !== 1 ? "s" : ""} • {model.engines}</p>
+              </div>
+              <p className="text-lg font-bold text-blue-600 mt-2">€{Number(model.basePrice).toLocaleString()}</p>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
     </div>
   );
 }
@@ -804,10 +821,10 @@ function BoatsSection({ currentUser }: { currentUser: AdminUser }) {
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">My Boats</h1>
-          <p className="text-gray-500">Manage your boat inventory with automatic fraction pricing</p>
+          <h1 className="text-xl lg:text-2xl font-bold text-gray-900">My Boats</h1>
+          <p className="text-sm text-gray-500">Manage inventory</p>
         </div>
         <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
           <DialogTrigger asChild>
@@ -815,7 +832,7 @@ function BoatsSection({ currentUser }: { currentUser: AdminUser }) {
               <Plus className="w-4 h-4 mr-2" /> Add Boat
             </Button>
           </DialogTrigger>
-          <DialogContent className="max-w-lg">
+          <DialogContent className="max-w-lg max-h-[90vh] overflow-y-auto">
             <DialogHeader>
               <DialogTitle>Add New Boat</DialogTitle>
             </DialogHeader>
@@ -843,22 +860,21 @@ function BoatsSection({ currentUser }: { currentUser: AdminUser }) {
                   <Input type="number" value={formData.totalPrice} onChange={(e) => setFormData({ ...formData, totalPrice: e.target.value })} required data-testid="input-total-price" />
                 </div>
                 <div>
-                  <Label>Number of Fractions</Label>
+                  <Label>Fractions</Label>
                   <Select value={formData.numberOfFractions.toString()} onValueChange={(v) => setFormData({ ...formData, numberOfFractions: parseInt(v) })}>
                     <SelectTrigger data-testid="select-fractions"><SelectValue /></SelectTrigger>
                     <SelectContent>
                       {[2, 3, 4, 5, 6, 8, 10].map((n) => (
-                        <SelectItem key={n} value={n.toString()}>{n} fractions (1/{n} share)</SelectItem>
+                        <SelectItem key={n} value={n.toString()}>1/{n} share</SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
                 </div>
               </div>
 
-              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                <p className="text-sm text-gray-600 mb-1">Calculated Fraction Price</p>
-                <p className="text-2xl font-bold text-blue-600">€{calculatedFractionPrice.toLocaleString()}</p>
-                <p className="text-xs text-gray-500">€{Number(formData.totalPrice || 0).toLocaleString()} ÷ {formData.numberOfFractions} fractions</p>
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
+                <p className="text-xs text-gray-600">Fraction Price</p>
+                <p className="text-xl font-bold text-blue-600">€{calculatedFractionPrice.toLocaleString()}</p>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
@@ -872,14 +888,14 @@ function BoatsSection({ currentUser }: { currentUser: AdminUser }) {
                 </div>
               </div>
 
-              <div className="flex items-center gap-8">
+              <div className="flex items-center gap-6">
                 <div className="flex items-center gap-2">
                   <Switch checked={formData.availableForSale} onCheckedChange={(c) => setFormData({ ...formData, availableForSale: c })} data-testid="switch-for-sale" />
-                  <Label>For Sale</Label>
+                  <Label className="text-sm">For Sale</Label>
                 </div>
                 <div className="flex items-center gap-2">
                   <Switch checked={formData.availableForCharter} onCheckedChange={(c) => setFormData({ ...formData, availableForCharter: c })} data-testid="switch-for-charter" />
-                  <Label>For Charter</Label>
+                  <Label className="text-sm">For Charter</Label>
                 </div>
               </div>
 
@@ -890,7 +906,7 @@ function BoatsSection({ currentUser }: { currentUser: AdminUser }) {
                 </div>
               )}
 
-              <DialogFooter>
+              <DialogFooter className="gap-2">
                 <DialogClose asChild><Button type="button" variant="outline">Cancel</Button></DialogClose>
                 <Button type="submit" className="bg-blue-600 hover:bg-blue-700" disabled={createMutation.isPending} data-testid="button-submit-boat">
                   {createMutation.isPending && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
@@ -903,68 +919,44 @@ function BoatsSection({ currentUser }: { currentUser: AdminUser }) {
       </div>
 
       {boats.length === 0 ? (
-        <Card>
-          <CardContent className="py-16 text-center text-gray-500">
-            <Ship className="w-16 h-16 mx-auto mb-4 text-gray-300" />
-            <p className="text-lg">No boats yet</p>
-            <p className="text-sm">Click "Add Boat" to add your first boat</p>
+        <Card className="bg-white">
+          <CardContent className="py-12 text-center text-gray-500">
+            <Ship className="w-12 h-12 mx-auto mb-4 text-gray-300" />
+            <p>No boats yet. Click "Add Boat" to add one.</p>
           </CardContent>
         </Card>
       ) : (
-        <Card>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead className="w-24">Image</TableHead>
-                <TableHead>Boat Name</TableHead>
-                <TableHead>Model</TableHead>
-                <TableHead>Location</TableHead>
-                <TableHead>Fractions</TableHead>
-                <TableHead className="text-right">Price</TableHead>
-                <TableHead>Status</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {boats.map((boat) => {
-                const model = fleetModels.find(m => m.id === boat.fleetModelId);
-                return (
-                  <TableRow key={boat.id} data-testid={`boat-row-${boat.id}`}>
-                    <TableCell>
-                      {model?.images?.[0] ? (
-                        <img src={model.images[0]} alt={boat.name} className="w-24 h-16 object-cover rounded" />
-                      ) : (
-                        <div className="w-24 h-16 bg-gray-100 rounded flex items-center justify-center">
-                          <Anchor className="w-6 h-6 text-gray-400" />
-                        </div>
-                      )}
-                    </TableCell>
-                    <TableCell className="font-medium">{boat.name}</TableCell>
-                    <TableCell className="text-gray-500">{getModelName(boat.fleetModelId)}</TableCell>
-                    <TableCell>
-                      <div className="flex items-center gap-1">
-                        <MapPin className="w-3 h-3 text-gray-400" />
-                        {boat.location} • {boat.homePort}
+        <div className="space-y-3">
+          {boats.map((boat) => {
+            const model = fleetModels.find(m => m.id === boat.fleetModelId);
+            return (
+              <Card key={boat.id} className="bg-white" data-testid={`boat-row-${boat.id}`}>
+                <CardContent className="p-4">
+                  <div className="flex flex-col sm:flex-row gap-4">
+                    {model?.images?.[0] && (
+                      <img src={model.images[0]} alt={boat.name} className="w-full sm:w-24 h-32 sm:h-16 object-cover rounded-lg" />
+                    )}
+                    <div className="flex-1">
+                      <h3 className="font-semibold text-gray-900">{boat.name}</h3>
+                      <p className="text-sm text-gray-500">{getModelName(boat.fleetModelId)}</p>
+                      <p className="text-xs text-gray-500 flex items-center gap-1 mt-1">
+                        <MapPin className="w-3 h-3" />{boat.location} • {boat.homePort}
+                      </p>
+                    </div>
+                    <div className="sm:text-right">
+                      <p className="text-lg font-bold text-blue-600">€{Number(boat.totalPrice).toLocaleString()}</p>
+                      <p className="text-sm text-gray-500">{boat.numberOfFractions}× €{Number(boat.fractionPrice).toLocaleString()}</p>
+                      <div className="flex gap-1 mt-1 sm:justify-end">
+                        {boat.availableForSale && <Badge className="bg-green-100 text-green-700 text-xs">Sale</Badge>}
+                        {boat.availableForCharter && <Badge className="bg-blue-100 text-blue-700 text-xs">Charter</Badge>}
                       </div>
-                    </TableCell>
-                    <TableCell>
-                      <div>{boat.numberOfFractions} shares</div>
-                      <div className="text-sm text-gray-500">€{Number(boat.fractionPrice).toLocaleString()} each</div>
-                    </TableCell>
-                    <TableCell className="text-right">
-                      <span className="text-lg font-bold text-blue-600">€{Number(boat.totalPrice).toLocaleString()}</span>
-                    </TableCell>
-                    <TableCell>
-                      <div className="flex gap-1">
-                        {boat.availableForSale && <Badge className="bg-green-100 text-green-700">Sale</Badge>}
-                        {boat.availableForCharter && <Badge className="bg-blue-100 text-blue-700">Charter</Badge>}
-                      </div>
-                    </TableCell>
-                  </TableRow>
-                );
-              })}
-            </TableBody>
-          </Table>
-        </Card>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            );
+          })}
+        </div>
       )}
     </div>
   );
@@ -1005,66 +997,49 @@ function InquiriesSection({ currentUser }: { currentUser: AdminUser }) {
   return (
     <div>
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-gray-900">Customer Inquiries</h1>
-        <p className="text-gray-500">Manage purchase and charter inquiries</p>
+        <h1 className="text-xl lg:text-2xl font-bold text-gray-900">Customer Inquiries</h1>
+        <p className="text-sm text-gray-500">Manage inquiries</p>
       </div>
 
       {inquiries.length === 0 ? (
-        <Card>
-          <CardContent className="py-16 text-center text-gray-500">
-            <MessageSquare className="w-16 h-16 mx-auto mb-4 text-gray-300" />
-            <p className="text-lg">No inquiries yet</p>
-            <p className="text-sm">Customer inquiries will appear here</p>
+        <Card className="bg-white">
+          <CardContent className="py-12 text-center text-gray-500">
+            <MessageSquare className="w-12 h-12 mx-auto mb-4 text-gray-300" />
+            <p>No inquiries yet.</p>
           </CardContent>
         </Card>
       ) : (
-        <Card>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Customer</TableHead>
-                <TableHead>Contact</TableHead>
-                <TableHead>Type</TableHead>
-                <TableHead>Message</TableHead>
-                <TableHead>Date</TableHead>
-                <TableHead>Status</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {inquiries.map((inquiry) => (
-                <TableRow key={inquiry.id} data-testid={`inquiry-${inquiry.id}`}>
-                  <TableCell className="font-medium">{inquiry.customerName}</TableCell>
-                  <TableCell>
-                    <div>{inquiry.customerEmail}</div>
-                    <div className="text-sm text-gray-500">{inquiry.customerPhone}</div>
-                  </TableCell>
-                  <TableCell>
-                    <Badge variant="outline">{inquiry.inquiryType}</Badge>
-                  </TableCell>
-                  <TableCell className="max-w-xs">
-                    <p className="truncate text-sm">{inquiry.message}</p>
-                  </TableCell>
-                  <TableCell className="text-gray-500">
-                    {new Date(inquiry.createdAt).toLocaleDateString()}
-                  </TableCell>
-                  <TableCell>
-                    <Select value={inquiry.status} onValueChange={(s) => updateMutation.mutate({ id: inquiry.id, status: s })}>
-                      <SelectTrigger className="w-32" data-testid={`select-inquiry-status-${inquiry.id}`}>
-                        <Badge className={getStatusColor(inquiry.status)}>{inquiry.status}</Badge>
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="new">New</SelectItem>
-                        <SelectItem value="contacted">Contacted</SelectItem>
-                        <SelectItem value="qualified">Qualified</SelectItem>
-                        <SelectItem value="closed">Closed</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </Card>
+        <div className="space-y-3">
+          {inquiries.map((inquiry) => (
+            <Card key={inquiry.id} className="bg-white" data-testid={`inquiry-${inquiry.id}`}>
+              <CardContent className="p-4">
+                <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2 mb-2">
+                      <Badge className={getStatusColor(inquiry.status)}>{inquiry.status}</Badge>
+                      <Badge variant="outline">{inquiry.inquiryType}</Badge>
+                    </div>
+                    <p className="font-medium text-gray-900">{inquiry.customerName}</p>
+                    <p className="text-sm text-gray-500">{inquiry.customerEmail} • {inquiry.customerPhone}</p>
+                    <p className="mt-2 text-sm text-gray-700">{inquiry.message}</p>
+                    <p className="text-xs text-gray-400 mt-2">{new Date(inquiry.createdAt).toLocaleDateString()}</p>
+                  </div>
+                  <Select value={inquiry.status} onValueChange={(s) => updateMutation.mutate({ id: inquiry.id, status: s })}>
+                    <SelectTrigger className="w-32" data-testid={`select-inquiry-status-${inquiry.id}`}>
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="new">New</SelectItem>
+                      <SelectItem value="contacted">Contacted</SelectItem>
+                      <SelectItem value="qualified">Qualified</SelectItem>
+                      <SelectItem value="closed">Closed</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
       )}
     </div>
   );
