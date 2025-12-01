@@ -4,16 +4,16 @@ import { useQuery, useMutation } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter, DialogClose } from "@/components/ui/dialog";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
+import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { 
-  Anchor, Users, Ship, Building2, MessageSquare, Calendar, LogOut, 
-  Plus, Edit2, Loader2, MapPin, Euro, ChevronRight
+  Anchor, Users, Ship, Building2, MessageSquare, LogOut, 
+  Plus, Loader2, MapPin
 } from "lucide-react";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 import deAntonioLogo from "@assets/DE-ANTONIO-YACHTS_LOGO-removebg-preview_1754331163197.png";
@@ -88,6 +88,15 @@ interface Inquiry {
   createdAt: string;
 }
 
+function getRoleLabel(role: string): string {
+  switch (role) {
+    case "super_admin": return "Super Admin";
+    case "staff": return "Staff";
+    case "dealer": return "Dealer";
+    default: return role;
+  }
+}
+
 export default function AdminDashboard() {
   const [, setLocation] = useLocation();
   const { toast } = useToast();
@@ -128,26 +137,25 @@ export default function AdminDashboard() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header matching app style */}
+      {/* Header */}
       <header className="bg-white border-b border-gray-100 px-4 py-3 sticky top-0 z-50">
         <div className="flex items-center justify-between max-w-6xl mx-auto">
           <div className="flex items-center gap-3">
             <img src={deAntonioLogo} alt="De Antonio" className="h-8 w-auto" />
-            <div>
-              <span className="text-sm font-semibold text-gray-900">Admin Portal</span>
-              <Badge variant="outline" className="ml-2 text-xs">{currentUser.role}</Badge>
-            </div>
+            <span className="text-sm font-semibold text-gray-900 hidden sm:block">Admin</span>
           </div>
-          <div className="flex items-center gap-3">
-            <span className="text-sm text-gray-600 hidden sm:block">
-              {currentUser.firstName} {currentUser.lastName}
-            </span>
+          <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5">
+              <span className="text-xs text-gray-600">{currentUser.firstName}</span>
+              <Badge variant="outline" className="text-[10px] px-1.5 py-0">{getRoleLabel(currentUser.role)}</Badge>
+              {currentUser.isActive && <Badge className="text-[10px] px-1.5 py-0 bg-green-500">Active</Badge>}
+            </div>
             <Button 
-              variant="outline" 
+              variant="ghost" 
               size="sm" 
               onClick={handleLogout} 
               data-testid="button-logout"
-              className="text-gray-600"
+              className="text-gray-500 h-8 w-8 p-0"
             >
               <LogOut className="w-4 h-4" />
             </Button>
@@ -158,16 +166,17 @@ export default function AdminDashboard() {
       <main className="max-w-6xl mx-auto px-4 py-6">
         {/* Tab Navigation */}
         <div className="flex gap-2 overflow-x-auto pb-4 mb-6">
+          {/* De Antonio Staff tabs */}
           {isAdmin && (
             <>
               <Button
-                variant={activeTab === "users" ? "default" : "outline"}
+                variant={activeTab === "fleet" ? "default" : "outline"}
                 size="sm"
-                onClick={() => setActiveTab("users")}
-                className={activeTab === "users" ? "bg-blue-600 text-white" : ""}
-                data-testid="tab-users"
+                onClick={() => setActiveTab("fleet")}
+                className={activeTab === "fleet" ? "bg-blue-600 text-white" : ""}
+                data-testid="tab-fleet"
               >
-                <Users className="w-4 h-4 mr-2" /> Users
+                <Ship className="w-4 h-4 mr-2" /> Fleet
               </Button>
               <Button
                 variant={activeTab === "dealers" ? "default" : "outline"}
@@ -178,43 +187,49 @@ export default function AdminDashboard() {
               >
                 <Building2 className="w-4 h-4 mr-2" /> Dealers
               </Button>
+              <Button
+                variant={activeTab === "users" ? "default" : "outline"}
+                size="sm"
+                onClick={() => setActiveTab("users")}
+                className={activeTab === "users" ? "bg-blue-600 text-white" : ""}
+                data-testid="tab-users"
+              >
+                <Users className="w-4 h-4 mr-2" /> Users
+              </Button>
             </>
           )}
-          <Button
-            variant={activeTab === "fleet" ? "default" : "outline"}
-            size="sm"
-            onClick={() => setActiveTab("fleet")}
-            className={activeTab === "fleet" ? "bg-blue-600 text-white" : ""}
-            data-testid="tab-fleet"
-          >
-            <Ship className="w-4 h-4 mr-2" /> Fleet
-          </Button>
-          <Button
-            variant={activeTab === "boats" ? "default" : "outline"}
-            size="sm"
-            onClick={() => setActiveTab("boats")}
-            className={activeTab === "boats" ? "bg-blue-600 text-white" : ""}
-            data-testid="tab-boats"
-          >
-            <Anchor className="w-4 h-4 mr-2" /> Boats
-          </Button>
-          <Button
-            variant={activeTab === "inquiries" ? "default" : "outline"}
-            size="sm"
-            onClick={() => setActiveTab("inquiries")}
-            className={activeTab === "inquiries" ? "bg-blue-600 text-white" : ""}
-            data-testid="tab-inquiries"
-          >
-            <MessageSquare className="w-4 h-4 mr-2" /> Inquiries
-          </Button>
+          
+          {/* Dealer tabs */}
+          {isDealer && (
+            <>
+              <Button
+                variant={activeTab === "boats" ? "default" : "outline"}
+                size="sm"
+                onClick={() => setActiveTab("boats")}
+                className={activeTab === "boats" ? "bg-blue-600 text-white" : ""}
+                data-testid="tab-boats"
+              >
+                <Anchor className="w-4 h-4 mr-2" /> My Boats
+              </Button>
+              <Button
+                variant={activeTab === "inquiries" ? "default" : "outline"}
+                size="sm"
+                onClick={() => setActiveTab("inquiries")}
+                className={activeTab === "inquiries" ? "bg-blue-600 text-white" : ""}
+                data-testid="tab-inquiries"
+              >
+                <MessageSquare className="w-4 h-4 mr-2" /> Inquiries
+              </Button>
+            </>
+          )}
         </div>
 
         {/* Tab Content */}
-        {isAdmin && activeTab === "users" && <UsersSection currentUser={currentUser} />}
+        {isAdmin && activeTab === "fleet" && <FleetSection />}
         {isAdmin && activeTab === "dealers" && <DealersSection />}
-        {activeTab === "fleet" && <FleetSection />}
-        {activeTab === "boats" && <BoatsSection currentUser={currentUser} />}
-        {activeTab === "inquiries" && <InquiriesSection currentUser={currentUser} />}
+        {isAdmin && activeTab === "users" && <UsersSection currentUser={currentUser} />}
+        {isDealer && activeTab === "boats" && <BoatsSection currentUser={currentUser} />}
+        {isDealer && activeTab === "inquiries" && <InquiriesSection currentUser={currentUser} />}
       </main>
     </div>
   );
@@ -355,8 +370,8 @@ function UsersSection({ currentUser }: { currentUser: AdminUser }) {
                   <p className="text-sm text-gray-500">@{user.username} • {user.email}</p>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Badge variant={user.isActive ? "default" : "secondary"}>{user.isActive ? "Active" : "Inactive"}</Badge>
-                  <Badge variant="outline">{user.role}</Badge>
+                  <Badge variant={user.isActive ? "default" : "secondary"} className="text-xs">{user.isActive ? "Active" : "Inactive"}</Badge>
+                  <Badge variant="outline" className="text-xs">{getRoleLabel(user.role)}</Badge>
                 </div>
               </div>
             </CardContent>
@@ -499,7 +514,7 @@ function DealersSection() {
               <CardContent className="p-4">
                 <div className="flex items-start justify-between mb-2">
                   <h3 className="font-semibold text-gray-900">{dealer.name}</h3>
-                  <Badge variant={dealer.isActive ? "default" : "secondary"}>{dealer.isActive ? "Active" : "Inactive"}</Badge>
+                  <Badge variant={dealer.isActive ? "default" : "secondary"} className="text-xs">{dealer.isActive ? "Active" : "Inactive"}</Badge>
                 </div>
                 <div className="text-sm text-gray-600 space-y-1">
                   <p><MapPin className="w-3 h-3 inline mr-1" />{dealer.city}, {dealer.country}</p>
@@ -517,9 +532,52 @@ function DealersSection() {
 }
 
 function FleetSection() {
+  const { toast } = useToast();
+  const [dialogOpen, setDialogOpen] = useState(false);
+  
   const { data: models = [], isLoading } = useQuery<FleetModel[]>({
     queryKey: ["/api/admin/fleet-models"],
   });
+
+  const [formData, setFormData] = useState({
+    modelName: "",
+    displayName: "",
+    description: "",
+    lengthMeters: "",
+    beamMeters: "",
+    maxCapacity: 10,
+    cabins: 1,
+    engines: "",
+    maxSpeed: "",
+    basePrice: "",
+    images: [""],
+    isActive: true,
+  });
+
+  const createMutation = useMutation({
+    mutationFn: async (data: any) => {
+      const res = await apiRequest("POST", "/api/admin/fleet-models", data);
+      return res.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/admin/fleet-models"] });
+      setDialogOpen(false);
+      setFormData({ modelName: "", displayName: "", description: "", lengthMeters: "", beamMeters: "", maxCapacity: 10, cabins: 1, engines: "", maxSpeed: "", basePrice: "", images: [""], isActive: true });
+      toast({ title: "Yacht model added to fleet" });
+    },
+    onError: (error: Error) => {
+      toast({ title: "Failed to add yacht", description: error.message, variant: "destructive" });
+    },
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const data = {
+      ...formData,
+      images: formData.images.filter(img => img.trim() !== ""),
+    };
+    createMutation.mutate(data);
+  };
 
   if (isLoading) {
     return <div className="flex justify-center py-8"><Loader2 className="w-8 h-8 animate-spin text-blue-600" /></div>;
@@ -527,8 +585,92 @@ function FleetSection() {
 
   return (
     <div className="space-y-4">
-      <h2 className="text-xl font-bold text-gray-900">De Antonio Fleet Models</h2>
-      <p className="text-sm text-gray-600">Official yacht models with base pricing</p>
+      <div className="flex items-center justify-between">
+        <div>
+          <h2 className="text-xl font-bold text-gray-900">De Antonio Fleet</h2>
+          <p className="text-sm text-gray-600">Official yacht models with base pricing</p>
+        </div>
+        <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+          <DialogTrigger asChild>
+            <Button className="bg-blue-600 hover:bg-blue-700" data-testid="button-add-fleet-model">
+              <Plus className="w-4 h-4 mr-2" /> Add Yacht
+            </Button>
+          </DialogTrigger>
+          <DialogContent className="max-w-lg max-h-[90vh] overflow-y-auto">
+            <DialogHeader>
+              <DialogTitle>Add New Yacht to Fleet</DialogTitle>
+            </DialogHeader>
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <Label>Model Name</Label>
+                  <Input value={formData.modelName} onChange={(e) => setFormData({ ...formData, modelName: e.target.value })} placeholder="D42" required data-testid="input-model-name" />
+                </div>
+                <div>
+                  <Label>Display Name</Label>
+                  <Input value={formData.displayName} onChange={(e) => setFormData({ ...formData, displayName: e.target.value })} placeholder="De Antonio D42" required data-testid="input-display-name" />
+                </div>
+              </div>
+              
+              <div>
+                <Label>Description</Label>
+                <Textarea value={formData.description} onChange={(e) => setFormData({ ...formData, description: e.target.value })} placeholder="Luxury yacht with..." data-testid="input-description" />
+              </div>
+              
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <Label>Length (meters)</Label>
+                  <Input type="number" step="0.1" value={formData.lengthMeters} onChange={(e) => setFormData({ ...formData, lengthMeters: e.target.value })} placeholder="12.8" required data-testid="input-length" />
+                </div>
+                <div>
+                  <Label>Beam (meters)</Label>
+                  <Input type="number" step="0.1" value={formData.beamMeters} onChange={(e) => setFormData({ ...formData, beamMeters: e.target.value })} placeholder="3.9" required data-testid="input-beam" />
+                </div>
+              </div>
+              
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <Label>Max Passengers</Label>
+                  <Input type="number" value={formData.maxCapacity} onChange={(e) => setFormData({ ...formData, maxCapacity: parseInt(e.target.value) || 0 })} required data-testid="input-capacity" />
+                </div>
+                <div>
+                  <Label>Cabins</Label>
+                  <Input type="number" value={formData.cabins} onChange={(e) => setFormData({ ...formData, cabins: parseInt(e.target.value) || 0 })} required data-testid="input-cabins" />
+                </div>
+              </div>
+              
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <Label>Engines</Label>
+                  <Input value={formData.engines} onChange={(e) => setFormData({ ...formData, engines: e.target.value })} placeholder="2x Mercury 450hp" data-testid="input-engines" />
+                </div>
+                <div>
+                  <Label>Max Speed</Label>
+                  <Input value={formData.maxSpeed} onChange={(e) => setFormData({ ...formData, maxSpeed: e.target.value })} placeholder="45 knots" data-testid="input-speed" />
+                </div>
+              </div>
+              
+              <div>
+                <Label>Base Price (€)</Label>
+                <Input type="number" value={formData.basePrice} onChange={(e) => setFormData({ ...formData, basePrice: e.target.value })} placeholder="650000" required data-testid="input-base-price" />
+              </div>
+              
+              <div>
+                <Label>Image URL</Label>
+                <Input value={formData.images[0]} onChange={(e) => setFormData({ ...formData, images: [e.target.value] })} placeholder="https://..." data-testid="input-image-url" />
+              </div>
+              
+              <DialogFooter>
+                <DialogClose asChild><Button type="button" variant="outline">Cancel</Button></DialogClose>
+                <Button type="submit" className="bg-blue-600 hover:bg-blue-700" disabled={createMutation.isPending} data-testid="button-submit-fleet-model">
+                  {createMutation.isPending && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
+                  Add to Fleet
+                </Button>
+              </DialogFooter>
+            </form>
+          </DialogContent>
+        </Dialog>
+      </div>
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
         {models.map((model) => (
@@ -561,10 +703,6 @@ function BoatsSection({ currentUser }: { currentUser: AdminUser }) {
 
   const { data: fleetModels = [] } = useQuery<FleetModel[]>({
     queryKey: ["/api/admin/fleet-models"],
-  });
-
-  const { data: dealers = [] } = useQuery<Dealer[]>({
-    queryKey: ["/api/admin/dealers"],
   });
 
   const [formData, setFormData] = useState({
@@ -616,7 +754,6 @@ function BoatsSection({ currentUser }: { currentUser: AdminUser }) {
     : 0;
 
   const getModelName = (modelId: string) => fleetModels.find(m => m.id === modelId)?.displayName || "Unknown";
-  const getDealerName = (dealerId: string) => dealers.find(d => d.id === dealerId)?.name || "Unknown";
 
   if (isLoading) {
     return <div className="flex justify-center py-8"><Loader2 className="w-8 h-8 animate-spin text-blue-600" /></div>;
@@ -626,7 +763,7 @@ function BoatsSection({ currentUser }: { currentUser: AdminUser }) {
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-xl font-bold text-gray-900">Boats for Sale & Charter</h2>
+          <h2 className="text-xl font-bold text-gray-900">My Boats</h2>
           <p className="text-sm text-gray-600">Manage your inventory with automatic fraction pricing</p>
         </div>
         <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
@@ -640,29 +777,16 @@ function BoatsSection({ currentUser }: { currentUser: AdminUser }) {
               <DialogTitle>Add New Boat</DialogTitle>
             </DialogHeader>
             <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="grid grid-cols-2 gap-3">
-                <div>
-                  <Label>Fleet Model</Label>
-                  <Select value={formData.fleetModelId} onValueChange={handleModelChange}>
-                    <SelectTrigger data-testid="select-fleet-model"><SelectValue placeholder="Select model" /></SelectTrigger>
-                    <SelectContent>
-                      {fleetModels.map((m) => (
-                        <SelectItem key={m.id} value={m.id}>{m.displayName} (€{Number(m.basePrice).toLocaleString()})</SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-                {currentUser.role !== "dealer" && (
-                  <div>
-                    <Label>Dealer</Label>
-                    <Select value={formData.dealerId} onValueChange={(v) => setFormData({ ...formData, dealerId: v })}>
-                      <SelectTrigger data-testid="select-boat-dealer"><SelectValue placeholder="Select dealer" /></SelectTrigger>
-                      <SelectContent>
-                        {dealers.map((d) => <SelectItem key={d.id} value={d.id}>{d.name}</SelectItem>)}
-                      </SelectContent>
-                    </Select>
-                  </div>
-                )}
+              <div>
+                <Label>Fleet Model</Label>
+                <Select value={formData.fleetModelId} onValueChange={handleModelChange}>
+                  <SelectTrigger data-testid="select-fleet-model"><SelectValue placeholder="Select model" /></SelectTrigger>
+                  <SelectContent>
+                    {fleetModels.map((m) => (
+                      <SelectItem key={m.id} value={m.id}>{m.displayName} (€{Number(m.basePrice).toLocaleString()})</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
 
               <div>
@@ -688,7 +812,6 @@ function BoatsSection({ currentUser }: { currentUser: AdminUser }) {
                 </div>
               </div>
 
-              {/* Fraction Price Calculator */}
               <div className="bg-blue-50 border border-blue-100 rounded-xl p-4">
                 <p className="text-sm text-gray-600 mb-1">Calculated Fraction Price</p>
                 <p className="text-2xl font-bold text-blue-600">€{calculatedFractionPrice.toLocaleString()}</p>
@@ -757,9 +880,6 @@ function BoatsSection({ currentUser }: { currentUser: AdminUser }) {
                     <div className="flex-1">
                       <h3 className="font-semibold text-gray-900">{boat.name}</h3>
                       <p className="text-sm text-gray-500">{getModelName(boat.fleetModelId)}</p>
-                      {currentUser.role !== "dealer" && (
-                        <p className="text-xs text-gray-400">Dealer: {getDealerName(boat.dealerId)}</p>
-                      )}
                       <p className="text-xs text-gray-500"><MapPin className="w-3 h-3 inline mr-1" />{boat.location} • {boat.homePort}</p>
                     </div>
                     <div className="text-right">
