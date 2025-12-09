@@ -1,4 +1,4 @@
-import { Switch, Route, useLocation } from "wouter";
+import { Switch, Route, useLocation, Link } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
@@ -64,8 +64,11 @@ function PhoneFrameWrapper({ children }: { children: React.ReactNode }) {
         <div className="volume-down"></div>
         <div className="power-button"></div>
         <div className="phone-screen">
-          <div className="phone-screen-content" id="phone-viewport">
-            {children}
+          <div className="phone-screen-inner" id="phone-viewport">
+            <div className="phone-content-scroll">
+              {children}
+            </div>
+            <PhoneBottomNav />
           </div>
         </div>
       </div>
@@ -74,6 +77,33 @@ function PhoneFrameWrapper({ children }: { children: React.ReactNode }) {
         <p>Experience luxury yacht ownership like never before. Browse our exclusive fleet, explore ownership options, and set sail on your dream.</p>
       </div>
     </div>
+  );
+}
+
+function PhoneBottomNav() {
+  const [location] = useLocation();
+  const tabs = [
+    { icon: "🏠", label: "Home", route: "/" },
+    { icon: "⛵", label: "Charter", route: "/charter" },
+    { icon: "📊", label: "Invest", route: "/invest" },
+    { icon: "🚤", label: "My Boats", route: "/my-boats" },
+    { icon: "👤", label: "Profile", route: "/profile" }
+  ];
+  
+  return (
+    <nav className="phone-bottom-nav">
+      {tabs.map(({ icon, label, route }) => {
+        const isActive = location === route || (route === "/" && (location === "" || location === "/home"));
+        return (
+          <Link key={route} href={route}>
+            <button className={`phone-nav-item ${isActive ? 'active' : ''}`}>
+              <span className="phone-nav-icon">{icon}</span>
+              <span className="phone-nav-label">{label}</span>
+            </button>
+          </Link>
+        );
+      })}
+    </nav>
   );
 }
 

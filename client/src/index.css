@@ -261,29 +261,77 @@ html, body {
   border-radius: 36px;
   overflow: hidden;
   position: relative;
-  transform: translateZ(0);
-  contain: layout style paint;
 }
 
-.phone-screen-content {
-  width: 100%;
+.phone-screen-inner {
+  display: flex;
+  flex-direction: column;
   height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.phone-content-scroll {
+  flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
   position: relative;
+  padding-bottom: 8px;
 }
 
-/* Force fixed elements to be contained within phone screen */
-#phone-viewport .fixed {
-  position: absolute !important;
+/* Scale down content inside phone frame */
+.phone-content-scroll > * {
+  font-size: 0.75rem;
 }
 
+/* Hide the original fixed bottom navigation inside phone frame */
 #phone-viewport .fixed.bottom-0 {
-  bottom: 0 !important;
-  left: 0 !important;
-  right: 0 !important;
-  width: 100% !important;
+  display: none !important;
+}
+
+/* Phone bottom navigation - stays fixed at bottom of phone screen */
+.phone-bottom-nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: white;
+  border-top: 1px solid #e5e7eb;
+  padding: 4px 2px;
+  flex-shrink: 0;
+}
+
+.phone-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2px 6px;
+  border-radius: 8px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  color: #6b7280;
+}
+
+.phone-nav-item:hover {
+  background: #f3f4f6;
+}
+
+.phone-nav-item.active {
+  background: #eff6ff;
+  color: #2563eb;
+}
+
+.phone-nav-icon {
+  font-size: 14px;
+  line-height: 1;
+}
+
+.phone-nav-label {
+  font-size: 8px;
+  font-weight: 500;
+  margin-top: 1px;
 }
 
 /* Side buttons */
