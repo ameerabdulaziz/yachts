@@ -200,3 +200,164 @@ html, body {
     opacity: 1; 
   }
 }
+
+/* Mobile Phone Frame Mockup - Shows consumer app in a phone frame on desktop */
+.phone-frame-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0E2047 0%, #1a3a6e 50%, #0E2047 100%);
+  padding: 40px 20px;
+}
+
+.phone-frame {
+  position: relative;
+  width: 390px;
+  height: 844px;
+  background: #1a1a1a;
+  border-radius: 55px;
+  padding: 12px;
+  box-shadow: 
+    0 0 0 3px #2a2a2a,
+    0 0 0 6px #1a1a1a,
+    0 25px 60px rgba(0, 0, 0, 0.5),
+    0 10px 20px rgba(0, 0, 0, 0.3),
+    inset 0 0 3px rgba(255, 255, 255, 0.1);
+}
+
+.phone-frame::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px;
+  height: 35px;
+  background: #1a1a1a;
+  border-radius: 0 0 20px 20px;
+  z-index: 10;
+}
+
+.phone-frame::after {
+  content: '';
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 8px;
+  background: #333;
+  border-radius: 4px;
+  z-index: 11;
+}
+
+.phone-screen {
+  width: 100%;
+  height: 100%;
+  background: white;
+  border-radius: 45px;
+  overflow: hidden;
+  position: relative;
+}
+
+.phone-screen-content {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Side buttons */
+.phone-frame .volume-up,
+.phone-frame .volume-down,
+.phone-frame .power-button {
+  position: absolute;
+  background: #2a2a2a;
+  border-radius: 2px;
+}
+
+.phone-frame .volume-up {
+  left: -3px;
+  top: 180px;
+  width: 3px;
+  height: 50px;
+}
+
+.phone-frame .volume-down {
+  left: -3px;
+  top: 240px;
+  width: 3px;
+  height: 50px;
+}
+
+.phone-frame .power-button {
+  right: -3px;
+  top: 220px;
+  width: 3px;
+  height: 80px;
+}
+
+/* Branding text beside phone */
+.phone-frame-branding {
+  position: absolute;
+  left: calc(50% + 240px);
+  top: 50%;
+  transform: translateY(-50%);
+  color: white;
+  text-align: left;
+  max-width: 300px;
+}
+
+.phone-frame-branding h1 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  letter-spacing: -0.5px;
+}
+
+.phone-frame-branding p {
+  font-size: 16px;
+  opacity: 0.8;
+  line-height: 1.6;
+}
+
+/* Hide phone frame on mobile - show actual app */
+@media (max-width: 900px) {
+  .phone-frame-wrapper {
+    background: transparent;
+    padding: 0;
+  }
+  
+  .phone-frame {
+    width: 100%;
+    height: 100vh;
+    border-radius: 0;
+    padding: 0;
+    box-shadow: none;
+    background: transparent;
+  }
+  
+  .phone-frame::before,
+  .phone-frame::after,
+  .phone-frame .volume-up,
+  .phone-frame .volume-down,
+  .phone-frame .power-button {
+    display: none;
+  }
+  
+  .phone-screen {
+    border-radius: 0;
+  }
+  
+  .phone-frame-branding {
+    display: none;
+  }
+}
+
+/* Admin pages - full desktop, no phone frame */
+.admin-desktop-view {
+  width: 100%;
+  min-height: 100vh;
+}

@@ -3,10 +3,7 @@ import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import ScrollToTop from "@/components/ScrollToTop";
-import ScrollHandler from "@/components/ScrollHandler";
 import NotFound from "@/pages/not-found";
-import { useEffect } from "react";
 
 // Import all screens
 import SplashScreen from "@/pages/SplashScreen";
@@ -58,41 +55,29 @@ import ScrollToTopOnRoute from "@/components/ScrollToTopOnRoute";
 import AdminLoginPage from "@/pages/admin/AdminLoginPage";
 import AdminDashboard from "@/pages/admin/AdminDashboard";
 
-function Router() {
-  // Force scroll to top on any route change
-  const [location] = useLocation();
-  
-  // Handle redirects and scroll to top
-  useEffect(() => {
-    // Immediate redirect if landing on /hone
-    if (location === '/hone') {
-      console.log('Detected /hone route, redirecting to /');
-      window.history.replaceState({}, '', '/');
-      window.location.href = '/';
-      return;
-    }
-    
-    // Force scroll to top for all route changes
-    const scrollToTop = () => {
-      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-      document.documentElement.scrollTop = 0;
-      document.body.scrollTop = 0;
-      // Also try the root element
-      const root = document.getElementById('root');
-      if (root) root.scrollTop = 0;
-    };
-    
-    // Immediate scroll
-    scrollToTop();
-    
-    // Multiple attempts to ensure it works across all browsers/devices
-    requestAnimationFrame(scrollToTop);
-    setTimeout(scrollToTop, 10);
-    setTimeout(scrollToTop, 50);
-    setTimeout(scrollToTop, 100);
-    setTimeout(scrollToTop, 200);
-  }, [location]);
 
+function PhoneFrameWrapper({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="phone-frame-wrapper">
+      <div className="phone-frame">
+        <div className="volume-up"></div>
+        <div className="volume-down"></div>
+        <div className="power-button"></div>
+        <div className="phone-screen">
+          <div className="phone-screen-content">
+            {children}
+          </div>
+        </div>
+      </div>
+      <div className="phone-frame-branding">
+        <h1>De Antonio Yachts</h1>
+        <p>Experience luxury yacht ownership like never before. Browse our exclusive fleet, explore ownership options, and set sail on your dream.</p>
+      </div>
+    </div>
+  );
+}
+
+function ConsumerRouter() {
   return (
     <>
       <ScrollToTopOnRoute />
@@ -143,33 +128,32 @@ function Router() {
         <Route path="/access-models" component={AccessModelsScreen} />
         <Route path="/modality/:type" component={ModalityDetailScreen} />
         <Route path="/invest" component={InvestScreen} />
-        
-        {/* Admin routes */}
-        <Route path="/admin" component={AdminLoginPage} />
-        <Route path="/admin/dashboard" component={AdminDashboard} />
-        
         <Route component={NotFound} />
       </Switch>
     </>
   );
 }
 
-function MobileShellController() {
+function AppContent() {
   const [location] = useLocation();
+  const isAdminRoute = location.startsWith('/admin');
   
-  useEffect(() => {
-    const root = document.getElementById('root');
-    if (root) {
-      // Admin pages get full desktop width, consumer pages get mobile shell
-      if (location.startsWith('/admin')) {
-        root.classList.remove('mobile-shell');
-      } else {
-        root.classList.add('mobile-shell');
-      }
-    }
-  }, [location]);
+  if (isAdminRoute) {
+    return (
+      <div className="admin-desktop-view">
+        <Switch>
+          <Route path="/admin" component={AdminLoginPage} />
+          <Route path="/admin/dashboard" component={AdminDashboard} />
+        </Switch>
+      </div>
+    );
+  }
   
-  return null;
+  return (
+    <PhoneFrameWrapper>
+      <ConsumerRouter />
+    </PhoneFrameWrapper>
+  );
 }
 
 function App() {
@@ -177,8 +161,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
-        <MobileShellController />
-        <Router />
+        <AppContent />
       </TooltipProvider>
     </QueryClientProvider>
   );
