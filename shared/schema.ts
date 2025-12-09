@@ -35,6 +35,10 @@ export const users = pgTable("users", {
   role: varchar("role", { length: 20 }).default("renter"), // renter, owner, both
   isVerified: boolean("is_verified").default(false),
   fuelWalletBalance: decimal("fuel_wallet_balance", { precision: 10, scale: 2 }).default("0.00"),
+  // New fields for lead tracking
+  countryOfBerth: varchar("country_of_berth", { length: 100 }), // Where user wants to berth their boat
+  cityOfBerth: varchar("city_of_berth", { length: 100 }), // Preferred marina/city
+  interestedModality: varchar("interested_modality", { length: 30 }), // OWN, EARN, CO_OWN, INVEST
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
 });

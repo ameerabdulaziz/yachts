@@ -173,11 +173,36 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.post("/api/auth/setup-account", async (req, res) => {
     try {
-      const userData = insertUserSchema.parse(req.body);
-      // For account setup, we're creating a new user, not updating existing one
+      // For account setup via email, phone is optional - generate placeholder if not provided
+      const { firstName, lastName, email, password, role, countryOfBerth, cityOfBerth, interestedModality } = req.body;
+      
+      if (!firstName || !lastName || !email) {
+        return res.status(400).json({ message: "First name, last name, and email are required" });
+      }
+      
+      // Check if user already exists with this email
+      const existingUser = await storage.getUserByEmail(email);
+      if (existingUser) {
+        return res.status(400).json({ message: "An account with this email already exists" });
+      }
+      
+      const userData = {
+        phone: `email-${Date.now()}`, // Placeholder phone for email-based signup
+        firstName,
+        lastName,
+        email,
+        role: role || 'renter',
+        countryOfBerth: countryOfBerth || null,
+        cityOfBerth: cityOfBerth || null,
+        interestedModality: interestedModality || null,
+        isVerified: true,
+        fuelWalletBalance: '0.00'
+      };
+      
       const user = await storage.createUser(userData);
       res.json({ user });
     } catch (error) {
+      console.error('Account setup error:', error);
       res.status(500).json({ message: "Account setup failed" });
     }
   });
