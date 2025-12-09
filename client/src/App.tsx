@@ -154,11 +154,30 @@ function Router() {
   );
 }
 
+function MobileShellController() {
+  const [location] = useLocation();
+  
+  useEffect(() => {
+    const root = document.getElementById('root');
+    if (root) {
+      // Admin pages get full desktop width, consumer pages get mobile shell
+      if (location.startsWith('/admin')) {
+        root.classList.remove('mobile-shell');
+      } else {
+        root.classList.add('mobile-shell');
+      }
+    }
+  }, [location]);
+  
+  return null;
+}
+
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
+        <MobileShellController />
         <Router />
       </TooltipProvider>
     </QueryClientProvider>
