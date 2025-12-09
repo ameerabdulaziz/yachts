@@ -1,25 +1,15 @@
 import { useEffect } from "react";
 import { useLocation } from "wouter";
 import deAntonioLogo from "@assets/DE-ANTONIO-YACHTS_LOGO-removebg-preview_1754331163197.png";
-import { isFirstTimeUser, getSelectedModality } from "@/lib/userPreferences";
 
 export default function SplashScreen() {
   const [, setLocation] = useLocation();
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      // Check if first-time user - send to modality selection
-      if (isFirstTimeUser()) {
-        setLocation("/access-models");
-      } else {
-        // Returning user - go to home or their preferred modality
-        const savedModality = getSelectedModality();
-        if (savedModality) {
-          setLocation("/home");
-        } else {
-          setLocation("/access-models");
-        }
-      }
+      // Always show the full experience - start from access models screen
+      // This ensures every visitor sees the complete flow
+      setLocation("/access-models");
     }, 3000);
 
     return () => clearTimeout(timer);
