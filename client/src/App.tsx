@@ -64,7 +64,7 @@ function PhoneFrameWrapper({ children }: { children: React.ReactNode }) {
         <div className="volume-down"></div>
         <div className="power-button"></div>
         <div className="phone-screen">
-          <div className="phone-screen-content">
+          <div className="phone-screen-content" id="phone-viewport">
             {children}
           </div>
         </div>
