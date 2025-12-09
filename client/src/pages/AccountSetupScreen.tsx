@@ -82,6 +82,16 @@ export default function AccountSetupScreen() {
       return;
     }
     
+    // Modality selection is mandatory for lead segmentation
+    if (!interestedModality) {
+      toast({
+        title: "Modality Required",
+        description: "Please select how you'd like to access yacht ownership",
+        variant: "destructive",
+      });
+      return;
+    }
+    
     if (firstName && lastName && email && password) {
       setupMutation.mutate({ 
         firstName, 

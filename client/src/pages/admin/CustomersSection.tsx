@@ -82,6 +82,10 @@ export default function CustomersSection({ adminUser }: { adminUser?: AdminUser 
   const [countryFilter, setCountryFilter] = useState("All Countries");
   const [searchTerm, setSearchTerm] = useState("");
   const [modalityFilter, setModalityFilter] = useState("all");
+  
+  // Dealers can only see their country's leads (enforced at API level)
+  // Admins and staff see all leads with optional country filtering
+  const isDealer = adminUser?.role === "dealer";
 
   const { data: customers = [], isLoading } = useQuery<Customer[]>({
     queryKey: ["/api/admin/customers"]
@@ -93,7 +97,8 @@ export default function CustomersSection({ adminUser }: { adminUser?: AdminUser 
   };
 
   const filteredCustomers = customers.filter(customer => {
-    const matchesCountry = countryFilter === "All Countries" || customer.countryOfBerth === countryFilter;
+    // Country filter only applies for admins/staff (dealers see only their country from API)
+    const matchesCountry = isDealer || countryFilter === "All Countries" || customer.countryOfBerth === countryFilter;
     const matchesModality = modalityFilter === "all" || customer.interestedModality === modalityFilter;
     const matchesSearch = searchTerm === "" || 
       (customer.firstName?.toLowerCase().includes(searchTerm.toLowerCase())) ||
@@ -120,8 +125,11 @@ export default function CustomersSection({ adminUser }: { adminUser?: AdminUser 
   return (
     <div>
       <SectionHeader
-        title="Customer Management"
-        subtitle="View all registered customers, their ownership interests, and berth locations"
+        title={isDealer ? "Your Regional Leads" : "Customer Management"}
+        subtitle={isDealer 
+          ? "View leads interested in boats from your assigned region" 
+          : "View all registered customers, their ownership interests, and berth locations"
+        }
       />
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 16, marginBottom: 24 }}>
@@ -195,19 +203,22 @@ export default function CustomersSection({ adminUser }: { adminUser?: AdminUser 
             data-testid="input-search-customers"
           />
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <Filter style={{ width: 18, height: 18, color: '#64748b' }} />
-          <Select value={countryFilter} onValueChange={setCountryFilter}>
-            <SelectTrigger style={{ width: 180 }} data-testid="select-country-filter">
-              <SelectValue placeholder="Filter by country" />
-            </SelectTrigger>
-            <SelectContent>
-              {EUROPEAN_COUNTRIES.map((country) => (
-                <SelectItem key={country} value={country}>{country}</SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
+        {/* Country filter only shown to admins/staff - dealers see only their assigned country */}
+        {!isDealer && (
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+            <Filter style={{ width: 18, height: 18, color: '#64748b' }} />
+            <Select value={countryFilter} onValueChange={setCountryFilter}>
+              <SelectTrigger style={{ width: 180 }} data-testid="select-country-filter">
+                <SelectValue placeholder="Filter by country" />
+              </SelectTrigger>
+              <SelectContent>
+                {EUROPEAN_COUNTRIES.map((country) => (
+                  <SelectItem key={country} value={country}>{country}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+        )}
         <Select value={modalityFilter} onValueChange={setModalityFilter}>
           <SelectTrigger style={{ width: 180 }} data-testid="select-modality-filter">
             <SelectValue placeholder="Filter by modality" />

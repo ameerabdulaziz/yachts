@@ -538,10 +538,25 @@ export async function registerAdminRoutes(app: Express) {
 
   // ========== CUSTOMER MANAGEMENT ROUTES ==========
 
-  // Get all customers (users)
+  // Get all customers (users) - filtered by dealer's country for dealer role
   app.get("/api/admin/customers", adminAuthMiddleware, async (req, res) => {
     try {
       const users = await storage.getAllUsers();
+      
+      // Dealers can only see leads from their assigned country
+      if (req.adminUser.role === "dealer" && req.adminUser.dealerId) {
+        const dealer = await storage.getDealer(req.adminUser.dealerId);
+        if (dealer && dealer.country) {
+          const filteredUsers = users.filter(
+            (user: any) => user.countryOfBerth === dealer.country
+          );
+          return res.json(filteredUsers);
+        }
+        // If dealer has no country assigned, return empty array
+        return res.json([]);
+      }
+      
+      // Admins and staff see all leads
       res.json(users);
     } catch (error) {
       res.status(500).json({ message: "Failed to fetch customers" });
