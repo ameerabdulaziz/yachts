@@ -277,12 +277,24 @@ html, body {
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
   position: relative;
-  padding-bottom: 8px;
 }
 
-/* Scale down content inside phone frame */
-.phone-content-scroll > * {
-  font-size: 0.75rem;
+/* Constrain all content to fit phone frame */
+.phone-content-scroll * {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Prevent text overflow */
+.phone-content-scroll p,
+.phone-content-scroll h1,
+.phone-content-scroll h2,
+.phone-content-scroll h3,
+.phone-content-scroll h4,
+.phone-content-scroll span,
+.phone-content-scroll div {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 /* Hide the original fixed bottom navigation inside phone frame */
