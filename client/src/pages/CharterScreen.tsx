@@ -29,8 +29,8 @@ export default function CharterScreen() {
     <div className="min-h-screen bg-gray-50 pb-24">
       {/* Header with Extended Background */}
       <div className="relative">
-        {/* Extended Sea Background */}
-        <div className="absolute inset-0 bg-gradient-ocean" style={{ height: '280px' }}>
+        {/* Extended Sea Background - covers header + extends under search card */}
+        <div className="absolute inset-0 bg-gradient-ocean" style={{ height: '240px' }}>
           <div className="absolute inset-0" style={{
             backgroundImage: `url(${seaBackground})`,
             backgroundSize: 'cover',

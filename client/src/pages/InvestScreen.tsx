@@ -288,7 +288,8 @@ export default function InvestScreen() {
   return (
     <div className="min-h-screen bg-gray-50 pb-24">
       <div className="relative">
-        <div className="absolute inset-0 bg-gradient-ocean" style={{ height: '280px' }}>
+        {/* Extended Sea Background - covers header + extends under intro card */}
+        <div className="absolute inset-0 bg-gradient-ocean" style={{ height: '180px' }}>
           <div className="absolute inset-0" style={{
             backgroundImage: `url(${seaBackground})`,
             backgroundSize: 'cover',

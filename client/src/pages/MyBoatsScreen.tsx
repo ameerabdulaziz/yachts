@@ -51,8 +51,8 @@ export default function MyBoatsScreen() {
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white pb-24">
       {/* Header with Extended Background */}
       <div className="relative">
-        {/* Extended Sea Background */}
-        <div className="absolute inset-0 bg-gradient-ocean" style={{ height: '180px' }}>
+        {/* Extended Sea Background - covers header + extends under fuel wallet card */}
+        <div className="absolute inset-0 bg-gradient-ocean" style={{ height: '140px' }}>
           <div className="absolute inset-0" style={{
             backgroundImage: `url(${seaBackground})`,
             backgroundSize: 'cover',
