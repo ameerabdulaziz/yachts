@@ -13,6 +13,12 @@ import {
   dealerBoats,
   boatCalendar,
   inquiries,
+  skippers,
+  skipperAssignments,
+  tripLogs,
+  maintenanceRecords,
+  payments,
+  skipperAvailability,
   type User,
   type InsertUser,
   type Yacht,
@@ -41,6 +47,18 @@ import {
   type InsertBoatCalendar,
   type Inquiry,
   type InsertInquiry,
+  type Skipper,
+  type InsertSkipper,
+  type SkipperAssignment,
+  type InsertSkipperAssignment,
+  type TripLog,
+  type InsertTripLog,
+  type MaintenanceRecord,
+  type InsertMaintenanceRecord,
+  type Payment,
+  type InsertPayment,
+  type SkipperAvailability,
+  type InsertSkipperAvailability,
 } from "@shared/schema";
 import { db } from "./db";
 import { eq, desc, and, gte, lte } from "drizzle-orm";
@@ -121,6 +139,47 @@ export interface IStorage {
   getInquiry(id: string): Promise<Inquiry | undefined>;
   createInquiry(inquiry: InsertInquiry): Promise<Inquiry>;
   updateInquiry(id: string, inquiry: Partial<InsertInquiry>): Promise<Inquiry>;
+
+  // Skipper operations
+  getAllSkippers(): Promise<Skipper[]>;
+  getDealerSkippers(dealerId: string): Promise<Skipper[]>;
+  getSkipper(id: string): Promise<Skipper | undefined>;
+  createSkipper(skipper: InsertSkipper): Promise<Skipper>;
+  updateSkipper(id: string, skipper: Partial<InsertSkipper>): Promise<Skipper>;
+
+  // Skipper assignment operations
+  getAllAssignments(): Promise<SkipperAssignment[]>;
+  getDealerAssignments(dealerId: string): Promise<SkipperAssignment[]>;
+  getSkipperAssignments(skipperId: string): Promise<SkipperAssignment[]>;
+  getAssignment(id: string): Promise<SkipperAssignment | undefined>;
+  createAssignment(assignment: InsertSkipperAssignment): Promise<SkipperAssignment>;
+  updateAssignment(id: string, assignment: Partial<InsertSkipperAssignment>): Promise<SkipperAssignment>;
+
+  // Trip log operations
+  getAllTripLogs(): Promise<TripLog[]>;
+  getDealerTripLogs(dealerId: string): Promise<TripLog[]>;
+  getSkipperTripLogs(skipperId: string): Promise<TripLog[]>;
+  getTripLog(id: string): Promise<TripLog | undefined>;
+  createTripLog(log: InsertTripLog): Promise<TripLog>;
+  updateTripLog(id: string, log: Partial<InsertTripLog>): Promise<TripLog>;
+
+  // Maintenance operations
+  getAllMaintenanceRecords(): Promise<MaintenanceRecord[]>;
+  getDealerMaintenanceRecords(dealerId: string): Promise<MaintenanceRecord[]>;
+  getBoatMaintenanceRecords(boatId: string): Promise<MaintenanceRecord[]>;
+  getMaintenanceRecord(id: string): Promise<MaintenanceRecord | undefined>;
+  createMaintenanceRecord(record: InsertMaintenanceRecord): Promise<MaintenanceRecord>;
+  updateMaintenanceRecord(id: string, record: Partial<InsertMaintenanceRecord>): Promise<MaintenanceRecord>;
+
+  // Payment operations
+  getAllPayments(): Promise<Payment[]>;
+  getDealerPayments(dealerId: string): Promise<Payment[]>;
+  getPayment(id: string): Promise<Payment | undefined>;
+  createPayment(payment: InsertPayment): Promise<Payment>;
+  updatePayment(id: string, payment: Partial<InsertPayment>): Promise<Payment>;
+
+  // Booking admin operations
+  getAllBookings(): Promise<Booking[]>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -488,6 +547,143 @@ export class DatabaseStorage implements IStorage {
       .where(eq(inquiries.id, id))
       .returning();
     return inquiry;
+  }
+
+  // Skipper operations
+  async getAllSkippers(): Promise<Skipper[]> {
+    return await db.select().from(skippers).orderBy(desc(skippers.createdAt));
+  }
+
+  async getDealerSkippers(dealerId: string): Promise<Skipper[]> {
+    return await db.select().from(skippers).where(eq(skippers.dealerId, dealerId)).orderBy(desc(skippers.createdAt));
+  }
+
+  async getSkipper(id: string): Promise<Skipper | undefined> {
+    const [skipper] = await db.select().from(skippers).where(eq(skippers.id, id));
+    return skipper;
+  }
+
+  async createSkipper(skipperData: InsertSkipper): Promise<Skipper> {
+    const [skipper] = await db.insert(skippers).values(skipperData).returning();
+    return skipper;
+  }
+
+  async updateSkipper(id: string, skipperData: Partial<InsertSkipper>): Promise<Skipper> {
+    const [skipper] = await db.update(skippers).set({ ...skipperData, updatedAt: new Date() }).where(eq(skippers.id, id)).returning();
+    return skipper;
+  }
+
+  // Skipper assignment operations
+  async getAllAssignments(): Promise<SkipperAssignment[]> {
+    return await db.select().from(skipperAssignments).orderBy(desc(skipperAssignments.startDate));
+  }
+
+  async getDealerAssignments(dealerId: string): Promise<SkipperAssignment[]> {
+    return await db.select().from(skipperAssignments).where(eq(skipperAssignments.dealerId, dealerId)).orderBy(desc(skipperAssignments.startDate));
+  }
+
+  async getSkipperAssignments(skipperId: string): Promise<SkipperAssignment[]> {
+    return await db.select().from(skipperAssignments).where(eq(skipperAssignments.skipperId, skipperId)).orderBy(desc(skipperAssignments.startDate));
+  }
+
+  async getAssignment(id: string): Promise<SkipperAssignment | undefined> {
+    const [assignment] = await db.select().from(skipperAssignments).where(eq(skipperAssignments.id, id));
+    return assignment;
+  }
+
+  async createAssignment(assignmentData: InsertSkipperAssignment): Promise<SkipperAssignment> {
+    const [assignment] = await db.insert(skipperAssignments).values(assignmentData).returning();
+    return assignment;
+  }
+
+  async updateAssignment(id: string, assignmentData: Partial<InsertSkipperAssignment>): Promise<SkipperAssignment> {
+    const [assignment] = await db.update(skipperAssignments).set({ ...assignmentData, updatedAt: new Date() }).where(eq(skipperAssignments.id, id)).returning();
+    return assignment;
+  }
+
+  // Trip log operations
+  async getAllTripLogs(): Promise<TripLog[]> {
+    return await db.select().from(tripLogs).orderBy(desc(tripLogs.createdAt));
+  }
+
+  async getDealerTripLogs(dealerId: string): Promise<TripLog[]> {
+    return await db.select().from(tripLogs).where(eq(tripLogs.dealerId, dealerId)).orderBy(desc(tripLogs.createdAt));
+  }
+
+  async getSkipperTripLogs(skipperId: string): Promise<TripLog[]> {
+    return await db.select().from(tripLogs).where(eq(tripLogs.skipperId, skipperId)).orderBy(desc(tripLogs.createdAt));
+  }
+
+  async getTripLog(id: string): Promise<TripLog | undefined> {
+    const [log] = await db.select().from(tripLogs).where(eq(tripLogs.id, id));
+    return log;
+  }
+
+  async createTripLog(logData: InsertTripLog): Promise<TripLog> {
+    const [log] = await db.insert(tripLogs).values(logData).returning();
+    return log;
+  }
+
+  async updateTripLog(id: string, logData: Partial<InsertTripLog>): Promise<TripLog> {
+    const [log] = await db.update(tripLogs).set({ ...logData, updatedAt: new Date() }).where(eq(tripLogs.id, id)).returning();
+    return log;
+  }
+
+  // Maintenance operations
+  async getAllMaintenanceRecords(): Promise<MaintenanceRecord[]> {
+    return await db.select().from(maintenanceRecords).orderBy(desc(maintenanceRecords.createdAt));
+  }
+
+  async getDealerMaintenanceRecords(dealerId: string): Promise<MaintenanceRecord[]> {
+    return await db.select().from(maintenanceRecords).where(eq(maintenanceRecords.dealerId, dealerId)).orderBy(desc(maintenanceRecords.createdAt));
+  }
+
+  async getBoatMaintenanceRecords(boatId: string): Promise<MaintenanceRecord[]> {
+    return await db.select().from(maintenanceRecords).where(eq(maintenanceRecords.dealerBoatId, boatId)).orderBy(desc(maintenanceRecords.scheduledDate));
+  }
+
+  async getMaintenanceRecord(id: string): Promise<MaintenanceRecord | undefined> {
+    const [record] = await db.select().from(maintenanceRecords).where(eq(maintenanceRecords.id, id));
+    return record;
+  }
+
+  async createMaintenanceRecord(recordData: InsertMaintenanceRecord): Promise<MaintenanceRecord> {
+    const [record] = await db.insert(maintenanceRecords).values(recordData).returning();
+    return record;
+  }
+
+  async updateMaintenanceRecord(id: string, recordData: Partial<InsertMaintenanceRecord>): Promise<MaintenanceRecord> {
+    const [record] = await db.update(maintenanceRecords).set({ ...recordData, updatedAt: new Date() }).where(eq(maintenanceRecords.id, id)).returning();
+    return record;
+  }
+
+  // Payment operations
+  async getAllPayments(): Promise<Payment[]> {
+    return await db.select().from(payments).orderBy(desc(payments.createdAt));
+  }
+
+  async getDealerPayments(dealerId: string): Promise<Payment[]> {
+    return await db.select().from(payments).where(eq(payments.dealerId, dealerId)).orderBy(desc(payments.createdAt));
+  }
+
+  async getPayment(id: string): Promise<Payment | undefined> {
+    const [payment] = await db.select().from(payments).where(eq(payments.id, id));
+    return payment;
+  }
+
+  async createPayment(paymentData: InsertPayment): Promise<Payment> {
+    const [payment] = await db.insert(payments).values(paymentData).returning();
+    return payment;
+  }
+
+  async updatePayment(id: string, paymentData: Partial<InsertPayment>): Promise<Payment> {
+    const [payment] = await db.update(payments).set({ ...paymentData, updatedAt: new Date() }).where(eq(payments.id, id)).returning();
+    return payment;
+  }
+
+  // Booking admin operations
+  async getAllBookings(): Promise<Booking[]> {
+    return await db.select().from(bookings).orderBy(desc(bookings.createdAt));
   }
 }
 

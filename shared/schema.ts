@@ -635,3 +635,336 @@ export type BoatCalendar = typeof boatCalendar.$inferSelect;
 export type InsertBoatCalendar = z.infer<typeof insertBoatCalendarSchema>;
 export type Inquiry = typeof inquiries.$inferSelect;
 export type InsertInquiry = z.infer<typeof insertInquirySchema>;
+
+// ========== PHASE 1 & 2: SKIPPER & OPERATIONS MANAGEMENT ==========
+
+// Skipper status enum
+export const SkipperStatus = {
+  ACTIVE: "active",
+  INACTIVE: "inactive",
+  ON_LEAVE: "on_leave",
+  SUSPENDED: "suspended",
+} as const;
+export type SkipperStatusEnum = (typeof SkipperStatus)[keyof typeof SkipperStatus];
+
+// Skippers table - Captain/crew profiles
+export const skippers = pgTable("skippers", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  dealerId: varchar("dealer_id").references(() => dealers.id).notNull(),
+  firstName: varchar("first_name", { length: 100 }).notNull(),
+  lastName: varchar("last_name", { length: 100 }).notNull(),
+  email: varchar("email", { length: 255 }),
+  phone: varchar("phone", { length: 50 }),
+  profileImage: varchar("profile_image", { length: 500 }),
+  // License & Certifications
+  licenseType: varchar("license_type", { length: 100 }), // RYA Yachtmaster, ICC, USCG, etc.
+  licenseNumber: varchar("license_number", { length: 100 }),
+  licenseExpiry: timestamp("license_expiry"),
+  certifications: text("certifications").array(), // STCW, First Aid, VHF, etc.
+  // Experience
+  yearsExperience: integer("years_experience"),
+  languages: text("languages").array(),
+  boatTypesQualified: text("boat_types_qualified").array(), // D29, D32, D36, etc.
+  specializations: text("specializations").array(), // fishing, diving, overnight, racing
+  // Rates
+  dailyRate: decimal("daily_rate", { precision: 10, scale: 2 }),
+  halfDayRate: decimal("half_day_rate", { precision: 10, scale: 2 }),
+  overnightRate: decimal("overnight_rate", { precision: 10, scale: 2 }),
+  currency: varchar("currency", { length: 10 }).default("EUR"),
+  // Personal
+  dateOfBirth: timestamp("date_of_birth"),
+  nationality: varchar("nationality", { length: 100 }),
+  address: text("address"),
+  emergencyContactName: varchar("emergency_contact_name", { length: 100 }),
+  emergencyContactPhone: varchar("emergency_contact_phone", { length: 50 }),
+  // Status
+  status: varchar("status", { length: 30 }).default("active"),
+  bio: text("bio"),
+  rating: decimal("rating", { precision: 3, scale: 2 }).default("0.00"),
+  totalTrips: integer("total_trips").default(0),
+  notes: text("notes"),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+// Assignment type enum
+export const AssignmentType = {
+  CHARTER: "charter",
+  OWNER_TRIP: "owner_trip",
+  DELIVERY: "delivery",
+  MAINTENANCE: "maintenance",
+  TRAINING: "training",
+  SEA_TRIAL: "sea_trial",
+} as const;
+export type AssignmentTypeEnum = (typeof AssignmentType)[keyof typeof AssignmentType];
+
+// Assignment status enum
+export const AssignmentStatus = {
+  SCHEDULED: "scheduled",
+  CONFIRMED: "confirmed",
+  IN_PROGRESS: "in_progress",
+  COMPLETED: "completed",
+  CANCELLED: "cancelled",
+} as const;
+export type AssignmentStatusEnum = (typeof AssignmentStatus)[keyof typeof AssignmentStatus];
+
+// Skipper assignments table - Links skippers to trips
+export const skipperAssignments = pgTable("skipper_assignments", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  skipperId: varchar("skipper_id").references(() => skippers.id).notNull(),
+  dealerId: varchar("dealer_id").references(() => dealers.id).notNull(),
+  dealerBoatId: varchar("dealer_boat_id").references(() => dealerBoats.id),
+  bookingId: varchar("booking_id").references(() => bookings.id),
+  // Assignment details
+  assignmentType: varchar("assignment_type", { length: 30 }).notNull(), // charter, owner_trip, delivery, maintenance
+  title: varchar("title", { length: 255 }),
+  description: text("description"),
+  // Dates
+  startDate: timestamp("start_date").notNull(),
+  endDate: timestamp("end_date").notNull(),
+  // Location
+  departurePort: varchar("departure_port", { length: 255 }),
+  arrivalPort: varchar("arrival_port", { length: 255 }),
+  // Guest info (for charter)
+  guestCount: integer("guest_count"),
+  guestNames: text("guest_names"),
+  guestPhone: varchar("guest_phone", { length: 50 }),
+  specialRequests: text("special_requests"),
+  // Payment
+  paymentAmount: decimal("payment_amount", { precision: 10, scale: 2 }),
+  paymentStatus: varchar("payment_status", { length: 30 }).default("pending"), // pending, paid, cancelled
+  // Status
+  status: varchar("status", { length: 30 }).default("scheduled"),
+  notes: text("notes"),
+  createdBy: varchar("created_by").references(() => adminUsers.id),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+// Trip logs table - Detailed trip records
+export const tripLogs = pgTable("trip_logs", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  assignmentId: varchar("assignment_id").references(() => skipperAssignments.id),
+  skipperId: varchar("skipper_id").references(() => skippers.id).notNull(),
+  dealerBoatId: varchar("dealer_boat_id").references(() => dealerBoats.id).notNull(),
+  dealerId: varchar("dealer_id").references(() => dealers.id).notNull(),
+  // Trip timing
+  departureTime: timestamp("departure_time"),
+  arrivalTime: timestamp("arrival_time"),
+  tripDurationHours: decimal("trip_duration_hours", { precision: 5, scale: 2 }),
+  // Locations
+  departurePort: varchar("departure_port", { length: 255 }),
+  arrivalPort: varchar("arrival_port", { length: 255 }),
+  routeDescription: text("route_description"),
+  // Engine & Fuel
+  engineHoursStart: decimal("engine_hours_start", { precision: 10, scale: 2 }),
+  engineHoursEnd: decimal("engine_hours_end", { precision: 10, scale: 2 }),
+  fuelLevelStart: integer("fuel_level_start"), // percentage
+  fuelLevelEnd: integer("fuel_level_end"), // percentage
+  fuelUsedLiters: decimal("fuel_used_liters", { precision: 10, scale: 2 }),
+  fuelAddedLiters: decimal("fuel_added_liters", { precision: 10, scale: 2 }),
+  fuelCost: decimal("fuel_cost", { precision: 10, scale: 2 }),
+  // Conditions
+  weatherConditions: varchar("weather_conditions", { length: 100 }),
+  seaState: varchar("sea_state", { length: 100 }),
+  windSpeed: varchar("wind_speed", { length: 50 }),
+  visibility: varchar("visibility", { length: 50 }),
+  // Guests
+  guestCount: integer("guest_count"),
+  // Issues & Notes
+  incidentOccurred: boolean("incident_occurred").default(false),
+  incidentDescription: text("incident_description"),
+  maintenanceIssues: text("maintenance_issues"),
+  skipperNotes: text("skipper_notes"),
+  // Feedback
+  guestFeedback: text("guest_feedback"),
+  guestRating: integer("guest_rating"), // 1-5
+  // Pre/Post checks
+  preCheckCompleted: boolean("pre_check_completed").default(false),
+  preCheckNotes: text("pre_check_notes"),
+  postCheckCompleted: boolean("post_check_completed").default(false),
+  postCheckNotes: text("post_check_notes"),
+  // Status
+  status: varchar("status", { length: 30 }).default("draft"), // draft, submitted, reviewed, approved
+  reviewedBy: varchar("reviewed_by").references(() => adminUsers.id),
+  reviewedAt: timestamp("reviewed_at"),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+// Maintenance type enum
+export const MaintenanceType = {
+  SCHEDULED: "scheduled",
+  UNSCHEDULED: "unscheduled",
+  EMERGENCY: "emergency",
+  INSPECTION: "inspection",
+  WINTERIZATION: "winterization",
+  ANNUAL_SERVICE: "annual_service",
+} as const;
+export type MaintenanceTypeEnum = (typeof MaintenanceType)[keyof typeof MaintenanceType];
+
+// Maintenance records table
+export const maintenanceRecords = pgTable("maintenance_records", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  dealerBoatId: varchar("dealer_boat_id").references(() => dealerBoats.id).notNull(),
+  dealerId: varchar("dealer_id").references(() => dealers.id).notNull(),
+  // Maintenance details
+  maintenanceType: varchar("maintenance_type", { length: 50 }).notNull(),
+  category: varchar("category", { length: 100 }), // engine, hull, electrical, plumbing, safety, cosmetic
+  title: varchar("title", { length: 255 }).notNull(),
+  description: text("description"),
+  // Schedule
+  scheduledDate: timestamp("scheduled_date"),
+  startedDate: timestamp("started_date"),
+  completedDate: timestamp("completed_date"),
+  // Next service
+  nextDueDate: timestamp("next_due_date"),
+  nextDueEngineHours: decimal("next_due_engine_hours", { precision: 10, scale: 2 }),
+  // Engine hours at service
+  engineHoursAtService: decimal("engine_hours_at_service", { precision: 10, scale: 2 }),
+  // Vendor
+  vendorName: varchar("vendor_name", { length: 255 }),
+  vendorContact: varchar("vendor_contact", { length: 255 }),
+  // Cost
+  laborCost: decimal("labor_cost", { precision: 10, scale: 2 }),
+  partsCost: decimal("parts_cost", { precision: 10, scale: 2 }),
+  totalCost: decimal("total_cost", { precision: 10, scale: 2 }),
+  currency: varchar("currency", { length: 10 }).default("EUR"),
+  invoiceNumber: varchar("invoice_number", { length: 100 }),
+  // Documents
+  documents: text("documents").array(),
+  photos: text("photos").array(),
+  // Status
+  status: varchar("status", { length: 30 }).default("scheduled"), // scheduled, in_progress, completed, cancelled
+  priority: varchar("priority", { length: 20 }).default("normal"), // low, normal, high, urgent
+  notes: text("notes"),
+  createdBy: varchar("created_by").references(() => adminUsers.id),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+// Payment type enum
+export const PaymentType = {
+  SALE: "sale",
+  CHARTER: "charter",
+  OWNERSHIP_FEE: "ownership_fee",
+  SKIPPER_PAYMENT: "skipper_payment",
+  MAINTENANCE: "maintenance",
+  FUEL: "fuel",
+  REFUND: "refund",
+} as const;
+export type PaymentTypeEnum = (typeof PaymentType)[keyof typeof PaymentType];
+
+// Payments table - Financial tracking
+export const payments = pgTable("payments", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  dealerId: varchar("dealer_id").references(() => dealers.id),
+  // Payment type
+  paymentType: varchar("payment_type", { length: 50 }).notNull(),
+  // References
+  bookingId: varchar("booking_id").references(() => bookings.id),
+  assignmentId: varchar("assignment_id").references(() => skipperAssignments.id),
+  maintenanceId: varchar("maintenance_id").references(() => maintenanceRecords.id),
+  customerId: varchar("customer_id").references(() => users.id),
+  skipperId: varchar("skipper_id").references(() => skippers.id),
+  // Amount
+  amount: decimal("amount", { precision: 12, scale: 2 }).notNull(),
+  currency: varchar("currency", { length: 10 }).default("EUR"),
+  // Payment details
+  paymentMethod: varchar("payment_method", { length: 50 }), // card, bank_transfer, cash, stripe
+  stripePaymentId: varchar("stripe_payment_id", { length: 255 }),
+  stripePaymentIntentId: varchar("stripe_payment_intent_id", { length: 255 }),
+  // Status
+  status: varchar("status", { length: 30 }).default("pending"), // pending, processing, completed, failed, refunded
+  paidAt: timestamp("paid_at"),
+  // Invoice
+  invoiceNumber: varchar("invoice_number", { length: 100 }),
+  invoiceUrl: varchar("invoice_url", { length: 500 }),
+  // Notes
+  description: text("description"),
+  notes: text("notes"),
+  createdBy: varchar("created_by").references(() => adminUsers.id),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+// Skipper availability table
+export const skipperAvailability = pgTable("skipper_availability", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  skipperId: varchar("skipper_id").references(() => skippers.id).notNull(),
+  date: timestamp("date").notNull(),
+  isAvailable: boolean("is_available").default(true),
+  availabilityType: varchar("availability_type", { length: 30 }), // available, busy, vacation, sick
+  notes: text("notes"),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+// Relations for Phase 1 & 2 tables
+export const skippersRelations = relations(skippers, ({ one, many }) => ({
+  dealer: one(dealers, { fields: [skippers.dealerId], references: [dealers.id] }),
+  assignments: many(skipperAssignments),
+  tripLogs: many(tripLogs),
+  availability: many(skipperAvailability),
+  payments: many(payments),
+}));
+
+export const skipperAssignmentsRelations = relations(skipperAssignments, ({ one, many }) => ({
+  skipper: one(skippers, { fields: [skipperAssignments.skipperId], references: [skippers.id] }),
+  dealer: one(dealers, { fields: [skipperAssignments.dealerId], references: [dealers.id] }),
+  dealerBoat: one(dealerBoats, { fields: [skipperAssignments.dealerBoatId], references: [dealerBoats.id] }),
+  booking: one(bookings, { fields: [skipperAssignments.bookingId], references: [bookings.id] }),
+  createdByUser: one(adminUsers, { fields: [skipperAssignments.createdBy], references: [adminUsers.id] }),
+  tripLogs: many(tripLogs),
+  payments: many(payments),
+}));
+
+export const tripLogsRelations = relations(tripLogs, ({ one }) => ({
+  assignment: one(skipperAssignments, { fields: [tripLogs.assignmentId], references: [skipperAssignments.id] }),
+  skipper: one(skippers, { fields: [tripLogs.skipperId], references: [skippers.id] }),
+  dealerBoat: one(dealerBoats, { fields: [tripLogs.dealerBoatId], references: [dealerBoats.id] }),
+  dealer: one(dealers, { fields: [tripLogs.dealerId], references: [dealers.id] }),
+  reviewedByUser: one(adminUsers, { fields: [tripLogs.reviewedBy], references: [adminUsers.id] }),
+}));
+
+export const maintenanceRecordsRelations = relations(maintenanceRecords, ({ one, many }) => ({
+  dealerBoat: one(dealerBoats, { fields: [maintenanceRecords.dealerBoatId], references: [dealerBoats.id] }),
+  dealer: one(dealers, { fields: [maintenanceRecords.dealerId], references: [dealers.id] }),
+  createdByUser: one(adminUsers, { fields: [maintenanceRecords.createdBy], references: [adminUsers.id] }),
+  payments: many(payments),
+}));
+
+export const paymentsRelations = relations(payments, ({ one }) => ({
+  dealer: one(dealers, { fields: [payments.dealerId], references: [dealers.id] }),
+  booking: one(bookings, { fields: [payments.bookingId], references: [bookings.id] }),
+  assignment: one(skipperAssignments, { fields: [payments.assignmentId], references: [skipperAssignments.id] }),
+  maintenance: one(maintenanceRecords, { fields: [payments.maintenanceId], references: [maintenanceRecords.id] }),
+  customer: one(users, { fields: [payments.customerId], references: [users.id] }),
+  skipper: one(skippers, { fields: [payments.skipperId], references: [skippers.id] }),
+  createdByUser: one(adminUsers, { fields: [payments.createdBy], references: [adminUsers.id] }),
+}));
+
+export const skipperAvailabilityRelations = relations(skipperAvailability, ({ one }) => ({
+  skipper: one(skippers, { fields: [skipperAvailability.skipperId], references: [skippers.id] }),
+}));
+
+// Insert schemas for Phase 1 & 2 tables
+export const insertSkipperSchema = createInsertSchema(skippers).omit({ id: true, createdAt: true, updatedAt: true });
+export const insertSkipperAssignmentSchema = createInsertSchema(skipperAssignments).omit({ id: true, createdAt: true, updatedAt: true });
+export const insertTripLogSchema = createInsertSchema(tripLogs).omit({ id: true, createdAt: true, updatedAt: true });
+export const insertMaintenanceRecordSchema = createInsertSchema(maintenanceRecords).omit({ id: true, createdAt: true, updatedAt: true });
+export const insertPaymentSchema = createInsertSchema(payments).omit({ id: true, createdAt: true, updatedAt: true });
+export const insertSkipperAvailabilitySchema = createInsertSchema(skipperAvailability).omit({ id: true, createdAt: true });
+
+// Types for Phase 1 & 2 tables
+export type Skipper = typeof skippers.$inferSelect;
+export type InsertSkipper = z.infer<typeof insertSkipperSchema>;
+export type SkipperAssignment = typeof skipperAssignments.$inferSelect;
+export type InsertSkipperAssignment = z.infer<typeof insertSkipperAssignmentSchema>;
+export type TripLog = typeof tripLogs.$inferSelect;
+export type InsertTripLog = z.infer<typeof insertTripLogSchema>;
+export type MaintenanceRecord = typeof maintenanceRecords.$inferSelect;
+export type InsertMaintenanceRecord = z.infer<typeof insertMaintenanceRecordSchema>;
+export type Payment = typeof payments.$inferSelect;
+export type InsertPayment = z.infer<typeof insertPaymentSchema>;
+export type SkipperAvailability = typeof skipperAvailability.$inferSelect;
+export type InsertSkipperAvailability = z.infer<typeof insertSkipperAvailabilitySchema>;
