@@ -1,4 +1,5 @@
 import { Switch, Route, useLocation, Link } from "wouter";
+import { Home, Ship, PieChart, User, Waves } from "lucide-react";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
@@ -83,21 +84,21 @@ function PhoneFrameWrapper({ children }: { children: React.ReactNode }) {
 function PhoneBottomNav() {
   const [location] = useLocation();
   const tabs = [
-    { icon: "🏠", label: "Home", route: "/home" },
-    { icon: "⛵", label: "Charter", route: "/charter" },
-    { icon: "📊", label: "Invest", route: "/invest" },
-    { icon: "🚤", label: "My Boats", route: "/my-boats" },
-    { icon: "👤", label: "Profile", route: "/profile" }
+    { Icon: Home, label: "Home", route: "/home" },
+    { Icon: Waves, label: "Charter", route: "/charter" },
+    { Icon: PieChart, label: "Invest", route: "/invest" },
+    { Icon: Ship, label: "My Boats", route: "/my-boats" },
+    { Icon: User, label: "Profile", route: "/profile" }
   ];
   
   return (
     <nav className="phone-bottom-nav">
-      {tabs.map(({ icon, label, route }) => {
+      {tabs.map(({ Icon, label, route }) => {
         const isActive = location === route || (route === "/home" && location === "/hone");
         return (
           <Link key={route} href={route}>
             <button className={`phone-nav-item ${isActive ? 'active' : ''}`}>
-              <span className="phone-nav-icon">{icon}</span>
+              <Icon className="phone-nav-icon" />
               <span className="phone-nav-label">{label}</span>
             </button>
           </Link>
