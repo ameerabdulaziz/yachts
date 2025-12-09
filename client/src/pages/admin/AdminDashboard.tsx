@@ -12,10 +12,16 @@ import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { 
   Anchor, Users, Ship, Building2, MessageSquare, LogOut, 
-  Plus, Loader2, MapPin, ExternalLink, Gauge
+  Plus, Loader2, MapPin, ExternalLink, Gauge, Calendar, UserCheck, ClipboardList, FileText, Wrench
 } from "lucide-react";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 import deAntonioLogo from "@assets/DE-ANTONIO-YACHTS_LOGO-removebg-preview_1754331163197.png";
+import BookingsSection from "./BookingsSection";
+import CustomersSection from "./CustomersSection";
+import SkippersSection from "./SkippersSection";
+import AssignmentsSection from "./AssignmentsSection";
+import TripLogsSection from "./TripLogsSection";
+import MaintenanceSection from "./MaintenanceSection";
 
 interface AdminUser {
   id: string;
@@ -139,10 +145,20 @@ export default function AdminDashboard() {
         { id: "fleet", label: "Fleet Models", icon: Ship },
         { id: "dealers", label: "Dealer Network", icon: Building2 },
         { id: "users", label: "Admin Users", icon: Users },
+        { id: "bookings", label: "Bookings", icon: Calendar },
+        { id: "customers", label: "Customers", icon: UserCheck },
+        { id: "skippers", label: "Skippers", icon: Anchor },
+        { id: "assignments", label: "Assignments", icon: ClipboardList },
+        { id: "trip-logs", label: "Trip Logs", icon: FileText },
+        { id: "maintenance", label: "Maintenance", icon: Wrench },
       ]
     : [
         { id: "boats", label: "Boat Inventory", icon: Anchor },
         { id: "inquiries", label: "Inquiries", icon: MessageSquare },
+        { id: "skippers", label: "Skippers", icon: UserCheck },
+        { id: "assignments", label: "Assignments", icon: ClipboardList },
+        { id: "trip-logs", label: "Trip Logs", icon: FileText },
+        { id: "maintenance", label: "Maintenance", icon: Wrench },
       ];
 
   return (
@@ -236,8 +252,14 @@ export default function AdminDashboard() {
           {isAdmin && activeTab === "fleet" && <FleetSection />}
           {isAdmin && activeTab === "dealers" && <DealersSection />}
           {isAdmin && activeTab === "users" && <UsersSection currentUser={currentUser} />}
+          {isAdmin && activeTab === "bookings" && <BookingsSection />}
+          {isAdmin && activeTab === "customers" && <CustomersSection />}
           {isDealer && activeTab === "boats" && <BoatsSection currentUser={currentUser} />}
           {isDealer && activeTab === "inquiries" && <InquiriesSection currentUser={currentUser} />}
+          {activeTab === "skippers" && <SkippersSection currentUser={currentUser} />}
+          {activeTab === "assignments" && <AssignmentsSection currentUser={currentUser} />}
+          {activeTab === "trip-logs" && <TripLogsSection currentUser={currentUser} />}
+          {activeTab === "maintenance" && <MaintenanceSection currentUser={currentUser} />}
         </div>
       </main>
     </div>

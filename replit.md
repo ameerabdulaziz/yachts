@@ -8,9 +8,23 @@ Preferred communication style: Simple, everyday language.
 
 # Recent Changes
 
+## Admin Dashboard Expansion (December 9, 2025)
+- **NEW MODULES**: Added 6 comprehensive admin modules to the dashboard:
+  - **Bookings**: View and manage all charter/ownership bookings with status updates
+  - **Customers**: View registered customers with role badges, fuel wallet balances, and contact info
+  - **Skippers**: Manage professional skippers with certifications, rates, and availability
+  - **Assignments**: Schedule and manage skipper trip assignments with guest details
+  - **Trip Logs**: View voyage records with fuel consumption, weather conditions, and incidents
+  - **Maintenance**: Schedule and track boat maintenance records with cost breakdowns
+- **DESIGN**: Desktop-first approach (1280px minimum), fixed 256px sidebar, Blue Zodiac branding (#0E2047)
+- **TABLES**: Proper data tables with zebra striping, not cards
+- **DIALOGS**: Add/Edit forms for skippers, assignments, and maintenance records
+- **STATISTICS**: Dashboard cards showing totals, status counts, and financial summaries
+- **ROLE-BASED**: Admin/Staff see all modules, dealers see relevant subset
+
 ## De Antonio Admin Tool Implementation (December 1, 2025)
 - **CREATED**: Complete admin tool for De Antonio staff and dealers
-- **DATABASE**: New tables for admin_users, dealers, fleet_models, dealer_boats, boat_calendar, inquiries
+- **DATABASE**: New tables for admin_users, dealers, fleet_models, dealer_boats, boat_calendar, inquiries, skippers, skipper_assignments, trip_logs, maintenance_records, payments, skipper_availability
 - **AUTHENTICATION**: Username/password login with bcrypt password hashing, session-based auth
 - **ROLES**: Three-tier role system (super_admin, staff, dealer) with appropriate access controls
 - **FLEET MANAGEMENT**: Pre-seeded De Antonio yacht models (D29, D32, D36, D42, D50, D60) with accurate pricing:
