@@ -8,6 +8,11 @@ import {
   insertDealerBoatSchema,
   insertBoatCalendarSchema,
   insertInquirySchema,
+  insertSkipperSchema,
+  insertSkipperAssignmentSchema,
+  insertTripLogSchema,
+  insertMaintenanceRecordSchema,
+  insertPaymentSchema,
 } from "@shared/schema";
 import { z } from "zod";
 
@@ -493,6 +498,418 @@ export async function registerAdminRoutes(app: Express) {
       res.json(inquiry);
     } catch (error) {
       res.status(500).json({ message: "Failed to update inquiry" });
+    }
+  });
+
+  // ========== BOOKING MANAGEMENT ROUTES ==========
+
+  // Get all bookings (admin view)
+  app.get("/api/admin/bookings", adminAuthMiddleware, async (req, res) => {
+    try {
+      const bookings = await storage.getAllBookings();
+      res.json(bookings);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch bookings" });
+    }
+  });
+
+  // Get single booking
+  app.get("/api/admin/bookings/:id", adminAuthMiddleware, async (req, res) => {
+    try {
+      const booking = await storage.getBooking(req.params.id);
+      if (!booking) {
+        return res.status(404).json({ message: "Booking not found" });
+      }
+      res.json(booking);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch booking" });
+    }
+  });
+
+  // Update booking status
+  app.patch("/api/admin/bookings/:id", adminAuthMiddleware, async (req, res) => {
+    try {
+      const booking = await storage.updateBooking(req.params.id, req.body);
+      res.json(booking);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to update booking" });
+    }
+  });
+
+  // ========== CUSTOMER MANAGEMENT ROUTES ==========
+
+  // Get all customers (users)
+  app.get("/api/admin/customers", adminAuthMiddleware, async (req, res) => {
+    try {
+      const users = await storage.getAllUsers();
+      res.json(users);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch customers" });
+    }
+  });
+
+  // Get single customer
+  app.get("/api/admin/customers/:id", adminAuthMiddleware, async (req, res) => {
+    try {
+      const user = await storage.getUser(req.params.id);
+      if (!user) {
+        return res.status(404).json({ message: "Customer not found" });
+      }
+      res.json(user);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch customer" });
+    }
+  });
+
+  // Update customer
+  app.patch("/api/admin/customers/:id", adminAuthMiddleware, async (req, res) => {
+    try {
+      const user = await storage.updateUser({ id: req.params.id, ...req.body });
+      res.json(user);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to update customer" });
+    }
+  });
+
+  // ========== SKIPPER MANAGEMENT ROUTES ==========
+
+  // Get all skippers
+  app.get("/api/admin/skippers", adminAuthMiddleware, async (req, res) => {
+    try {
+      let skippers;
+      if (req.adminUser.role === "dealer" && req.adminUser.dealerId) {
+        skippers = await storage.getDealerSkippers(req.adminUser.dealerId);
+      } else {
+        skippers = await storage.getAllSkippers();
+      }
+      res.json(skippers);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch skippers" });
+    }
+  });
+
+  // Get single skipper
+  app.get("/api/admin/skippers/:id", adminAuthMiddleware, async (req, res) => {
+    try {
+      const skipper = await storage.getSkipper(req.params.id);
+      if (!skipper) {
+        return res.status(404).json({ message: "Skipper not found" });
+      }
+      if (req.adminUser.role === "dealer" && skipper.dealerId !== req.adminUser.dealerId) {
+        return res.status(403).json({ message: "Access denied" });
+      }
+      res.json(skipper);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch skipper" });
+    }
+  });
+
+  // Create skipper
+  app.post("/api/admin/skippers", adminAuthMiddleware, async (req, res) => {
+    try {
+      let dealerId = req.body.dealerId;
+      if (req.adminUser.role === "dealer") {
+        dealerId = req.adminUser.dealerId;
+      }
+      if (!dealerId) {
+        return res.status(400).json({ message: "Dealer ID is required" });
+      }
+      const skipperData = { ...req.body, dealerId };
+      const skipper = await storage.createSkipper(skipperData);
+      res.json(skipper);
+    } catch (error) {
+      console.error("Create skipper error:", error);
+      res.status(500).json({ message: "Failed to create skipper" });
+    }
+  });
+
+  // Update skipper
+  app.patch("/api/admin/skippers/:id", adminAuthMiddleware, async (req, res) => {
+    try {
+      const existingSkipper = await storage.getSkipper(req.params.id);
+      if (!existingSkipper) {
+        return res.status(404).json({ message: "Skipper not found" });
+      }
+      if (req.adminUser.role === "dealer" && existingSkipper.dealerId !== req.adminUser.dealerId) {
+        return res.status(403).json({ message: "Access denied" });
+      }
+      const skipper = await storage.updateSkipper(req.params.id, req.body);
+      res.json(skipper);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to update skipper" });
+    }
+  });
+
+  // ========== SKIPPER ASSIGNMENT ROUTES ==========
+
+  // Get all assignments
+  app.get("/api/admin/assignments", adminAuthMiddleware, async (req, res) => {
+    try {
+      let assignments;
+      if (req.adminUser.role === "dealer" && req.adminUser.dealerId) {
+        assignments = await storage.getDealerAssignments(req.adminUser.dealerId);
+      } else {
+        assignments = await storage.getAllAssignments();
+      }
+      res.json(assignments);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch assignments" });
+    }
+  });
+
+  // Get single assignment
+  app.get("/api/admin/assignments/:id", adminAuthMiddleware, async (req, res) => {
+    try {
+      const assignment = await storage.getAssignment(req.params.id);
+      if (!assignment) {
+        return res.status(404).json({ message: "Assignment not found" });
+      }
+      if (req.adminUser.role === "dealer" && assignment.dealerId !== req.adminUser.dealerId) {
+        return res.status(403).json({ message: "Access denied" });
+      }
+      res.json(assignment);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch assignment" });
+    }
+  });
+
+  // Create assignment
+  app.post("/api/admin/assignments", adminAuthMiddleware, async (req, res) => {
+    try {
+      let dealerId = req.body.dealerId;
+      if (req.adminUser.role === "dealer") {
+        dealerId = req.adminUser.dealerId;
+      }
+      if (!dealerId) {
+        return res.status(400).json({ message: "Dealer ID is required" });
+      }
+      const assignmentData = { ...req.body, dealerId, createdBy: req.adminUser.id };
+      const assignment = await storage.createAssignment(assignmentData);
+      res.json(assignment);
+    } catch (error) {
+      console.error("Create assignment error:", error);
+      res.status(500).json({ message: "Failed to create assignment" });
+    }
+  });
+
+  // Update assignment
+  app.patch("/api/admin/assignments/:id", adminAuthMiddleware, async (req, res) => {
+    try {
+      const existingAssignment = await storage.getAssignment(req.params.id);
+      if (!existingAssignment) {
+        return res.status(404).json({ message: "Assignment not found" });
+      }
+      if (req.adminUser.role === "dealer" && existingAssignment.dealerId !== req.adminUser.dealerId) {
+        return res.status(403).json({ message: "Access denied" });
+      }
+      const assignment = await storage.updateAssignment(req.params.id, req.body);
+      res.json(assignment);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to update assignment" });
+    }
+  });
+
+  // ========== TRIP LOG ROUTES ==========
+
+  // Get all trip logs
+  app.get("/api/admin/trip-logs", adminAuthMiddleware, async (req, res) => {
+    try {
+      let logs;
+      if (req.adminUser.role === "dealer" && req.adminUser.dealerId) {
+        logs = await storage.getDealerTripLogs(req.adminUser.dealerId);
+      } else {
+        logs = await storage.getAllTripLogs();
+      }
+      res.json(logs);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch trip logs" });
+    }
+  });
+
+  // Get single trip log
+  app.get("/api/admin/trip-logs/:id", adminAuthMiddleware, async (req, res) => {
+    try {
+      const log = await storage.getTripLog(req.params.id);
+      if (!log) {
+        return res.status(404).json({ message: "Trip log not found" });
+      }
+      if (req.adminUser.role === "dealer" && log.dealerId !== req.adminUser.dealerId) {
+        return res.status(403).json({ message: "Access denied" });
+      }
+      res.json(log);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch trip log" });
+    }
+  });
+
+  // Create trip log
+  app.post("/api/admin/trip-logs", adminAuthMiddleware, async (req, res) => {
+    try {
+      let dealerId = req.body.dealerId;
+      if (req.adminUser.role === "dealer") {
+        dealerId = req.adminUser.dealerId;
+      }
+      if (!dealerId) {
+        return res.status(400).json({ message: "Dealer ID is required" });
+      }
+      const logData = { ...req.body, dealerId };
+      const log = await storage.createTripLog(logData);
+      res.json(log);
+    } catch (error) {
+      console.error("Create trip log error:", error);
+      res.status(500).json({ message: "Failed to create trip log" });
+    }
+  });
+
+  // Update trip log
+  app.patch("/api/admin/trip-logs/:id", adminAuthMiddleware, async (req, res) => {
+    try {
+      const existingLog = await storage.getTripLog(req.params.id);
+      if (!existingLog) {
+        return res.status(404).json({ message: "Trip log not found" });
+      }
+      if (req.adminUser.role === "dealer" && existingLog.dealerId !== req.adminUser.dealerId) {
+        return res.status(403).json({ message: "Access denied" });
+      }
+      const log = await storage.updateTripLog(req.params.id, req.body);
+      res.json(log);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to update trip log" });
+    }
+  });
+
+  // ========== MAINTENANCE RECORDS ROUTES ==========
+
+  // Get all maintenance records
+  app.get("/api/admin/maintenance", adminAuthMiddleware, async (req, res) => {
+    try {
+      let records;
+      if (req.adminUser.role === "dealer" && req.adminUser.dealerId) {
+        records = await storage.getDealerMaintenanceRecords(req.adminUser.dealerId);
+      } else {
+        records = await storage.getAllMaintenanceRecords();
+      }
+      res.json(records);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch maintenance records" });
+    }
+  });
+
+  // Get single maintenance record
+  app.get("/api/admin/maintenance/:id", adminAuthMiddleware, async (req, res) => {
+    try {
+      const record = await storage.getMaintenanceRecord(req.params.id);
+      if (!record) {
+        return res.status(404).json({ message: "Maintenance record not found" });
+      }
+      if (req.adminUser.role === "dealer" && record.dealerId !== req.adminUser.dealerId) {
+        return res.status(403).json({ message: "Access denied" });
+      }
+      res.json(record);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch maintenance record" });
+    }
+  });
+
+  // Create maintenance record
+  app.post("/api/admin/maintenance", adminAuthMiddleware, async (req, res) => {
+    try {
+      let dealerId = req.body.dealerId;
+      if (req.adminUser.role === "dealer") {
+        dealerId = req.adminUser.dealerId;
+      }
+      if (!dealerId) {
+        return res.status(400).json({ message: "Dealer ID is required" });
+      }
+      const recordData = { ...req.body, dealerId, createdBy: req.adminUser.id };
+      const record = await storage.createMaintenanceRecord(recordData);
+      res.json(record);
+    } catch (error) {
+      console.error("Create maintenance record error:", error);
+      res.status(500).json({ message: "Failed to create maintenance record" });
+    }
+  });
+
+  // Update maintenance record
+  app.patch("/api/admin/maintenance/:id", adminAuthMiddleware, async (req, res) => {
+    try {
+      const existingRecord = await storage.getMaintenanceRecord(req.params.id);
+      if (!existingRecord) {
+        return res.status(404).json({ message: "Maintenance record not found" });
+      }
+      if (req.adminUser.role === "dealer" && existingRecord.dealerId !== req.adminUser.dealerId) {
+        return res.status(403).json({ message: "Access denied" });
+      }
+      const record = await storage.updateMaintenanceRecord(req.params.id, req.body);
+      res.json(record);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to update maintenance record" });
+    }
+  });
+
+  // ========== PAYMENT ROUTES ==========
+
+  // Get all payments
+  app.get("/api/admin/payments", adminAuthMiddleware, async (req, res) => {
+    try {
+      let payments;
+      if (req.adminUser.role === "dealer" && req.adminUser.dealerId) {
+        payments = await storage.getDealerPayments(req.adminUser.dealerId);
+      } else {
+        payments = await storage.getAllPayments();
+      }
+      res.json(payments);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch payments" });
+    }
+  });
+
+  // Get single payment
+  app.get("/api/admin/payments/:id", adminAuthMiddleware, async (req, res) => {
+    try {
+      const payment = await storage.getPayment(req.params.id);
+      if (!payment) {
+        return res.status(404).json({ message: "Payment not found" });
+      }
+      if (req.adminUser.role === "dealer" && payment.dealerId !== req.adminUser.dealerId) {
+        return res.status(403).json({ message: "Access denied" });
+      }
+      res.json(payment);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch payment" });
+    }
+  });
+
+  // Create payment
+  app.post("/api/admin/payments", adminAuthMiddleware, async (req, res) => {
+    try {
+      let dealerId = req.body.dealerId;
+      if (req.adminUser.role === "dealer") {
+        dealerId = req.adminUser.dealerId;
+      }
+      const paymentData = { ...req.body, dealerId, createdBy: req.adminUser.id };
+      const payment = await storage.createPayment(paymentData);
+      res.json(payment);
+    } catch (error) {
+      console.error("Create payment error:", error);
+      res.status(500).json({ message: "Failed to create payment" });
+    }
+  });
+
+  // Update payment
+  app.patch("/api/admin/payments/:id", adminAuthMiddleware, async (req, res) => {
+    try {
+      const existingPayment = await storage.getPayment(req.params.id);
+      if (!existingPayment) {
+        return res.status(404).json({ message: "Payment not found" });
+      }
+      if (req.adminUser.role === "dealer" && existingPayment.dealerId !== req.adminUser.dealerId) {
+        return res.status(403).json({ message: "Access denied" });
+      }
+      const payment = await storage.updatePayment(req.params.id, req.body);
+      res.json(payment);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to update payment" });
     }
   });
 
