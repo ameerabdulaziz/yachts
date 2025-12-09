@@ -83,7 +83,7 @@ function PhoneFrameWrapper({ children }: { children: React.ReactNode }) {
 function PhoneBottomNav() {
   const [location] = useLocation();
   const tabs = [
-    { icon: "🏠", label: "Home", route: "/" },
+    { icon: "🏠", label: "Home", route: "/home" },
     { icon: "⛵", label: "Charter", route: "/charter" },
     { icon: "📊", label: "Invest", route: "/invest" },
     { icon: "🚤", label: "My Boats", route: "/my-boats" },
@@ -93,7 +93,7 @@ function PhoneBottomNav() {
   return (
     <nav className="phone-bottom-nav">
       {tabs.map(({ icon, label, route }) => {
-        const isActive = location === route || (route === "/" && (location === "" || location === "/home"));
+        const isActive = location === route || (route === "/home" && location === "/hone");
         return (
           <Link key={route} href={route}>
             <button className={`phone-nav-item ${isActive ? 'active' : ''}`}>
@@ -112,10 +112,10 @@ function ConsumerRouter() {
     <>
       <ScrollToTopOnRoute />
       <Switch>
-        <Route path="/" component={OwnershipHomeScreen} />
+        <Route path="/" component={SplashScreen} />
+        <Route path="/splash" component={SplashScreen} />
         <Route path="/hone" component={OwnershipHomeScreen} />
         <Route path="/home" component={OwnershipHomeScreen} />
-        <Route path="/splash" component={SplashScreen} />
         <Route path="/login" component={PhoneLoginScreen} />
         <Route path="/verify-otp" component={OTPVerificationScreen} />
         <Route path="/account-setup" component={AccountSetupScreen} />
