@@ -11,17 +11,17 @@ export default function BoatCalendarScreen() {
   
   const yacht = {
     id: id || "yacht-1",
-    name: "Serenity Princess",
-    location: "Monaco, France"
+    name: "De Antonio D42",
+    location: "Monaco"
   };
 
   // Mock calendar data
   const bookings = [
-    { date: "2025-10-15", guest: "John D.", status: "confirmed", revenue: 2400 },
-    { date: "2025-10-16", guest: "John D.", status: "confirmed", revenue: 2400 },
-    { date: "2025-10-17", guest: "John D.", status: "confirmed", revenue: 2400 },
-    { date: "2025-10-20", guest: "Sarah M.", status: "pending", revenue: 2400 },
-    { date: "2025-10-21", guest: "Sarah M.", status: "pending", revenue: 2400 },
+    { date: "2025-10-15", guest: "Pierre B.", status: "confirmed", revenue: 3420 },
+    { date: "2025-10-16", guest: "Pierre B.", status: "confirmed", revenue: 3420 },
+    { date: "2025-10-17", guest: "Pierre B.", status: "confirmed", revenue: 3420 },
+    { date: "2025-10-20", guest: "Elena K.", status: "pending", revenue: 3420 },
+    { date: "2025-10-21", guest: "Elena K.", status: "pending", revenue: 3420 },
     { date: "2025-11-05", guest: "Available", status: "blocked", revenue: 0 },
     { date: "2025-11-06", guest: "Available", status: "blocked", revenue: 0 },
   ];

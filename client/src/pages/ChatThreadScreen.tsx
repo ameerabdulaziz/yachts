@@ -12,14 +12,14 @@ export default function ChatThreadScreen() {
   const conversation = {
     id: id || "chat-1",
     participant: {
-      name: "Captain Laurent",
+      name: "Captain Jean-Pierre",
       avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100",
       role: "Captain",
       verified: true,
       online: true
     },
     yacht: {
-      name: "Serenity Princess",
+      name: "De Antonio D42",
       booking: "October 15-18, 2025"
     }
   };
@@ -27,8 +27,8 @@ export default function ChatThreadScreen() {
   const messages = [
     {
       id: "msg-1",
-      sender: "Captain Laurent",
-      content: "Hello! Thank you for booking Serenity Princess. I'm Captain Laurent and I'll be taking care of your trip.",
+      sender: "Captain Jean-Pierre",
+      content: "Hello! Thank you for booking the De Antonio D42. I'm Captain Jean-Pierre and I'll be taking care of your trip.",
       timestamp: "2:30 PM",
       isOwn: false,
       type: "text"
@@ -36,27 +36,27 @@ export default function ChatThreadScreen() {
     {
       id: "msg-2",
       sender: "You",
-      content: "Hi Captain Laurent! We're really excited about our upcoming trip. Can you tell us more about the itinerary?",
+      content: "Hi Captain Jean-Pierre! We're really excited about our upcoming trip. Can you tell us more about the itinerary?",
       timestamp: "2:32 PM",
       isOwn: true,
       type: "text"
     },
     {
       id: "msg-3",
-      sender: "Captain Laurent",
-      content: "Absolutely! I've prepared a wonderful route along the French Riviera. We'll visit Monaco, Cannes, and some beautiful secluded coves for swimming.",
+      sender: "Captain Jean-Pierre",
+      content: "Absolutely! I've prepared a wonderful route along the Côte d'Azur. We'll visit Monaco, Cannes, and some beautiful secluded coves for swimming.",
       timestamp: "2:35 PM",
       isOwn: false,
       type: "text"
     },
     {
       id: "msg-4",
-      sender: "Captain Laurent",
+      sender: "Captain Jean-Pierre",
       content: "Here's the detailed itinerary for your 3-day trip. Please let me know if you have any special requests!",
       timestamp: "2:36 PM",
       isOwn: false,
       type: "document",
-      documentName: "Itinerary_June_2024.pdf"
+      documentName: "Itinerary_October_2025.pdf"
     },
     {
       id: "msg-5",
@@ -68,7 +68,7 @@ export default function ChatThreadScreen() {
     },
     {
       id: "msg-6",
-      sender: "Captain Laurent",
+      sender: "Captain Jean-Pierre",
       content: "Of course! Our chef specializes in Mediterranean vegetarian cuisine. I'll make sure everything is prepared according to your preferences.",
       timestamp: "2:42 PM",
       isOwn: false,
@@ -76,7 +76,7 @@ export default function ChatThreadScreen() {
     },
     {
       id: "msg-7",
-      sender: "Captain Laurent",
+      sender: "Captain Jean-Pierre",
       content: "I'm typing...",
       timestamp: "now",
       isOwn: false,

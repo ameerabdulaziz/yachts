@@ -71,15 +71,17 @@ export default function CharterScreen() {
           <div className="grid grid-cols-2 gap-3 mb-3">
             <div>
               <label className="text-sm font-medium text-gray-700 block mb-1">Location</label>
-              <Select value={location || "el-gouna"} onValueChange={setLocation}>
+              <Select value={location || "barcelona"} onValueChange={setLocation}>
                 <SelectTrigger className="text-gray-900 font-medium">
-                  <SelectValue placeholder="El Gouna, Egypt" />
+                  <SelectValue placeholder="Barcelona, Spain" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="el-gouna">El Gouna, Egypt</SelectItem>
-                  <SelectItem value="monaco">Monaco, France</SelectItem>
-                  <SelectItem value="mallorca">Palma, Mallorca</SelectItem>
+                  <SelectItem value="barcelona">Barcelona, Spain</SelectItem>
+                  <SelectItem value="monaco">Monaco</SelectItem>
+                  <SelectItem value="mallorca">Palma de Mallorca, Spain</SelectItem>
                   <SelectItem value="saint-tropez">Saint-Tropez, France</SelectItem>
+                  <SelectItem value="ibiza">Ibiza, Spain</SelectItem>
+                  <SelectItem value="portofino">Portofino, Italy</SelectItem>
                 </SelectContent>
               </Select>
             </div>

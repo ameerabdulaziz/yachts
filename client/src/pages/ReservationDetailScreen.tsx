@@ -14,7 +14,7 @@ export default function ReservationDetailScreen() {
     status: "confirmed" as const,
     yacht: {
       name: "De Antonio D50",
-      location: "El Gouna, Egypt",
+      location: "Portofino, Italy",
       image: deAntonioD50
     },
     startDate: new Date("2025-10-15"),

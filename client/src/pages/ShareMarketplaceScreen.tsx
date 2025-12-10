@@ -16,7 +16,7 @@ const mockShareListings = [
     id: "listing-1",
     yacht: {
       name: "De Antonio D50",
-      location: "El Gouna, Egypt",
+      location: "Portofino, Italy",
       image: "https://static.wixstatic.com/media/0fb4c8_60988eb5cf834fcb876c1d06bd8af594~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D50.jpg"
     },
     shareFraction: "1/5",
@@ -37,7 +37,7 @@ const mockShareListings = [
     id: "listing-2",
     yacht: {
       name: "De Antonio D36",
-      location: "El Gouna, Egypt",
+      location: "Portofino, Italy",
       image: "https://static.wixstatic.com/media/0fb4c8_fbbb6a2569c747d48881f7ac065b947a~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D36.jpg"
     },
     shareFraction: "1/5",
@@ -58,7 +58,7 @@ const mockShareListings = [
     id: "listing-3",
     yacht: {
       name: "De Antonio D60",
-      location: "El Gouna, Egypt",
+      location: "Portofino, Italy",
       image: "https://static.wixstatic.com/media/5c3629_a8b1aa6ff9244bddaf7383aa45b4afc1~mv2.jpg/v1/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/5c3629_a8b1aa6ff9244bddaf7383aa45b4afc1~mv2.jpg"
     },
     shareFraction: "1/5",
@@ -79,7 +79,7 @@ const mockShareListings = [
     id: "listing-4",
     yacht: {
       name: "De Antonio D42",
-      location: "El Gouna, Egypt",
+      location: "Portofino, Italy",
       image: "https://static.wixstatic.com/media/0fb4c8_008f1545c8764f8789a2b7415ca9dde7~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D42.jpg"
     },
     shareFraction: "1/5",
@@ -323,7 +323,7 @@ export default function ShareMarketplaceScreen() {
               
               <div className="flex items-center justify-between p-3 bg-blue-50 rounded-lg">
                 <div>
-                  <p className="font-medium text-blue-900">Caribbean Shares</p>
+                  <p className="font-medium text-blue-900">Mediterranean Shares</p>
                   <p className="text-sm text-blue-700">Stable market, good liquidity</p>
                 </div>
                 <div className="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center">

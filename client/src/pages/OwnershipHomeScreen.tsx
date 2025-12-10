@@ -106,7 +106,7 @@ export default function OwnershipHomeScreen() {
                 <span>•</span>
                 <span>{selectedYacht.passengers} guests</span>
                 <span>•</span>
-                <span>El Gouna, Egypt</span>
+                <span>Barcelona, Spain</span>
               </div>
             </div>
 
@@ -261,7 +261,7 @@ export default function OwnershipHomeScreen() {
             { 
               id: "share-deantonio-d32", 
               model: "D32", 
-              location: "El Gouna", 
+              location: "Barcelona", 
               availableShares: 3, 
               totalShares: 5, 
               sharePrice: "€61,800", 
@@ -275,7 +275,7 @@ export default function OwnershipHomeScreen() {
             { 
               id: "share-deantonio-d42", 
               model: "D42", 
-              location: "El Gouna", 
+              location: "Barcelona", 
               availableShares: 2, 
               totalShares: 5, 
               sharePrice: "€130,000", 
@@ -289,7 +289,7 @@ export default function OwnershipHomeScreen() {
             { 
               id: "share-deantonio-d50", 
               model: "D50", 
-              location: "El Gouna", 
+              location: "Barcelona", 
               availableShares: 3, 
               totalShares: 5, 
               sharePrice: "€190,000", 
@@ -303,7 +303,7 @@ export default function OwnershipHomeScreen() {
             { 
               id: "share-deantonio-d60", 
               model: "D60", 
-              location: "El Gouna", 
+              location: "Barcelona", 
               availableShares: 1, 
               totalShares: 5, 
               sharePrice: "€400,000", 

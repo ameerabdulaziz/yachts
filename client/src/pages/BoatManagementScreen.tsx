@@ -11,20 +11,20 @@ export default function BoatManagementScreen() {
   
   const yacht = {
     id: id || "yacht-1",
-    name: "Serenity Princess",
-    location: "Monaco, France",
+    name: "De Antonio D42",
+    location: "Monaco",
     images: [
-      "https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400",
-      "https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400"
+      "https://static.wixstatic.com/media/0fb4c8_008f1545c8764f8789a2b7415ca9dde7~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D42.jpg",
+      "https://static.wixstatic.com/media/0fb4c8_60988eb5cf834fcb876c1d06bd8af594~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D50.jpg"
     ],
     status: "available",
-    pricePerDay: 2400,
+    pricePerDay: 3420,
     capacity: 12,
-    cabins: 6,
+    cabins: 2,
     rating: 4.9,
     reviewCount: 127,
     totalBookings: 18,
-    monthlyRevenue: 7200,
+    monthlyRevenue: 10260,
     occupancyRate: 78,
     nextMaintenance: "November 15, 2025"
   };
@@ -32,18 +32,18 @@ export default function BoatManagementScreen() {
   const bookings = [
     {
       id: "booking-1",
-      guestName: "John Doe",
+      guestName: "Pierre Bonnet",
       dates: "June 15-18, 2024",
       guests: 6,
-      revenue: 8190,
+      revenue: 10260,
       status: "confirmed"
     },
     {
       id: "booking-2",
-      guestName: "Sarah Miller",
+      guestName: "Elena Kowalski",
       dates: "June 22-24, 2024",
       guests: 4,
-      revenue: 3600,
+      revenue: 6840,
       status: "pending"
     }
   ];
@@ -51,14 +51,14 @@ export default function BoatManagementScreen() {
   const reviews = [
     {
       id: "review-1",
-      guestName: "Michael R.",
+      guestName: "Klaus W.",
       rating: 5,
       comment: "Absolutely amazing yacht! Perfect for our family vacation.",
       date: "May 28, 2024"
     },
     {
       id: "review-2",
-      guestName: "Emma L.",
+      guestName: "Francesca M.",
       rating: 5,
       comment: "Captain was excellent, yacht was immaculate. Highly recommend!",
       date: "May 20, 2024"

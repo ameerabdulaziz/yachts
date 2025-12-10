@@ -13,25 +13,25 @@ export default function ShareListingDetailScreen() {
   const listing = {
     id: id || "listing-1",
     yacht: {
-      name: "Azure Legend",
-      location: "French Riviera",
+      name: "De Antonio D50",
+      location: "Côte d'Azur, France",
       images: [
-        "https://images.unsplash.com/photo-1540946485063-a40da27545f8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400",
-        "https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400"
+        "https://static.wixstatic.com/media/0fb4c8_60988eb5cf834fcb876c1d06bd8af594~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D50.jpg",
+        "https://static.wixstatic.com/media/0fb4c8_008f1545c8764f8789a2b7415ca9dde7~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D42.jpg"
       ],
-      capacity: 10,
-      cabins: 5,
-      length: 85,
-      yearBuilt: 2021
+      capacity: 12,
+      cabins: 3,
+      length: 50,
+      yearBuilt: 2024
     },
-    shareFraction: "1/8",
+    shareFraction: "1/5",
     sharesForSale: 1,
-    originalPrice: 45000,
-    askingPrice: 48000,
-    priceChange: 6.7,
-    usageDaysPerYear: 40,
+    originalPrice: 190000,
+    askingPrice: 198000,
+    priceChange: 4.2,
+    usageDaysPerYear: 73,
     seller: {
-      name: "Sarah Mitchell",
+      name: "Sophie Dubois",
       avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b0ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100",
       rating: 4.9,
       verified: true,

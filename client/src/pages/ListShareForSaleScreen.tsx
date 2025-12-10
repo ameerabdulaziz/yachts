@@ -40,7 +40,7 @@ export default function ListShareForSaleScreen() {
       id: "share-1",
       yacht: { 
         name: "De Antonio D32", 
-        location: "El Gouna, Egypt",
+        location: "Barcelona, Spain",
         image: "https://static.wixstatic.com/media/0fb4c8_6cbbd012fc0645009bc4a91a412b293a~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D32.jpg"
       },
       shareFraction: "1/5",
@@ -51,7 +51,7 @@ export default function ListShareForSaleScreen() {
       id: "share-2",
       yacht: { 
         name: "De Antonio D42", 
-        location: "El Gouna, Egypt",
+        location: "Barcelona, Spain",
         image: "https://static.wixstatic.com/media/0fb4c8_008f1545c8764f8789a2b7415ca9dde7~mv2.jpg/v1/crop/x_0,y_129,w_1920,h_823/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE%20RANGE_PORTADA_D42.jpg"
       },
       shareFraction: "1/5",
@@ -62,7 +62,7 @@ export default function ListShareForSaleScreen() {
       id: "share-3",
       yacht: { 
         name: "De Antonio D60", 
-        location: "El Gouna, Egypt",
+        location: "Barcelona, Spain",
         image: "https://static.wixstatic.com/media/5c3629_a8b1aa6ff9244bddaf7383aa45b4afc1~mv2.jpg/v1/fill/w_800,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/5c3629_a8b1aa6ff9244bddaf7383aa45b4afc1~mv2.jpg"
       },
       shareFraction: "1/5",
